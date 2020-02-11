@@ -34,8 +34,6 @@ class RegistrationController extends AbstractController
             $user->setPassword($hash);
 
             $user->setRoles(['ROLE_USER']);
-            $user->setActif(true);
-            $user->setAdministrateur(false);
 
 
             $em->persist($user);
