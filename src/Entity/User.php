@@ -71,16 +71,6 @@ class User implements UserInterface
      */
     private $telephone;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $administrateur;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $actif;
-
     public function __construct()
     {
         $this->noInscription = new ArrayCollection();
@@ -211,30 +201,6 @@ class User implements UserInterface
     public function setTelephone(?string $telephone): self
     {
         $this->telephone = $telephone;
-
-        return $this;
-    }
-
-    public function getAdministrateur(): ?bool
-    {
-        return $this->administrateur;
-    }
-
-    public function setAdministrateur(bool $administrateur): self
-    {
-        $this->administrateur = $administrateur;
-
-        return $this;
-    }
-
-    public function getActif(): ?bool
-    {
-        return $this->actif;
-    }
-
-    public function setActif(bool $actif): self
-    {
-        $this->actif = $actif;
 
         return $this;
     }
