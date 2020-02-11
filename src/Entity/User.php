@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -46,11 +48,13 @@ class User implements UserInterface
     private $pseudo;
 
     /**
+
      * @ORM\Column(type="json")
      */
     private $roles = [];
 
     /**
+     * TODO: REGEX A REALISER POUR MAIL
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
@@ -72,15 +76,11 @@ class User implements UserInterface
     private $telephone;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="string", length=255)
      */
-    private $administrateur;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $actif;
-
+    private $pseudo;
+  
+  
     public function __construct()
     {
         $this->noInscription = new ArrayCollection();
@@ -88,6 +88,7 @@ class User implements UserInterface
         $this->noInscriptions = new ArrayCollection();
         $this->noSorties = new ArrayCollection();
     }
+
 
     /**
      * A visual identifier that represents this user.
@@ -175,7 +176,6 @@ class User implements UserInterface
     public function setPseudo(string $pseudo): self
     {
         $this->pseudo = $pseudo;
-
         return $this;
     }
 
@@ -208,33 +208,10 @@ class User implements UserInterface
         return $this->telephone;
     }
 
+
     public function setTelephone(?string $telephone): self
     {
         $this->telephone = $telephone;
-
-        return $this;
-    }
-
-    public function getAdministrateur(): ?bool
-    {
-        return $this->administrateur;
-    }
-
-    public function setAdministrateur(bool $administrateur): self
-    {
-        $this->administrateur = $administrateur;
-
-        return $this;
-    }
-
-    public function getActif(): ?bool
-    {
-        return $this->actif;
-    }
-
-    public function setActif(bool $actif): self
-    {
-        $this->actif = $actif;
 
         return $this;
     }
@@ -312,7 +289,5 @@ class User implements UserInterface
 
         return $this;
     }
-
-    
 
 }
