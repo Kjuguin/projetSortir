@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AfficherProfilController!{% endblock %}
+
+{% block body %}
+
+    <p>Index</p>
+
+        {% for user in user %}
+
+            <a href="{{ path('afficherProfil',{'id': user.id}) }}">{{ user.prenom }}</a>
+
+        {% endfor %}
+
+
+{% endblock %}
