@@ -41,6 +41,7 @@ class Site
         $this->noUsers = new ArrayCollection();
     }
 
+
     public function getId(): ?int
     {
         return $this->id;
@@ -56,6 +57,10 @@ class Site
         $this->nomSite = $nomSite;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->nomSite;
     }
 
     /**

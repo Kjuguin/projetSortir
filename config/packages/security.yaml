@@ -22,7 +22,7 @@ security:
         App\Entity\Participants:
             algorithm: bcrypt
         App\Entity\User:
-            algorithm: auto
+            algorithm: bcrypt
 
 
 
