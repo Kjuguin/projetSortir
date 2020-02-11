@@ -28,6 +28,7 @@ class User implements UserInterface
     private $roles = [];
 
     /**
+     * TODO: REGEX A REALISER POUR MAIL
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
