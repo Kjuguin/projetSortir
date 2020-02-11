@@ -49,36 +49,9 @@ class User implements UserInterface
     private $telephone;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $actif;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $administrateur;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $pseudo;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
 
     /**
      * A visual identifier that represents this user.
@@ -141,6 +114,23 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
     public function getNom(): ?string
     {
         return $this->nom;
@@ -177,30 +167,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getActif(): ?bool
-    {
-        return $this->actif;
-    }
-
-    public function setActif(bool $actif): self
-    {
-        $this->actif = $actif;
-
-        return $this;
-    }
-
-    public function getAdministrateur(): ?bool
-    {
-        return $this->administrateur;
-    }
-
-    public function setAdministrateur(bool $administrateur): self
-    {
-        $this->administrateur = $administrateur;
-
-        return $this;
-    }
-
     public function getPseudo(): ?string
     {
         return $this->pseudo;
@@ -212,4 +178,5 @@ class User implements UserInterface
 
         return $this;
     }
+
 }
