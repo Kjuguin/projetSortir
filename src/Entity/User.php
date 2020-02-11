@@ -75,11 +75,6 @@ class User implements UserInterface
      */
     private $telephone;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $pseudo;
-  
   
     public function __construct()
     {
