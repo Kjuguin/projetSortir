@@ -14,17 +14,17 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-            main:
-                pattern: ^/
-                provider: app_user_provider
-                anonymous: ~
-                form_login:
-                    login_path: login
-                    check_path: login
-                logout_on_user_change: true
-                logout:
-                    path: logout
-                    target: home
+        main:
+            pattern: ^/
+            provider: app_user_provider
+            anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login
+            #logout_on_user_change: true
+            logout:
+                path: logout
+                target: home
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
