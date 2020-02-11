@@ -36,7 +36,7 @@ class AfficherProfilController extends AbstractController
     {
         $profileRepository = $em->getRepository(User::class);
         $profile = $profileRepository->find($id);
-        return $this->render('afficher_profil/afficherProfil.html.twig', ['profils'=>$profile]
+        return $this->render('afficher_profil/afficherProfil.html.twig', ['profile'=>$profile]
         );
     }
 }
