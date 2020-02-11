@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Sorties;
+use App\Entity\Site;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method Sorties|null find($id, $lockMode = null, $lockVersion = null)
- * @method Sorties|null findOneBy(array $criteria, array $orderBy = null)
- * @method Sorties[]    findAll()
- * @method Sorties[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Site|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Site|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Site[]    findAll()
+ * @method Site[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SortiesRepository extends ServiceEntityRepository
+class SiteRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Sorties::class);
+        parent::__construct($registry, Site::class);
     }
 
     // /**
-    //  * @return Sorties[] Returns an array of Sorties objects
+    //  * @return Site[] Returns an array of Site objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class SortiesRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Sorties
+    public function findOneBySomeField($value): ?Site
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')

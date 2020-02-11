@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -17,6 +19,21 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Site", inversedBy="noUsers")
+     */
+    private $noSite;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Inscription", mappedBy="noUser")
+     */
+    private $noInscriptions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="noOrganisateur")
+     */
+    private $noSorties;
 
     /**
      * @ORM\Column(type="string", length=100, unique=true)
@@ -64,38 +81,12 @@ class User implements UserInterface
      */
     private $actif;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $sites_no_site;
-
-    public function getId(): ?int
+    public function __construct()
     {
-        return $this->id;
-    }
-
-    public function getPseudo(): ?string
-    {
-        return $this->pseudo;
-    }
-
-    public function setPseudo(string $pseudo): self
-    {
-        $this->pseudo = $pseudo;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
+        $this->noInscription = new ArrayCollection();
+        $this->noSortie = new ArrayCollection();
+        $this->noInscriptions = new ArrayCollection();
+        $this->noSorties = new ArrayCollection();
     }
 
     /**
@@ -159,12 +150,41 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
     public function getPrenom(): ?string
     {
         return $this->prenom;
     }
 
-    public function setPrenom(?string $prenom): self
+    public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
 
@@ -176,7 +196,7 @@ class User implements UserInterface
         return $this->nom;
     }
 
-    public function setNom(?string $nom): self
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
 
@@ -200,7 +220,7 @@ class User implements UserInterface
         return $this->administrateur;
     }
 
-    public function setAdministrateur(?bool $administrateur): self
+    public function setAdministrateur(bool $administrateur): self
     {
         $this->administrateur = $administrateur;
 
@@ -212,22 +232,87 @@ class User implements UserInterface
         return $this->actif;
     }
 
-    public function setActif(?bool $actif): self
+    public function setActif(bool $actif): self
     {
         $this->actif = $actif;
 
         return $this;
     }
 
-    public function getSitesNoSite(): ?int
+    public function getNoSite(): ?Site
     {
-        return $this->sites_no_site;
+        return $this->noSite;
     }
 
-    public function setSitesNoSite(int $sites_no_site): self
+    public function setNoSite(?Site $noSite): self
     {
-        $this->sites_no_site = $sites_no_site;
+        $this->noSite = $noSite;
 
         return $this;
     }
+
+    /**
+     * @return Collection|Inscription[]
+     */
+    public function getNoInscriptions(): Collection
+    {
+        return $this->noInscriptions;
+    }
+
+    public function addNoInscription(Inscription $noInscription): self
+    {
+        if (!$this->noInscriptions->contains($noInscription)) {
+            $this->noInscriptions[] = $noInscription;
+            $noInscription->setNoUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNoInscription(Inscription $noInscription): self
+    {
+        if ($this->noInscriptions->contains($noInscription)) {
+            $this->noInscriptions->removeElement($noInscription);
+            // set the owning side to null (unless already changed)
+            if ($noInscription->getNoUser() === $this) {
+                $noInscription->setNoUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Sortie[]
+     */
+    public function getNoSorties(): Collection
+    {
+        return $this->noSorties;
+    }
+
+    public function addNoSorty(Sortie $noSorty): self
+    {
+        if (!$this->noSorties->contains($noSorty)) {
+            $this->noSorties[] = $noSorty;
+            $noSorty->setNoOrganisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNoSorty(Sortie $noSorty): self
+    {
+        if ($this->noSorties->contains($noSorty)) {
+            $this->noSorties->removeElement($noSorty);
+            // set the owning side to null (unless already changed)
+            if ($noSorty->getNoOrganisateur() === $this) {
+                $noSorty->setNoOrganisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
+
 }
