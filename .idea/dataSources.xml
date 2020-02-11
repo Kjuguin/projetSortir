@@ -7,5 +7,11 @@
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mariadb://10.27.200.1:3306/rdv</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="projet" uuid="578bf372-140d-4667-98d6-e048c5defca3">
+      <driver-ref>mariadb</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mariadb://10.27.200.1:3306/rdv</jdbc-url>
+    </data-source>
   </component>
 </project>

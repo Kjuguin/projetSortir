@@ -24,6 +24,7 @@ class RegistrationController extends AbstractController
     public function registration(UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em, Request $request)
     {
         $user = new User();
+        dump($user);
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -33,6 +34,9 @@ class RegistrationController extends AbstractController
             $user->setPassword($hash);
 
             $user->setRoles(['ROLE_USER']);
+            $user->setActif(true);
+            $user->setAdministrateur(false);
+
 
             $em->persist($user);
             $em->flush();
