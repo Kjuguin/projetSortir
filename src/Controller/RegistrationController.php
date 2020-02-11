@@ -32,6 +32,7 @@ class RegistrationController extends AbstractController
 
             $hash = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
+            $user->setPseudo($user->getEmail());
 
             $user->setRoles(['ROLE_USER']);
 

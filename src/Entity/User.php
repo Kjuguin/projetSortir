@@ -58,6 +58,11 @@ class User implements UserInterface
      */
     private $administrateur;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $pseudo;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -192,6 +197,18 @@ class User implements UserInterface
     public function setAdministrateur(bool $administrateur): self
     {
         $this->administrateur = $administrateur;
+
+        return $this;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
 
         return $this;
     }
