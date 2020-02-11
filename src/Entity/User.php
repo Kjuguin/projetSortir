@@ -2,8 +2,13 @@
 
 namespace App\Entity;
 
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -18,11 +23,32 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Site", inversedBy="noUsers")
+     */
+    private $noSite;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Inscription", mappedBy="noUser")
+     */
+    private $noInscriptions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="noOrganisateur")
+     */
+    private $noSorties;
+
+    /**
+     * @ORM\Column(type="string", length=100, unique=true)
      */
     private $email;
 
     /**
+     * @ORM\Column(type="string", length=30, unique=true)
+     */
+    private $pseudo;
+
+    /**
+
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -35,17 +61,17 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $nom;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=30)
      */
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=30)
+     */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=15, nullable=true)
      */
     private $telephone;
 
@@ -53,6 +79,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $pseudo;
+  
+  
+    public function __construct()
+    {
+        $this->noInscription = new ArrayCollection();
+        $this->noSortie = new ArrayCollection();
+        $this->noInscriptions = new ArrayCollection();
+        $this->noSorties = new ArrayCollection();
+    }
+
 
     /**
      * A visual identifier that represents this user.
@@ -132,15 +168,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getNom(): ?string
+    public function getPseudo(): ?string
     {
-        return $this->nom;
+        return $this->pseudo;
     }
 
-    public function setNom(string $nom): self
+    public function setPseudo(string $pseudo): self
     {
-        $this->nom = $nom;
-
+        $this->pseudo = $pseudo;
         return $this;
     }
 
@@ -156,26 +191,101 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
     public function getTelephone(): ?string
     {
         return $this->telephone;
     }
 
-    public function setTelephone(string $telephone): self
+
+    public function setTelephone(?string $telephone): self
     {
         $this->telephone = $telephone;
 
         return $this;
     }
 
-    public function getPseudo(): ?string
+    public function getNoSite(): ?Site
     {
-        return $this->pseudo;
+        return $this->noSite;
     }
 
-    public function setPseudo(string $pseudo): self
+    public function setNoSite(?Site $noSite): self
     {
-        $this->pseudo = $pseudo;
+        $this->noSite = $noSite;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Inscription[]
+     */
+    public function getNoInscriptions(): Collection
+    {
+        return $this->noInscriptions;
+    }
+
+    public function addNoInscription(Inscription $noInscription): self
+    {
+        if (!$this->noInscriptions->contains($noInscription)) {
+            $this->noInscriptions[] = $noInscription;
+            $noInscription->setNoUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNoInscription(Inscription $noInscription): self
+    {
+        if ($this->noInscriptions->contains($noInscription)) {
+            $this->noInscriptions->removeElement($noInscription);
+            // set the owning side to null (unless already changed)
+            if ($noInscription->getNoUser() === $this) {
+                $noInscription->setNoUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Sortie[]
+     */
+    public function getNoSorties(): Collection
+    {
+        return $this->noSorties;
+    }
+
+    public function addNoSorty(Sortie $noSorty): self
+    {
+        if (!$this->noSorties->contains($noSorty)) {
+            $this->noSorties[] = $noSorty;
+            $noSorty->setNoOrganisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNoSorty(Sortie $noSorty): self
+    {
+        if ($this->noSorties->contains($noSorty)) {
+            $this->noSorties->removeElement($noSorty);
+            // set the owning side to null (unless already changed)
+            if ($noSorty->getNoOrganisateur() === $this) {
+                $noSorty->setNoOrganisateur(null);
+            }
+        }
 
         return $this;
     }
