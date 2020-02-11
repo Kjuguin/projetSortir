@@ -23,11 +23,63 @@ header{
     width:100%;
     display:inline-block;
     text-align:center;
+    padding-top:1.5em;
 }
 
 .nav-header, .logo-header, .logo-img, .site-title, .nav-menu, .nav-menu li{
     display: inline-block;
 }
+/** bloc navigation**/
+.nav-header{
+    width:88%;
+}
+
+/** logo **/
+.logo-header{
+    float:left;
+}
+
+.site-title{
+    vertical-align: top;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+/** menu **/
+.nav-menu{
+    float:right;
+}
+
+.nav-menu li{
+    margin-left:3em;
+}
+
+.nav-menu li a{
+    color:#fff;
+    font-size:1.1em;
+    letter-spacing:0.5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
