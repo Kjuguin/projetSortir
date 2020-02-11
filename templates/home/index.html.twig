@@ -1,20 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Sorties entr'Eni{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<section class="section-filtre">
+    <div>
+        <h2>Filtrer les sorties</h2>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/ccousin2019/Desktop/PROJET II/projetSortir/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/ccousin2019/Desktop/PROJET II/projetSortir/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <form method="get">
+            <div class="bf-1">
+                <label for="site">Site</label>
+                <select name="site" id="site">
+{#                    {% for site in sites %}#}
+{#                        <option value="{{ site.id}}"> {{ site.nomSite }}</option>#}
+{#                    {% endfor %}#}
+                </select>
+
+            </div>
+            <div class="bf-2">
+                <label for="nom">Le nom contient</label>
+                <input type="search" name="nom" id="nom">
+            </div>
+            <div class="bf-3">
+                <label for="date-debut">Entre le</label>
+                <input type="date" name="date-debut" id="date-debut">
+            </div>
+            <div class="bf-4">
+                <label for="date-fin">Et le</label>
+                <input type="date" name="date-fin" id="date-fin">
+            </div>
+            <div class="bf-checkboxes">
+                <div class="check">
+                   <input type="checkbox" name="filtre1" value="filtre1">
+                   <label for="filtre1">Sorties dont je suis l'organisateur/rice</label>
+                </div>
+
+                <div class="check">
+                    <input type="checkbox" name="filtre2" value="filtre2">
+                    <label for="filtre2">Sorties auxquelles je suis inscrit.e</label>
+                </div>
+
+                <div class="check">
+                    <input type="checkbox" name="filtre3" value="filtre3">
+                    <label for="filtre3">Sorties auxquelles je ne suis pas inscrit.e</label>
+                </div>
+
+                <div class="check">
+                    <input type="checkbox" name="filtre4" value="filtre4">
+                    <label for="filtre4">Sorties passées</label>
+                </div>
+            </div>
+            <div>
+                <input type="submit" value="Rechercher">
+            </div>
+
+        </form>
+    </div>
+
+</section>
+
 {% endblock %}
