@@ -1,7 +1,7 @@
 security:
     encoders:
         App\Entity\User:
-            algorithm: auto
+            algorithm: bcrypt
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
@@ -25,6 +25,9 @@ security:
             logout:
                 path: app_logout
                 target: test
+            guard:
+                authenticators:
+                    - App\Security\LoginAutenticatorAuthenticator
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
