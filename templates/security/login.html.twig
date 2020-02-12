@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Log in!{% endblock %}
-
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset("css/login.css") }}">
+{% endblock %}
 {% block body %}
     <div class="wrapper fadeInDown">
         <div id="formContent">
