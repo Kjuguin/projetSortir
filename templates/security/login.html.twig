@@ -1,53 +1,49 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Log in!{% endblock %}
-
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset("css/login.css") }}">
+{% endblock %}
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-4 col-sm-4 offset-md-4">
-                <div class="card">
-                    <article class="card-body">
-                        <a href="{{ path('registration') }}" class="float-right btn btn-outline-primary">Sign up</a>
-                        <h4 class="card-title mb-4 mt-1">Connexion</h4>
-                        <hr>
-                        <form method="post">
-                            {% if error %}
-                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                            {% endif %}
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
 
-                            {% if app.user %}
-                                <div class="mb-3">
-                                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-                                </div>
-                            {% endif %}
-                            <div class="form-group">
-                                <input  autofocus id="inputEmail" name="email" value="{{ last_username }}" class="form-control" placeholder="Email or login" type="text" required>
-                            </div> <!-- form-group// -->
-                            <div class="form-group">
-                                <input name="password" id="inputPassword" class="form-control" placeholder="******" type="password" required>
-                                <input type="hidden" name="_csrf_token"
-                                       value="{{ csrf_token('authenticate') }}"
-                                >
-                            </div> <!-- form-group// -->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-block"> Login  </button>
-                                    </div> <!-- form-group// -->
-                                </div>
-
-                                <div class="col-md-6 text-right">
-                                    <a class="small" href="#">Forgot password?</a>
-                                </div>
-                            </div>
-                        </form>
-                        <div class="col-md-6">
-                            <button class="btn btn-block btn-primary" href="{{ path('app_logout') }}"> Deconnexion</button>
-                        </div>
-                    </article>
-                </div>
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
             </div>
+
+            <!-- Login Form -->
+            <form method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                        <div class="mb-3">
+                            Vous êtes connecté sous  {{ app.user.pseudo }} <a style="margin-left: 20px" href="{{ path('app_logout') }}" class="btn btn-outline-primary">Logout</a>
+                        </div>
+                {% endif %}
+
+                <input autofocus type="text" value="{{ last_username }}" id="inputEmail" class="fadeIn second" name="email" placeholder="Email or login" required>
+                <input type="password" id="inputPassword" class="fadeIn third" name="password" placeholder="******" required>
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+                <div class="checkbox mb-3 fadeIn fourth">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                </div>
+                <input type="submit" class="fadeIn five" value="Log In">
+            </form>
+
+            <!-- Remind Passowrd -->
+            <div id="formFooter">
+                <a class="underlineHover" href="#">Forgot Password?</a>
+            </div>
+
         </div>
     </div>
 
