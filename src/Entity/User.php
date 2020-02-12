@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -36,6 +38,7 @@ class User implements UserInterface
     private $noSorties;
 
     /**
+     * @Assert\Email(message="L'email n'est pas valide")
      * @ORM\Column(type="string", length=100, unique=true)
      */
     private $email;
@@ -46,11 +49,38 @@ class User implements UserInterface
     private $pseudo;
 
     /**
+
      * @ORM\Column(type="json")
      */
     private $roles = [];
 
+
+//* @Assert\Regex(
+//* pattern = "/^(?=.*\d)(?=.*[A-Z])(?=.*[@#$%])(?!.*(.)\1{2}).*[a-z]/m",
+//* match=true,
+//* message="Votre mot de passe doit comporter au moins huit caractères, dont des lettres majuscules et minuscules, un chiffre et un symbole.")
+
     /**
+     * @Assert\Regex(
+     *      pattern = "/^(?=.*[A-Z]).*[a-z]/m",
+     *      match=true,
+     *      message="Votre mot de passe doit comporter au moins une lettre majuscule.")
+     * @Assert\Regex(
+     *      pattern = "/^(?=.*[a-z]).*[a-z]/m",
+     *      match=true,
+     *      message="Votre mot de passe doit comporter au moins une lettre minuscule.")
+     * @Assert\Regex(
+     *      pattern = "/^(?=.*[0-9]).*[a-z]/m",
+     *      match=true,
+     *      message="Votre mot de passe doit comporter au moins un chiffre.")
+     * @Assert\Regex(
+     *      pattern = "/^(?=.*[@#$%]).*[a-z]/m",
+     *      match=true,
+     *      message="Votre mot de passe doit comporter au moins un caractère spécial : @ # $ %.")
+     * @Assert\Regex(
+     *      pattern = "/^.{8,15}/m",
+     *      match=true,
+     *      message="Votre mot de passe doit comporter entre 8 et 15 caractères.")
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
@@ -71,7 +101,7 @@ class User implements UserInterface
      */
     private $telephone;
 
-
+  
     public function __construct()
     {
         $this->noInscription = new ArrayCollection();
@@ -79,6 +109,7 @@ class User implements UserInterface
         $this->noInscriptions = new ArrayCollection();
         $this->noSorties = new ArrayCollection();
     }
+
 
     /**
      * A visual identifier that represents this user.
@@ -166,7 +197,6 @@ class User implements UserInterface
     public function setPseudo(string $pseudo): self
     {
         $this->pseudo = $pseudo;
-
         return $this;
     }
 
@@ -198,6 +228,7 @@ class User implements UserInterface
     {
         return $this->telephone;
     }
+
 
     public function setTelephone(?string $telephone): self
     {
@@ -279,7 +310,5 @@ class User implements UserInterface
 
         return $this;
     }
-
-    
 
 }
