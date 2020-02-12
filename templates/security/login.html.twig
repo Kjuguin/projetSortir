@@ -21,9 +21,9 @@
                 {% endif %}
 
                 {% if app.user %}
-                    <div class="mb-3">
-                        You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-                    </div>
+                        <div class="mb-3">
+                            Vous êtes connecté sous  {{ app.user.pseudo }} <a style="margin-left: 20px" href="{{ path('app_logout') }}" class="btn btn-outline-primary">Logout</a>
+                        </div>
                 {% endif %}
 
                 <input autofocus type="text" value="{{ last_username }}" id="inputEmail" class="fadeIn second" name="email" placeholder="Email or login" required>
