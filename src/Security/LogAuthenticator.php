@@ -65,7 +65,7 @@ class LogAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
+        $user = $this->entityManager->getRepository(User::class)->loadUserByUsername(['username' => $credentials['email']]);
 
         if (!$user) {
             // fail authentication with a custom error
@@ -94,8 +94,7 @@ class LogAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
             return new RedirectResponse($targetPath);
         }
 
-        // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return new RedirectResponse($this->urlGenerator->generate('test'));
     }
 
     protected function getLoginUrl()
