@@ -44,12 +44,33 @@ class SortieRepository extends ServiceEntityRepository
             $sqb->setParameter("dateFin", $date);
         }
 
-        if (!empty($param['organisateur'])){
-            $sqb->andWhere("s.noOrganisateur = :organisateur");
-            $sqb->setParameter("organisateur", $param['organisateur']);
+     // TODO : A décommenter avec le merge et les fichiers login
+//        if (!empty($param['organisateur'])){
+////            $sqb->andWhere("s.noOrganisateur = :organisateur");
+////            $sqb->setParameter("organisateur", $param['organisateur']);
+////        }
+///
+///      // TODO : A décommenter avec le merge et les fichiers login
+////        if (!empty($param['inscrit'])){
+//////            $sqb->andWhere("s.noInscription.noUser = :inscrit");
+//////            $sqb->setParameter("inscrit", $param['inscrit']);
+//////        }
+///
+///      // TODO : A décommenter avec le merge et les fichiers login
+////        if (!empty($param['notInscrit'])){
+//////            $sqb->andWhere("s.noInscription.noUser != :notInscrit");
+//////            $sqb->setParameter("notInscrit", $param['notInscrit']);
+//////        }
+
+        if (!empty($param['passee'])){
+            $sqb->andWhere("s.dateCloture < :passee");
+            $date = new DateTime();
+            $date->setTime(00, 00, 00);
+            $date->format('Y-m-d H:i:s');
+            $sqb->setParameter("passee", $date);
         }
 
-        dump($param['organisateur']);
+
 
 
         $query = $sqb->getQuery();

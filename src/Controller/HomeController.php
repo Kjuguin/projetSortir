@@ -23,21 +23,31 @@ class HomeController extends AbstractController
         $sorties=[];
 
         if ( $recherche !=null){
-
             $sortieRepository = $em->getRepository(Sortie::class);
 
-            if(!empty($request->get('filtre1'))){
-                $organisateur = $this->getUser()->getId();
-            }
+        // TODO : A décommenter avec le merge et les fichiers login
+//            if(!empty($request->get('filtre1'))){
+//                $organisateur = $this->getUser()->getId();
+//            }
+
+            // TODO
+//            if(!empty($request->get('filtre2'))){
+//                $inscrit = $this->getUser()->getId();
+//            }
+//             TODO
+//            if(!empty($request->get('filtre3'))){
+//                $notInscrit = $this->getUser()->getId();
+//            }
 
             $param=[
                 "site"=>$request->get('site'),
                 "nom"=>$request->get('nom'),
                 "dateDebut"=>$request->get('date-debut'),
                 "dateFin"=>$request->get('date-fin'),
-                "organisateur"=> $organisateur,
-                "inscrit"=>$request->get('filtre2'),
-                "notInscrit"=>$request->get('filtre3'),
+                // TODO
+//                "organisateur"=>$organisateur,
+//                "inscrit"=>$inscrit,
+//                "notInscrit"=>$notInscrit,
                 "passee"=>$request->get('filtre4')
             ];
 
@@ -53,9 +63,5 @@ class HomeController extends AbstractController
                 ]
         );
     }
-
-
-
-
 
 }
