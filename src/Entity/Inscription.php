@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
- * @ORM\Entity(repositoryClass="InscriptionRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\InscriptionRepository")
  */
 class Inscription
 {
@@ -18,7 +18,7 @@ class Inscription
     private $dateInscription;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Sortie", inversedBy="noInscriptions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\sortie", inversedBy="noInscriptions")
      * @ORM\Id()
      */
     private $noSortie;
@@ -28,6 +28,10 @@ class Inscription
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="noInscriptions")
      */
     private $noUser;
+    public function __toString()
+    {
+        return $this->noUser;
+    }
 
     public function getDateInscription(): ?\DateTimeInterface
     {

@@ -31,7 +31,7 @@ class User implements UserInterface
     private $noInscriptions;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="noOrganisateur")
+     * @ORM\OneToMany(targetEntity="App\Entity\sortie", mappedBy="noOrganisateur")
      */
     private $noSorties;
 
@@ -71,15 +71,7 @@ class User implements UserInterface
      */
     private $telephone;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $administrateur;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $actif;
 
     public function __construct()
     {
@@ -88,6 +80,7 @@ class User implements UserInterface
         $this->noInscriptions = new ArrayCollection();
         $this->noSorties = new ArrayCollection();
     }
+
 
     /**
      * A visual identifier that represents this user.
@@ -215,29 +208,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAdministrateur(): ?bool
-    {
-        return $this->administrateur;
-    }
 
-    public function setAdministrateur(bool $administrateur): self
-    {
-        $this->administrateur = $administrateur;
-
-        return $this;
-    }
-
-    public function getActif(): ?bool
-    {
-        return $this->actif;
-    }
-
-    public function setActif(bool $actif): self
-    {
-        $this->actif = $actif;
-
-        return $this;
-    }
 
     public function getNoSite(): ?Site
     {

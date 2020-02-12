@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
- * @ORM\Entity(repositoryClass="EtatRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\EtatRepository")
  */
 class Etat
 {
@@ -21,7 +21,7 @@ class Etat
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="noEtat")
+     * @ORM\OneToMany(targetEntity="App\Entity\sortie", mappedBy="noEtat")
      */
     private $noSorties;
 

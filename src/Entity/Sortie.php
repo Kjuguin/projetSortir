@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
- * @ORM\Entity(repositoryClass="SortieRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\SortieRepository")
  */
 class Sortie
 {
@@ -85,6 +85,11 @@ class Sortie
      */
     private $noSite;
 
+    public function __toString()
+    {
+        return $this->dateDebut;
+    }
+
     public function __construct()
     {
         $this->noInscriptions = new ArrayCollection();
@@ -118,6 +123,8 @@ class Sortie
 
         return $this;
     }
+
+
 
     public function getDuree(): ?int
     {

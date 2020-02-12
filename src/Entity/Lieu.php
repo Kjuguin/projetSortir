@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
- * @ORM\Entity(repositoryClass="LieuRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\LieuRepository")
  */
 class Lieu
 {
@@ -21,7 +21,7 @@ class Lieu
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="noLieu")
+     * @ORM\OneToMany(targetEntity="App\Entity\sortie", mappedBy="noLieu")
      */
     private $noSorties;
 

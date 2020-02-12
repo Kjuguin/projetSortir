@@ -21,7 +21,7 @@ class Site
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="noSite")
+     * @ORM\OneToMany(targetEntity="App\Entity\sortie", mappedBy="noSite")
      */
     private $noSorties;
 
