@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Sortie;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+//use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @method Sortie|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +19,64 @@ class SortieRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Sortie::class);
+    }
+
+    public function afficher($param)
+    {
+
+        $sqb = $this->createQueryBuilder('s');
+
+        if (!empty($param['site'])){
+            $sqb->where("s.noSite = :site");
+            $sqb->setParameter("site", $param['site']);
+        }
+
+        $sqb->andWhere("s.nom LIKE :nom");
+        $sqb->setParameter("nom", '%' . $param['nom'] . '%');
+        $sqb->andWhere("s.dateDebut >= :dateDebut");
+        $sqb->setParameter("dateDebut", $param['dateDebut']);
+
+        if (!empty($param['dateFin'])){
+            $sqb->andWhere("s.dateCloture <= :dateFin");
+            $date = DateTime::createFromFormat('Y-m-d', $param['dateFin']);
+            $date->setTime(24, 00, 00);
+            $date->format('Y-m-d H:i:s');
+            $sqb->setParameter("dateFin", $date);
+        }
+
+     // TODO : A décommenter avec le merge et les fichiers login
+//        if (!empty($param['organisateur'])){
+////            $sqb->andWhere("s.noOrganisateur = :organisateur");
+////            $sqb->setParameter("organisateur", $param['organisateur']);
+////        }
+///
+///      // TODO : A décommenter avec le merge et les fichiers login
+////        if (!empty($param['inscrit'])){
+//////            $sqb->andWhere("s.noInscription.noUser = :inscrit");
+//////            $sqb->setParameter("inscrit", $param['inscrit']);
+//////        }
+///
+///      // TODO : A décommenter avec le merge et les fichiers login
+////        if (!empty($param['notInscrit'])){
+//////            $sqb->andWhere("s.noInscription.noUser != :notInscrit");
+//////            $sqb->setParameter("notInscrit", $param['notInscrit']);
+//////        }
+
+        if (!empty($param['passee'])){
+            $sqb->andWhere("s.dateCloture < :passee");
+            $date = new DateTime();
+            $date->setTime(00, 00, 00);
+            $date->format('Y-m-d H:i:s');
+            $sqb->setParameter("passee", $date);
+        }
+
+
+
+
+        $query = $sqb->getQuery();
+        $result = $query->getResult();
+        return $result;
+
     }
 
     // /**
@@ -47,4 +107,5 @@ class SortieRepository extends ServiceEntityRepository
         ;
     }
     */
+
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}sortir.com{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+
+    <link rel="stylesheet" href="{{ asset("css/main.css") }}">
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <section class="full-page">
+        <nav class="nav-header">
+            <div class="logo-header">
+                <a href="#">
+                    <img class="logo-img" src="{{ asset("img/logo.png") }}">
+                    <h1 class="site-title">SORTIES ENTR'ENI</h1>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                {#                <li><a href="#">Villes</a></li>#}
+                {#                <li><a href="#">Sites</a></li>#}
+                <li><a href="{{ path('home') }}">Accueil</a></li>
+                <li><a href="#">Profil</a></li>
+                <li><a href="#">Déconnexion</a></li>
+            </ul>
+        </nav>
+
+    {% block body %}{% endblock %}
+
+    </section>
+<footer>
+</footer>
+
+</body>
+</html>

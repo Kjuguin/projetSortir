@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
- * @ORM\Entity(repositoryClass="InscriptionRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\InscriptionRepository")
  */
 class Inscription
 {
