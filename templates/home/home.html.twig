@@ -1,0 +1,129 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Sorties entr'Eni{% endblock %}
+
+{% block body %}
+
+<!-- SECTION 1 : Recherche et filtres des sorties -->
+    <section class="section-filtre">
+    <div class="container">
+
+        <form action="{{ path('home',{'recherche':'recherche'} ) }}" method="get">
+            <!-- filtres inputs -->
+            <div class="filtre-bloc-left">
+                <!-- 1ere ligne d'inputs -->
+                <div class="filtre-ligne-1">
+                    <div class="bloc-field bf-1">
+                        <label for="site">Site</label>
+                        <select class="input-home" name="site" id="site">
+                            <option value="" selected>Tous les sites</option>
+                            {% for site in sites %}
+                                <option value="{{ site.id}}"> {{ site.nomSite }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="bloc-field bf-2">
+                        <label for="nom">Le nom contient</label>
+                        <input class="input-home" type="search" name="nom" id="nom">
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+
+                <!-- 2eme ligne d'inputs -->
+                <div class="filtre-ligne-2">
+                    <div class="bloc-field bf-3">
+                        <label for="date-debut">Début</label>
+                        <input class="input-home" type="date" name="date-debut" id="date-debut">
+                    </div>
+                    <div class="bloc-field bf-4">
+                        <label for="date-fin">Fin</label>
+                        <input class="input-home" type="date" name="date-fin" id="date-fin">
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+
+                <!-- filtres checkboxes -->
+                <div class="bf-checkboxes">
+                    <div class="check">
+                       <input type="checkbox" name="filtre1" value="filtre1">
+                       <label for="filtre1">Sorties dont je suis l'organisateur.rice</label>
+                    </div>
+
+                    <div class="check">
+                        <input type="checkbox" name="filtre2" value="filtre2">
+                        <label for="filtre2">Sorties auxquelles je suis inscrit.e</label>
+                    </div>
+
+                    <div class="check">
+                        <input type="checkbox" name="filtre3" value="filtre3">
+                        <label for="filtre3">Sorties auxquelles je ne suis pas inscrit.e</label>
+                    </div>
+
+                    <div class="check">
+                        <input type="checkbox" name="filtre4" value="filtre4">
+                        <label for="filtre4">Sorties passées</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- bouton recherche -->
+            <div>
+                <input type="submit" value="Rechercher">
+            </div>
+        </form>
+    </div>
+
+    <!-- image background: clouds + city -->
+    <div class="background-img">
+        <img src="{{ asset('img/clouds-city.png') }}" alt="clouds-background">
+    </div>
+</section>
+
+<!-- SECTION 2 : Affichage du tableau des sorties -->
+<section class="section-filtre-2">
+    {% if(sorties !=null) %}
+        <table class="home-table">
+            <thead>
+            <tr>
+                <th>Nom de la sortie</th>
+                <th>Date de la sortie</th>
+                <th>Clôture</th>
+                <th>Places</th>
+                <th>Etat</th>
+                <th>Inscrit</th>
+                <th>Organisateur</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for sortie in sorties %}
+                    <tr>
+                        <td>{{ sortie.nom }}</td>
+                        <td>{{ sortie.dateDebut | date('d/m/Y') }}</td>
+                        <td>{{ sortie.dateCloture | date('d/m/Y') }}</td>
+                        <td>{{ sortie.noInscriptions.count }} / {{ sortie.nbInscriptionMax }}</td>
+                        <td>{{ sortie.noEtat.libelle }}</td>
+                        <td>
+                            {% if app.user %}
+                                {% for inscrit in sortie.noInscriptions %}
+                                    {% if inscrit.noUser == app.user.id %}
+                                        <p>X</p>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </td>
+                        <td>{{ sortie.noOrganisateur.pseudo }}</td>
+                        <td>Afficher - modifier</td>
+{#                        <a href="{{ path('afficher',{"id":sortie.id}) }}"> Afficher</a> -                            #}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}
