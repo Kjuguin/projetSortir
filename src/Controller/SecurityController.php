@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class RegistrationController extends AbstractController
+class SecurityController extends AbstractController
 {
     /**
      * @Route("/registration", name="registration")
@@ -45,15 +45,12 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        return $this->render('registration/registration.html.twig', [
+        return $this->render('security/registration.html.twig', [
             "form" => $form->createView()
         ]);
     }
-
     /**
      * @Route("/login", name="app_login")
-     * @param AuthenticationUtils $authenticationUtils
-     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -66,11 +63,12 @@ class RegistrationController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('registration/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
     /**
      * @Route("/logout", name="app_logout")
+     * @throws \Exception
      */
     public function logout()
     {
@@ -82,10 +80,8 @@ class RegistrationController extends AbstractController
      */
     public function test()
     {
-        return $this->render('registration/test.html.twig', [
+        return $this->render('security/test.html.twig', [
             "form" => "form"
         ]);
     }
-
-
 }
