@@ -38,6 +38,7 @@ class User implements UserInterface
     private $noSorties;
 
     /**
+     * @Assert\Email(message="L'email n'est pas valide")
      * @ORM\Column(type="string", length=100, unique=true)
      */
     private $email;
@@ -53,8 +54,33 @@ class User implements UserInterface
      */
     private $roles = [];
 
+
+//* @Assert\Regex(
+//* pattern = "/^(?=.*\d)(?=.*[A-Z])(?=.*[@#$%])(?!.*(.)\1{2}).*[a-z]/m",
+//* match=true,
+//* message="Votre mot de passe doit comporter au moins huit caractères, dont des lettres majuscules et minuscules, un chiffre et un symbole.")
+
     /**
-     * TODO: REGEX A REALISER POUR MAIL
+     * @Assert\Regex(
+     *      pattern = "/^(?=.*[A-Z]).*[a-z]/m",
+     *      match=true,
+     *      message="Votre mot de passe doit comporter au moins une lettre majuscule.")
+     * @Assert\Regex(
+     *      pattern = "/^(?=.*[a-z]).*[a-z]/m",
+     *      match=true,
+     *      message="Votre mot de passe doit comporter au moins une lettre minuscule.")
+     * @Assert\Regex(
+     *      pattern = "/^(?=.*[0-9]).*[a-z]/m",
+     *      match=true,
+     *      message="Votre mot de passe doit comporter au moins un chiffre.")
+     * @Assert\Regex(
+     *      pattern = "/^(?=.*[@#$%]).*[a-z]/m",
+     *      match=true,
+     *      message="Votre mot de passe doit comporter au moins un caractère spécial : @ # $ %.")
+     * @Assert\Regex(
+     *      pattern = "/^.{8,15}/m",
+     *      match=true,
+     *      message="Votre mot de passe doit comporter entre 8 et 15 caractères.")
      * @var string The hashed password
      * @ORM\Column(type="string")
      */

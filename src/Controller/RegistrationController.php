@@ -76,4 +76,16 @@ class RegistrationController extends AbstractController
     {
         throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
     }
+
+    /**
+     * @Route("/test", name="test")
+     */
+    public function test()
+    {
+        return $this->render('registration/test.html.twig', [
+            "form" => "form"
+        ]);
+    }
+
+
 }
