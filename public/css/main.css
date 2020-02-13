@@ -5,7 +5,7 @@
 }
 
 body, html{
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Nunito', sans-serif !important;
     background:#8fb5db;
 }
 
@@ -22,14 +22,15 @@ li{
 }
 
 /*************** HEADER ***************/
-.full-page{
+.gradient-section{
+    text-align: center;
     width:100%;
     display:inline-block;
-    /**text-align:center;**/
     padding-top:1.5em;
     background: rgb(138,201,255);
     background: linear-gradient(180deg, rgba(138,201,255,1) 0%, rgba(218,244,255,1) 100%);
 }
+
 
 .nav-header, .logo-header, .logo-img, .site-title, .nav-menu, .nav-menu li{
     display: inline-block;
@@ -77,15 +78,15 @@ li{
     width:100%;
 }
 
-.container{
-    width:50em;
+.container-home{
+    width:60em;
     margin:0 auto;
 }
 
 /** left field bloc **/
 .filtre-bloc-left{
     text-align: left;
-    width: 33em;
+    width:36em;
 }
 
 .bf-1, .bf-3{

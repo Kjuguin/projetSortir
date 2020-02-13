@@ -5,81 +5,99 @@
 {% block body %}
 
 <!-- SECTION 1 : Recherche et filtres des sorties -->
+<header class="gradient-section">
+    <nav class="nav-header">
+        <div class="logo-header">
+            <a href="{{ path('home') }}">
+                <img class="logo-img" src="{{ asset("img/logo.png") }}">
+                <h1 class="site-title">SORTIES ENTR'ENI</h1>
+            </a>
+        </div>
+        <ul class="nav-menu">
+                {#                <li><a href="#">Villes</a></li>#}
+                {#                <li><a href="#">Sites</a></li>#}
+            <li><a href="{{ path('home') }}">Accueil</a></li>
+            <li><a href="#">Profil</a></li>
+            <li> <a href="{{ path('app_logout') }}">Déconnexion</a></li>
+        </ul>
+    </nav>
+
     <section class="section-filtre">
-    <div class="container">
-
-        <form action="{{ path('home',{'recherche':'recherche'} ) }}" method="get">
-            <!-- filtres inputs -->
-            <div class="filtre-bloc-left">
-                <!-- 1ere ligne d'inputs -->
-                <div class="filtre-ligne-1">
-                    <div class="bloc-field bf-1">
-                        <label for="site">Site</label>
-                        <select class="input-home" name="site" id="site">
-                            <option value="" selected>Tous les sites</option>
-                            {% for site in sites %}
-                                <option value="{{ site.id}}"> {{ site.nomSite }}</option>
-                            {% endfor %}
-                        </select>
+        <div class="container-home">
+            <form action="{{ path('home',{'recherche':'recherche'} ) }}" method="get">
+                <!-- filtres inputs -->
+                <div class="filtre-bloc-left">
+                    <!-- 1ere ligne d'inputs -->
+                    <div class="filtre-ligne-1">
+                        <div class="bloc-field bf-1">
+                            <label for="site">Site</label>
+                            <select class="input-home" name="site" id="site">
+                                <option value="" selected>Tous les sites</option>
+                                {% for site in sites %}
+                                    <option value="{{ site.id}}"> {{ site.nomSite }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="bloc-field bf-2">
+                            <label for="nom">Le nom contient</label>
+                            <input class="input-home" type="search" name="nom" id="nom">
+                        </div>
                     </div>
-                    <div class="bloc-field bf-2">
-                        <label for="nom">Le nom contient</label>
-                        <input class="input-home" type="search" name="nom" id="nom">
+
+                    <div class="clear"></div>
+
+                    <!-- 2eme ligne d'inputs -->
+                    <div class="filtre-ligne-2">
+                        <div class="bloc-field bf-3">
+                            <label for="date-debut">Début</label>
+                            <input class="input-home" type="date" name="date-debut" id="date-debut">
+                        </div>
+                        <div class="bloc-field bf-4">
+                            <label for="date-fin">Fin</label>
+                            <input class="input-home" type="date" name="date-fin" id="date-fin">
+                        </div>
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <!-- filtres checkboxes -->
+                    <div class="bf-checkboxes">
+                        <div class="check">
+                           <input type="checkbox" name="filtre1" value="filtre1">
+                           <label for="filtre1">Sorties dont je suis l'organisateur.rice</label>
+                        </div>
+
+                        <div class="check">
+                            <input type="checkbox" name="filtre2" value="filtre2">
+                            <label for="filtre2">Sorties auxquelles je suis inscrit.e</label>
+                        </div>
+
+                        <div class="check">
+                            <input type="checkbox" name="filtre3" value="filtre3">
+                            <label for="filtre3">Sorties auxquelles je ne suis pas inscrit.e</label>
+                        </div>
+
+                        <div class="check">
+                            <input type="checkbox" name="filtre4" value="filtre4">
+                            <label for="filtre4">Sorties passées</label>
+                        </div>
                     </div>
                 </div>
 
-                <div class="clear"></div>
-
-                <!-- 2eme ligne d'inputs -->
-                <div class="filtre-ligne-2">
-                    <div class="bloc-field bf-3">
-                        <label for="date-debut">Début</label>
-                        <input class="input-home" type="date" name="date-debut" id="date-debut">
-                    </div>
-                    <div class="bloc-field bf-4">
-                        <label for="date-fin">Fin</label>
-                        <input class="input-home" type="date" name="date-fin" id="date-fin">
-                    </div>
+                <!-- bouton recherche -->
+                <div>
+                    <input type="submit" value="Rechercher">
                 </div>
+            </form>
+        </div>
 
-                <div class="clear"></div>
+        <!-- image background: clouds + city -->
+        <div class="background-img">
+            <img src="{{ asset('img/clouds-city.png') }}" alt="clouds-background">
+        </div>
+    </section>
 
-                <!-- filtres checkboxes -->
-                <div class="bf-checkboxes">
-                    <div class="check">
-                       <input type="checkbox" name="filtre1" value="filtre1">
-                       <label for="filtre1">Sorties dont je suis l'organisateur.rice</label>
-                    </div>
-
-                    <div class="check">
-                        <input type="checkbox" name="filtre2" value="filtre2">
-                        <label for="filtre2">Sorties auxquelles je suis inscrit.e</label>
-                    </div>
-
-                    <div class="check">
-                        <input type="checkbox" name="filtre3" value="filtre3">
-                        <label for="filtre3">Sorties auxquelles je ne suis pas inscrit.e</label>
-                    </div>
-
-                    <div class="check">
-                        <input type="checkbox" name="filtre4" value="filtre4">
-                        <label for="filtre4">Sorties passées</label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- bouton recherche -->
-            <div>
-                <input type="submit" value="Rechercher">
-            </div>
-        </form>
-    </div>
-
-    <!-- image background: clouds + city -->
-    <div class="background-img">
-        <img src="{{ asset('img/clouds-city.png') }}" alt="clouds-background">
-    </div>
-</section>
+</header>
 
 <!-- SECTION 2 : Affichage du tableau des sorties -->
 <div class="container-fluid">
