@@ -118,7 +118,7 @@
                             <td>
                                 <a href="{{ path('utilisateur_afficherProfil',{'id':sortie.noOrganisateur.id}) }}">{{ sortie.noOrganisateur.pseudo }}</a>
                             </td>
-                            <td><a href="{{ path('afficherSortie',{'id':sortie.id}) }}">Afficher</a> - modifier</td>
+                            <td><a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a> - modifier</td>
                         </tr>
                     {% endfor %}
                     </tbody>
