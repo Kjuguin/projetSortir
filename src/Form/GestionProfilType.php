@@ -26,7 +26,6 @@ class GestionProfilType extends AbstractType
                 'type' => PasswordType::class,
                 'first_options' => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
-                'mapped' =>false
             ])
             ->add('noSite', EntityType::class, [
                 'class' => Site::class,

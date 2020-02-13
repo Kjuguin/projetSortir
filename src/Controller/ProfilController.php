@@ -26,9 +26,13 @@ class ProfilController extends AbstractController
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
+            if (empty($user)){
+                $user->setPassword($this->getUser()->getPassword());
+            } else {
+                $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+                $user->setPassword($password);
+            }
 
-            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($password);
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
