@@ -172,6 +172,9 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
+    /**
+     * @see UserInterface
+     */
     public function getId(): ?int
     {
         return $this->id;

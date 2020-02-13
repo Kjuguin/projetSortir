@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
- * @ORM\Entity(repositoryClass="SortieRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\SortieRepository")
  */
 class Sortie
 {
@@ -54,11 +54,6 @@ class Sortie
      * @ORM\Column(type="text", nullable=true)
      */
     private $descriptionInfos;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $etatSortie;
 
     /**
      * @ORM\Column(type="string", length=250, nullable=true)
@@ -163,18 +158,6 @@ class Sortie
     public function setDescriptionInfos(?string $descriptionInfos): self
     {
         $this->descriptionInfos = $descriptionInfos;
-
-        return $this;
-    }
-
-    public function getEtatSortie(): ?int
-    {
-        return $this->etatSortie;
-    }
-
-    public function setEtatSortie(?int $etatSortie): self
-    {
-        $this->etatSortie = $etatSortie;
 
         return $this;
     }
