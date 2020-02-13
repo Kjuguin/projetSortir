@@ -24,9 +24,10 @@ class SecurityController extends AbstractController
     public function registration(UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em, Request $request)
     {
         $user = new User();
-        dump($user);
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
+
+
         if ($form->isSubmitted() && $form->isValid()) {
             // Etape de plus : hasher le mot de pass
 
@@ -35,6 +36,9 @@ class SecurityController extends AbstractController
             $user->setPseudo($user->getEmail());
 
             $user->setRoles(['ROLE_USER']);
+
+            $user->setNom(ucfirst(strtolower($user->getNom())));
+            $user->setPrenom(ucfirst(strtolower($user->getPrenom())));
 
 
             $em->persist($user);

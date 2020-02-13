@@ -26,6 +26,11 @@ class Etat
     private $noSorties;
 
     /**
+     * @Assert\Length(
+     *     min="3",
+     *     max="30",
+     *     minMessage="L'état doit être supérieur à 3 caractères",
+     *     maxMessage="L'état doit être inférieur à 30 caractères")
      * @ORM\Column(type="string", length=30)
      */
     private $libelle;

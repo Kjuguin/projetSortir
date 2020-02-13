@@ -26,12 +26,22 @@ class Lieu
     private $noSorties;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @Assert\Length(
+     *     min="3",
+     *     max="50",
+     *     minMessage="Le nom de la ville doit être supérieur à 3 caractères",
+     *     maxMessage="Le nom de la ville doit être inférieur à 50 caractères")
+     * @ORM\Column(type="string", length=50)
      */
     private $nomLieu;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Length(
+     *     min="3",
+     *     max="100",
+     *     minMessage="Le nom de la ville doit être supérieur à 3 caractères",
+     *     maxMessage="Le nom de la ville doit être inférieur à 100 caractères")
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $rue;
 
