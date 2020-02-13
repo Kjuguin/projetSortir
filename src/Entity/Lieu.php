@@ -150,7 +150,4 @@ class Lieu
 
         return $this;
     }
-
-
-    
 }
