@@ -99,7 +99,4 @@ class Ville
 
         return $this;
     }
-
-    
-
 }

@@ -1,0 +1,32 @@
+{% extends "layout.html.twig" %}
+
+
+{% block body %}
+
+    <div>
+        <div> Nom : {{ sortie.nom | capitalize }}</div>
+        <div> Date de sortie : {{ sortie.dateDebut | date("d/m/y H:i:s") }}</div>
+        <div> Date limite inscription {{ sortie.dateCloture | date("d/m/Y H:i:s ") }}</div>
+        <div> Nombre de place : {{ sortie.nbInscriptionMax }}</div>
+        <div> Durée : {{ sortie.duree }} minutes</div>
+        <div> Description et infos : {{ sortie.descriptionInfos }}</div>
+    </div>
+    <div>
+        <div> Lieu : {{ sortie.noLieu.nomLieu | capitalize }}</div>
+        <div> Rue : {{ sortie.nolieu.rue | capitalize }}</div>
+        <div> Ville : {{ sortie.noLieu.noVille.nomVille | capitalize }}</div>
+        <div> Code Postal : {{ sortie.noLieu.noVille.codePostal }}</div>
+        <div> Latitude : {{ sortie.noLieu.latitude }}°</div>
+        <div> Longitude : {{ sortie.noLieu.longitude }}°</div>
+    </div>
+    <h1>Inscrit</h1>
+    <div>
+        <lu>
+            {% for inscription in sortie.noInscriptions %}
+                <li>pseudo : {{ inscription.noUser.pseudo }} / nom : {{ inscription.noUser.prenom | capitalize }} {{ inscription.noUser.prenom | upper }} </li>
+                <br>
+
+            {% endfor %}
+        </lu>
+    </div>
+{% endblock %}

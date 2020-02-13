@@ -9,7 +9,7 @@ security:
         app_user_provider:
             entity:
                 class: App\Entity\User
-                property: email
+#                property: pseudo
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -24,7 +24,13 @@ security:
             #logout_on_user_change: true
             logout:
                 path: app_logout
-                target: test
+                target: app_login
+            guard:
+                authenticators:
+                    - App\Security\LogAuthenticator
+
+            remember_me:
+                secret: '%kernel.secret%'
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

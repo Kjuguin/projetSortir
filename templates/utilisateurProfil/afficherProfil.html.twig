@@ -1,0 +1,17 @@
+{#{% extends 'base.html.twig' %}#}
+
+{% block body %}
+
+    {% if profile %}
+
+        <h1>{{ profile.pseudo }}</h1>
+        <p>Prénom: {{ profile.prenom }}</p>
+        <p>Nom: {{ profile.nom }}</p>
+        <p>Téléphone: {{ profile.telephone }}</p>
+        <p>Email: {{ profile.email }}</p>
+        <p>Site de Rattachement: {{ profile.noSite.nomSite}}</p>
+        <a href="{{ path('home') }}"><button>Retour</button></a>
+
+    {% endif %}
+
+{% endblock %}

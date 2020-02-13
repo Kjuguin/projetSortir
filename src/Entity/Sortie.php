@@ -162,6 +162,18 @@ class Sortie
         return $this;
     }
 
+    public function getEtatSortie(): ?int
+    {
+        return $this->etatSortie;
+    }
+
+    public function setEtatSortie(?int $etatSortie): self
+    {
+        $this->etatSortie = $etatSortie;
+
+        return $this;
+    }
+
     public function getUrlPhoto(): ?string
     {
         return $this->urlPhoto;
@@ -252,7 +264,4 @@ class Sortie
 
         return $this;
     }
-
-    
-
 }

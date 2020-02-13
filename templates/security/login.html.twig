@@ -1,0 +1,65 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset("css/login.css") }}">
+{% endblock %}
+{% block body %}
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <img src="{{ asset("img/logo.png") }}" id="icon" alt="User Icon" />
+            </div>
+
+            <!-- Login Form -->
+            <form method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                        <div class="mb-3">
+                            Vous êtes connecté sous  {{ app.user.pseudo }} <a style="margin-left: 20px" href="{{ path('app_logout') }}" class="btn btn-outline-primary">Logout</a>
+                        </div>
+                {% endif %}
+
+                <input autofocus type="text" value="{{ last_username }}" id="inputEmail" class="fadeIn second" name="email" placeholder="Email or login" required>
+                <input type="password" id="inputPassword" class="fadeIn third" name="password" placeholder="******" required>
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+                <div class="checkbox mb-3 fadeIn fourth">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                </div>
+                <input type="submit" class="fadeIn five" value="Log In">
+            </form>
+
+            <!-- Remind Passowrd -->
+            <div id="formFooter">
+                <a class="underlineHover" href="#">Forgot Password?</a>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    #}
+
+{% endblock %}
+

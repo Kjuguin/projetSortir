@@ -1,0 +1,23 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} Modification du Profil{% endblock %}
+
+{% block body %}
+    <div>
+        <h1>Gestion Du Profil</h1>
+    </div>
+    <div>
+        {{ form_start(userForm) }}
+        {{ form_widget(userForm) }}
+        <label>Ma photo </label>
+        <button><p>Télécharger vers le serveur !</p></button>
+        <br>
+
+        <button type="submit"><p>Modifier !</p></button>
+        <button type="reset"><p>Annuler !</p></button>
+        {{ form_end(userForm) }}
+
+    </div>
+
+
+{% endblock %}
