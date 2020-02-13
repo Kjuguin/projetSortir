@@ -57,6 +57,10 @@ class Site
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->nomSite;
+    }
 
     /**
      * @return Collection|Sortie[]
