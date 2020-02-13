@@ -24,6 +24,8 @@ class SecurityController extends AbstractController
     public function registration(UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em, Request $request)
     {
         $user = new User();
+        $user->setPseudo("test");
+
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
@@ -53,6 +55,7 @@ class SecurityController extends AbstractController
             "form" => $form->createView()
         ]);
     }
+
     /**
      * @Route("/login", name="app_login")
      */

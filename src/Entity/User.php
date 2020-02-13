@@ -43,9 +43,10 @@ class User implements UserInterface
      */
     private $email;
 
-//TODO : * @Assert\NotBlank(message="Il ne doit pas y avoir d'espace dans votre pseudo")
+//TODO :
 
     /**
+     * @Assert\NotBlank(message="Il ne doit pas y avoir d'espace dans votre pseudo")
      * @Assert\Length(
      *     min="3",
      *     max="30",

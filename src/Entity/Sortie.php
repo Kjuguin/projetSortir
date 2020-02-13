@@ -26,26 +26,39 @@ class Sortie
     private $noInscriptions;
 
     /**
+     * @Assert\Length(
+     *     min="3",
+     *     max="30",
+     *     minMessage="Le nom de la sortie doit être supérieur à 3 caractères",
+     *     maxMessage="Le nom de la sortie doit être inférieur à 30 caractères")
      * @ORM\Column(type="string", length=30)
      */
     private $nom;
 
     /**
+     * @Assert\GreaterThan("today utc", message="La date de début de sortie doit être supérieur à la date d'aujourd'hui")
      * @ORM\Column(type="datetime")
      */
     private $dateDebut;
 
     /**
+     * @Assert\Positive(message="La valeur doit être un nombre positif.")
      * @ORM\Column(type="integer", nullable=true)
      */
     private $duree;
 
+    //TODO : a valider si possible
     /**
+     * @Assert\Range(min="today UTC",
+     *     max=$dateDebut,
+     *     maxMessage="La date de clôture doit se situe entre aujourd'hui et le '{{$dateDebut}}",
+     *     minMessage="La date de clôture doit se situe entre aujourd'hui et le '{{$dateDebut}}")
      * @ORM\Column(type="datetime")
      */
     private $dateCloture;
 
     /**
+     * @Assert\Positive(message="La valeur doit être un nombre positif.")
      * @ORM\Column(type="integer")
      */
     private $nbInscriptionMax;
@@ -56,6 +69,7 @@ class Sortie
     private $descriptionInfos;
 
     /**
+     * @Assert\Url(message="L'url n'est pas valide)
      * @ORM\Column(type="string", length=250, nullable=true)
      */
     private $urlPhoto;
