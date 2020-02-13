@@ -24,7 +24,7 @@ security:
             #logout_on_user_change: true
             logout:
                 path: app_logout
-                target: test
+                target: app_login
             guard:
                 authenticators:
                     - App\Security\LogAuthenticator

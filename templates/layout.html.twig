@@ -6,7 +6,7 @@
     {% block stylesheets %}{% endblock %}
 
     <link rel="stylesheet" href="{{ asset("css/main.css") }}">
-
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
 </head>
 
@@ -24,7 +24,7 @@
                 {#                <li><a href="#">Sites</a></li>#}
                 <li><a href="{{ path('home') }}">Accueil</a></li>
                 <li><a href="#">Profil</a></li>
-                <li><a href="#">Déconnexion</a></li>
+                <li> <a href="{{ path('app_logout') }}">Déconnexion</a></li>
             </ul>
         </nav>
 
@@ -33,6 +33,10 @@
     </section>
 <footer>
 </footer>
+    {% block javascripts %}
+    {% endblock %}
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </body>
 </html>

@@ -99,6 +99,7 @@
             </thead>
             <tbody>
                 {% for sortie in sorties %}
+{#                    {% if (inscrit == null and notInscrit == null) OR (inscrit != null and notInscrit != null) %}#}
                     <tr>
                         <td>{{ sortie.nom }}</td>
                         <td>{{ sortie.dateDebut | date('d/m/Y') }}</td>
@@ -108,7 +109,7 @@
                         <td>
                             {% if app.user %}
                                 {% for inscrit in sortie.noInscriptions %}
-                                    {% if inscrit.noUser == app.user.id %}
+                                    {% if inscrit.noUser.id == app.user.id %}
                                         <p>X</p>
                                     {% endif %}
                                 {% endfor %}
@@ -118,6 +119,7 @@
                         <td>Afficher - modifier</td>
 {#                        <a href="{{ path('afficher',{"id":sortie.id}) }}"> Afficher</a> -                            #}
                     </tr>
+{#                    {% endif %}#}
                 {% endfor %}
             </tbody>
         </table>

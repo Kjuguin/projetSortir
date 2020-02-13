@@ -20,35 +20,36 @@ class HomeController extends AbstractController
         $siteRepository = $em->getRepository(Site::class);
         $sites = $siteRepository->findAll();
 
-        $sorties=[];
+        $sorties = [];
+        $inscrit = null;
+        $notInscrit = null;
 
-        if ( $recherche !=null){
+        if ($recherche != null) {
             $sortieRepository = $em->getRepository(Sortie::class);
 
-        // TODO : A décommenter avec le merge et les fichiers login
-//            if(!empty($request->get('filtre1'))){
-//                $organisateur = $this->getUser()->getId();
-//            }
+            if (!empty($request->get('filtre1'))) {
+                $organisateur = $this->getUser()->getId();
+            } else {
+                $organisateur = null;
+            }
 
-            // TODO
-//            if(!empty($request->get('filtre2'))){
-//                $inscrit = $this->getUser()->getId();
-//            }
-//             TODO
-//            if(!empty($request->get('filtre3'))){
-//                $notInscrit = $this->getUser()->getId();
-//            }
+            if (!empty($request->get('filtre2'))) {
+                $inscrit = $this->getUser()->getId();
+            }
 
-            $param=[
-                "site"=>$request->get('site'),
-                "nom"=>$request->get('nom'),
-                "dateDebut"=>$request->get('date-debut'),
-                "dateFin"=>$request->get('date-fin'),
-                // TODO
-//                "organisateur"=>$organisateur,
-//                "inscrit"=>$inscrit,
-//                "notInscrit"=>$notInscrit,
-                "passee"=>$request->get('filtre4')
+            if (!empty($request->get('filtre3'))) {
+                $notInscrit = $this->getUser()->getId();
+            }
+
+            $param = [
+                "site" => $request->get('site'),
+                "nom" => $request->get('nom'),
+                "dateDebut" => $request->get('date-debut'),
+                "dateFin" => $request->get('date-fin'),
+                "organisateur" => $organisateur,
+                "inscrit"=>$inscrit,
+                "notInscrit"=>$notInscrit,
+                "passee" => $request->get('filtre4')
             ];
 
             dump($param);
@@ -58,9 +59,11 @@ class HomeController extends AbstractController
 
         return $this->render('home/home.html.twig',
             [
-                "sites"=>$sites,
-                "sorties" => $sorties
-                ]
+                "sites" => $sites,
+                "sorties" => $sorties,
+                "inscrit" => $inscrit,
+                "notInscrit" => $notInscrit,
+            ]
         );
     }
 
