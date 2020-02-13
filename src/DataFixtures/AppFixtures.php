@@ -154,7 +154,7 @@ class AppFixtures extends Fixture
 //        $manager->persist($inscription);
 
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 15; $i++) {
             $inscription = new Inscription();
             $inscription->setNoUser($faker->randomElement($orga));
             $inscription->setNoSortie($faker->randomElement($sorties));
