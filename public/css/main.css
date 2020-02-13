@@ -25,7 +25,7 @@ li{
 .full-page{
     width:100%;
     display:inline-block;
-    text-align:center;
+    /**text-align:center;**/
     padding-top:1.5em;
     background: rgb(138,201,255);
     background: linear-gradient(180deg, rgba(138,201,255,1) 0%, rgba(218,244,255,1) 100%);
