@@ -31,7 +31,7 @@ class User implements UserInterface
     private $noInscriptions;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\sortie", mappedBy="noOrganisateur")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="noOrganisateur")
      */
     private $noSorties;
 

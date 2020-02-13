@@ -18,7 +18,7 @@ class Inscription
     private $dateInscription;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\sortie", inversedBy="noInscriptions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Sortie", inversedBy="noInscriptions")
      * @ORM\Id()
      */
     private $noSortie;

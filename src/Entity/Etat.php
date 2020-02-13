@@ -21,7 +21,7 @@ class Etat
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\sortie", mappedBy="noEtat")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="noEtat")
      */
     private $noSorties;
 

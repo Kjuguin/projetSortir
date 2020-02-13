@@ -21,7 +21,7 @@ class Lieu
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\sortie", mappedBy="noLieu")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="noLieu")
      */
     private $noSorties;
 
