@@ -1,7 +1,5 @@
 {#{% extends 'base.html.twig' %}#}
 
-{% block title %}Hello AfficherProfilController!{% endblock %}
-
 {% block body %}
 
     {% if profile %}
@@ -12,7 +10,7 @@
         <p>Téléphone: {{ profile.telephone }}</p>
         <p>Email: {{ profile.email }}</p>
         <p>Site de Rattachement: {{ profile.noSite.nomSite}}</p>
-        <a href="{{ path('profilIndex') }}"><button>Retour</button></a>
+        <a href="{{ path('home') }}"><button>Retour</button></a>
 
     {% endif %}
 
