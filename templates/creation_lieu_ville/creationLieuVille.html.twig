@@ -1,11 +1,11 @@
-{#{% extends "base.html.twig" %}#}
+{% extends "base.html.twig" %}
 
-{#{% block body %}#}
-{#    <div>#}
-{#        {{ form_start(form) }}#}
-{#        {{ form_widget(form) }}#}
-{#bla#}
-{#        <button type="submit"><p>Envoyer !</p></button>#}
-{#        {{ form_end(form) }}#}
-{#    </div>#}
-{#{% endblock %}#}
+{% block body %}
+    <div>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+
+        <button type="submit"><p>Envoyer !</p></button>
+       {{ form_end(form) }}
+    </div>
+{% endblock %}

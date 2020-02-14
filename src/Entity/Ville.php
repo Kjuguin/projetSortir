@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
- * @ORM\Entity(repositoryClass="VilleRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\VilleRepository")
  */
 class Ville
 {
@@ -39,6 +39,12 @@ class Ville
     {
         $this->noLieux = new ArrayCollection();
     }
+
+    public function __toString()
+{
+
+    return $this->nomVille;
+}
 
     public function getId(): ?int
     {

@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
- * @ORM\Entity(repositoryClass="EtatRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\EtatRepository")
  */
 class Etat
 {
