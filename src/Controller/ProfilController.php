@@ -30,15 +30,13 @@ class ProfilController extends AbstractController
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
 //            if ($userForm->get(''))
-            dump($userForm->get("gestion_profil[password][first]"));
             if ($user->getPassword() == 'Pa$$w0rdPa$$w0rd'){
                 $user->setPassword($user2->getPassword());
             } else {
                 $password = $passwordEncoder->encodePassword($user, $user->getPassword());
                 $user->setPassword($password);
             }
-            echo $user->getPassword();
-            die();
+
 
             $em->persist($user);
             $em->flush();
