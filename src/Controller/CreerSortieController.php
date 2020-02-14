@@ -32,7 +32,6 @@ class CreerSortieController extends AbstractController
 
 
 //            $currentUser = $this->getUser();
-//
 //            $currentSite = $this->getUser()->getNoSite();
 //            $sortie = $sortie->setNoSite($em->getRepository(Site::class)->find($currentSite));
 //
