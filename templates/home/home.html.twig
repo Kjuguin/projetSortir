@@ -100,7 +100,6 @@
                 </thead>
                 <tbody>
                     {% for sortie in sorties %}
-                {#                    {% if (inscrit == null and notInscrit == null) OR (inscrit != null and notInscrit != null) %}#}
                         <tr>
                             <td>{{ sortie.nom }}</td>
                             <td>{{ sortie.dateDebut | date('d/m/Y H:i') }}</td>
@@ -117,14 +116,45 @@
                                 {% endif %}
                             </td>
                             <td>{{ sortie.noOrganisateur.pseudo }}</td>
-                            <td>Afficher - modifier</td>
-            {#                <a href="{{ path('afficher',{"id":sortie.id}) }}"> Afficher</a> -                            #}
+                            <td>
+                                    {% for inscrit in sortie.noInscriptions %}
+                                        <!--Actions si Etat en Création -->
+                                        {% if sortie.noEtat.id is same as(105) %}
+                                            <a>Modifier-Publier</a>
+                                        {% endif %}
+                                        <!--Actions si Etat en Cours -->
+                                        {% if sortie.noEtat.id is same as(108) %}
+                                                <a>Afficher</a>
+                                        {% endif %}
+                                        <!--Actions si Etat Fermé -->
+                                        {% if sortie.noEtat.id is same as(107) %}
+                                            <!--Actions si Etat Fermé et inscrit-->
+                                            {% if inscrit.noUser.id is same as(app.user.id)  %}
+                                                <a>Afficher-Se Désister</a>
+                                            {% endif %}
+                                            {% if inscrit.noUser.id != app.user.id  %}
+                                                <a>Afficher</a>
+                                            {% endif %}
+                                        {% endif %}
+                                        <!--Actions si Etat Ouvert -->
+                                        {% if sortie.noEtat.id is same as(106) %}
+                                            <!--Actions si Etat Ouvert et inscrit-->
+                                            {% if inscrit.noUser.id is same as(app.user.id) and app.user.id is same as(sortie.noOrganisateur.id) %}
+                                                    <a>Afficher-Annuler</a>
+                                            {% endif %}
+                                            {% if inscrit.noUser.id is same as(app.user.id) and inscrit.noUser.id != sortie.noOrganisateur.id%}
+                                                <a>Afficher-Se Désister</a>
+                                            {% endif %}
+                                            {% if inscrit.noUser.id != app.user.id  %}
+                                                <a>Afficher-S'inscrire</a>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                            </td>
                         </tr>
-            {#                    {% endif %}#}
                     {% endfor %}
                 </tbody>
             </table>
-
         {% endif %}
 
     </div>
