@@ -1,8 +1,8 @@
-{% extends 'layout.html.twig' %}
+{% extends 'login-base.html.twig' %}
 
 {% block title %}Log in!{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset("css/login.css") }}">
+
 {% endblock %}
 {% block body %}
     <div class="wrapper fadeInDown">
@@ -10,8 +10,9 @@
             <!-- Tabs Titles -->
 
             <!-- Icon -->
-            <div class="fadeIn first">
+            <div class="fadeIn first login-logo">
                 <img src="{{ asset("img/logo.png") }}" id="icon" alt="User Icon" />
+                <h1 class="login-title">Sorties entr'ENI</h1>
             </div>
 
             <!-- Login Form -->
@@ -26,26 +27,33 @@
                         </div>
                 {% endif %}
 
-                <input autofocus type="text" value="{{ last_username }}" id="inputEmail" class="fadeIn second" name="email" placeholder="Email or login" required>
-                <input type="password" id="inputPassword" class="fadeIn third" name="password" placeholder="******" required>
+                <input autofocus type="text" value="{{ last_username }}" id="inputEmail" class="fadeIn second login-input-field lif1" name="email" placeholder="Email or login" required>
+                <input type="password" id="inputPassword" class="fadeIn third login-input-field" name="password" placeholder="******" required>
                 <input type="hidden" name="_csrf_token"
                        value="{{ csrf_token('authenticate') }}"
                 >
                 <div class="checkbox mb-3 fadeIn fourth">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me
+
+                    <label class="login-check-lbl">
+                        <input type="checkbox" value="remember-me {{ (app.user ) ? 'checked' : '' }}"> se souvenir de moi
+
                     </label>
                 </div>
-                <input type="submit" class="fadeIn five" value="Log In">
+                <input type="submit" class="fadeIn five" value="LOGIN">
             </form>
 
             <!-- Remind Passowrd -->
             <div id="formFooter">
-                <a class="underlineHover" href="#">Forgot Password?</a>
+                <a class="underlineHover" href="#">Mot de passe oublié ?</a>
             </div>
 
         </div>
     </div>
+    <footer class="login-footer">
+        <img src="{{ asset('img/clouds-footer.png') }}">
+    </footer>
+
+
 
 
 

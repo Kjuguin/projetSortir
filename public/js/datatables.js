@@ -11211,7 +11211,7 @@
 		 *      } );
 		 *    } )
 		 */
-		"iDisplayLength": 100,
+		"iDisplayLength": 10,
 	
 	
 		/**

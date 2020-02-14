@@ -9,6 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Flex\Response;
 
+/**
+ * @Route("/sortie", name="sortie_",)
+ */
 class AfficherSortieController extends AbstractController
 {
     /**
@@ -20,7 +23,7 @@ class AfficherSortieController extends AbstractController
         $sortieRepository = $em->getRepository(Sortie::class);
         $sortie = $sortieRepository->find($id);
 
-        return $this->render('afficherSortie.html.twig', [
+        return $this->render('sortie/afficherSortie.html.twig', [
                 'sortie' => $sortie
             ]
         );
