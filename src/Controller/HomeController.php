@@ -20,12 +20,10 @@ class HomeController extends AbstractController
         $siteRepository = $em->getRepository(Site::class);
         $sites = $siteRepository->findAll();
 
-        $sorties = [];
-        $inscrit = null;
-        $notInscrit = null;
-
         if ($recherche != null) {
             $sortieRepository = $em->getRepository(Sortie::class);
+            $inscrit = null;
+            $notInscrit = null;
 
             if (!empty($request->get('filtre1'))) {
                 $organisateur = $this->getUser()->getId();
@@ -55,14 +53,14 @@ class HomeController extends AbstractController
             dump($param);
 
             $sorties = $sortieRepository->afficher($param);
+        } else {
+            $sorties = $em->getRepository(Sortie::class)->findAll();
         }
 
         return $this->render('home/home.html.twig',
             [
                 "sites" => $sites,
                 "sorties" => $sorties,
-                "inscrit" => $inscrit,
-                "notInscrit" => $notInscrit,
             ]
         );
     }
