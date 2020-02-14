@@ -15,7 +15,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/home/{recherche}", name="home")
      */
-    public function index($recherche = null, EntityManagerInterface $em, Request $request)
+    public function  index($recherche = null, EntityManagerInterface $em, Request $request)
     {
         $siteRepository = $em->getRepository(Site::class);
         $sites = $siteRepository->findAll();

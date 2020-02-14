@@ -90,7 +90,7 @@ h2 {
 
 .login-input-field{
     border:none !important;
-    border:0px !important;
+    border-radius:0px !important;
     background-color:#f4faff !important;
     margin:0 !important;
     width:100% !important;
@@ -136,7 +136,6 @@ input[type=button], input[type=submit], input[type=reset]  {
     text-decoration: none;
     display: inline-block;
     text-transform: uppercase;
-    font-size: 13px;
     -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
     box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
     -webkit-border-radius: 5px 5px 5px 5px;
@@ -167,7 +166,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
 }
 
 input[type=text] {
-    background-color: #f5fbff;
+    background-color: #f5fbff ;
     border: none;
     color: #687786;
     padding: 15px 32px;
@@ -177,6 +176,7 @@ input[type=text] {
     font-size: 16px;
     margin: 5px;
     width: 85%;
+    border-radius:0;
     border: 2px solid #f6f6f6;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
@@ -184,7 +184,7 @@ input[type=text] {
     -o-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
     -webkit-border-radius: 5px 5px 5px 5px;
-    border-radius:0;
+
 }
 
 input[type=text]:focus {
