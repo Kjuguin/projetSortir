@@ -5,126 +5,126 @@
 {% block body %}
 
 
-<!-- SECTION 1 : Recherche et filtres des sorties -->
-<header class="gradient-section">
-    <nav class="nav-header">
-        <div class="logo-header">
-            <a href="{{ path('home') }}">
-                <img class="logo-img" src="{{ asset("img/logo.png") }}">
-                <h1 class="site-title">SORTIES ENTR'ENI</h1>
-            </a>
-        </div>
-        <ul class="nav-menu">
+    <!-- SECTION 1 : Recherche et filtres des sorties -->
+    <header class="gradient-section">
+        <nav class="nav-header">
+            <div class="logo-header">
+                <a href="{{ path('home') }}">
+                    <img class="logo-img" src="{{ asset("img/logo.png") }}">
+                    <h1 class="site-title">SORTIES ENTR'ENI</h1>
+                </a>
+            </div>
+            <ul class="nav-menu">
                 {#                <li><a href="#">Villes</a></li>#}
                 {#                <li><a href="#">Sites</a></li>#}
-            <li><a href="{{ path('home') }}">Accueil</a></li>
-            <li><a href="#">Profil</a></li>
-            <li> <a href="{{ path('app_logout') }}">Déconnexion</a></li>
-        </ul>
-    </nav>
+                <li><a href="{{ path('home') }}">Accueil</a></li>
+                <li><a href="#">Profil</a></li>
+                <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+            </ul>
+        </nav>
 
-    <section class="section-filtre">
-        <div class="container-home">
-            <form action="{{ path('home',{'recherche':'recherche'} ) }}" method="get">
+        <section class="section-filtre">
+            <div class="container-home">
+                <form action="{{ path('home',{'recherche':'recherche'} ) }}" method="get">
 
-                <!-- filtres inputs -->
-                <div class="filtre-bloc-left">
-                    <!-- 1ere ligne d'inputs -->
-                    <div class="filtre-ligne-1">
-                        <div class="bloc-field bf-1">
-                            <label for="site">Site</label>
-                            <select class="input-home" name="site" id="site">
-                                <option value="" selected>Tous les sites</option>
-                                {% for site in sites %}
+                    <!-- filtres inputs -->
+                    <div class="filtre-bloc-left">
+                        <!-- 1ere ligne d'inputs -->
+                        <div class="filtre-ligne-1">
+                            <div class="bloc-field bf-1">
+                                <label for="site">Site</label>
+                                <select class="input-home" name="site" id="site">
+                                    <option value="" selected>Tous les sites</option>
+                                    {% for site in sites %}
 
-                                    <option value="{{ site.id }}"> {{ site.nomSite }}</option>
+                                        <option value="{{ site.id }}"> {{ site.nomSite }}</option>
 
-                                {% endfor %}
-                            </select>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="bloc-field bf-2">
+                                <label for="nom">Le nom contient</label>
+
+                                <input class="input-home" type="search" name="nom" id="nom">
+                            </div>
                         </div>
-                        <div class="bloc-field bf-2">
-                            <label for="nom">Le nom contient</label>
 
-                            <input class="input-home" type="search" name="nom" id="nom">
+                        <div class="clear"></div>
+
+                        <!-- 2eme ligne d'inputs -->
+                        <div class="filtre-ligne-2">
+                            <div class="bloc-field bf-3">
+                                <label for="date-debut">Début</label>
+                                <input class="input-home" type="date" name="date-debut" id="date-debut">
+                            </div>
+                            <div class="bloc-field bf-4">
+                                <label for="date-fin">Fin</label>
+                                <input class="input-home" type="date" name="date-fin" id="date-fin">
+
+                            </div>
+                        </div>
+
+                        <div class="clear"></div>
+
+
+                        <!-- filtres checkboxes -->
+                        <div class="bf-checkboxes">
+                            <div class="check">
+                                <input type="checkbox" name="filtre1" value="filtre1">
+                                <label for="filtre1">Sorties dont je suis l'organisateur.rice</label>
+                            </div>
+
+                            <div class="check">
+                                <input type="checkbox" name="filtre2" value="filtre2">
+                                <label for="filtre2">Sorties auxquelles je suis inscrit.e</label>
+                            </div>
+
+                            <div class="check">
+                                <input type="checkbox" name="filtre3" value="filtre3">
+                                <label for="filtre3">Sorties auxquelles je ne suis pas inscrit.e</label>
+                            </div>
+
+                            <div class="check">
+                                <input type="checkbox" name="filtre4" value="filtre4">
+                                <label for="filtre4">Sorties passées</label>
+
+                            </div>
                         </div>
                     </div>
 
-                    <div class="clear"></div>
-
-                    <!-- 2eme ligne d'inputs -->
-                    <div class="filtre-ligne-2">
-                        <div class="bloc-field bf-3">
-                            <label for="date-debut">Début</label>
-                            <input class="input-home" type="date" name="date-debut" id="date-debut">
-                        </div>
-                        <div class="bloc-field bf-4">
-                            <label for="date-fin">Fin</label>
-                            <input class="input-home" type="date" name="date-fin" id="date-fin">
-
-                        </div>
+                    <!-- bouton recherche -->
+                    <div>
+                        <input type="submit" value="Rechercher">
                     </div>
+                </form>
+            </div>
 
-                    <div class="clear"></div>
+            <!-- image background: clouds + city -->
+            <div class="background-img">
+                <img src="{{ asset('img/clouds-city.png') }}" alt="clouds-background">
+            </div>
+        </section>
 
+    </header>
 
-                    <!-- filtres checkboxes -->
-                    <div class="bf-checkboxes">
-                        <div class="check">
-                           <input type="checkbox" name="filtre1" value="filtre1">
-                           <label for="filtre1">Sorties dont je suis l'organisateur.rice</label>
-                        </div>
-
-                        <div class="check">
-                            <input type="checkbox" name="filtre2" value="filtre2">
-                            <label for="filtre2">Sorties auxquelles je suis inscrit.e</label>
-                        </div>
-
-                        <div class="check">
-                            <input type="checkbox" name="filtre3" value="filtre3">
-                            <label for="filtre3">Sorties auxquelles je ne suis pas inscrit.e</label>
-                        </div>
-
-                        <div class="check">
-                            <input type="checkbox" name="filtre4" value="filtre4">
-                            <label for="filtre4">Sorties passées</label>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- bouton recherche -->
-                <div>
-                    <input type="submit" value="Rechercher">
-                </div>
-            </form>
-        </div>
-
-        <!-- image background: clouds + city -->
-        <div class="background-img">
-            <img src="{{ asset('img/clouds-city.png') }}" alt="clouds-background">
-        </div>
-    </section>
-
-</header>
-
-<!-- SECTION 2 : Affichage du tableau des sorties -->
-<div class="container-fluid">
-    <div class="table-responsive-sm">
-        {% if(sorties !=null) %}
-            <table id="table-sortie" data-toggle="table" class="table table-bordered table-orderable table-striped">
-                <thead class="thead-light">
-                <tr class="active">
-                    <th scope="col" data-field="nom" data-sortable="true">Nom</th>
-                    <th scope="col" data-field="date-sortie" data-sortable="true">Date</th>
-                    <th scope="col" data-field="cloture" data-sortable="true">Clôture</th>
-                    <th scope="col" data-field="places" data-sortable="true">Places</th>
-                    <th scope="col" data-field="etat" data-sortable="true">Etat</th>
-                    <th scope="col" data-field="inscrit" data-sortable="true">Inscrit</th>
-                    <th scope="col" data-field="organisateur" data-sortable="true">Organisateur</th>
-                    <th scope="col" data-field="action" data-sortable="true">Action</th>
-                </tr>
-                </thead>
-                <tbody>
+    <!-- SECTION 2 : Affichage du tableau des sorties -->
+    <div class="container-fluid">
+        <div class="table-responsive-sm">
+            {% if(sorties !=null) %}
+                <table id="table-sortie" data-toggle="table" class="table table-bordered table-orderable table-striped">
+                    <thead class="thead-light">
+                    <tr class="active">
+                        <th scope="col" data-field="nom" data-sortable="true">Nom</th>
+                        <th scope="col" data-field="date-sortie" data-sortable="true">Date</th>
+                        <th scope="col" data-field="cloture" data-sortable="true">Clôture</th>
+                        <th scope="col" data-field="places" data-sortable="true">Places</th>
+                        <th scope="col" data-field="etat" data-sortable="true">Etat</th>
+                        <th scope="col" data-field="inscrit" data-sortable="true">Inscrit</th>
+                        <th scope="col" data-field="organisateur" data-sortable="true">Organisateur</th>
+                        <th scope="col" data-field="action" data-sortable="true">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
                     {% for sortie in sorties %}
                         <tr>
@@ -145,15 +145,78 @@
                             <td>
                                 <a href="{{ path('utilisateur_afficherProfil',{'id':sortie.noOrganisateur.id}) }}">{{ sortie.noOrganisateur.pseudo }}</a>
                             </td>
-                            <td><a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a> - modifier</td>
+                            {#                            <td><a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a> - modifier</td>#}
+                            <td>
+                                {% set test = 0 %}
+
+                                <!-- En création -->
+                                {% if sortie.noEtat.libelle is same as ("En création") %}
+                                    Modifier - Publier
+
+                                    <!-- En cours -->
+                                {% elseif  sortie.noEtat.libelle is same as ("En cours") %}
+                                    Afficher
+
+                                    <!-- cas ouvert et fermé -->
+                                {% else %}
+                                    Afficher
+
+                                    <!-- cas fermé -->
+                                    {% if sortie.noEtat.libelle is same as ('Fermé') %}
+
+                                        {% for inscrit in sortie.noInscriptions %}
+
+                                            <!-- fermé et inscrit -->
+                                            {% if inscrit.noUser.id is same as (app.user.id) %}
+                                                - Se désister
+                                            {% endif %}
+
+                                            <!-- fermé et non inscrit (se passe rien) -->
+
+                                        {% endfor %}
+                                        <!-- cas ouvert -->
+                                    {% elseif sortie.noEtat.libelle is same as ('Ouvert') %}
+
+                                        {% if sortie.noInscriptions.count is same as (0) %}
+                                            - S'inscrire
+                                            {% if sortie.noOrganisateur.id is same as (app.user.id) %}
+                                                - Annuler
+                                            {% endif %}
+                                        {% else %}
+
+                                            {% for inscrit in sortie.noInscriptions %}
+
+                                                {% if test== 0 %}
+                                                    <!-- modification de la variable pour ne pas rentrer une seconde fois dans le if -->
+                                                    {% set test = 1 %}
+                                                    <!-- ouvert et inscrit -->
+                                                    {% if inscrit.noUser.id is same as (app.user.id) %}
+                                                        - Se désister
+
+                                                        <!-- ouvert, inscrit et organisateur -->
+                                                        {% if sortie.noOrganisateur.id is same as (app.user.id) %}
+                                                            - Annuler
+                                                        {% endif %}
+                                                        <!-- ouvert et non inscrit -->
+                                                    {% else %}
+                                                        - S'inscrire
+
+                                                        <!-- ouvert, non inscrit et organisateur -->
+                                                        {% if sortie.noOrganisateur.id is same as (app.user.id) %}
+                                                            - Annuler
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
-
             {% endif %}
-
         </div>
     </div>
-
 {% endblock %}
