@@ -7,25 +7,63 @@
 
     <link rel="stylesheet" href="{{ asset("css/main.css") }}">
     <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" type="text/css" href="/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap4-glyphicons/maps/glyphicons-fontawesome.min.css">
-</head>
 
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css"rel="stylesheet">
+
+
+</head>
 <body>
 
-    {% block body %}{% endblock %}
+        {% block body %}{% endblock %}
 
-<footer>
-</footer>
+    <footer>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+        <script>
+            ;(function($){
+                $.fn.datepicker.dates['fr'] = {
+                    days: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
+                    daysShort: ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."],
+                    daysMin: ["d", "l", "ma", "me", "j", "v", "s"],
+                    months: ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"],
+                    monthsShort: ["janv.", "févr.", "mars", "avril", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."],
+                    today: "Aujourd'hui",
+                    monthsTitle: "Mois",
+                    clear: "Effacer",
+                    weekStart: 1,
+                    format: "dd/mm/yyyy"
+                };
+            }(jQuery));
 
-    {% block javascripts %}
-        <script type="text/javascript" charset="utf8" src="/js/jquery-3.4.1.min.js"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script type="text/javascript" charset="utf8" src="/js/datatables.js"></script>
-        <script type="text/javascript" charset="utf8" src="/js/home.js"></script>
-    {% endblock %}
+            $('.datepicker').datepicker({
+                language: 'fr',
+                autoclose: true,
+                todayHighlight: true
+            })
+        </script>
+    </footer>
 
-
+        {% block javascripts %}
+            <script type="text/javascript" charset="utf8" src="/js/jquery-3.4.1.min.js"></script>
+            <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+            <script type="text/javascript" charset="utf8" src="/js/datatables.js"></script>
+            <script type="text/javascript" charset="utf8" src="/js/home.js"></script>
+        {% endblock %}
 </body>
 </html>
