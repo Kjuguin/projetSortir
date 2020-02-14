@@ -33,7 +33,7 @@
                 >
                 <div class="checkbox mb-3 fadeIn fourth">
                     <label>
-                        <input type="checkbox" value="remember-me"> Remember me
+                        <input type="checkbox" value="remember-me" {{ (app.user ) ? 'checked' : '' }} > Remember me
                     </label>
                 </div>
                 <input type="submit" class="fadeIn five" value="Log In">

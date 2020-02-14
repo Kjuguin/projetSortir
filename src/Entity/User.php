@@ -43,14 +43,21 @@ class User implements UserInterface
      */
     private $email;
 
+//TODO :
+
     /**
+     * @Assert\NotBlank(message="Il ne doit pas y avoir d'espace dans votre pseudo")
+     * @Assert\Length(
+     *     min="3",
+     *     max="30",
+     *     minMessage="Le nom de la ville doit être supérieur à 3 caractères",
+     *     maxMessage="Le nom de la ville doit être inférieur à 30 caractères")
      * @ORM\Column(type="string", length=30, unique=true)
      */
     private $pseudo;
 
     /**
-
-     * @ORM\Column(type="json")
+* @ORM\Column(type="json")
      */
     private $roles = [];
 
@@ -87,16 +94,27 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @Assert\Length(
+     *     min="3",
+     *     max="30",
+     *     minMessage="Le prénom doit être supérieur à 3 caractères",
+     *     maxMessage="Le prénom doit être inférieur à 30 caractères")
      * @ORM\Column(type="string", length=30)
      */
     private $prenom;
 
     /**
+     * @Assert\Length(
+     *     min="3",
+     *     max="30",
+     *     minMessage="Le nom doit être supérieur à 3 caractères",
+     *     maxMessage="Le nom doit être inférieur à 30 caractères")
      * @ORM\Column(type="string", length=30)
      */
     private $nom;
 
     /**
+     * @Assert\Regex(pattern="/^0[1|2|6|7][0-9]{8}$/", message="Votre numéro de téléphone doit être composer de 10 chiffres commencant par 01/02/06/07")
      * @ORM\Column(type="string", length=15, nullable=true)
      */
     private $telephone;

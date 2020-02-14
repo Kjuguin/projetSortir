@@ -20,20 +20,26 @@ class ProfilController extends AbstractController
      */
     public function form(EntityManagerInterface $em, Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
+        $user2 = new User();
+        $user2->setPassword($this->getUser()->getPassword());
         $user = $this->getUser();
 
         $userForm = $this->createForm(GestionProfilType::class, $user);
+
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
-            if (empty($user)){
-                $user->setPassword($this->getUser()->getPassword());
+//            if ($userForm->get(''))
+            dump($userForm->get("gestion_profil[password][first]"));
+            if ($user->getPassword() == 'Pa$$w0rdPa$$w0rd'){
+                $user->setPassword($user2->getPassword());
             } else {
                 $password = $passwordEncoder->encodePassword($user, $user->getPassword());
                 $user->setPassword($password);
             }
+            echo $user->getPassword();
+            die();
 
-            $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
             $this->addFlash("succes", "User Modifié");
