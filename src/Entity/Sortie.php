@@ -47,12 +47,8 @@ class Sortie
      */
     private $duree;
 
-    //TODO : a valider si possible
     /**
-     * @Assert\Range(min="today UTC",
-     *     max=$dateDebut,
-     *     maxMessage="La date de clôture doit se situe entre aujourd'hui et le '{{$dateDebut}}",
-     *     minMessage="La date de clôture doit se situe entre aujourd'hui et le '{{$dateDebut}}")
+     * @Assert\GreaterThan("today utc", message="La date de clôture doit être supérieur à la date d'aujourd'hui")
      * @ORM\Column(type="datetime")
      */
     private $dateCloture;
@@ -69,7 +65,7 @@ class Sortie
     private $descriptionInfos;
 
     /**
-     * @Assert\Url(message="L'url n'est pas valide)
+     * @Assert\Url(message="L'url n'est pas valide")
      * @ORM\Column(type="string", length=250, nullable=true)
      */
     private $urlPhoto;
