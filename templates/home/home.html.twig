@@ -3,7 +3,11 @@
 {% block title %}Sorties entr'Eni{% endblock %}
 
 {% block body %}
-
+{% for message in app.flashes('danger') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
 
     <!-- SECTION 1 : Recherche et filtres des sorties -->
     <header class="gradient-section">
@@ -179,7 +183,7 @@
                                     {% elseif sortie.noEtat.libelle is same as ('Ouvert') %}
 
                                         {% if sortie.noInscriptions.count is same as (0) %}
-                                            - <a href="#">S'inscrire</a>
+                                            - <a href="{{ path('inscription',{'id':sortie.id}) }}">S'inscrire</a>
                                             {% if sortie.noOrganisateur.id is same as (app.user.id) %}
                                                 - <a href="#">Annuler</a>
                                             {% endif %}
@@ -200,7 +204,7 @@
                                                         {% endif %}
                                                         <!-- ouvert et non inscrit -->
                                                     {% else %}
-                                                        - <a href="#">S'inscrire</a>
+                                                        - <a href="{{ path('inscription',{'id':sortie.id}) }}">S'inscrire</a>
 
                                                         <!-- ouvert, non inscrit et organisateur -->
                                                         {% if sortie.noOrganisateur.id is same as (app.user.id) %}
@@ -221,3 +225,4 @@
         </div>
     </div>
 {% endblock %}
+
