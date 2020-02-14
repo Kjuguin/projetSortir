@@ -23,7 +23,8 @@ class GestionProfilType extends AbstractType
             ->add('email', EmailType::class, ['label'=>'Email : '])
             ->add('prenom', TextType::class, ['label'=>'Prénom : '])
             ->add('nom', TextType::class, ['label'=>'Nom : '])
-            ->add('telephone', TextType::class, ['label'=>'Téléphone : '])
+            ->add('telephone', TextType::class, ['label'=>'Téléphone : ',
+                'required' => false])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mot de passe doivent correspondre',
