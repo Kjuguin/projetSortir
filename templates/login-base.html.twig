@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}sortir.com{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+
+    <link rel="stylesheet" href="{{ asset("css/login.css") }}">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap4-glyphicons/maps/glyphicons-fontawesome.min.css">
+</head>
+
+<body>
+<section class="login-section">
+
+{% block body %}{% endblock %}
+
+</section>
+
+<footer>
+</footer>
+{% block javascripts %}
+    <script type="text/javascript" charset="utf8" src="/js/jquery-3.4.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="/js/datatables.js"></script>
+    <script type="text/javascript" charset="utf8" src="/js/home.js"></script>
+{% endblock %}
+
+
+</body>
+</html>

@@ -1,12 +1,13 @@
-
 /* BASIC */
 
-html {
-    background-color: #56baed;
+.login-section{
+    width:100%;
+    background: linear-gradient(180deg, rgba(138,201,255,1) 0%, rgba(218,244,255,1) 100%);
+    padding-top:3em ;
 }
 
 body {
-    font-family: "Poppins", sans-serif;
+    font-family: 'Nunito', sans-serif;
     height: 100vh;
 }
 
@@ -28,7 +29,6 @@ h2 {
 }
 
 
-
 /* STRUCTURE */
 
 .wrapper {
@@ -43,8 +43,8 @@ h2 {
 
 #formContent {
     -webkit-border-radius: 10px 10px 10px 10px;
-    border-radius: 10px 10px 10px 10px;
-    background: #fff;
+    border-radius:3px;
+    background: #dff2ff;
     padding: 30px;
     width: 90%;
     max-width: 450px;
@@ -56,15 +56,57 @@ h2 {
 }
 
 #formFooter {
-    background-color: #f6f6f6;
-    border-top: 1px solid #dce8f1;
-    padding: 25px;
+    background-color: #f5fbff;
+    border-top:0;
+    padding: 0.3em;
     text-align: center;
     -webkit-border-radius: 0 0 10px 10px;
     border-radius: 0 0 10px 10px;
 }
 
+/** LOGO **/
 
+.login-logo{
+    padding:1em 0 2.5em 0;
+}
+
+.login-logo img{
+    display: inline-block;
+}
+
+.login-title{
+    display: inline-block;
+    font-family: 'Nunito', sans-serif;
+    color:#687786;
+    text-transform: uppercase;
+    font-size:1.5em;
+    font-weight: bold;
+    vertical-align: bottom;
+    margin-bottom: 0.5em;
+    text-shadow: 1px 2px 4px rgba(96,111,118,0.3);
+}
+
+/** INPUTS **/
+
+.login-input-field{
+    border:none !important;
+    border:0px !important;
+    background-color:#f4faff !important;
+    margin:0 !important;
+    width:100% !important;
+}
+
+.lif1{
+    margin-bottom: 1em !important;
+}
+
+.checkbox{
+    margin-top: 1.8em !important;
+}
+
+.login-check-lbl{
+    color:#687786;
+}
 
 /* TABS */
 
@@ -82,10 +124,14 @@ h2.active {
 /* FORM TYPOGRAPHY*/
 
 input[type=button], input[type=submit], input[type=reset]  {
-    background-color: #56baed;
+    background-color: #ff7083;
     border: none;
     color: white;
+    font-size: 1.3em !important;
+    font-weight: 500;
+    letter-spacing: 0.6px;
     padding: 15px 80px;
+    /*margin-top:2em;*/
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -95,7 +141,7 @@ input[type=button], input[type=submit], input[type=reset]  {
     box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
-    margin: 5px 20px 40px 20px;
+    margin: 2em 20px 40px 20px;
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     -ms-transition: all 0.3s ease-in-out;
@@ -104,7 +150,12 @@ input[type=button], input[type=submit], input[type=reset]  {
 }
 
 input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
-    background-color: #39ace7;
+    background-color: #5dbecb;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
@@ -116,11 +167,11 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
 }
 
 input[type=text] {
-    background-color: #f6f6f6;
+    background-color: #f5fbff;
     border: none;
-    color: #0d0d0d;
+    color: #687786;
     padding: 15px 32px;
-    text-align: center;
+    text-align: left;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
@@ -133,7 +184,7 @@ input[type=text] {
     -o-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
     -webkit-border-radius: 5px 5px 5px 5px;
-    border-radius: 5px 5px 5px 5px;
+    border-radius:0;
 }
 
 input[type=text]:focus {
@@ -150,7 +201,7 @@ input[type=password] {
     border: none;
     color: #0d0d0d;
     padding: 15px 32px;
-    text-align: center;
+    text-align: left;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
@@ -167,7 +218,8 @@ input[type=password] {
 }
 
 input[type=password]:focus {
-    background-color: #fff;
+    background-color: #f5fbff !important;
+    opacity:1;
     border-bottom: 2px solid #5fbae9;
 }
 
@@ -265,6 +317,11 @@ input[type=password]::placeholder {
 }
 
 /* Simple CSS3 Fade-in Animation */
+.underlineHover{
+    color: #687786;
+    font-size: 0.9em;
+}
+
 .underlineHover:after {
     display: block;
     left: 0;
@@ -296,4 +353,14 @@ input[type=password]::placeholder {
     width:52px;
     height:66px;
     margin-top: 10px;
+}
+
+
+/* FOOTER */
+.login-footer{
+    width:100%;
+}
+
+.login-footer img{
+    width:100%;
 }

@@ -4,11 +4,29 @@
 
 {% block body %}
 
-    <!-- SECTION 1 : Recherche et filtres des sorties -->
-    <section class="section-filtre">
-        <div class="container">
 
-            <form action="{{ path('home',{'recherche':'recherche'} ) }}" method="post">
+<!-- SECTION 1 : Recherche et filtres des sorties -->
+<header class="gradient-section">
+    <nav class="nav-header">
+        <div class="logo-header">
+            <a href="{{ path('home') }}">
+                <img class="logo-img" src="{{ asset("img/logo.png") }}">
+                <h1 class="site-title">SORTIES ENTR'ENI</h1>
+            </a>
+        </div>
+        <ul class="nav-menu">
+                {#                <li><a href="#">Villes</a></li>#}
+                {#                <li><a href="#">Sites</a></li>#}
+            <li><a href="{{ path('home') }}">Accueil</a></li>
+            <li><a href="#">Profil</a></li>
+            <li> <a href="{{ path('app_logout') }}">Déconnexion</a></li>
+        </ul>
+    </nav>
+
+    <section class="section-filtre">
+        <div class="container-home">
+            <form action="{{ path('home',{'recherche':'recherche'} ) }}" method="get">
+
                 <!-- filtres inputs -->
                 <div class="filtre-bloc-left">
                     <!-- 1ere ligne d'inputs -->
@@ -18,13 +36,16 @@
                             <select class="input-home" name="site" id="site">
                                 <option value="" selected>Tous les sites</option>
                                 {% for site in sites %}
+
                                     <option value="{{ site.id }}"> {{ site.nomSite }}</option>
+
                                 {% endfor %}
                             </select>
                         </div>
                         <div class="bloc-field bf-2">
                             <label for="nom">Le nom contient</label>
-                            <input class="input-home" type="search" name="nom" id="nom" value="">
+
+                            <input class="input-home" type="search" name="nom" id="nom">
                         </div>
                     </div>
 
@@ -39,16 +60,18 @@
                         <div class="bloc-field bf-4">
                             <label for="date-fin">Fin</label>
                             <input class="input-home" type="date" name="date-fin" id="date-fin">
+
                         </div>
                     </div>
 
                     <div class="clear"></div>
 
+
                     <!-- filtres checkboxes -->
                     <div class="bf-checkboxes">
                         <div class="check">
-                            <input type="checkbox" name="filtre1" value="filtre1">
-                            <label for="filtre1">Sorties dont je suis l'organisateur.rice</label>
+                           <input type="checkbox" name="filtre1" value="filtre1">
+                           <label for="filtre1">Sorties dont je suis l'organisateur.rice</label>
                         </div>
 
                         <div class="check">
@@ -64,6 +87,7 @@
                         <div class="check">
                             <input type="checkbox" name="filtre4" value="filtre4">
                             <label for="filtre4">Sorties passées</label>
+
                         </div>
                     </div>
                 </div>
@@ -81,24 +105,27 @@
         </div>
     </section>
 
-    <!-- SECTION 2 : Affichage du tableau des sorties -->
-    <div class="container-fluid">
-        <div class="table-responsive-sm">
-            {% if(sorties !=null) %}
-                <table id="table-sortie" data-toggle="table" class="table table-bordered table-orderable table-striped">
-                    <thead class="thead-light">
-                    <tr class="active">
-                        <th scope="col" data-field="nom" data-sortable="true">Nom</th>
-                        <th scope="col" data-field="date-sortie" data-sortable="true">Date</th>
-                        <th scope="col" data-field="cloture" data-sortable="true">Clôture</th>
-                        <th scope="col" data-field="places" data-sortable="true">Places</th>
-                        <th scope="col" data-field="etat" data-sortable="true">Etat</th>
-                        <th scope="col" data-field="inscrit" data-sortable="true">Inscrit</th>
-                        <th scope="col" data-field="organisateur" data-sortable="true">Organisateur</th>
-                        <th scope="col" data-field="action" data-sortable="true">Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+</header>
+
+<!-- SECTION 2 : Affichage du tableau des sorties -->
+<div class="container-fluid">
+    <div class="table-responsive-sm">
+        {% if(sorties !=null) %}
+            <table id="table-sortie" data-toggle="table" class="table table-bordered table-orderable table-striped">
+                <thead class="thead-light">
+                <tr class="active">
+                    <th scope="col" data-field="nom" data-sortable="true">Nom</th>
+                    <th scope="col" data-field="date-sortie" data-sortable="true">Date</th>
+                    <th scope="col" data-field="cloture" data-sortable="true">Clôture</th>
+                    <th scope="col" data-field="places" data-sortable="true">Places</th>
+                    <th scope="col" data-field="etat" data-sortable="true">Etat</th>
+                    <th scope="col" data-field="inscrit" data-sortable="true">Inscrit</th>
+                    <th scope="col" data-field="organisateur" data-sortable="true">Organisateur</th>
+                    <th scope="col" data-field="action" data-sortable="true">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+
                     {% for sortie in sorties %}
                         <tr>
                             <td>{{ sortie.nom }}</td>
