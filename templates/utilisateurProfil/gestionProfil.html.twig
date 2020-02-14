@@ -10,13 +10,14 @@
         {{ form_start(userForm) }}
         {{ form_widget(userForm) }}
         <label>Ma photo </label>
-        <button><p>Télécharger vers le serveur !</p></button>
-        <br>
+        <button class="btn btn-success mt15">Télécharger vers le serveur</button>
 
-        <button type="submit"><p>Modifier !</p></button>
-        <button type="reset"><p>Annuler !</p></button>
+
+        <div class="row col-auto justify-content-end" style="padding-right: 30px ">
+        <button class="btn btn-success" style="margin-right: 10px" type="reset">Annuler</button>
+        <button class="btn btn-success " type="submit">Modifier</button>
         {{ form_end(userForm) }}
-
+        </div>
     </div>
 
 
