@@ -159,11 +159,11 @@
 
                                     <!-- En cours -->
                                 {% elseif  sortie.noEtat.libelle is same as ("En cours") %}
-                                    <a href="{{ path('sortie_afficherSortie') }}">Afficher</a>
+                                    <a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a>
 
                                     <!-- cas ouvert et fermé -->
                                 {% else %}
-                                    <a href="{{ path('sortie_afficherSortie') }}">Afficher</a>
+                                    <a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a>
 
 
                                     <!-- cas fermé -->
