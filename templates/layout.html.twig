@@ -32,11 +32,11 @@
                 {#                <li><a href="#">Villes</a></li>#}
                 {#                <li><a href="#">Sites</a></li>#}
                 <li><a href="{{ path('home') }}">Accueil</a></li>
-                <li><a href="{{path('utilisateur_gestionProfil')}}">Profil</a></li>
+                <li><a href="{{path('utilisateur_gestionProfil', {"id": app.user.id})}}">Profil</a></li>
                 <li> <a href="{{ path('app_logout') }}">Déconnexion</a></li>
             </ul>
         </nav>
-
+    </section>
 
     {% block body %}{% endblock %}
 
