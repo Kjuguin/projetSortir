@@ -29,7 +29,7 @@ class ProfilController extends AbstractController
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
-//            if ($userForm->get(''))
+
             if ($user->getPassword() == 'Pa$$w0rdPa$$w0rd'){
                 $user->setPassword($user2->getPassword());
             } else {
