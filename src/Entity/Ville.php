@@ -26,11 +26,18 @@ class Ville
     private $noLieux;
 
     /**
+     * @Assert\Length(
+     *     min="3",
+     *     max="30",
+     *     minMessage="Le nom de la ville doit être supérieur à 3 caractères",
+     *     maxMessage="Le nom de la ville doit être inférieur à 30 caractères")
      * @ORM\Column(type="string", length=30)
      */
     private $nomVille;
 
     /**
+     * @Assert\Regex(pattern="^[0-9]{5}$",
+     *     message="Le code postal est de 5 chiffres")
      * @ORM\Column(type="string", length=5)
      */
     private $codePostal;
@@ -99,7 +106,4 @@ class Ville
 
         return $this;
     }
-
-    
-
 }

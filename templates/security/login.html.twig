@@ -33,8 +33,10 @@
                        value="{{ csrf_token('authenticate') }}"
                 >
                 <div class="checkbox mb-3 fadeIn fourth">
+
                     <label class="login-check-lbl">
-                        <input type="checkbox" value="remember-me"> se souvenir de moi
+                        <input type="checkbox" value="remember-me {{ (app.user ) ? 'checked' : '' }}"> se souvenir de moi
+
                     </label>
                 </div>
                 <input type="submit" class="fadeIn five" value="LOGIN">

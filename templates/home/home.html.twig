@@ -4,6 +4,7 @@
 
 {% block body %}
 
+
 <!-- SECTION 1 : Recherche et filtres des sorties -->
 <header class="gradient-section">
     <nav class="nav-header">
@@ -25,6 +26,7 @@
     <section class="section-filtre">
         <div class="container-home">
             <form action="{{ path('home',{'recherche':'recherche'} ) }}" method="get">
+
                 <!-- filtres inputs -->
                 <div class="filtre-bloc-left">
                     <!-- 1ere ligne d'inputs -->
@@ -34,12 +36,15 @@
                             <select class="input-home" name="site" id="site">
                                 <option value="" selected>Tous les sites</option>
                                 {% for site in sites %}
-                                    <option value="{{ site.id}}"> {{ site.nomSite }}</option>
+
+                                    <option value="{{ site.id }}"> {{ site.nomSite }}</option>
+
                                 {% endfor %}
                             </select>
                         </div>
                         <div class="bloc-field bf-2">
                             <label for="nom">Le nom contient</label>
+
                             <input class="input-home" type="search" name="nom" id="nom">
                         </div>
                     </div>
@@ -55,10 +60,12 @@
                         <div class="bloc-field bf-4">
                             <label for="date-fin">Fin</label>
                             <input class="input-home" type="date" name="date-fin" id="date-fin">
+
                         </div>
                     </div>
 
                     <div class="clear"></div>
+
 
                     <!-- filtres checkboxes -->
                     <div class="bf-checkboxes">
@@ -80,6 +87,7 @@
                         <div class="check">
                             <input type="checkbox" name="filtre4" value="filtre4">
                             <label for="filtre4">Sorties passées</label>
+
                         </div>
                     </div>
                 </div>
@@ -117,8 +125,8 @@
                 </tr>
                 </thead>
                 <tbody>
+
                     {% for sortie in sorties %}
-                {#                    {% if (inscrit == null and notInscrit == null) OR (inscrit != null and notInscrit != null) %}#}
                         <tr>
                             <td>{{ sortie.nom }}</td>
                             <td>{{ sortie.dateDebut | date('d/m/Y H:i') }}</td>
@@ -134,18 +142,18 @@
                                     {% endfor %}
                                 {% endif %}
                             </td>
-                            <td>{{ sortie.noOrganisateur.pseudo }}</td>
-                            <td>Afficher - modifier</td>
-            {#                <a href="{{ path('afficher',{"id":sortie.id}) }}"> Afficher</a> -                            #}
+                            <td>
+                                <a href="{{ path('utilisateur_afficherProfil',{'id':sortie.noOrganisateur.id}) }}">{{ sortie.noOrganisateur.pseudo }}</a>
+                            </td>
+                            <td><a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a> - modifier</td>
                         </tr>
-            {#                    {% endif %}#}
                     {% endfor %}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
 
-        {% endif %}
+            {% endif %}
 
+        </div>
     </div>
-</div>
 
 {% endblock %}

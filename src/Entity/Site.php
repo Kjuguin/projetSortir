@@ -31,6 +31,11 @@ class Site
     private $noUsers;
 
     /**
+     * @Assert\Length(
+     *     min="3",
+     *     max="30",
+     *     minMessage="Le nom du site doit être supérieur à 3 caractères",
+     *     maxMessage="Le nom du site doit être inférieur à 30 caractères")
      * @ORM\Column(type="string", length=30)
      */
     private $nomSite;
@@ -56,6 +61,10 @@ class Site
         $this->nomSite = $nomSite;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->nomSite;
     }
 
     /**
