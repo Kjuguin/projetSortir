@@ -151,15 +151,16 @@
 
                                 <!-- En création -->
                                 {% if sortie.noEtat.libelle is same as ("En création") %}
-                                    Modifier - Publier
+                                    <a href="#">Modifier</a> - <a href="#">Publier</a>
 
                                     <!-- En cours -->
                                 {% elseif  sortie.noEtat.libelle is same as ("En cours") %}
-                                    Afficher
+                                    <a href="{{ path('sortie_afficherSortie') }}">Afficher</a>
 
                                     <!-- cas ouvert et fermé -->
                                 {% else %}
-                                    Afficher
+                                    <a href="{{ path('sortie_afficherSortie') }}">Afficher</a>
+
 
                                     <!-- cas fermé -->
                                     {% if sortie.noEtat.libelle is same as ('Fermé') %}
@@ -168,7 +169,7 @@
 
                                             <!-- fermé et inscrit -->
                                             {% if inscrit.noUser.id is same as (app.user.id) %}
-                                                - Se désister
+                                                - <a href="#">Se désister</a>
                                             {% endif %}
 
                                             <!-- fermé et non inscrit (se passe rien) -->
@@ -178,9 +179,9 @@
                                     {% elseif sortie.noEtat.libelle is same as ('Ouvert') %}
 
                                         {% if sortie.noInscriptions.count is same as (0) %}
-                                            - S'inscrire
+                                            - <a href="#">S'inscrire</a>
                                             {% if sortie.noOrganisateur.id is same as (app.user.id) %}
-                                                - Annuler
+                                                - <a href="#">Annuler</a>
                                             {% endif %}
                                         {% else %}
 
@@ -191,19 +192,19 @@
                                                     {% set test = 1 %}
                                                     <!-- ouvert et inscrit -->
                                                     {% if inscrit.noUser.id is same as (app.user.id) %}
-                                                        - Se désister
+                                                        - <a href="#">Se désister</a>
 
                                                         <!-- ouvert, inscrit et organisateur -->
                                                         {% if sortie.noOrganisateur.id is same as (app.user.id) %}
-                                                            - Annuler
+                                                            - <a href="#">Annuler</a>
                                                         {% endif %}
                                                         <!-- ouvert et non inscrit -->
                                                     {% else %}
-                                                        - S'inscrire
+                                                        - <a href="#">S'inscrire</a>
 
                                                         <!-- ouvert, non inscrit et organisateur -->
                                                         {% if sortie.noOrganisateur.id is same as (app.user.id) %}
-                                                            - Annuler
+                                                            - <a href="#">Annuler</a>
                                                         {% endif %}
                                                     {% endif %}
                                                 {% endif %}

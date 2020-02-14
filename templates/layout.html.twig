@@ -17,31 +17,31 @@
 
 <body>
 
-    <section class="full-page">
-        <nav class="nav-header">
-            {% if app.user %}
+<section class="full-page">
+    <nav class="nav-header">
+        {% if app.user %}
             {{ app.user.pseudo }}
-            {% endif %}
-            <div class="logo-header">
-                <a href="{{ path('home') }}">
-                    <img class="logo-img" src="{{ asset("img/logo.png") }}">
-                    <h1 class="site-title">SORTIES ENTR'ENI</h1>
-                </a>
-            </div>
-            <ul class="nav-menu">
-                {#                <li><a href="#">Villes</a></li>#}
-                {#                <li><a href="#">Sites</a></li>#}
-                <li><a href="{{ path('home') }}">Accueil</a></li>
-                <li><a href="{{path('utilisateur_gestionProfil')}}">Mon profil</a></li>
-                <li> <a href="{{ path('app_logout') }}">Déconnexion</a></li>
-            </ul>
-        </nav>
+        {% endif %}
+        <div class="logo-header">
+            <a href="{{ path('home') }}">
+                <img class="logo-img" src="{{ asset("img/logo.png") }}">
+                <h1 class="site-title">SORTIES ENTR'ENI</h1>
+            </a>
+        </div>
+        <ul class="nav-menu">
+            {#                <li><a href="#">Villes</a></li>#}
+            {#                <li><a href="#">Sites</a></li>#}
+            <li><a href="{{ path('home') }}">Accueil</a></li>
+            <li><a href="{{ path('utilisateur_gestionProfil') }}">Mon profil</a></li>
+            <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+        </ul>
+    </nav>
 
 
     {% block body %}{% endblock %}
 
-<footer>
-</footer>
+    <footer>
+    </footer>
 
     {% block javascripts %}
         <script type="text/javascript" charset="utf8" src="/js/jquery-3.4.1.min.js"></script>
@@ -50,6 +50,6 @@
         <script type="text/javascript" charset="utf8" src="/js/home.js"></script>
     {% endblock %}
 
-
+</section>
 </body>
 </html>
