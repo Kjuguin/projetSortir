@@ -18,6 +18,9 @@
 <body>
     <section class="full-page">
         <nav class="nav-header">
+            {% if app.user %}
+            {{ app.user.pseudo }}
+            {% endif %}
             <div class="logo-header">
                 <a href="{{ path('home') }}">
                     <img class="logo-img" src="{{ asset("img/logo.png") }}">

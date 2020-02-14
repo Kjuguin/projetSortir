@@ -114,7 +114,7 @@ class User implements UserInterface
     private $nom;
 
     /**
-     * @Assert\Regex(pattern="^0[1|2|6|7][0-9]{8}$", message="Votre numéro de téléphone doit être composer de 10 chiffres commencant par 01/02/06/07")
+     * @Assert\Regex(pattern="/^0[1|2|6|7][0-9]{8}$/", message="Votre numéro de téléphone doit être composer de 10 chiffres commencant par 01/02/06/07")
      * @ORM\Column(type="string", length=15, nullable=true)
      */
     private $telephone;
