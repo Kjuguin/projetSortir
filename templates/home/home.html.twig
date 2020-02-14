@@ -3,7 +3,11 @@
 {% block title %}Sorties entr'Eni{% endblock %}
 
 {% block body %}
-
+    {% for message in app.flashes('danger') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
     <!-- SECTION 1 : Recherche et filtres des sorties -->
     <section class="section-filtre">
         <div class="container">
@@ -118,7 +122,8 @@
                             <td>
                                 <a href="{{ path('utilisateur_afficherProfil',{'id':sortie.noOrganisateur.id}) }}">{{ sortie.noOrganisateur.pseudo }}</a>
                             </td>
-                            <td><a href="{{ path('afficherSortie',{'id':sortie.id}) }}">Afficher</a> - modifier</td>
+                            <td><a href="{{ path('afficherSortie',{'id':sortie.id}) }}">Afficher</a> - modifier - <a
+                                        href="{{ path('inscription',{'id':sortie.id}) }}">Inscription</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
