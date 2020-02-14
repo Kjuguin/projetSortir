@@ -43,8 +43,7 @@ class ProfilController extends AbstractController
         }
 
         return $this->render('utilisateurProfil/gestionProfil.html.twig', [
-            "userForm" => $userForm->createView(),
-            "user"=>$user
+            "userForm" => $userForm->createView()
         ]);
 
 
