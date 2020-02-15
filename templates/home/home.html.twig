@@ -3,7 +3,7 @@
 {% block title %}Sorties entr'Eni{% endblock %}
 
 {% block body %}
-{% for message in app.flashes('danger') %}
+    {% for message in app.flashes('danger') %}
         <div class="alert alert-danger">
             {{ message }}
         </div>
@@ -191,28 +191,31 @@
 
                                             {% for inscrit in sortie.noInscriptions %}
 
-                                                {% if test== 0 %}
-                                                    <!-- modification de la variable pour ne pas rentrer une seconde fois dans le if -->
-                                                    {% set test = 1 %}
-                                                    <!-- ouvert et inscrit -->
-                                                    {% if inscrit.noUser.id is same as (app.user.id) %}
-                                                        - <a href="#">Se désister</a>
+                                                {% if inscrit.noUser.id != app.user.id %}
 
-                                                        <!-- ouvert, inscrit et organisateur -->
-                                                        {% if sortie.noOrganisateur.id is same as (app.user.id) %}
-                                                            - <a href="#">Annuler</a>
-                                                        {% endif %}
-                                                        <!-- ouvert et non inscrit -->
-                                                    {% else %}
-                                                        - <a href="{{ path('inscription',{'id':sortie.id}) }}">S'inscrire</a>
+                                                    {% set test = test + 1 %}
 
-                                                        <!-- ouvert, non inscrit et organisateur -->
-                                                        {% if sortie.noOrganisateur.id is same as (app.user.id) %}
-                                                            - <a href="#">Annuler</a>
-                                                        {% endif %}
-                                                    {% endif %}
                                                 {% endif %}
                                             {% endfor %}
+
+                                            {% if test == sortie.noInscriptions.count %}
+                                                <!-- ouvert et non inscrit -->
+
+                                                - <a href="{{ path('inscription',{'id':sortie.id}) }}">S'inscrire</a>
+
+                                                <!-- ouvert, non inscrit et organisateur -->
+                                                {% if sortie.noOrganisateur.id is same as (app.user.id) %}
+                                                    - <a href="#">Annuler</a>
+                                                {% endif %}
+                                            {% else %}
+                                                <!-- ouvert et inscrit -->
+                                                - <a href="#">Se désister</a>
+
+                                                <!-- ouvert, inscrit et organisateur -->
+                                                {% if sortie.noOrganisateur.id is same as (app.user.id) %}
+                                                    - <a href="#">Annuler</a>
+                                                {% endif %}
+                                            {% endif %}
                                         {% endif %}
                                     {% endif %}
                                 {% endif %}
@@ -225,4 +228,3 @@
         </div>
     </div>
 {% endblock %}
-

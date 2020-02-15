@@ -14,25 +14,25 @@ $(document).ready(function() {
 });
 
 
-// $('#nom').on('keyup', function (e) {
-//
-//     $.ajax({
-//         url: "{{ path('home') }}",
-//         data: {"site" : null,
-//         "nom" : $(this).val(),
-//         "dateDebut" : null,
-//         "dateFin" : null,
-//         "organisateur" : null,
-//         "inscrit":null,
-//         "notInscrit":null,
-//         "passee" : null}
-//     }).done(function(datas){
-//
-//         datas.forEach(function(data) {
-//             console.log(data);
-//         });
-//     });
-// });
+$('#nom').on('keyup', function (e) {
+
+    $.ajax({
+        url: "{{ path('home_recherche') }}",
+        data: {"site" : null,
+        "nom" : $(this).val(),
+        "dateDebut" : null,
+        "dateFin" : null,
+        "organisateur" : null,
+        "inscrit":null,
+        "notInscrit":null,
+        "passee" : null}
+    }).done(function(datas){
+
+        datas.forEach(function(data) {
+            console.log(data);
+        });
+    });
+});
 
 
 // $('.delete').on('click', function (e) {

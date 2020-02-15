@@ -12,18 +12,60 @@ use function Sodium\add;
 
 class HomeController extends AbstractController
 {
+    /**
+     * @Route("/home/recherche", name="home_recherche")
+     */
+    public function index(EntityManagerInterface $em, Request $request)
+    {
+
+        $sortieRepository = $em->getRepository(Sortie::class);
+
+        $param = $request->get('data');
+
+        dump($param);
+
+        $sorties = $sortieRepository->afficher($param);
+
+        return $this->json(["sorties" => $sorties]);
+
+    }
+
+    /**
+     * @Route("/home", name="home")
+     */
+    public function home(EntityManagerInterface $em, Request $request)
+    {
+        $siteRepository = $em->getRepository(Site::class);
+        $sites = $siteRepository->findAll();
+
+
+        $sortieRepository = $em->getRepository(Sortie::class);
+
+        $sorties = $sortieRepository->findAll();
+
+        return $this->render('home/home.html.twig',
+            [
+                "sites" => $sites,
+                "sorties" => $sorties,
+            ]
+        );
+
+    }
+
+
+
+
+
+
 //    /**
-//     * @Route("/home", name="home")
+//     * @Route("/home/{recherche}", name="home")
 //     */
-//    public function index(EntityManagerInterface $em, Request $request)
+//    public function index($recherche = null, EntityManagerInterface $em, Request $request)
 //    {
 //        $siteRepository = $em->getRepository(Site::class);
 //        $sites = $siteRepository->findAll();
-////
-////        if ($recherche != null) {
 //
-//
-//
+//        if ($recherche != null) {
 //            $sortieRepository = $em->getRepository(Sortie::class);
 //            $inscrit = null;
 //            $notInscrit = null;
@@ -42,95 +84,31 @@ class HomeController extends AbstractController
 //                $notInscrit = $this->getUser()->getId();
 //            }
 //
-////            $param = [
-////                "site" => $request->get('site'),
-////                "nom" => $request->get('nom'),
-////                "dateDebut" => $request->get('date-debut'),
-////                "dateFin" => $request->get('date-fin'),
-////                "organisateur" => $organisateur,
-////                "inscrit"=>$inscrit,
-////                "notInscrit"=>$notInscrit,
-////                "passee" => $request->get('filtre4')
-////            ];
-//
-//        $param = $request->get('data');
+//            $param = [
+//                "site" => $request->get('site'),
+//                "nom" => $request->get('nom'),
+//                "dateDebut" => $request->get('date-debut'),
+//                "dateFin" => $request->get('date-fin'),
+//                "organisateur" => $organisateur,
+//                "inscrit"=>$inscrit,
+//                "notInscrit"=>$notInscrit,
+//                "passee" => $request->get('filtre4')
+//            ];
 //
 //            dump($param);
 //
 //            $sorties = $sortieRepository->afficher($param);
-////        } else {
-////            $sorties = $em->getRepository(Sortie::class)->findAll();
-////        }
+//        } else {
+//            $sorties = $em->getRepository(Sortie::class)->findAll();
+//        }
 //
-//        return $this->json(["sorties" => $sorties]);
-//
-////        return $this->render('home/home.html.twig',
-////            [
-////                "sites" => $sites,
-////                "sorties" => $sorties,
-////            ]
-////        );
+//        return $this->render('home/home.html.twig',
+//            [
+//                "sites" => $sites,
+//                "sorties" => $sorties,
+//            ]
+//        );
 //    }
-
-
-
-
-
-
-
-
-    /**
-     * @Route("/home/{recherche}", name="home")
-     */
-    public function index($recherche = null, EntityManagerInterface $em, Request $request)
-    {
-        $siteRepository = $em->getRepository(Site::class);
-        $sites = $siteRepository->findAll();
-
-        if ($recherche != null) {
-            $sortieRepository = $em->getRepository(Sortie::class);
-            $inscrit = null;
-            $notInscrit = null;
-
-            if (!empty($request->get('filtre1'))) {
-                $organisateur = $this->getUser()->getId();
-            } else {
-                $organisateur = null;
-            }
-
-            if (!empty($request->get('filtre2'))) {
-                $inscrit = $this->getUser()->getId();
-            }
-
-            if (!empty($request->get('filtre3'))) {
-                $notInscrit = $this->getUser()->getId();
-            }
-
-            $param = [
-                "site" => $request->get('site'),
-                "nom" => $request->get('nom'),
-                "dateDebut" => $request->get('date-debut'),
-                "dateFin" => $request->get('date-fin'),
-                "organisateur" => $organisateur,
-                "inscrit"=>$inscrit,
-                "notInscrit"=>$notInscrit,
-                "passee" => $request->get('filtre4')
-            ];
-
-            dump($param);
-
-            $sorties = $sortieRepository->afficher($param);
-        } else {
-            $sorties = $em->getRepository(Sortie::class)->findAll();
-        }
-
-        return $this->render('home/home.html.twig',
-            [
-                "sites" => $sites,
-                "sorties" => $sorties,
-            ]
-        );
-    }
 
     //TODO pour modification de l'état
 //CREATE DEFINER=root@localhost
@@ -146,7 +124,6 @@ class HomeController extends AbstractController
 //FOR EACH ROW BEGIN
 //UPDATE `changelog` SET `old_value`=OLD.`field1`, `new_value`=NEW.`field1` WHERE `backup_tab`.`id`=`example_tab`.`id`
 //END
-
 
 
 }
