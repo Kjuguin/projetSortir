@@ -16,34 +16,61 @@ $(document).ready(function () {
 });
 
 
-$('#nom').on('keyup', function (e) {
+// $('#nom').on('keyup', function (e) {
+//
+//     currentRequest = $.ajax({
+//         type: 'POST',
+//         url: '/home/recherche',
+//         data: {
+//             "site": null,
+//             "nom": $(this).val(),
+//             "dateDebut": null,
+//             "dateFin": null,
+//             "organisateur": null,
+//             "inscrit": null,
+//             "notInscrit": null,
+//             "passee": null
+//         },
+//         beforeSend: function () {
+//             if (currentRequest != null) {
+//                 currentRequest.abort();
+//             }
+//         }
+//     }).done(function (data) {
+//         console.log(data);
+//         console.log(data['param']);
+//
+//         // lire un tableau
+//         $.each(data['param'], function (key, val) {
+//             console.log(key + " : " + val);
+//         });
+//     });
+// });
+
+$('#nom2').on('keyup', function (e) {
 
     currentRequest = $.ajax({
         type: 'POST',
-        url: '/home/recherche',
+        url: '/test/recherche',
         data: {
             "site": null,
-            "nom": $(this).val(),
-            "dateDebut": null,
-            "dateFin": null,
-            "organisateur": null,
-            "inscrit": null,
-            "notInscrit": null,
-            "passee": null
+            "nom": $(this).val()
         },
         beforeSend: function () {
             if (currentRequest != null) {
                 currentRequest.abort();
             }
         }
+
     }).done(function (data) {
         console.log(data);
         console.log(data['param']);
-
+        console.log(JSON.parse(data['sorties']));
+        // console.log(data['sorties']);
         // lire un tableau
-        $.each(data['param'], function (key, val) {
-            console.log(key + " : " + val);
-        });
+        // $.each(data['param'], function (key, val) {
+        //     console.log(key + " : " + val);
+        // });
     });
 });
 

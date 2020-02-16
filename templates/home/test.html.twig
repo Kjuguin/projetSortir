@@ -1,0 +1,31 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Sorties entr'Eni{% endblock %}
+
+{% block body %}
+
+        <div class="bloc-field bf-2">
+            <label for="nom2">Le nom contient</label>
+
+            <input class="input-home" type="search" name="nom2" id="nom2">
+        </div>
+
+
+    <table >
+        <tr c>
+            <th>Nom</th>
+            <th>numero</th>
+        </tr>
+
+        <tbody>
+
+        {% for sortie in sorties %}
+            <tr>
+                <td>{{ sortie.nom }}</td>
+                <td>:</td>
+                <td>{{ sortie.deux.numero }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
