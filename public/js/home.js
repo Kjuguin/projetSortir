@@ -1,3 +1,5 @@
+var currentRequest = null;
+
 $(document).ready(function () {
 
     /**
@@ -16,10 +18,9 @@ $(document).ready(function () {
 
 $('#nom').on('keyup', function (e) {
 
-    $.ajax({
+    currentRequest = $.ajax({
         type: 'POST',
         url: '/home/recherche',
-        // url: "{{ path('home_recherche') }}",
         data: {
             "site": null,
             "nom": $(this).val(),
@@ -29,13 +30,18 @@ $('#nom').on('keyup', function (e) {
             "inscrit": null,
             "notInscrit": null,
             "passee": null
+        },
+        beforeSend: function () {
+            if (currentRequest != null) {
+                currentRequest.abort();
+            }
         }
     }).done(function (data) {
         console.log(data);
-        console.log(data['sorties']);
+        console.log(data['param']);
 
         // lire un tableau
-        $.each(data['sorties'], function (key, val) {
+        $.each(data['param'], function (key, val) {
             console.log(key + " : " + val);
         });
     });

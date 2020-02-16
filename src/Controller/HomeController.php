@@ -27,9 +27,20 @@ class HomeController extends AbstractController
 
 //        $sorties = $sortieRepository->afficher($param);
 //        $sorties = ['test1'=>'test1','test2'=>'test2'];
-        $sorties = $request->get('data');
 
-        return $this->json(["sorties" => $sorties]);
+
+        $param = [
+                "site" => $request->get('site'),
+                "nom" => $request->get('nom'),
+                "dateDebut" => $request->get('dateDebut'),
+                "dateFin" => $request->get('dateFin'),
+                "organisateur" => $request->get('organisateur'),
+                "inscrit"=>$request->get('inscrit'),
+                "notInscrit"=>$request->get('notInscrit'),
+                "passee" => $request->get('passee')
+            ];
+
+        return $this->json(["param" => $param]);
 
     }
 
