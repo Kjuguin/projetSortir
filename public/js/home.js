@@ -17,7 +17,9 @@ $(document).ready(function() {
 $('#nom').on('keyup', function (e) {
 
     $.ajax({
-        url: "{{ path('home_recherche') }}",
+        type: 'POST',
+        url: '/home/recherche',
+        // url: "{{ path('home_recherche') }}",
         data: {"site" : null,
         "nom" : $(this).val(),
         "dateDebut" : null,
@@ -26,10 +28,10 @@ $('#nom').on('keyup', function (e) {
         "inscrit":null,
         "notInscrit":null,
         "passee" : null}
-    }).done(function(datas){
+    }).done(function(sorties){
 
-        datas.forEach(function(data) {
-            console.log(data);
+        sorties.forEach(function(donne) {
+            console.log(donne);
         });
     });
 });

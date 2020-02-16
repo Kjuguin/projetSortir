@@ -17,14 +17,16 @@ class HomeController extends AbstractController
      */
     public function index(EntityManagerInterface $em, Request $request)
     {
+        dump('coucou');
 
-        $sortieRepository = $em->getRepository(Sortie::class);
+//        $sortieRepository = $em->getRepository(Sortie::class);
 
-        $param = $request->get('data');
+//        $param = $request->get('data');
 
-        dump($param);
+//        dump($param);
 
-        $sorties = $sortieRepository->afficher($param);
+//        $sorties = $sortieRepository->afficher($param);
+        $sorties = ['test1'=>'test1','test2'=>'test2'];
 
         return $this->json(["sorties" => $sorties]);
 
