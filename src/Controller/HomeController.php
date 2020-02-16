@@ -21,24 +21,23 @@ class HomeController extends AbstractController
 
 //        $sortieRepository = $em->getRepository(Sortie::class);
 
-//        $param = $request->get('data');
+        $param = [
+            "site" => $request->get('site'),
+            "nom" => $request->get('nom'),
+            "dateDebut" => $request->get('dateDebut'),
+            "dateFin" => $request->get('dateFin'),
+            "organisateur" => $request->get('organisateur'),
+            "inscrit"=>$request->get('inscrit'),
+            "notInscrit"=>$request->get('notInscrit'),
+            "passee" => $request->get('passee')
+        ];
 
 //        dump($param);
 
 //        $sorties = $sortieRepository->afficher($param);
-//        $sorties = ['test1'=>'test1','test2'=>'test2'];
 
 
-        $param = [
-                "site" => $request->get('site'),
-                "nom" => $request->get('nom'),
-                "dateDebut" => $request->get('dateDebut'),
-                "dateFin" => $request->get('dateFin'),
-                "organisateur" => $request->get('organisateur'),
-                "inscrit"=>$request->get('inscrit'),
-                "notInscrit"=>$request->get('notInscrit'),
-                "passee" => $request->get('passee')
-            ];
+
 
         return $this->json(["param" => $param]);
 
