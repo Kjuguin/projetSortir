@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     /**
      * Activation du tri sur toutes les colonnes du tableau
@@ -20,22 +20,26 @@ $('#nom').on('keyup', function (e) {
         type: 'POST',
         url: '/home/recherche',
         // url: "{{ path('home_recherche') }}",
-        data: {"site" : null,
-        "nom" : $(this).val(),
-        "dateDebut" : null,
-        "dateFin" : null,
-        "organisateur" : null,
-        "inscrit":null,
-        "notInscrit":null,
-        "passee" : null}
-    }).done(function(sorties){
+        data: {
+            "site": null,
+            "nom": $(this).val(),
+            "dateDebut": null,
+            "dateFin": null,
+            "organisateur": null,
+            "inscrit": null,
+            "notInscrit": null,
+            "passee": null
+        }
+    }).done(function (data) {
+        console.log(data);
+        console.log(data['sorties']);
 
-        sorties.forEach(function(donne) {
-            console.log(donne);
+        // lire un tableau
+        $.each(data['sorties'], function (key, val) {
+            console.log(key + " : " + val);
         });
     });
 });
-
 
 // $('.delete').on('click', function (e) {
 //

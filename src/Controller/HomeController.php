@@ -26,7 +26,8 @@ class HomeController extends AbstractController
 //        dump($param);
 
 //        $sorties = $sortieRepository->afficher($param);
-        $sorties = ['test1'=>'test1','test2'=>'test2'];
+//        $sorties = ['test1'=>'test1','test2'=>'test2'];
+        $sorties = $request->get('data');
 
         return $this->json(["sorties" => $sorties]);
 
