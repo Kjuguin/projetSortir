@@ -4,6 +4,17 @@
 
 {% block body %}
 
+    {% for message in app.flashes('danger') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div>     {{ message }}</div>
+        {% endfor %}
+    {% endfor %}
+
     <!-- SECTION 1 : Recherche et filtres des sorties -->
     <header class="gradient-section">
         <nav class="nav-header">
@@ -24,7 +35,7 @@
 
         <section class="section-filtre">
             <div class="container-home">
-                <form action="{{ path('home',{'recherche':'recherche'} ) }}" method="get">
+                <form action="{{ path('home' ) }}" method="get">
 
                     <!-- filtres inputs -->
                     <div class="filtre-bloc-left">
@@ -180,7 +191,7 @@
                                         {% if sortie.noInscriptions.count is same as (0) %}
                                             - <a href="{{ path('inscription',{'id':sortie.id}) }}">S'inscrire</a>
                                             {% if sortie.noOrganisateur.id is same as (app.user.id) %}
-                                                - <a href="#">Annuler</a>
+                                                - <a href="{{ path('annulerSortieTwig',{'id':sortie.id}) }}">Annuler</a>
                                             {% endif %}
                                         {% else %}
 

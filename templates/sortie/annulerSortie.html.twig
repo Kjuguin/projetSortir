@@ -1,0 +1,13 @@
+{% extends "layout.html.twig" %}
+
+{% block body %}
+    <h1>Annulation de la Sortie</h1>
+    <div>
+        <div> Nom : {{ sortie.nom | capitalize }}</div>
+        <div> Date de sortie : {{ sortie.dateDebut | date("d/m/y H:i:s") }}</div>
+        <div> Lieu
+            : {{ sortie.noLieu.nomLieu | capitalize }} {{ sortie.nolieu.rue | capitalize }} {{ sortie.noLieu.noVille.nomVille | capitalize }} {{ sortie.noLieu.noVille.codePostal }}</div>
+    </div>
+    <p><a href="{{ path("annulerSortie",{'id':sortie.id}) }}">Comfirmer la suppression</a></p>
+    <p><a href="{{ path("home") }}">Annuler</a></p>
+{% endblock %}
