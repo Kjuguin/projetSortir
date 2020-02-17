@@ -245,6 +245,128 @@
             {% endif %}
         </div>
 
+
+        <!--/////////////////////////////////////-->
+
+{#        <div class="container-fluid">#}
+{#            <div class="table-responsive-sm">#}
+{#                {% if(sorties !=null) %}#}
+{#                    <table id="table-sortie" data-toggle="table" class="table table-bordered table-orderable table-striped">#}
+{#                        <thead class="thead-light">#}
+{#                        <tr class="active">#}
+{#                            <th scope="col" data-field="nom" data-sortable="true">Nom</th>#}
+{#                            <th scope="col" data-field="date-sortie" data-sortable="true">Date</th>#}
+{#                            <th scope="col" data-field="cloture" data-sortable="true">Clôture</th>#}
+{#                            <th scope="col" data-field="places" data-sortable="true">Places</th>#}
+{#                            <th scope="col" data-field="etat" data-sortable="true">Etat</th>#}
+{#                            <th scope="col" data-field="inscrit" data-sortable="true">Inscrit</th>#}
+{#                            <th scope="col" data-field="organisateur" data-sortable="true">Organisateur</th>#}
+{#                            <th scope="col" data-field="action" data-sortable="true">Action</th>#}
+{#                        </tr>#}
+{#                        </thead>#}
+{#                        <tbody>#}
+
+{#                        {% for sortie in sorties %}#}
+{#                            <tr>#}
+{#                                <td>{{ sortie.nom }}</td>#}
+{#                                <td>{{ sortie.dateDebut | date('d/m/Y H:i') }}</td>#}
+{#                                <td>{{ sortie.dateCloture | date('d/m/Y') }}</td>#}
+{#                                <td>{{ sortie.noInscriptions.count }} / {{ sortie.nbInscriptionMax }}</td>#}
+{#                                <td>{{ sortie.noEtat.libelle }}</td>#}
+{#                                <td>#}
+{#                                    {% if app.user %}#}
+{#                                        {% for inscrit in sortie.noInscriptions %}#}
+{#                                            {% if inscrit.noUser.id == app.user.id %}#}
+{#                                                <p>Oui</p>#}
+{#                                            {% endif %}#}
+{#                                        {% endfor %}#}
+{#                                    {% endif %}#}
+{#                                </td>#}
+{#                                <td>#}
+{#                                    <a href="{{ path('utilisateur_afficherProfil',{'id':sortie.noOrganisateur.id}) }}">{{ sortie.noOrganisateur.pseudo }}</a>#}
+{#                                </td>#}
+{#                                #}{#                            <td><a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a> - modifier</td>#}
+{#                                <td>#}
+{#                                    {% set test = 0 %}#}
+
+{#                                    <!-- En création -->#}
+{#                                    {% if sortie.noEtat.libelle is same as ("En création") %}#}
+{#                                        <a href="#">Modifier</a> - <a href="#">Publier</a>#}
+
+{#                                        <!-- En cours -->#}
+{#                                    {% elseif  sortie.noEtat.libelle is same as ("En cours") %}#}
+{#                                        <a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a>#}
+
+{#                                        <!-- cas ouvert et fermé -->#}
+{#                                    {% else %}#}
+{#                                        <a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a>#}
+
+
+{#                                        <!-- cas fermé -->#}
+{#                                        {% if sortie.noEtat.libelle is same as ('Fermé') %}#}
+
+{#                                            {% for inscrit in sortie.noInscriptions %}#}
+
+{#                                                <!-- fermé et inscrit -->#}
+{#                                                {% if inscrit.noUser.id is same as (app.user.id) %}#}
+{#                                                    - <a href="#">Se désister</a>#}
+{#                                                {% endif %}#}
+
+{#                                                <!-- fermé et non inscrit (se passe rien) -->#}
+
+{#                                            {% endfor %}#}
+{#                                            <!-- cas ouvert -->#}
+{#                                        {% elseif sortie.noEtat.libelle is same as ('Ouvert') %}#}
+
+{#                                            {% if sortie.noInscriptions.count is same as (0) %}#}
+{#                                                - <a href="{{ path('inscription',{'id':sortie.id}) }}">S'inscrire</a>#}
+{#                                                {% if sortie.noOrganisateur.id is same as (app.user.id) %}#}
+{#                                                    - <a href="#">Annuler</a>#}
+{#                                                {% endif %}#}
+{#                                            {% else %}#}
+
+{#                                                {% for inscrit in sortie.noInscriptions %}#}
+
+{#                                                    {% if test== 0 %}#}
+{#                                                        <!-- modification de la variable pour ne pas rentrer une seconde fois dans le if -->#}
+{#                                                        {% set test = 1 %}#}
+{#                                                        <!-- ouvert et inscrit -->#}
+{#                                                        {% if inscrit.noUser.id is same as (app.user.id) %}#}
+{#                                                            - <a href="#">Se désister</a>#}
+
+{#                                                            <!-- ouvert, inscrit et organisateur -->#}
+{#                                                            {% if sortie.noOrganisateur.id is same as (app.user.id) %}#}
+{#                                                                - <a href="#">Annuler</a>#}
+{#                                                            {% endif %}#}
+{#                                                            <!-- ouvert et non inscrit -->#}
+{#                                                        {% else %}#}
+{#                                                            - <a href="{{ path('inscription',{'id':sortie.id}) }}">S'inscrire</a>#}
+
+{#                                                            <!-- ouvert, non inscrit et organisateur -->#}
+{#                                                            {% if sortie.noOrganisateur.id is same as (app.user.id) %}#}
+{#                                                                - <a href="#">Annuler</a>#}
+{#                                                            {% endif %}#}
+{#                                                        {% endif %}#}
+{#                                                    {% endif %}#}
+{#                                                {% endfor %}#}
+{#                                            {% endif %}#}
+{#                                        {% endif %}#}
+{#                                    {% endif %}#}
+{#                                </td>#}
+{#                            </tr>#}
+{#                        {% endfor %}#}
+{#                        </tbody>#}
+{#                    </table>#}
+{#                {% endif %}#}
+{#            </div>#}
+{#        </div>#}
+
+
+
+        <!--/////////////////////////////////////-->
+
+
+
         <!-- bouton recherche -->
         <div class="bloc-btn-home btn-creer-home">
             <a href="#" class="btn-home">Créer une sortie</a>
