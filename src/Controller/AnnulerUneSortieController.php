@@ -20,15 +20,11 @@ class AnnulerUneSortieController extends AbstractController
             $sortie = $SortieRepository->find($id);
             $nom = $sortie->getNom();
 
-            $entityManager = $this->getDoctrine()->getManager();
             $this->addFlash("succes", "Sortie " . $nom . " Annulé");
-            $entityManager->remove($sortie);
-            $entityManager->flush();
+            $em->remove($sortie);
+            $em->flush();
 
             return $this->redirectToRoute("home");
-
-
-            return $this->render('sortie/annulerSortie.html.twig');
         }
     }
 

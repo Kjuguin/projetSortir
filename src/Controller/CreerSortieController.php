@@ -18,9 +18,6 @@ class CreerSortieController extends AbstractController
 {
     /**
      * @Route("/creerSortie", name="creer_sortie")
-     * @param Request $request
-     * @param EntityManagerInterface $em
-     * @return Response
      */
     public function index(Request $request, EntityManagerInterface $em)
     {
@@ -51,7 +48,7 @@ class CreerSortieController extends AbstractController
             $this->addFlash("success", "Sortie ajoutée");
             $em->persist($sortie);
             $em->flush();
-            return $this->redirectToRoute("creer_sortie");
+            return $this->redirectToRoute("home");
 
         }
 

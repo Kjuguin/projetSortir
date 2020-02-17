@@ -211,7 +211,7 @@
 
                                                 <!-- ouvert, non inscrit et organisateur -->
                                                 {% if sortie.noOrganisateur.id is same as (app.user.id) %}
-                                                    - <a href="#">Annuler</a>
+                                                    - <a href="{{path('annulerSortieTwig',{'id':sortie.id})}}">Annuler</a>
                                                 {% endif %}
                                             {% else %}
                                                 <!-- ouvert et inscrit -->
@@ -219,7 +219,7 @@
 
                                                 <!-- ouvert, inscrit et organisateur -->
                                                 {% if sortie.noOrganisateur.id is same as (app.user.id) %}
-                                                    - <a href="#">Annuler</a>
+                                                    - <a href="{{path('annulerSortieTwig',{'id':sortie.id})}}">Annuler</a>
                                                 {% endif %}
                                             {% endif %}
                                         {% endif %}
@@ -233,5 +233,7 @@
             {% endif %}
         </div>
     </div>
+
+    <button style="background: purple"><a href="{{path('creer_sortie')}}">Bouton à l'arrache pour créer une sortie en mode VIOLEEEEETTTTTTTTTTT</a></button>
 {% endblock %}
 
