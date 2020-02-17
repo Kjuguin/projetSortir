@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TestUnRepository")
@@ -17,11 +18,13 @@ class TestUn
     private $id;
 
     /**
+     * @Groups("group1")
      * @ORM\Column(type="string", length=255)
      */
     private $nom;
 
     /**
+     * @Groups("group1")
      * @ORM\ManyToOne(targetEntity="App\Entity\TestDeux", inversedBy="un")
      */
     private $deux;

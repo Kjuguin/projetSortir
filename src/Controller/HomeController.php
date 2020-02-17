@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Site;
 use App\Entity\Sortie;
 use App\Entity\TestUn;
+use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,7 +13,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
+use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use function Sodium\add;
@@ -24,18 +28,23 @@ class HomeController extends AbstractController
      */
     public function index(EntityManagerInterface $em, Request $request)
     {
-        $encoder = new JsonEncoder();
-        $defaultContext = [
-            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
-                return 'circ
-                ';
-            },
-        ];
-        $normalizer = new ObjectNormalizer(null, null, null, null, null, null, $defaultContext);
-
-        $serializer = new Serializer([$normalizer], [$encoder]);
+//        $encoder = new JsonEncoder();
+//        $defaultContext = [
+//            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+//                return 'circ
+//                ';
+//            },
+//        ];
+//        $normalizer = new ObjectNormalizer(null, null, null, null, null, null, $defaultContext);
+//
+//        $serializer = new Serializer([$normalizer], [$encoder]);
 
 //        $sortieRepository = $em->getRepository(Sortie::class);
+
+        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
+
+        $normalizer = new ObjectNormalizer($classMetadataFactory);
+        $serializer = new Serializer([new DateTimeNormalizer(),$normalizer ]);
 
         $sortieRepository = $em->getRepository(Sortie::class);
 
@@ -70,10 +79,16 @@ class HomeController extends AbstractController
 
         $sorties = $sortieRepository->afficher($param);
 
-        $json = $serializer->serialize($sorties, 'json');
-        dump($json);
+//        $json = $serializer->serialize($sorties, 'json');
+//        dump($json);
+//
+//        return new JsonResponse($json, Response::HTTP_OK, [], true);
+        $data = $serializer->normalize($sorties, null, ['groups' => 'group1']);
 
-        return new JsonResponse($json, Response::HTTP_OK, [], true);
+        dump($sorties);
+        dump($data);
+        die();
+        return $this->json(['sorties'=>$data]);
 
     }
 

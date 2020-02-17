@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -21,11 +22,13 @@ class Sortie
     private $id;
 
     /**
+     * @Groups("group1")
      * @ORM\OneToMany(targetEntity="App\Entity\Inscription", mappedBy="noSortie")
      */
     private $noInscriptions;
 
     /**
+     * @Groups("group1")
      * @Assert\Length(
      *     min="3",
      *     max="30",
@@ -36,6 +39,7 @@ class Sortie
     private $nom;
 
     /**
+     * @Groups("group1")
      * @Assert\GreaterThan("today utc", message="La date de début de sortie doit être supérieur à la date d'aujourd'hui")
      * @ORM\Column(type="datetime")
      */
@@ -48,12 +52,14 @@ class Sortie
     private $duree;
 
     /**
+     * @Groups("group1")
      * @Assert\GreaterThan("today utc", message="La date de clôture doit être supérieur à la date d'aujourd'hui")
      * @ORM\Column(type="datetime")
      */
     private $dateCloture;
 
     /**
+     * @Groups("group1")
      * @Assert\Positive(message="La valeur doit être un nombre positif.")
      * @ORM\Column(type="integer")
      */
@@ -71,6 +77,7 @@ class Sortie
     private $urlPhoto;
 
     /**
+     * @Groups("group1")
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="noSorties")
      */
     private $noOrganisateur;
@@ -81,11 +88,13 @@ class Sortie
     private $noLieu;
 
     /**
+     * @Groups("group1")
      * @ORM\ManyToOne(targetEntity="App\Entity\Etat", inversedBy="noSorties")
      */
     private $noEtat;
 
     /**
+     * @Groups("group1")
      * @ORM\ManyToOne(targetEntity="App\Entity\Site", inversedBy="noSorties")
      */
     private $noSite;

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -46,6 +47,7 @@ class User implements UserInterface
 //TODO :
 
     /**
+     * @Groups("group1")
      * @Assert\NotBlank(message="Il ne doit pas y avoir d'espace dans votre pseudo")
      * @Assert\Length(
      *     min="3",

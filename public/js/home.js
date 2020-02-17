@@ -105,21 +105,21 @@ $('#nom2').on('keyup', function (e) {
 
     }).done(function (data) {
         console.log(data);
-        console.log(data['0']);
-        console.log(data['0']['id']);
-        console.log(data['1']);
+        // console.log(data['0']);
+        // console.log(data['0']['id']);
+        // console.log(data['1']);
         // console.log(data['sorties']);
         // lire un tableau
 
-        $.each(data, function (key, val) {
-            $('#tbody').append(
-                '<tr><td>' + val['nom'] + '</td><td> : </td><td>' +
-                val['deux']['numero'] +
-                '</td></tr>'
-            );
-
-            console.log(key + " : " + val['id']);
-        });
+        // $.each(data, function (key, val) {
+        //     $('#tbody').append(
+        //         '<tr><td>' + val['nom'] + '</td><td> : </td><td>' +
+        //         val['deux']['numero'] +
+        //         '</td></tr>'
+        //     );
+        //
+        //     console.log(key + " : " + val['id']);
+        // });
     });
 });
 

@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\Sortie;
 use App\Entity\TestUn;
+use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,6 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
+use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
@@ -24,15 +27,21 @@ class TestController extends AbstractController
     public function index(EntityManagerInterface $em, Request $request)
     {
 
-        $encoder = new JsonEncoder();
-        $defaultContext = [
-            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
-                    return $object->getNom();
-            },
-        ];
-        $normalizer = new ObjectNormalizer(null, null, null, null, null, null, $defaultContext);
+//        $encoder = new JsonEncoder();
+//        $defaultContext = [
+//            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+//                    return $object->getNom();
+//            },
+//        ];
+//        $normalizer = new ObjectNormalizer(null, null, null, null, null, null, $defaultContext);
+//
+//        $serializer = new Serializer([$normalizer], [$encoder]);
+        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
 
-        $serializer = new Serializer([$normalizer], [$encoder]);
+        $normalizer = new ObjectNormalizer($classMetadataFactory);
+        $serializer = new Serializer([$normalizer]);
+
+
 
         $sortieRepository = $em->getRepository(TestUn::class);
 
@@ -44,23 +53,13 @@ class TestController extends AbstractController
 
         $sorties = $sortieRepository->afficher($param);
 
-        $test =[];
-        $i = 0;
-        dump($sorties);
-        foreach ($sorties as $sortie){
-            $test[$i] = [
-                'name' => $sortie->getNom(),
-                'deux' => $sortie->getDeux()->getId()];
-                $i++;
-        }
-
-
-        $json = $serializer->serialize($test, 'json');
+        $data = $serializer->normalize($sorties, null, ['groups' => 'group1']);
+//        $data = $serializer->normalize($sorties, 'json', ['groups' => 'group1']);
 
 //        var_dump($serializer->serialize($org, 'json'));
 
-        return new JsonResponse($json, Response::HTTP_OK, ['ignored_attributes' => ['un']], true);
-
+//        return new JsonResponse($data, Response::HTTP_OK, [], true);
+return $this->json(['sorties'=>$data]);
     }
 
     /**
