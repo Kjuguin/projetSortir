@@ -28,5 +28,7 @@ class AfficherSortieController extends AbstractController
             ]
         );
 
+
+
     }
 }
