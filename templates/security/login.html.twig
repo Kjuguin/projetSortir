@@ -11,31 +11,24 @@
 
             <!-- Icon -->
             <div class="fadeIn first login-logo">
-                <img src="{{ asset("img/logo.png") }}" id="icon" alt="User Icon" />
+                <img src="{{ asset("img/logo.png") }}" id="icon" alt="User Icon"/>
                 <h1 class="login-title">Sorties entr'ENI</h1>
             </div>
 
             <!-- Login Form -->
             <form method="post">
-                {% if error %}
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
-
-                {% if app.user %}
-                        <div class="mb-3">
-                            Vous êtes connecté sous  {{ app.user.pseudo }} <a style="margin-left: 20px" href="{{ path('app_logout') }}" class="btn btn-outline-primary">Logout</a>
-                        </div>
-                {% endif %}
-
-                <input autofocus type="text" value="{{ last_username }}" id="inputEmail" class="fadeIn second login-input-field lif1" name="email" placeholder="Email or login" required>
-                <input type="password" id="inputPassword" class="fadeIn third login-input-field" name="password" placeholder="******" required>
+                <input autofocus type="text" value="{{ last_username }}" id="inputEmail"
+                       class="fadeIn second login-input-field lif1" name="email" placeholder="Email or login" required>
+                <input type="password" id="inputPassword" class="fadeIn third login-input-field" name="password"
+                       placeholder="******" required>
                 <input type="hidden" name="_csrf_token"
                        value="{{ csrf_token('authenticate') }}"
                 >
                 <div class="checkbox mb-3 fadeIn fourth">
 
                     <label class="login-check-lbl">
-                        <input type="checkbox" value="remember-me {{ (app.user ) ? 'checked' : '' }}"> se souvenir de moi
+                        <input type="checkbox" value="remember-me {{ (app.user ) ? 'checked' : '' }}"> se souvenir de
+                        moi
 
                     </label>
                 </div>

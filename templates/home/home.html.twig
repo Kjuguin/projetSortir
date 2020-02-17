@@ -3,10 +3,16 @@
 {% block title %}Sorties entr'Eni{% endblock %}
 
 {% block body %}
-{% for message in app.flashes('danger') %}
+
+    {% for message in app.flashes('danger') %}
         <div class="alert alert-danger">
             {{ message }}
         </div>
+    {% endfor %}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div>     {{ message }}</div>
+        {% endfor %}
     {% endfor %}
 
     <!-- SECTION 1 : Recherche et filtres des sorties -->
@@ -29,7 +35,7 @@
 
         <section class="section-filtre">
             <div class="container-home">
-                <form action="{{ path('home',{'recherche':'recherche'} ) }}" method="get">
+                <form action="{{ path('home' ) }}" method="get">
 
                     <!-- filtres inputs -->
                     <div class="filtre-bloc-left">
@@ -185,34 +191,37 @@
                                         {% if sortie.noInscriptions.count is same as (0) %}
                                             - <a href="{{ path('inscription',{'id':sortie.id}) }}">S'inscrire</a>
                                             {% if sortie.noOrganisateur.id is same as (app.user.id) %}
-                                                - <a href="#">Annuler</a>
+                                                - <a href="{{ path('annulerSortieTwig',{'id':sortie.id}) }}">Annuler</a>
                                             {% endif %}
                                         {% else %}
 
                                             {% for inscrit in sortie.noInscriptions %}
 
-                                                {% if test== 0 %}
-                                                    <!-- modification de la variable pour ne pas rentrer une seconde fois dans le if -->
-                                                    {% set test = 1 %}
-                                                    <!-- ouvert et inscrit -->
-                                                    {% if inscrit.noUser.id is same as (app.user.id) %}
-                                                        - <a href="#">Se désister</a>
+                                                {% if inscrit.noUser.id != app.user.id %}
 
-                                                        <!-- ouvert, inscrit et organisateur -->
-                                                        {% if sortie.noOrganisateur.id is same as (app.user.id) %}
-                                                            - <a href="#">Annuler</a>
-                                                        {% endif %}
-                                                        <!-- ouvert et non inscrit -->
-                                                    {% else %}
-                                                        - <a href="{{ path('inscription',{'id':sortie.id}) }}">S'inscrire</a>
+                                                    {% set test = test + 1 %}
 
-                                                        <!-- ouvert, non inscrit et organisateur -->
-                                                        {% if sortie.noOrganisateur.id is same as (app.user.id) %}
-                                                            - <a href="#">Annuler</a>
-                                                        {% endif %}
-                                                    {% endif %}
                                                 {% endif %}
                                             {% endfor %}
+
+                                            {% if test == sortie.noInscriptions.count %}
+                                                <!-- ouvert et non inscrit -->
+
+                                                - <a href="{{ path('inscription',{'id':sortie.id}) }}">S'inscrire</a>
+
+                                                <!-- ouvert, non inscrit et organisateur -->
+                                                {% if sortie.noOrganisateur.id is same as (app.user.id) %}
+                                                    - <a href="#">Annuler</a>
+                                                {% endif %}
+                                            {% else %}
+                                                <!-- ouvert et inscrit -->
+                                                - <a href="#">Se désister</a>
+
+                                                <!-- ouvert, inscrit et organisateur -->
+                                                {% if sortie.noOrganisateur.id is same as (app.user.id) %}
+                                                    - <a href="#">Annuler</a>
+                                                {% endif %}
+                                            {% endif %}
                                         {% endif %}
                                     {% endif %}
                                 {% endif %}
