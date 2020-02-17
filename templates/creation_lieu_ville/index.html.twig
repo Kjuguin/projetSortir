@@ -1,0 +1,38 @@
+{#{% extends "base.html.twig" %}#}
+
+{% block body %}
+
+    <script language="JavaScript" type="text/javascript">
+
+        function masque(elem){
+
+            var etat = document.getElementById(elem).style.display;
+
+            if (etat="none"){
+                document.getElementById(elem).style.display="block";
+            }else {
+                document.getElementById(elem).style.display="none";
+            }
+        }
+
+    </script>
+
+    <div>
+        {{ form_start(formLieu) }}
+        {{ form_widget(formLieu) }}
+
+
+        <button type="button" id="button_ajouterVille" onclick="masque('1')">Ajouter une ville</button>
+        <div id="1" style="display: none;">
+            {{ form_start(formVille) }}
+            {{ form_widget(formVille) }}
+
+        </div>
+
+
+        {{ form_end(formVille) }}
+
+        {{ form_end(formLieu) }}
+
+    </div>
+{% endblock %}
