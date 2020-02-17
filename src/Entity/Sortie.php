@@ -90,10 +90,12 @@ class Sortie
      */
     private $noSite;
 
+
     public function __construct()
     {
         $this->noInscriptions = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {

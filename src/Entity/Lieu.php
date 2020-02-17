@@ -65,6 +65,11 @@ class Lieu
         $this->noSorties = new ArrayCollection();
     }
 
+    public function __toString(){
+        return $this->nomLieu;
+
+    }
+
     public function getId(): ?int
     {
         return $this->id;
