@@ -13,9 +13,9 @@ use function Sodium\add;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/home/{recherche}", name="home")
+     * @Route("/", name="home")
      */
-    public function index($recherche = null, EntityManagerInterface $em, Request $request)
+    public function index(EntityManagerInterface $em, Request $request)
     {
         $siteRepository = $em->getRepository(Site::class);
         $sites = $siteRepository->findAll();
@@ -24,9 +24,7 @@ class HomeController extends AbstractController
         $inscrit = null;
         $notInscrit = null;
 
-        if ($recherche != null) {
-            $sortieRepository = $em->getRepository(Sortie::class);
-
+        if (!is_null($request->get('site'))) {
             if (!empty($request->get('filtre1'))) {
                 $organisateur = $this->getUser()->getId();
             } else {
@@ -40,6 +38,7 @@ class HomeController extends AbstractController
             if (!empty($request->get('filtre3'))) {
                 $notInscrit = $this->getUser()->getId();
             }
+            $sortieRepository = $em->getRepository(Sortie::class);
 
             $param = [
                 "site" => $request->get('site'),
@@ -47,8 +46,8 @@ class HomeController extends AbstractController
                 "dateDebut" => $request->get('date-debut'),
                 "dateFin" => $request->get('date-fin'),
                 "organisateur" => $organisateur,
-                "inscrit"=>$inscrit,
-                "notInscrit"=>$notInscrit,
+                "inscrit" => $inscrit,
+                "notInscrit" => $notInscrit,
                 "passee" => $request->get('filtre4')
             ];
 

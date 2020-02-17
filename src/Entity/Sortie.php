@@ -21,7 +21,7 @@ class Sortie
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Inscription", mappedBy="noSortie")
+     * @ORM\OneToMany(targetEntity="App\Entity\Inscription", mappedBy="noSortie", cascade={"remove"})
      */
     private $noInscriptions;
 
