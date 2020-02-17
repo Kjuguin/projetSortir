@@ -20,6 +20,13 @@ class ProfilController extends AbstractController
      */
     public function form(EntityManagerInterface $em, Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
+        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+
+            $this->addFlash('danger', 'Vous devez être connecter');
+
+            return $this->redirectToRoute('app_login');
+        }
+
         $user2 = new User();
         $user2->setPassword($this->getUser()->getPassword());
         $user = $this->getUser();
@@ -54,6 +61,14 @@ class ProfilController extends AbstractController
      */
     public function afficherProfil(int $id, EntityManagerInterface $em)
     {
+
+        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+
+            $this->addFlash('danger', 'Vous devez être connecter');
+
+            return $this->redirectToRoute('app_login');
+        }
+
         $profileRepository = $em->getRepository(User::class);
         $profil = $profileRepository->find($id);
         if ($profil == null) {

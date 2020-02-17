@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use function Sodium\add;
 
 class HomeController extends AbstractController
 {
@@ -17,6 +16,15 @@ class HomeController extends AbstractController
      */
     public function index($recherche = null, EntityManagerInterface $em, Request $request)
     {
+
+        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+
+            $this->addFlash('danger', 'Vous devez vous connecter');
+
+            return $this->redirectToRoute('app_login');
+        }
+
+
         $siteRepository = $em->getRepository(Site::class);
         $sites = $siteRepository->findAll();
 

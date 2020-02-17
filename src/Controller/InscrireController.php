@@ -16,6 +16,13 @@ class InscrireController extends AbstractController
      */
     public function inscription($id, EntityManagerInterface $entityManager)
     {
+        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+
+            $this->addFlash('danger', 'Vous devez être connecter');
+
+            return $this->redirectToRoute('app_login');
+        }
+
         $SortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
         $sortie = $SortieRepository->find($id);
         $date = new \DateTime();

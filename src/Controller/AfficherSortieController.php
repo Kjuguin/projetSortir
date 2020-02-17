@@ -20,6 +20,13 @@ class AfficherSortieController extends AbstractController
     public function afficherSortie($id, Request $request, EntityManagerInterface $em)
     {
 
+        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+
+            $this->addFlash('danger', 'Vous devez être connecter');
+
+            return $this->redirectToRoute('app_login');
+        }
+
         $sortieRepository = $em->getRepository(Sortie::class);
         $sortie = $sortieRepository->find($id);
 
