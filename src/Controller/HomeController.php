@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use function Sodium\add;
 
 class HomeController extends AbstractController
 {
@@ -17,6 +16,15 @@ class HomeController extends AbstractController
      */
     public function index(EntityManagerInterface $em, Request $request)
     {
+
+        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+
+            $this->addFlash('danger', 'Vous devez vous connecter');
+
+            return $this->redirectToRoute('app_login');
+        }
+
+
         $siteRepository = $em->getRepository(Site::class);
         $sites = $siteRepository->findAll();
 
@@ -25,6 +33,7 @@ class HomeController extends AbstractController
         $notInscrit = null;
 
         if (!is_null($request->get('site'))) {
+
             if (!empty($request->get('filtre1'))) {
                 $organisateur = $this->getUser()->getId();
             } else {
@@ -54,14 +63,14 @@ class HomeController extends AbstractController
             dump($param);
 
             $sorties = $sortieRepository->afficher($param);
+        } else {
+            $sorties = $em->getRepository(Sortie::class)->findAll();
         }
 
         return $this->render('home/home.html.twig',
             [
                 "sites" => $sites,
                 "sorties" => $sorties,
-                "inscrit" => $inscrit,
-                "notInscrit" => $notInscrit,
             ]
         );
     }

@@ -16,10 +16,17 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class ProfilController extends AbstractController
 {
     /**
-     * @Route("/gestionProfil", name="gestionProfil")
+     * @Route("/gestionProfil/{id}", name="gestionProfil", requirements={"id"="\d+"})
      */
     public function form(EntityManagerInterface $em, Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
+        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+
+            $this->addFlash('danger', 'Vous devez être connecter');
+
+            return $this->redirectToRoute('app_login');
+        }
+
         $user2 = new User();
         $user2->setPassword($this->getUser()->getPassword());
         $user = $this->getUser();
@@ -29,7 +36,6 @@ class ProfilController extends AbstractController
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
-
             if ($user->getPassword() == 'Pa$$w0rdPa$$w0rd'){
                 $user->setPassword($user2->getPassword());
             } else {
@@ -37,30 +43,41 @@ class ProfilController extends AbstractController
                 $user->setPassword($password);
             }
 
-
             $em->persist($user);
             $em->flush();
-            $this->addFlash("succes", "User Modifié");
-            return $this->redirectToRoute("utilisateur_gestionProfil");
+            $this->addFlash("succes", "Votre profil a bien été modifié");
+            return $this->redirectToRoute("utilisateur_afficherProfil", ['id' => $user->getId()]);
         }
 
         return $this->render('utilisateurProfil/gestionProfil.html.twig', [
-            "userForm" => $userForm->createView()]);
+            "userForm" => $userForm->createView()
+        ]);
+
 
     }
 
     /**
      * @Route("/afficherProfil/{id}", name="afficherProfil", requirements={"id"="\d+"})
      */
-    public function detail(int $id, EntityManagerInterface $em)
+    public function afficherProfil(int $id, EntityManagerInterface $em)
     {
-        $profileRepository = $em->getRepository(User::class);
-        $profile = $profileRepository->find($id);
 
+        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+
+            $this->addFlash('danger', 'Vous devez être connecter');
+
+            return $this->redirectToRoute('app_login');
+        }
+
+        $profileRepository = $em->getRepository(User::class);
+        $profil = $profileRepository->find($id);
+        if ($profil == null) {
+            throw $this->createNotFoundException("Utilisateur inconnu");
+        }
         return $this->render(
             'utilisateurProfil/afficherProfil.html.twig',
             [
-                'profile' => $profile
+                'profil' => $profil
             ]
         );
     }
