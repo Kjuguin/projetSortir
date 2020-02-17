@@ -1,0 +1,13 @@
+.edit-profil-bloc{
+    width:45em;
+    background:#fff;
+}
+
+.bloc-profil-left{
+    display:inline-block;
+}
+
+.bloc-profil-right{
+    background:#e2f3ff;
+    display:inline-block;
+}

@@ -1,0 +1,244 @@
+/*************** RESET ***************/
+*{
+    margin:0;
+    padding:0;
+}
+
+body, html{
+    font-family: 'Nunito', sans-serif !important;
+    background: linear-gradient(180deg, rgba(138,201,255,1) 0%, rgba(218,244,255,1) 100%);
+    height:100%;
+}
+
+a{
+    text-decoration:none !important;
+}
+
+li{
+    list-style-type:none !important;
+}
+
+p{
+    margin:0 !important;
+}
+
+.clear {
+    clear: both;
+}
+
+.page-section{
+    width:100%;
+    height:85%;
+    position: relative;
+    display:inline-block;
+    text-align:center;
+    padding-top:1.5em;
+}
+
+/************ MENU DESKTOP *********/
+.nav-header, .logo-header, .logo-img, .site-title, .nav-menu, .nav-menu li{
+    display: inline-block;
+}
+
+.nav-header{
+    width:88%;
+    margin-bottom:2em;
+}
+
+/** logo **/
+.logo-header{
+    float:left;
+}
+
+.logo-header a{
+    text-decoration:none !important;
+}
+
+.site-title{
+    vertical-align: top;
+    color: #fff;
+    letter-spacing: 1px;
+    padding: 1.1em 0 0 0.2em;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-shadow: 1px 1px 7px rgba(40,104,134,0.37);
+}
+
+/** menu **/
+.nav-menu{
+    float:right;
+    padding-top: 1.9em;
+}
+
+.nav-menu li{
+    margin-left:3em;
+}
+
+.nav-menu li a{
+    color:#fff;
+    font-size:1.1em;
+    font-weight: 600;
+    letter-spacing:1px;
+    text-shadow: 1px 1px 5px rgba(40,104,134,0.25);
+}
+
+/************ BURGER MENU *********/
+.burger-menu{
+    display:none;
+    color:#fff;
+    height:50px;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+    text-align:left;
+}
+
+/** logo **/
+.logo-burger-menu{
+    padding-left:1.5em;
+}
+
+.burger-logo{
+    display:inline-block;
+    height: 2.6em;
+    margin-top: 0.3em;
+}
+
+.burger-img{
+    height:100%;
+}
+
+.burger-title{
+    display:inline-block;
+    vertical-align: top;
+    color: #fff;
+    letter-spacing: 1px;
+    padding: 0.6em 0 0 0.2em;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-shadow: 1px 1px 7px rgba(40,104,134,0.37);
+}
+
+.burger-menu nav{
+    background:inherit;
+    background-color:#fff;
+    font-size:20px;
+    font-weight:bold;
+    height:0;
+    overflow:hidden;
+    transition:height .2s;
+    padding: 0 0 0 2.2em;
+}
+
+.burger-menu nav > *{
+    display:block;
+    letter-spacing:1px;
+    line-height:2.5;
+    padding:0 20px;
+    width:100%;
+}
+
+.nav-li-1{
+    margin-top:1em;
+}
+
+.burger-menu nav input{
+    background:rgba(0,0,0,.2);
+    border:none;
+    color:#fff;
+}
+
+.nav-burger a{
+    color:#687786;
+}
+
+.nav-burger a:hover{
+    color:#ff7083;
+}
+
+.burger-menu .burger{
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    color:inherit;
+    cursor:pointer;
+    font-family:'Material Icons';
+    font-size:30px;
+    line-height:50px;
+    margin:0;
+    outline:0;
+    padding:0;
+    position:absolute;
+    text-align:center;
+    top:0;
+    right:10px;
+    width:50px;
+}
+
+.burger-menu .burger:before{
+    content:'menu';
+}
+
+.burger-menu .burger:checked:before{
+    content:'close';
+}
+
+.burger-menu .burger:checked + nav{
+    height:calc(100vh - 50px);
+}
+
+
+/*************** CONTENU COMMUN ****************/
+
+
+
+
+
+
+
+
+
+
+
+/*************** FOOTER ****************/
+.page-footer{
+    width:100%;
+    position: absolute;
+}
+
+.page-footer img{
+    width:100%;
+}
+
+
+/*************** MEDIA QUERIES ****************/
+@media screen and (max-width: 1200px){
+    .nav-header{
+        display:none;
+    }
+
+    .burger-menu{
+        display:block;
+    }
+
+    .page-section{
+        padding-top:0;
+    }
+
+    .page-content{
+        padding-top: 5em;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

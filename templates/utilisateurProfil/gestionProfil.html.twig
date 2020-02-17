@@ -1,23 +1,35 @@
-{% extends 'layout.html.twig' %}
+{% extends 'pages-base.html.twig' %}
 
 {% block title %} Modification du Profil{% endblock %}
 
 {% block body %}
-    <div>
-        <h1>Gestion Du Profil</h1>
-    </div>
-    <div>
+    <div class="edit-profil-bloc">
         {{ form_start(userForm) }}
-        {{ form_widget(userForm) }}
-        <label>Ma photo </label>
-        <button class="btn btn-success mt15">Télécharger vers le serveur</button>
 
+        <!-- bloc photo + buttons -->
+        <div class="bloc-profil-left">
+            <div class="avtr-prfl-edit">
+                <img src="{{ asset('img/avatar.png') }}">
+            </div>
 
-        <div class="row col-auto justify-content-end" style="padding-right: 30px ">
-        <button class="btn btn-success" style="margin-right: 10px" type="reset">Annuler</button>
-        <button class="btn btn-success " type="submit">Modifier</button>
-        {{ form_end(userForm) }}
+            <button class="btn-edt-pfl btn-blue">Upload photo</button>
+
+            <div class="red-action-btn">
+                <button class="btn-edt-pfl btn-red" type="reset">Annuler</button>
+                <button class="btn-edt-pfl btn-red" type="submit">Enregistrer</button>
+            </div>
+
         </div>
+
+        <!-- bloc title + fields -->
+        <div class="bloc-profil-right">
+            <h1>Mon Profil</h1>
+
+            {{ form_widget(userForm) }}
+        </div>
+
+        {{ form_end(userForm) }}
+
     </div>
 
 
