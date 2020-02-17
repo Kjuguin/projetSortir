@@ -27,11 +27,11 @@ class CreerSortieController extends AbstractController
         $form = $this->createForm(CreationSortieType::class, $sortie);
         $form->handleRequest($request);
 
-//            $currentUser = $this->getUser();
-//            $currentSite = $this->getUser()->getNoSite();
-//            $sortie = $sortie->setNoSite($em->getRepository(Site::class)->find($currentSite));
-//
-//            $sortie= $sortie->setNoOrganisateur($currentUser);
+            $currentUser = $this->getUser();
+            $currentSite = $this->getUser()->getNoSite();
+            $sortie = $sortie->setNoSite($em->getRepository(Site::class)->find($currentSite));
+
+            $sortie= $sortie->setNoOrganisateur($currentUser);
 
         $valueInput = $request->get("buttonCreerUneSortie") ;
 
