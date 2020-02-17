@@ -5,8 +5,10 @@
     <title>{% block title %}sortir.com{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
 
+    <link rel="stylesheet" href="{{ asset("css/mediaqueries.css") }}">
     <link rel="stylesheet" href="{{ asset("css/main.css") }}">
     <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap4-glyphicons/maps/glyphicons-fontawesome.min.css">
@@ -51,6 +53,12 @@
                 <div class="twitter rs-logo">
                     <a href="#"><img src="{{ asset('img/twitter.png') }}" alt="twitter logo"></a>
                 </div>
+            </div>
+
+            <!-- clear copyright tablette -->
+            <div class="clear clear-footer"></div>
+            <div class="copyright-2">
+                <p>Sorties entr’Eni © 2020</p>
             </div>
         </div>
 

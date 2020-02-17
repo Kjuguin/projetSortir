@@ -14,15 +14,70 @@
                 </a>
             </div>
             <ul class="nav-menu">
-                {#                <li><a href="#">Villes</a></li>#}
-                {#                <li><a href="#">Sites</a></li>#}
                 <li><a href="{{ path('home') }}">Accueil</a></li>
                 <li><a href="#">Profil</a></li>
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="{{ path('registration') }}">Inscription</a></li>
+                    <li><a href="#">Villes</a></li>
+                    <li><a href="#">Sites</a></li>
+                {% endif %}
+
                 <li> <a href="{{ path('app_logout') }}">Déconnexion</a></li>
             </ul>
         </nav>
+
+        <div class="burger-menu">
+            <span class="logo-burger-menu">
+                <a href="{{ path('home') }}">
+                    <div class="burger-logo">
+                        <img class="burger-img" src="{{ asset("img/logo.png") }}">
+                    </div>
+                    <h1 class="burger-title">SORTIES ENTR'ENI</h1>
+                </a>
+            </span>
+            <input class="burger" type="checkbox">
+            <nav class="nav-burger">
+                <a class="nav-li-1" href="{{ path('home') }}">Accueil</a>
+                <a href="#">Profil</a>
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('registration') }}">Inscription</a>
+                    <a href="#">Villes</a>
+                    <a href="#">Sites</a>
+                {% endif %}
+
+                <a href="{{ path('app_logout') }}">Déconnexion</a>
+            </nav>
+        </div>
+
+
         <!-- SECTION 1 : Recherche et filtres des sorties -->
         <section class="section-filtre">
+
+            <!-- aside user version tablette/mobile -->
+            <div class="mini-user-aside">
+                <div class="mini-user-avatar">
+                    <img src="{{ asset('img/avatar.png') }}" alt="user avatar">
+                </div>
+
+                <div class="mini-user-info">
+                    <p class="mini-pseudo">{{ app.user.pseudo }}</p>
+
+                    <div class="mini-date-bloc">
+                        <p class="mini-lbl">Date du jour: </p>
+                        <p class="mini-date-user">{{ "now"|date("d/m/Y") }}</p>
+                    </div>
+
+                    <div class="mini-date-bloc mdb-2">
+                        <p class="mini-lbl">Sortie: </p>
+                        <p class="mini-date-user">{{ "now"|date("d/m/Y") }}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- clear both pour mini aside -->
+            <div class="clear mini-clear"></div>
+
             <div class="container-home">
                 <!-- filtres inputs -->
                 <div class="filtre-bloc-left">
@@ -38,6 +93,9 @@
                                     {% endfor %}
                                 </select>
                             </div>
+                            <!-- clear version mobile-->
+                            <div class="clear clear-input"></div>
+
                             <div class="bloc-field bf-2">
                                 <label for="nom">Le nom contient</label>
                                 <input class="input-home inpt-search" type="search" name="nom" id="nom">
@@ -57,8 +115,10 @@
                                         <span class="inpt-caldr-icon input-group-text"><i class="far fa-calendar-alt"></i></span>
                                     </span>
                                 </div>
-
                             </div>
+                            <!-- clear version mobile-->
+                            <div class="clear clear-input"></div>
+
                             <div class="bloc-field bf-4">
                                 <label for="date-fin">Fin</label>
                                 <!-- 2eme champ date-->
@@ -120,6 +180,21 @@
                             <img src="{{ asset('img/avatar.png') }}" alt="user avatar">
                         </div>
 
+                        <div class="user-info-aside">
+                            <p class="user-pseudo">{{ app.user.pseudo }}</p>
+
+                            <div class="date-bloc-1">
+                                <p class="info-lbl">date du jour</p>
+                                <p class="date-user">{{ "now"|date("d/m/Y") }}</p>
+                            </div>
+
+                            <div class="date-bloc-2">
+                                <p class="info-lbl">prochaine sortie</p>
+                                <p class="date-user">22/02/2020</p> <!-- contenu à remplacer par une méthode-->
+                                <p class="heure-user">18h30</p> <!-- contenu à remplacer par une méthode-->
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -141,12 +216,12 @@
                     <thead class="thead-light">
                     <tr class="active">
                         <th scope="col" data-field="nom" data-sortable="true">Nom</th>
-                        <th scope="col" data-field="date-sortie" data-sortable="true">Date</th>
-                        <th scope="col" data-field="cloture" data-sortable="true">Clôture</th>
-                        <th scope="col" data-field="places" data-sortable="true">Places</th>
-                        <th scope="col" data-field="etat" data-sortable="true">Etat</th>
-                        <th scope="col" data-field="inscrit" data-sortable="true">Inscrit</th>
-                        <th scope="col" data-field="organisateur" data-sortable="true">Organisateur</th>
+                        <th scope="col" data-field="date-sortie" data-sortable="true">Date sortie</th>
+                        <th class="table-gone" scope="col" data-field="cloture" data-sortable="true">Clôture</th>
+                        <th class="table-gone" scope="col" data-field="places" data-sortable="true">Places</th>
+                        <th class="table-gone" scope="col" data-field="etat" data-sortable="true">Etat</th>
+                        <th class="table-gone" scope="col" data-field="inscrit" data-sortable="true">Inscrit</th>
+                        <th class="table-gone" scope="col" data-field="organisateur" data-sortable="true">Organisateur</th>
                         <th scope="col" data-field="action" data-sortable="true">Action</th>
                     </tr>
                     </thead>
@@ -156,19 +231,19 @@
                         <tr>
                             <td>{{ sortie.nom }}</td>
                             <td>{{ sortie.dateDebut | date('d/m/Y H:i') }}</td>
-                            <td>{{ sortie.dateCloture | date('d/m/Y') }}</td>
-                            <td>{{ sortie.noInscriptions.count }} / {{ sortie.nbInscriptionMax }}</td>
-                            <td>{{ sortie.noEtat.libelle }}</td>
-                            <td>
+                            <td class="table-gone">{{ sortie.dateCloture | date('d/m/Y') }}</td>
+                            <td class="table-gone">{{ sortie.noInscriptions.count }} / {{ sortie.nbInscriptionMax }}</td>
+                            <td class="table-gone">{{ sortie.noEtat.libelle }}</td>
+                            <td class="table-gone">
                                 {% if app.user %}
                                     {% for inscrit in sortie.noInscriptions %}
                                         {% if inscrit.noUser.id == app.user.id %}
-                                            <p>Oui</p>
+                                            <p class="oui-inscrit">Oui</p>
                                         {% endif %}
                                     {% endfor %}
                                 {% endif %}
                             </td>
-                            <td>
+                            <td class="table-gone">
                                 <a href="{{ path('utilisateur_afficherProfil',{'id':sortie.noOrganisateur.id}) }}">{{ sortie.noOrganisateur.pseudo }}</a>
                             </td>
                             {#                            <td><a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a> - modifier</td>#}

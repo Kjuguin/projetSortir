@@ -1,4 +1,4 @@
-/* BASIC */
+/**************** BASIC ****************/
 
 .login-section{
     width:100%;
@@ -29,7 +29,7 @@ h2 {
 }
 
 
-/* STRUCTURE */
+/**************** STRUCTURE ****************/
 
 .wrapper {
     display: flex;
@@ -70,7 +70,7 @@ h2 {
     padding:1em 0 2.5em 0;
 }
 
-.login-logo img{
+.logo-bloc-login{
     display: inline-block;
 }
 
@@ -108,7 +108,8 @@ h2 {
     color:#687786;
 }
 
-/* TABS */
+
+/**************** TABS ****************/
 
 h2.inactive {
     color: #cccccc;
@@ -120,8 +121,7 @@ h2.active {
 }
 
 
-
-/* FORM TYPOGRAPHY*/
+/**************** FORM TYPOGRAPHY ****************/
 
 input[type=button], input[type=submit], input[type=reset]  {
     background-color: #ff7083;
@@ -228,7 +228,7 @@ input[type=password]::placeholder {
 }
 
 
-/* ANIMATIONS */
+/**************** ANIMATIONS ****************/
 
 /* Simple CSS3 Fade-in-down Animation */
 .fadeInDown {
@@ -342,8 +342,7 @@ input[type=password]::placeholder {
 }
 
 
-
-/* OTHERS */
+/*************** OTHERS ****************/
 
 *:focus {
     outline: none;
@@ -356,11 +355,46 @@ input[type=password]::placeholder {
 }
 
 
-/* FOOTER */
+/*************** FOOTER ****************/
 .login-footer{
     width:100%;
 }
 
 .login-footer img{
     width:100%;
+}
+
+/*************** ALERT MESSAGE ****************/
+.msg-alert{
+    color: #fff !important;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.3em;
+    margin-bottom: 1em;
+    letter-spacing: 1px;
+    background-color:inherit !important;
+    border-color:inherit !important;
+    font-family: 'Nunito', sans-serif !important;
+}
+
+/*************** MEDIA QUERIES ****************/
+@media screen and (max-width: 450px){
+    .wrapper{
+        padding:0 !important;
+    }
+
+    .logo-bloc-login{
+        width:2.5em;
+    }
+
+    .logo-bloc-login img{
+        width:100%;
+    }
+
+    .login-title{
+        font-size:1.3em;
+        margin-bottom:0;
+
+    }
 }
