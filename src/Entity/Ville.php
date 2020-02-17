@@ -106,4 +106,9 @@ class Ville
 
         return $this;
     }
+
+    public function getFiltre()
+    {
+        return $this->nomVille;
+    }
 }

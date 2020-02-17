@@ -26,10 +26,10 @@ class SortieRepository extends ServiceEntityRepository
     {
 
         $sqb = $this->createQueryBuilder('s');
-        $sqb->leftJoin("s.noInscriptions",'i');
+//        $sqb->leftJoin("s.noInscriptions",'i');
         //ajout param site
         if (!empty($param['site'])) {
-            $sqb->where("s.noSite = :site");
+            $sqb->andWhere("s.noSite = :site");
             $sqb->setParameter("site", $param['site']);
         }
 
@@ -42,16 +42,15 @@ class SortieRepository extends ServiceEntityRepository
         //ajout param date début
         if (!empty($param['dateDebut'])) {
             $sqb->andWhere("s.dateDebut >= :dateDebut");
+            $param['dateDebut']->setTime(0, 0, 1);
             $sqb->setParameter("dateDebut", $param['dateDebut']);
         }
 
         //ajout param date fin
         if (!empty($param['dateFin'])) {
             $sqb->andWhere("s.dateCloture <= :dateFin");
-            $date = DateTime::createFromFormat('Y-m-d', $param['dateFin']);
-            $date->setTime(24, 00, 00);
-            $date->format('Y-m-d H:i:s');
-            $sqb->setParameter("dateFin", $date);
+            $param['dateFin']->setTime(23, 59, 59);
+            $sqb->setParameter("dateFin", $param['dateFin']);
         }
 
         // ajout choix organisateur
@@ -60,24 +59,23 @@ class SortieRepository extends ServiceEntityRepository
             $sqb->setParameter("organisateur", $param['organisateur']);
         }
 
-        // ajout choix inscrit
-        if (!empty($param['inscrit'])) {
-            $sqb->andWhere("i.noUser = :inscrit");
-            $sqb->setParameter("inscrit", $param['inscrit']);
-        }
-
-        // ajout choix pas inscrit
-        if (!empty($param['notInscrit'])) {
-            $sqb->andWhere("i.noUser != :notInscrit OR i.noUser IS NULL");
-            $sqb->setParameter("notInscrit", $param['notInscrit']);
-        }
+//        // ajout choix inscrit
+//        if (!empty($param['inscrit'])) {
+//            $sqb->andWhere("i.noUser = :inscrit");
+//            $sqb->setParameter("inscrit", $param['inscrit']);
+//        }
+//
+//        // ajout choix pas inscrit
+//        if (!empty($param['notInscrit'])) {
+//            $sqb->andWhere("i.noUser != :notInscrit OR i.noUser IS NULL");
+//            $sqb->setParameter("notInscrit", $param['notInscrit']);
+//        }
 
         //ajout param raccourci date passée
         if (!empty($param['passee'])) {
             $sqb->andWhere("s.dateCloture < :passee");
             $date = new DateTime();
             $date->setTime(00, 00, 00);
-            $date->format('Y-m-d H:i:s');
             $sqb->setParameter("passee", $date);
         }
 

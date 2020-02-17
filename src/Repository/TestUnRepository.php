@@ -37,8 +37,8 @@ class TestUnRepository extends ServiceEntityRepository
         }
 
         $query = $sqb->getQuery();
-        $result = $query->getResult();
-        return $result;
+        $results = $query->getResult();
+        return $results;
 
     }
 

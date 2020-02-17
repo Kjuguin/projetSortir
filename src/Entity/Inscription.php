@@ -62,5 +62,10 @@ class Inscription
         $this->noUser = $noUser;
 
         return $this;
-    }   
+    }
+
+    public function getFiltre()
+    {
+        return $this->dateInscription;
+    }
 }

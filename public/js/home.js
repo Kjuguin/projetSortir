@@ -47,7 +47,48 @@ $(document).ready(function () {
 //     });
 // });
 
+$('#nom').on('keyup', function (e) {
+
+    $('#tbody').empty();
+
+    currentRequest = $.ajax({
+        type: 'POST',
+        url: '/home/recherche',
+        data: {
+            "site": null,
+            "nom": $(this).val(),
+            "dateDebut": null,
+            "dateFin": null,
+            "organisateur": null,
+            "inscrit": null,
+            "notInscrit": null,
+            "passee": null
+        },
+        beforeSend: function () {
+            if (currentRequest != null) {
+                currentRequest.abort();
+            }
+        }
+
+    }).done(function (data) {
+        console.log(data);
+        // lire un tableau
+
+        // $.each(data, function (key, val) {
+        //     $('#tbody').append(
+        //         '<tr><td>' + val['nom'] + '</td><td> : </td><td>' +
+        //         val['deux']['numero'] +
+        //         '</td></tr>'
+        //     );
+        //
+        //     console.log(key + " : " + val['id']);
+        // });
+    });
+});
+
 $('#nom2').on('keyup', function (e) {
+
+    $('#tbody').empty();
 
     currentRequest = $.ajax({
         type: 'POST',
@@ -64,13 +105,21 @@ $('#nom2').on('keyup', function (e) {
 
     }).done(function (data) {
         console.log(data);
-        console.log(data['param']);
-        console.log(JSON.parse(data['sorties']));
+        console.log(data['0']);
+        console.log(data['0']['id']);
+        console.log(data['1']);
         // console.log(data['sorties']);
         // lire un tableau
-        // $.each(data['param'], function (key, val) {
-        //     console.log(key + " : " + val);
-        // });
+
+        $.each(data, function (key, val) {
+            $('#tbody').append(
+                '<tr><td>' + val['nom'] + '</td><td> : </td><td>' +
+                val['deux']['numero'] +
+                '</td></tr>'
+            );
+
+            console.log(key + " : " + val['id']);
+        });
     });
 });
 

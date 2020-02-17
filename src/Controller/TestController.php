@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 
+use App\Entity\Sortie;
 use App\Entity\TestUn;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
@@ -24,13 +27,12 @@ class TestController extends AbstractController
         $encoder = new JsonEncoder();
         $defaultContext = [
             AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
-                return $object->getNom();
+                    return $object->getNom();
             },
         ];
         $normalizer = new ObjectNormalizer(null, null, null, null, null, null, $defaultContext);
 
         $serializer = new Serializer([$normalizer], [$encoder]);
-
 
         $sortieRepository = $em->getRepository(TestUn::class);
 
@@ -42,15 +44,22 @@ class TestController extends AbstractController
 
         $sorties = $sortieRepository->afficher($param);
 
-        $serializer->serialize($sorties, 'json');
+        $test =[];
+        $i = 0;
+        dump($sorties);
+        foreach ($sorties as $sortie){
+            $test[$i] = [
+                'name' => $sortie->getNom(),
+                'deux' => $sortie->getDeux()->getId()];
+                $i++;
+        }
+
+
+        $json = $serializer->serialize($test, 'json');
 
 //        var_dump($serializer->serialize($org, 'json'));
 
-        return $this->json(
-            [
-                "sorties" => $serializer, //problème ici
-                "param" => $param
-            ]);
+        return new JsonResponse($json, Response::HTTP_OK, ['ignored_attributes' => ['un']], true);
 
     }
 

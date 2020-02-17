@@ -332,4 +332,9 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getFiltre()
+    {
+        return $this->pseudo;
+    }
+
 }

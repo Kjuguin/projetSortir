@@ -262,4 +262,9 @@ class Sortie
 
         return $this;
     }
+
+    public function getFiltre()
+    {
+        return $this->nom;
+    }
 }

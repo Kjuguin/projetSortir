@@ -4,10 +4,17 @@ namespace App\Controller;
 
 use App\Entity\Site;
 use App\Entity\Sortie;
+use App\Entity\TestUn;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use function Sodium\add;
 
 class HomeController extends AbstractController
@@ -17,29 +24,56 @@ class HomeController extends AbstractController
      */
     public function index(EntityManagerInterface $em, Request $request)
     {
-        dump('coucou');
+        $encoder = new JsonEncoder();
+        $defaultContext = [
+            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+                return 'circ
+                ';
+            },
+        ];
+        $normalizer = new ObjectNormalizer(null, null, null, null, null, null, $defaultContext);
+
+        $serializer = new Serializer([$normalizer], [$encoder]);
 
 //        $sortieRepository = $em->getRepository(Sortie::class);
+
+        $sortieRepository = $em->getRepository(Sortie::class);
+
+        if (!empty($request->get('filtre1'))) {
+            $organisateur = $this->getUser()->getId();
+        } else {
+            $organisateur = null;
+        }
+
+        if (!empty($request->get('filtre2'))) {
+            $inscrit = $this->getUser()->getId();
+        } else {
+            $inscrit = null;
+        }
+
+        if (!empty($request->get('filtre3'))) {
+            $notInscrit = $this->getUser()->getId();
+        } else {
+            $notInscrit = null;
+        }
 
         $param = [
             "site" => $request->get('site'),
             "nom" => $request->get('nom'),
-            "dateDebut" => $request->get('dateDebut'),
-            "dateFin" => $request->get('dateFin'),
-            "organisateur" => $request->get('organisateur'),
-            "inscrit"=>$request->get('inscrit'),
-            "notInscrit"=>$request->get('notInscrit'),
-            "passee" => $request->get('passee')
+            "dateDebut" => $request->get('date-debut'),
+            "dateFin" => $request->get('date-fin'),
+            "organisateur" => $organisateur,
+            "inscrit" => $inscrit,
+            "notInscrit" => $notInscrit,
+            "passee" => $request->get('filtre4')
         ];
 
-//        dump($param);
+        $sorties = $sortieRepository->afficher($param);
 
-//        $sorties = $sortieRepository->afficher($param);
+        $json = $serializer->serialize($sorties, 'json');
+        dump($json);
 
-
-
-
-        return $this->json(["param" => $param]);
+        return new JsonResponse($json, Response::HTTP_OK, [], true);
 
     }
 

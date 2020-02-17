@@ -38,6 +38,11 @@ class TestDeux
         return $this->id;
     }
 
+    public function getNom()
+    {
+        return $this->numero;
+    }
+
     public function getNumero(): ?int
     {
         return $this->numero;
@@ -79,5 +84,12 @@ class TestDeux
         }
 
         return $this;
+    }
+
+    public function toJson()
+    {
+        // ecrire un json
+
+        return $json;
     }
 }
