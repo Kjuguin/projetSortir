@@ -15,7 +15,7 @@
             </div>
             <ul class="nav-menu">
                 <li><a href="{{ path('home') }}">Accueil</a></li>
-                <li><a href="#">Profil</a></li>
+                <li><a href="{{path('utilisateur_gestionProfil', {"id": app.user.id})}}">Profil</a></li>
 
                 {% if is_granted('ROLE_ADMIN') %}
                     <li><a href="{{ path('registration') }}">Inscription</a></li>
@@ -39,7 +39,7 @@
             <input class="burger" type="checkbox">
             <nav class="nav-burger">
                 <a class="nav-li-1" href="{{ path('home') }}">Accueil</a>
-                <a href="#">Profil</a>
+                <a href="{{path('utilisateur_gestionProfil', {"id": app.user.id})}}">Profil</a>
 
                 {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('registration') }}">Inscription</a>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}sortir.com{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ asset("css/page.css") }}">
+    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <section class="page-section">
+
+        <!-- MENU NAVIGATION -->
+        <header>
+            <nav class="nav-header">
+                <div class="logo-header">
+                    <a href="{{ path('home') }}">
+                        <img class="logo-img" src="{{ asset("img/logo.png") }}">
+                        <h1 class="site-title">SORTIES ENTR'ENI</h1>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="{{ path('home') }}">Accueil</a></li>
+                    <li><a href="{{path('utilisateur_gestionProfil', {"id": app.user.id})}}">Profil</a></li>
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{ path('registration') }}">Inscription</a></li>
+                        <li><a href="#">Villes</a></li>
+                        <li><a href="#">Sites</a></li>
+                    {% endif %}
+
+                    <li> <a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                </ul>
+            </nav>
+
+            <div class="burger-menu">
+            <span class="logo-burger-menu">
+                <a href="{{ path('home') }}">
+                    <div class="burger-logo">
+                        <img class="burger-img" src="{{ asset("img/logo.png") }}">
+                    </div>
+                    <h1 class="burger-title">SORTIES ENTR'ENI</h1>
+                </a>
+            </span>
+                <input class="burger" type="checkbox">
+                <nav class="nav-burger">
+                    <a class="nav-li-1" href="{{ path('home') }}">Accueil</a>
+                    <a href="{{path('utilisateur_gestionProfil', {"id": app.user.id})}}">Profil</a>
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('registration') }}">Inscription</a>
+                        <a href="#">Villes</a>
+                        <a href="#">Sites</a>
+                    {% endif %}
+
+                    <a href="{{ path('app_logout') }}">Déconnexion</a>
+                </nav>
+            </div>
+        </header>
+
+        {% block body %}{% endblock %}
+
+    </section>
+
+</body>
+</html>
