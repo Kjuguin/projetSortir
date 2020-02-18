@@ -29,7 +29,10 @@ class LieuType extends AbstractType
                 'attr'=>[
                     'class'=>'villeSave'
                 ]])
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class,[
+                'attr'=>[
+                    'class'=>'buttonSubmitVilleSave'
+                ]])
             ;
     }
 

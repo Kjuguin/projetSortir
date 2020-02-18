@@ -31,6 +31,7 @@ class CreationLieuVilleController extends AbstractController
 
         $formLieu->handleRequest($request);
         $formVille->handleRequest($request);
+
         if ($formLieu->isSubmitted() && $formLieu->isValid()) {
             $this->addFlash("success", "lieu ajouté");
 
@@ -45,9 +46,6 @@ class CreationLieuVilleController extends AbstractController
 
             return $this->redirectToRoute("ajoutLieuVille");
         }
-
-
-
 
         return $this->render('creation_lieu_ville/index.html.twig', [
             "formLieu" => $formLieu->createView(),

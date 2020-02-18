@@ -17,14 +17,25 @@ class VilleType extends AbstractType
         $builder
             ->add('nomVille', TextType::class,[
                 'label'=>'Nom ville:',
-                'required'=>false
+                'required'=>false,
+                'attr'=>[
+                    'class'=>'nomVilleMasque'
+                ],
+                'label_attr'=>['class'=>'labelNomVilleMasque']
             ])
             ->add('codePostal', TextType::class,[
                 'label'=>'Code postal:',
-                'required'=>false
+                'required'=>false,
+                'attr'=>[
+                    'class'=>'codePostalMasque'
+                ],
+                'label_attr'=>['class'=>'labelCodePostalMasque']
             ])
-            ->add('Submit', SubmitType::class)
-        ;
+            ->add('Submit', SubmitType::class,[
+                'attr'=>[
+                    'class'=>'buttonSubmitMasque'
+                ]])
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
