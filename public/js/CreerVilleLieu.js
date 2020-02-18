@@ -4,58 +4,35 @@ $(document).ready(function($) {
         $('.codePostalMasque').hide(0);
         $('.labelCodePostalMasque').hide(0);
         $('.buttonSubmitMasque').hide(0);
+        $('#button_ajouterVilleMasque').hide(0);
 
-// $('#button_ajouterVille').click(
-//     function () {
-//
-//         $('.nomVilleMasque').fadeToggle();
-//         $('.labelNomVilleMasque').fadeToggle();
-//         $('.codePostalMasque').fadeToggle();
-//         $('.labelCodePostalMasque').fadeToggle();
-//         $('.buttonSubmitMasque').fadeToggle();
-//
-//         if ($('.codePostalMasque:visible').length != 0){
-//                 $('.codePostalMasque').prop('required',true);
-//                 $('.nomVilleMasque').prop('required',true);
-//                 $('.villeSave').prop('required',false);
-//                 $('.villeSave').prop('disabled');
-//                 { alert("Le paragraphe est visible."); }
-//
-//         } else if ($('.codePostalMasque:visible').length == 0){
-//                 $('.codePostalMasque').prop('required',false);
-//                 $('.nomVilleMasque').prop('required',false);
-//                 $('.villeSave').prop('required',true);
-//                 { alert("Le paragraphe n'est pas visible."); }
-//         }
-//
-//     })
-//
-// });
 
-// $('#button_ajouterVille').click(
-//     function () {
-//
-//         $('.nomVilleMasque').toggle();
-//         $('.labelNomVilleMasque').toggle();
-//         $('.codePostalMasque').toggle();
-//         $('.labelCodePostalMasque').toggle();
-//         $('.buttonSubmitMasque').toggle();
-//
-//         if ($('.codePostalMasque:visible')){
-//                 $('.codePostalMasque').prototype('required',true);
-//                 $('.nomVilleMasque').prototype('required',true);
-//                 $('.villeSave').prototype('required',false);
-//                 $('.villeSave').prototype('disabled');
-//                 { alert("Le paragraphe est visible."); }
-//
-//         } else if ($('.codePostalMasque:hidden')){
-//                 $('.codePostalMasque').prototype('required',false);
-//                 $('.nomVilleMasque').prototype('required',false);
-//                 $('.villeSave').prototype('required',true);
-//                 { alert("Le paragraphe n'est pas visible."); }
-//         }
-//
-//     })
+        $('#button_ajouterVille').click(function () {
+                $('.nomVilleMasque').show('slow','linear').attr('required',true).prop('disabled',false);
+                $('.labelNomVilleMasque').show('slow','linear');
+                $('.codePostalMasque').show('slow','linear').attr('required',true).prop('disabled',false);
+                $('.labelCodePostalMasque').show('slow','linear');
+                $('.buttonSubmitMasque').show('slow','linear');
+                $('#button_ajouterVille').hide('slow','linear');
+                $('#button_ajouterVilleMasque').show('slow','linear');
+                $('.buttonSubmitVilleSave').hide('slow','linear');
+                $('.villeSave').hide('slow','linear');
+                $('.labelVilleSave').hide('slow','linear');
+        })
+
+        $('#button_ajouterVilleMasque').click(function(){
+                $('.nomVilleMasque').hide('slow','linear').attr('required',false).prop('disabled',true);
+                $('.labelNomVilleMasque').hide('slow','linear');
+                $('.codePostalMasque').hide('slow','linear').attr('required',false).prop('disabled',true);
+                $('.labelCodePostalMasque').hide('slow','linear');
+                $('.buttonSubmitMasque').hide('slow','linear');
+                $('#button_ajouterVilleMasque').hide('slow','linear');
+                $('#button_ajouterVille').show('slow','linear');
+                $('.buttonSubmitVilleSave').show('slow','linear');
+                $('.villeSave').show('slow','linear');
+                $('.labelVilleSave').show('slow','linear');
+        })
+
 
 
 

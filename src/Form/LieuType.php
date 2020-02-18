@@ -28,7 +28,9 @@ class LieuType extends AbstractType
                 'placeholder'=>'...',
                 'attr'=>[
                     'class'=>'villeSave'
-                ]])
+                ],
+                'label_attr'=>['class'=>'labelVilleSave']
+            ])
             ->add('submit', SubmitType::class,[
                 'attr'=>[
                     'class'=>'buttonSubmitVilleSave'

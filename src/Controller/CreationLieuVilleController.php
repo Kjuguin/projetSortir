@@ -36,6 +36,7 @@ class CreationLieuVilleController extends AbstractController
             $this->addFlash("success", "lieu ajouté");
 
             $em->persist($lieu);
+
             if ($formVille->isSubmitted() && $formVille->isValid()) {
                 $this->addFlash("success", "Ville ajoutée");
                 $em->persist($ville);
