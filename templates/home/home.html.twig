@@ -191,7 +191,7 @@
                                         {% if sortie.noInscriptions.count is same as (0) %}
                                             - <a href="{{ path('inscription',{'id':sortie.id}) }}">S'inscrire</a>
                                             {% if sortie.noOrganisateur.id is same as (app.user.id) %}
-                                                - <a href="{{ path('annulerSortieTwig',{'id':sortie.id}) }}">Annuler</a>
+                                                - <a href="{{ path('annuler_verification',{'id':sortie.id}) }}">Annuler</a>
                                             {% endif %}
                                         {% else %}
 
@@ -211,7 +211,7 @@
 
                                                 <!-- ouvert, non inscrit et organisateur -->
                                                 {% if sortie.noOrganisateur.id is same as (app.user.id) %}
-                                                    - <a href="{{path('annulerSortieTwig',{'id':sortie.id})}}">Annuler</a>
+                                                    - <a href="{{path('annuler_verification',{'id':sortie.id})}}">Annuler</a>
                                                 {% endif %}
                                             {% else %}
                                                 <!-- ouvert et inscrit -->
@@ -219,7 +219,7 @@
 
                                                 <!-- ouvert, inscrit et organisateur -->
                                                 {% if sortie.noOrganisateur.id is same as (app.user.id) %}
-                                                    - <a href="{{path('annulerSortieTwig',{'id':sortie.id})}}">Annuler</a>
+                                                    - <a href="{{path('annuler_verification',{'id':sortie.id})}}">Annuler</a>
                                                 {% endif %}
                                             {% endif %}
                                         {% endif %}

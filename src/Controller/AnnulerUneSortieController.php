@@ -8,10 +8,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/annuler", name="annuler_")
+ */
 class AnnulerUneSortieController extends AbstractController
 {
     /**
-     * @Route("annulerSortie/{id}", name="annulerSortie")
+     * @Route("/sortie/{id}", name="sortie")
      */
     public function annulerSortie($id, EntityManagerInterface $em, Request $request)
     {
@@ -29,9 +32,9 @@ class AnnulerUneSortieController extends AbstractController
     }
 
     /**
-     * @Route("annulerSortieTwig/{id}", name="annulerSortieTwig")
+     * @Route("/verification/{id}", name="verification")
      */
-    public function annulerSortietwig($id, Request $request, EntityManagerInterface $em)
+    public function annulerVerification($id, Request $request, EntityManagerInterface $em)
     {
 
         $sortieRepository = $em->getRepository(Sortie::class);
