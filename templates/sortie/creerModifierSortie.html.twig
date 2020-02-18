@@ -8,6 +8,8 @@
 
     {{ form_widget(form) }}
 
+    <button style="background: purple"><a href="{{ path('ajoutLieuVille') }}">Ajouter Lieu (à mieux réaliser par la suite</a></button>
+
     <button type="submit" name="sortie" value="1">Enregistrer</button>
     <button type="submit" name="sortie" value="3">Publier la sortie
     {% if (modification == 1) %}

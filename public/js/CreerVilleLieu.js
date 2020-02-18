@@ -8,29 +8,29 @@ $(document).ready(function($) {
 
 
         $('#button_ajouterVille').click(function () {
-                $('.nomVilleMasque').show('slow','linear').attr('required',true).prop('disabled',false);
-                $('.labelNomVilleMasque').show('slow','linear');
-                $('.codePostalMasque').show('slow','linear').attr('required',true).prop('disabled',false);
-                $('.labelCodePostalMasque').show('slow','linear');
-                $('.buttonSubmitMasque').show('slow','linear');
-                $('#button_ajouterVille').hide('slow','linear');
-                $('#button_ajouterVilleMasque').show('slow','linear');
-                $('.buttonSubmitVilleSave').hide('slow','linear');
-                $('.villeSave').hide('slow','linear');
-                $('.labelVilleSave').hide('slow','linear');
+                $('.nomVilleMasque').show().attr('required',true).prop('disabled',false);
+                $('.labelNomVilleMasque').show();
+                $('.codePostalMasque').show().attr('required',true).prop('disabled',false);
+                $('.labelCodePostalMasque').show();
+                $('.buttonSubmitMasque').show();
+                $('#button_ajouterVille').hide();
+                $('#button_ajouterVilleMasque').show();
+                $('.buttonSubmitVilleSave').hide();
+                $('.villeSave').hide();
+                $('.labelVilleSave').hide();
         })
 
         $('#button_ajouterVilleMasque').click(function(){
-                $('.nomVilleMasque').hide('slow','linear').attr('required',false).prop('disabled',true);
-                $('.labelNomVilleMasque').hide('slow','linear');
-                $('.codePostalMasque').hide('slow','linear').attr('required',false).prop('disabled',true);
-                $('.labelCodePostalMasque').hide('slow','linear');
-                $('.buttonSubmitMasque').hide('slow','linear');
-                $('#button_ajouterVilleMasque').hide('slow','linear');
-                $('#button_ajouterVille').show('slow','linear');
-                $('.buttonSubmitVilleSave').show('slow','linear');
-                $('.villeSave').show('slow','linear');
-                $('.labelVilleSave').show('slow','linear');
+                $('.nomVilleMasque').hide().attr('required',false).prop('disabled',true);
+                $('.labelNomVilleMasque').hide();
+                $('.codePostalMasque').hide().attr('required',false).prop('disabled',true);
+                $('.labelCodePostalMasque').hide();
+                $('.buttonSubmitMasque').hide();
+                $('#button_ajouterVilleMasque').hide();
+                $('#button_ajouterVille').show();
+                $('.buttonSubmitVilleSave').show();
+                $('.villeSave').show();
+                $('.labelVilleSave').show();
         })
 
 

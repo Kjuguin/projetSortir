@@ -6,14 +6,15 @@
         {{ form_start(formLieu) }}
         {{ form_widget(formLieu) }}
 
+        {{ form_start(formVille) }}
+        {{ form_widget(formVille) }}
+
+
+        {{ form_end(formVille) }}
         <button type="button" id="button_ajouterVille">Ajouter Ville</button>
         <button type="button" id="button_ajouterVilleMasque">Retour</button>
         <div id="masque">
-            {{ form_start(formVille) }}
-            {{ form_widget(formVille) }}
 
-
-            {{ form_end(formVille) }}
         </div>
 
         {{ form_end(formLieu) }}
