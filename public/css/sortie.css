@@ -1,0 +1,106 @@
+.dtl-sortie-container{
+    display: inline-block;
+    background:#e2f3ff;
+    width: 60em;
+    margin: 0 auto;
+    padding: 3em 3em 3em 3em;
+}
+
+.dtl-sortie-flex{
+    width:100%;
+    text-align: center;
+}
+
+.dtl-sortie-left, .dtl-sortie-right{
+    display: inline-block;
+    text-align:left;
+    width:47%;
+}
+
+.dtl-sortie-left{
+    float:left;
+}
+
+.dtl-sortie-right{
+    float:right;
+}
+
+.dtl-srt-bloc{
+    margin-top:1.5em;
+}
+
+.dtl-srt-bloc p, .tbl-inscrits p{
+    color:#8c9ca9;
+    margin-bottom: 0.5em !important;
+}
+
+.dtl-srt-bloc div{
+    color:#687786;
+    background:#f4faff;
+    width:100%;
+    padding: 0.7em 1em;
+    font-weight:bold;
+}
+
+.dtl-descp{
+    min-height:10em;
+}
+
+/** tableau d'inscrits **/
+.tbl-inscrits{
+    margin-top:1.5em;
+}
+
+.tbl-header{
+    background-color:#fff;
+    border-radius: 3px 3px 0 0;
+}
+
+.dtl-table{
+    width:100%;
+    table-layout:fixed;
+}
+
+.tbl-content{
+    height:10em;
+    overflow-x:auto;
+    margin-top: 0px;
+    border-radius: 0 0 3px 3px;
+}
+
+th, td {
+    text-align: left;
+    padding:8px;
+}
+
+th{
+    color:#8fb5db;
+}
+
+.dtl-strip:nth-child(odd){
+    background-color: #fff2da;
+    color:#687786;
+}
+
+.dtl-strip:nth-child(even){
+    background-color: #fff;
+    color:#687786;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

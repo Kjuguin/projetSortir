@@ -1,16 +1,27 @@
-{#{% extends 'base.html.twig' %}#}
+{% extends 'pages-base.html.twig' %}
 
 {% block body %}
 
     {% if profil %}
 
-        <h1>{{ profil.pseudo }}</h1>
-        <p>Prénom: {{ profil.prenom }}</p>
-        <p>Nom: {{ profil.nom }}</p>
-        <p>Téléphone: {{ profil.telephone }}</p>
-        <p>Email: {{ profil.email }}</p>
-        <p>Site de Rattachement: {{ profil.noSite.nomSite}}</p>
-        <a href="{{ path('home') }}"><button>Retour</button></a>
+        <div class="profil-container">
+            <!-- avatar user-->
+            <div class="avtr-profil">
+                <img src="{{ asset('img/avatar-big.png') }}">
+            </div>
+
+            <!-- informations -->
+            <h1 class="profil-h1">{{ profil.pseudo }}</h1>
+            <p class="info-profil">{{ profil.prenom }}</p>
+            <p class="info-profil">{{ profil.nom }}</p>
+            <p class="info-profil">{{ profil.telephone }}</p>
+            <p class="info-profil">{{ profil.email }}</p>
+            <p class="info-profil">{{ profil.noSite.nomSite}}</p>
+
+            <!-- back button -->
+            <a href="{{ path('home') }}"><button class="btn-base btn-red btn-profil">Retour</button></a>
+
+        </div>
 
     {% endif %}
 

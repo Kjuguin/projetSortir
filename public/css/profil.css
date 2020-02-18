@@ -1,0 +1,222 @@
+/************************************** PAGE AFFICHER PROFIL ****************************************/
+.profil-container{
+    background:#fff;
+    border-radius:5px;
+    width:22em;
+    margin: 0 auto;
+    padding:3em 1em 3em 1em;
+    box-shadow: 2px -2px 28px -4px rgba(40,104,134,0.2);
+}
+
+.avtr-profil{
+    width:100%;
+    max-width:13em;
+    margin:0 auto;
+    margin-bottom:2em;
+}
+
+.avtr-profil img{
+    width:100%;
+}
+
+.profil-h1{
+    color:#687786;
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+.info-profil{
+    color:#687786;
+    font-size: 1.1em;
+    margin-top: 0.7em !important;
+}
+
+.btn-profil{
+    width:8em;
+    margin-top:2em;
+}
+
+/*************** MEDIA QUERIES ****************/
+@media screen and (max-width: 420px){
+    .profil-container{
+        width:88%;
+        padding: 2em 1em 2em 1em;
+    }
+
+    .profil-h1{
+        font-size:1.6em;
+    }
+
+    .info-profil{
+        font-size:1em;
+    }
+}
+
+
+
+/************************************** PAGE MODIFIER PROFIL ****************************************/
+.edit-profil-bloc{
+    display:flex;
+    justify-content: flex-end;
+    margin:0 auto;
+    margin-bottom:3em;
+    width:75%;
+    background:#fff;
+    text-align: right;
+    border-radius: 5px;
+    box-shadow: 2px -2px 28px -4px rgba(40,104,134,0.2);
+}
+
+.profil-form{
+    width:100%;
+}
+
+/** bloc de gauche (photo + buttons) **/
+.bloc-profil-left{
+    display:inline-block;
+    width:34%;
+    vertical-align: top;
+    padding:3em 3% 0 3%;
+}
+
+.left-container{
+    text-align: center;
+}
+
+.avtr-edit-mini{
+    display:none;
+}
+
+.avtr-prfl-edit{
+    width:100%;
+    max-width:13em;
+    margin:0 auto;
+    margin-bottom:3em;
+}
+
+.avtr-prfl-edit img{
+    width:100%;
+}
+
+/** buttons **/
+.gp-btn-pfl-mini{
+    display:none;
+}
+
+.red-action-btn{
+    margin-top:11.6em;
+}
+
+.btn-cncl-pfl{
+    margin-top:1.5em;
+}
+
+/** bloc de droite (title + inputs) **/
+.bloc-profil-right{
+    background:#e2f3ff;
+    display:inline-block;
+    padding: 3em 0 3em 0;
+    width:65%;
+    text-align:center;
+    border-radius: 0 5px 5px 0;
+}
+
+.input-form{
+    border: none;
+    width: 100%;
+    margin: 0.8em 0 0.8em 0;
+    background: #f4faff;
+    padding: 0.8em 1.5em 0.8em 1.5em;
+    color: #687786;
+    font-weight: bold;
+}
+
+.input-form::placeholder{
+    opacity:0.5;
+}
+
+
+/*************** MEDIA QUERIES ****************/
+@media screen and (max-width: 1030px){
+    .edit-profil-bloc{
+        width:90%;
+    }
+}
+
+@media screen and (max-width: 860px){
+    .bloc-profil-left{
+        padding: 3em 4% 0 4%;
+    }
+
+   .btn-pfl{
+       font-size: 1em;
+       width: 10.5em;
+   }
+}
+
+@media screen and (max-width: 730px){
+    .bloc-profil-left{
+        display:none;
+    }
+
+    .edit-profil-bloc{
+        background:none;
+    }
+
+    .bloc-profil-right{
+        width:100%;
+        border-radius:5px;
+    }
+
+    .avtr-edit-mini{
+        display:block;
+        width:100%;
+        max-width:13em;
+        margin:0 auto;
+        margin-bottom:2em;
+    }
+
+    .avtr-edit-mini img{
+        width:100%;
+    }
+
+    .gp-btn-pfl-mini{
+        display:block;
+        margin-top: 2em;
+    }
+
+    .btn-pfl-mini{
+        font-size:1em;
+        width:11em;
+    }
+
+    .mini-cncl{
+        margin:1em 0 1em 0;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
