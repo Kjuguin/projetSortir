@@ -8,22 +8,31 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use function Sodium\add;
 
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/home/{recherche}", name="home")
+     * @Route("/", name="home")
      */
-    public function index($recherche = null, EntityManagerInterface $em, Request $request)
+    public function index(EntityManagerInterface $em, Request $request)
     {
+
+        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+
+            $this->addFlash('danger', 'Vous devez vous connecter');
+
+            return $this->redirectToRoute('app_login');
+        }
+
+
         $siteRepository = $em->getRepository(Site::class);
         $sites = $siteRepository->findAll();
 
-        if ($recherche != null) {
-            $sortieRepository = $em->getRepository(Sortie::class);
-            $inscrit = null;
-            $notInscrit = null;
+        $sorties = [];
+        $inscrit = null;
+        $notInscrit = null;
+
+        if (!is_null($request->get('site'))) {
 
             if (!empty($request->get('filtre1'))) {
                 $organisateur = $this->getUser()->getId();
@@ -38,6 +47,7 @@ class HomeController extends AbstractController
             if (!empty($request->get('filtre3'))) {
                 $notInscrit = $this->getUser()->getId();
             }
+            $sortieRepository = $em->getRepository(Sortie::class);
 
             $param = [
                 "site" => $request->get('site'),
@@ -45,8 +55,8 @@ class HomeController extends AbstractController
                 "dateDebut" => $request->get('date-debut'),
                 "dateFin" => $request->get('date-fin'),
                 "organisateur" => $organisateur,
-                "inscrit"=>$inscrit,
-                "notInscrit"=>$notInscrit,
+                "inscrit" => $inscrit,
+                "notInscrit" => $notInscrit,
                 "passee" => $request->get('filtre4')
             ];
 

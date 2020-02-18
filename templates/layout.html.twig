@@ -19,24 +19,32 @@
 
     <section class="full-page">
         <nav class="nav-header">
-            {% if app.user %}
-            {{ app.user.pseudo }}
-            {% endif %}
             <div class="logo-header">
                 <a href="{{ path('home') }}">
                     <img class="logo-img" src="{{ asset("img/logo.png") }}">
                     <h1 class="site-title">SORTIES ENTR'ENI</h1>
                 </a>
             </div>
+            Bonjour, {{ app.user.pseudo }}.
             <ul class="nav-menu">
                 {#                <li><a href="#">Villes</a></li>#}
-                {#                <li><a href="#">Sites</a></li>#}
+                {% if is_granted('ROLE_ADMIN') %}
+                                <li><a href="{{ path('registration') }}">Inscription</a></li>
+                {% endif %}
                 <li><a href="{{ path('home') }}">Accueil</a></li>
                 <li><a href="{{path('utilisateur_gestionProfil', {"id": app.user.id})}}">Mon profil</a></li>
                 <li> <a href="{{ path('app_logout') }}">Déconnexion</a></li>
             </ul>
         </nav>
     </section>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
 
     {% block body %}{% endblock %}
 

@@ -21,7 +21,7 @@ class Sortie
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Inscription", mappedBy="noSortie")
+     * @ORM\OneToMany(targetEntity="App\Entity\Inscription", mappedBy="noSortie", cascade={"remove"})
      */
     private $noInscriptions;
 
@@ -64,11 +64,7 @@ class Sortie
      */
     private $descriptionInfos;
 
-    /**
-     * @Assert\Url(message="L'url n'est pas valide")
-     * @ORM\Column(type="string", length=250, nullable=true)
-     */
-    private $urlPhoto;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="noSorties")
@@ -90,10 +86,12 @@ class Sortie
      */
     private $noSite;
 
+
     public function __construct()
     {
         $this->noInscriptions = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -172,17 +170,7 @@ class Sortie
         return $this;
     }
 
-    public function getUrlPhoto(): ?string
-    {
-        return $this->urlPhoto;
-    }
 
-    public function setUrlPhoto(?string $urlPhoto): self
-    {
-        $this->urlPhoto = $urlPhoto;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Inscription[]
