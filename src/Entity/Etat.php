@@ -90,8 +90,4 @@ class Etat
         return $this;
     }
 
-    public function getFiltre()
-    {
-        return $this->libelle;
-    }
 }

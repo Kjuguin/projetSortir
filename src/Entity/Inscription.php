@@ -66,8 +66,4 @@ class Inscription
         return $this;
     }
 
-    public function getFiltre()
-    {
-        return $this->dateInscription;
-    }
 }

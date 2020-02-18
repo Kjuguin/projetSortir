@@ -72,12 +72,6 @@ class Sortie
     private $descriptionInfos;
 
     /**
-     * @Assert\Url(message="L'url n'est pas valide")
-     * @ORM\Column(type="string", length=250, nullable=true)
-     */
-    private $urlPhoto;
-
-    /**
      * @Groups("group1")
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="noSorties")
      */
@@ -182,18 +176,6 @@ class Sortie
         return $this;
     }
 
-    public function getUrlPhoto(): ?string
-    {
-        return $this->urlPhoto;
-    }
-
-    public function setUrlPhoto(?string $urlPhoto): self
-    {
-        $this->urlPhoto = $urlPhoto;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Inscription[]
      */
@@ -271,10 +253,5 @@ class Sortie
         $this->noSite = $noSite;
 
         return $this;
-    }
-
-    public function getFiltre()
-    {
-        return $this->nom;
     }
 }

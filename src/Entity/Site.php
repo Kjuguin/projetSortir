@@ -130,9 +130,4 @@ class Site
 
         return $this;
     }
-
-    public function getFiltre()
-    {
-        return $this->nomSite;
-    }
 }

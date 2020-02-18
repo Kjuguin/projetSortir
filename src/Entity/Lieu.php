@@ -160,9 +160,4 @@ class Lieu
 
         return $this;
     }
-
-    public function getFiltre()
-    {
-        return $this->nomLieu;
-    }
 }

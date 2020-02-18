@@ -122,7 +122,12 @@ class User implements UserInterface
      */
     private $telephone;
 
-  
+    /**
+     * @Assert\Url(message="L'url n'est pas valide")
+     * @ORM\Column(type="string", length=250, nullable=true)
+     */
+    private $urlPhoto;
+
     public function __construct()
     {
         $this->noInscription = new ArrayCollection();
@@ -335,9 +340,16 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getFiltre()
+    public function getUrlPhoto(): ?string
     {
-        return $this->pseudo;
+        return $this->urlPhoto;
+    }
+
+    public function setUrlPhoto(?string $urlPhoto): self
+    {
+        $this->urlPhoto = $urlPhoto;
+
+        return $this;
     }
 
 }
