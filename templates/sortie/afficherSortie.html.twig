@@ -3,30 +3,95 @@
 
 {% block body %}
 
-    <div>
-        <div> Nom : {{ sortie.nom | capitalize }}</div>
-        <div> Date de sortie : {{ sortie.dateDebut | date("d/m/y H:i:s") }}</div>
-        <div> Date limite inscription {{ sortie.dateCloture | date("d/m/Y H:i:s ") }}</div>
-        <div> Nombre de place : {{ sortie.nbInscriptionMax }}</div>
-        <div> Durée : {{ sortie.duree }} minutes</div>
-        <div> Description et infos : {{ sortie.descriptionInfos }}</div>
-    </div>
-    <div>
-        <div> Lieu : {{ sortie.noLieu.nomLieu | capitalize }}</div>
-        <div> Rue : {{ sortie.nolieu.rue | capitalize }}</div>
-        <div> Ville : {{ sortie.noLieu.noVille.nomVille | capitalize }}</div>
-        <div> Code Postal : {{ sortie.noLieu.noVille.codePostal }}</div>
-        <div> Latitude : {{ sortie.noLieu.latitude }}°</div>
-        <div> Longitude : {{ sortie.noLieu.longitude }}°</div>
-    </div>
-    <h1>Inscrit</h1>
-    <div>
-        <lu>
-            {% for inscription in sortie.noInscriptions %}
-                <li>pseudo : {{ inscription.noUser.pseudo }} / nom : {{ inscription.noUser.prenom | capitalize }} {{ inscription.noUser.prenom | upper }} </li>
-                <br>
+    <div class="dtl-sortie-container">
 
-            {% endfor %}
-        </lu>
+        <h1 class="page-h1">Détail sortie</h1>
+
+        <div class="dtl-sortie-flex">
+            <!-- left bloc fields -->
+            <div class="dtl-sortie-left">
+                <div class="dtl-srt-bloc">
+                    <p>Nom de la sortie</p>
+                    <div><span>{{ sortie.nom | capitalize }}</span></div>
+                </div>
+                <div class="dtl-srt-bloc">
+                    <p>Date et heure de la sortie</p>
+                    <div><span>{{ sortie.dateDebut | date("d/m/y H:i:s") }}</span></div>
+                </div>
+                <div class="dtl-srt-bloc">
+                    <p>Date limite d'inscription</p>
+                    <div><span>{{ sortie.dateCloture | date("d/m/Y") }}</span></div>
+                </div>
+                <div class="dtl-srt-bloc">
+                    <p>Nombre de places</p>
+                    <div><span>{{ sortie.nbInscriptionMax }}</span></div>
+                </div>
+                <div class="dtl-srt-bloc">
+                    <p>Durée (minutes)</p>
+                    <div><span>{{ sortie.duree }}</span></div>
+                </div>
+                <div class="dtl-srt-bloc">
+                    <p>Description et infos</p>
+                    <div class="dtl-descp"><span>{{ sortie.descriptionInfos }}</span></div>
+                </div>
+            </div>
+
+            <!-- right bloc fields -->
+            <div  class="dtl-sortie-right">
+                <div class="dtl-srt-bloc">
+                    <p>Lieu</p>
+                    <div><span>{{ sortie.noLieu.nomLieu | capitalize }}</span></div>
+                </div>
+                <div class="dtl-srt-bloc">
+                    <p>Ville</p>
+                    <div><span>{{ sortie.noLieu.noVille.nomVille | capitalize }}</span></div>
+                </div>
+                <div class="dtl-srt-bloc">
+                    <p>Rue</p>
+                    <div><span>{{ sortie.nolieu.rue | capitalize }}</span></div>
+                </div>
+                <div class="dtl-srt-bloc">
+                    <p>Code Postal</p>
+                    <div><span>{{ sortie.noLieu.noVille.codePostal }}</span></div>
+                </div>
+                <div class="dtl-srt-bloc">
+                    <p>Latitude</p>
+                    <div><span>{{ sortie.noLieu.latitude }}°</span></div>
+                </div>
+                <div class="dtl-srt-bloc">
+                    <p>Longitude</p>
+                    <div><span>{{ sortie.noLieu.longitude }}°</span></div>
+                </div>
+
+                <!-- tableau d'inscrits -->
+                <div class="tbl-inscrits">
+                    <p>Liste des participants inscrits</p>
+
+                    <div class="tbl-header">
+                        <table class="dtl-table">
+                            <thead>
+                                <tr>
+                                    <th>Pseudo</th>
+                                    <th>Nom</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="tbl-content">
+                        <table class="dtl-table">
+                            <tbody>
+                                {% for inscription in sortie.noInscriptions %}
+                                <tr class="dtl-strip">
+                                    <td>{{ inscription.noUser.pseudo }}</td>
+                                    <td>{{ inscription.noUser.prenom | capitalize }} {{ inscription.noUser.prenom | upper }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 {% endblock %}

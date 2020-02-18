@@ -4,10 +4,14 @@
     padding:0;
 }
 
-body, html{
+body{
     font-family: 'Nunito', sans-serif !important;
     background: linear-gradient(180deg, rgba(138,201,255,1) 0%, rgba(218,244,255,1) 100%);
     height:100%;
+}
+
+html{
+    background:#fff;
 }
 
 a{
@@ -28,7 +32,7 @@ p{
 
 .page-section{
     width:100%;
-    height:85%;
+    /*height:85%;*/
     position: relative;
     display:inline-block;
     text-align:center;
@@ -189,10 +193,54 @@ p{
 
 
 /*************** CONTENU COMMUN ****************/
+/** messages d'alerte **/
+.msg-alert{
+    color: #fff !important;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.3em;
+    margin-bottom: 1em;
+    letter-spacing: 1px;
+    background-color:inherit !important;
+    border-color:inherit !important;
+    font-family: 'Nunito', sans-serif !important;
+}
 
+/** titres **/
+.page-h1{
+    color:#687786;
+    text-transform: uppercase;
+    font-size: 1.6em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 0;
+    padding-bottom: 1.2em;
+}
 
+/** buttons par défaut **/
+.btn-base{
+    border:none;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-align: center;
+    border-radius: 5px;
+    text-transform:uppercase;
+    padding:0.8em 0 0.8em 0;
+    width:10.5em;
+    box-shadow: 2px -2px 28px -4px rgba(40,104,134,0.2);
+    cursor:pointer;
+}
 
+.btn-blue{
+    background:#8fb5db;
+}
 
+.btn-red{
+    background:#ff7083;
+}
 
 
 
@@ -203,7 +251,7 @@ p{
 /*************** FOOTER ****************/
 .page-footer{
     width:100%;
-    position: absolute;
+    /*position: absolute;*/
 }
 
 .page-footer img{
@@ -228,9 +276,14 @@ p{
     .page-content{
         padding-top: 5em;
     }
-
 }
 
+@media screen and (max-width: 450px){
+    .burger-title{
+        padding: 0.9em 0 0 0.2em;
+        font-size: 1.2em;
+    }
+}
 
 
 

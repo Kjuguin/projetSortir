@@ -391,7 +391,7 @@ p{
     font-weight: bold;
     font-size: 1.1em;
     letter-spacing: 0.5px;
-    margin-bottom: 0.6em;
+    margin-bottom: 0.6em !important;
 }
 
 .info-lbl{
