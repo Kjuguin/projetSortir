@@ -1,0 +1,18 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Modifier une sortie{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+
+    {{ form_widget(form) }}
+
+    <button type="submit" name="buttonModifierUneSortie" value="1">Enregistrer</button>
+    <button type="submit" name="buttonModifierUneSortie" value="3">Publier la sortie
+    <button><a href="{{ path('annulerSortieTwig',{'id':sortie.id}) }}">Supprimer</a></button>
+    <button type="reset">Annuler</button>
+
+    {{ form_end(form) }}
+
+{% endblock %}
