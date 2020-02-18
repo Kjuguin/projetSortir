@@ -36,7 +36,7 @@ class CreerSortieController extends AbstractController
         $valueInput = $request->get("buttonCreerUneSortie") ;
 
         if ($valueInput == 1 ){
-            $sortie->setNoEtat($em->getRepository(Etat::class)->findOneBy(array('libelle' =>'En cours')));
+            $sortie->setNoEtat($em->getRepository(Etat::class)->findOneBy(array('libelle' =>'En création')));
             dump($valueInput);
         } else {
             $sortie->setNoEtat($em->getRepository(Etat::class)->findOneBy(array('libelle' =>'Ouvert')));

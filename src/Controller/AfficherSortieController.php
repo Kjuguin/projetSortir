@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Etat;
 use App\Entity\Sortie;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,7 +36,36 @@ class AfficherSortieController extends AbstractController
             ]
         );
 
+        /**
+         * @Route("/publier/{id}", name="publier", requirements={"id": "\d+"})
+         */
 
 
+        $sortie->setNoEtat($em->getRepository(Etat::class)->findOneBy(array('libelle' =>'Ouvert')));
+        dump($valueInput);
+
+
+    }
+
+        /**
+         * @Route("/publier/{id}", name="publier", requirements={"id": "\d+"})
+         */
+        public function publierSortie($id, Request $request, EntityManagerInterface $em)
+    {
+
+        $sortieRepository = $em->getRepository(Sortie::class);
+        $sortie = $sortieRepository->find($id);
+
+        $etatRepository = $em->getRepository(Etat::class);
+        $etat = $etatRepository->findOneBy([
+            'libelle' => 'Ouvert']);
+
+        $sortie->setNoEtat($etat);
+
+        $em->persist($sortie);
+        $em->flush();
+
+
+        return $this->redirectToRoute("home");
     }
 }

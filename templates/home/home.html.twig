@@ -161,7 +161,7 @@
 
                                 <!-- En création -->
                                 {% if sortie.noEtat.libelle is same as ("En création") %}
-                                    <a href="#">Modifier</a> - <a href="#">Publier</a>
+                                    <a href="#">Modifier</a> - <a href="{{ path('sortie_publier',{'id':sortie.id}) }}">Publier</a>
 
                                     <!-- En cours -->
                                 {% elseif  sortie.noEtat.libelle is same as ("En cours") %}
