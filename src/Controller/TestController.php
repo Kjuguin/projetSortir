@@ -21,6 +21,8 @@ use Symfony\Component\Serializer\Serializer;
 
 class TestController extends AbstractController
 {
+
+    //Utilisation de groupe
     /**
      * @Route("/test/recherche", name="test_recherche")
      */

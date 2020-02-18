@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Sortie
 {
     /**
+     * @Groups("group1")
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")

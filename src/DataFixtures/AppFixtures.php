@@ -104,16 +104,22 @@ class AppFixtures extends Fixture
         $etat3 = new Etat();
         $etat4 = new Etat();
         $etat5 = new Etat();
+        $etat6 = new Etat();
+        $etat7 = new Etat();
         $etat->setLibelle('En création');
         $etat2->setLibelle('Ouvert');
-        $etat3->setLibelle('Fermé');
+        $etat3->setLibelle('Clôturer');
         $etat4->setLibelle('En cours');
         $etat5->setLibelle('Annulé');
+        $etat6->setLibelle('Terminer');
+        $etat7->setLibelle('Archiver');
         $manager->persist($etat);
         $manager->persist($etat2);
         $manager->persist($etat3);
         $manager->persist($etat4);
         $manager->persist($etat5);
+        $manager->persist($etat6);
+        $manager->persist($etat7);
         $manager->flush();
 
         $lieux = $manager->getRepository(Lieu::class)->findAll();

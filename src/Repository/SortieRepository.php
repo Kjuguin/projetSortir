@@ -26,7 +26,7 @@ class SortieRepository extends ServiceEntityRepository
     {
 
         $sqb = $this->createQueryBuilder('s');
-//        $sqb->leftJoin("s.noInscriptions",'i');
+        $sqb->leftJoin("s.noInscriptions",'i');
         //ajout param site
         if (!empty($param['site'])) {
             $sqb->andWhere("s.noSite = :site");
@@ -59,17 +59,20 @@ class SortieRepository extends ServiceEntityRepository
             $sqb->setParameter("organisateur", $param['organisateur']);
         }
 
-//        // ajout choix inscrit
-//        if (!empty($param['inscrit'])) {
-//            $sqb->andWhere("i.noUser = :inscrit");
-//            $sqb->setParameter("inscrit", $param['inscrit']);
-//        }
-//
-//        // ajout choix pas inscrit
-//        if (!empty($param['notInscrit'])) {
+        // ajout choix inscrit
+        if (!empty($param['inscrit'])) {
+            $sqb->andWhere(":inscrit MEMBER OF s.noInscriptions");
+            $sqb->andWhere("i MEMBER OF s.noInscriptions");
+            $sqb->setParameter("inscrit", $param['inscrit']);
+        }
+
+        // ajout choix pas inscrit
+        if (!empty($param['notInscrit'])) {
+            $sqb->andWhere(":inscrit NOT MEMBER OF s.noInscriptions");
+            $sqb->andWhere("i MEMBER OF s.noInscriptions");
 //            $sqb->andWhere("i.noUser != :notInscrit OR i.noUser IS NULL");
-//            $sqb->setParameter("notInscrit", $param['notInscrit']);
-//        }
+            $sqb->setParameter("notInscrit", $param['notInscrit']);
+        }
 
         //ajout param raccourci date passée
         if (!empty($param['passee'])) {

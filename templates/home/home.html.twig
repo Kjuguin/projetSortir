@@ -74,22 +74,22 @@
                         <!-- filtres checkboxes -->
                         <div class="bf-checkboxes">
                             <div class="check">
-                                <input type="checkbox" name="filtre1" value="filtre1">
+                                <input type="checkbox" id="organisateur" name="filtre1" value="filtre1">
                                 <label for="filtre1">Sorties dont je suis l'organisateur.rice</label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="filtre2" value="filtre2">
+                                <input type="checkbox" id="inscrit" name="filtre2" value="filtre2">
                                 <label for="filtre2">Sorties auxquelles je suis inscrit.e</label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="filtre3" value="filtre3">
+                                <input type="checkbox" id="non-inscrit" name="filtre3" value="filtre3">
                                 <label for="filtre3">Sorties auxquelles je ne suis pas inscrit.e</label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="filtre4" value="filtre4">
+                                <input type="checkbox" id="sorties-passees" name="filtre4" value="filtre4">
                                 <label for="filtre4">Sorties passées</label>
 
                             </div>
@@ -227,4 +227,105 @@
             {% endif %}
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $recherche = function (data) {
+            var $id = data['id'];
+            $.each(data['sorties'], function (key, val) {
+                    if (!(val['noEtat']['libelle'] === 'En création' && val['noOrganisateur']['id'] !== $id)) {
+
+
+                        var $present = '';
+                        var $pathProfil = "/utilisateur/afficherProfil/" + val['noOrganisateur']['id'];
+                        var $dateCloture = new Date(val['dateCloture']);
+                        var $outputCloture = $dateCloture.toLocaleString('en-GB', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                        });
+                        var $dateDebut = new Date(val['dateDebut']);
+                        var $outputDebut = $dateDebut.toLocaleString('en-GB', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+                        var $noOrga = val['noOrganisateur']['id'];
+                        var $action = '';
+
+                        var pathOrga = "{{ path('utilisateur_afficherProfil',{'id':'%id%'}) }}";
+                        pathOrga = pathOrga.replace("%25id%25", val['noOrganisateur']['id']);
+
+                        var pathAff = "{{ path('sortie_afficherSortie',{'id':'%id2%'}) }}";
+                        pathAff = pathAff.replace("%25id2%25", val['id']);
+
+                        var pathInsc = "{{ path('inscription',{'id':'%id3%'}) }}";
+                        pathInsc = pathInsc.replace("%25id3%25", val['id']);
+
+                        {#var pathAnn = "{{ path('sortie_afficherSortie',{'id':'%id2%'}) }}";#}
+                        {#pathAnn = pathAnn.replace("%25id2%25", val['id']);#}
+
+                        {#var pathDesi = "{{ path('sortie_afficherSortie',{'id':'%id2%'}) }}";#}
+                        {#pathDesi = pathDesi.replace("%25id2%25", val['id']);#}
+
+                        {#var pathMod = "{{ path('sortie_afficherSortie',{'id':'%id2%'}) }}";#}
+                        {#pathMod = pathMod.replace("%25id2%25", val['id']);#}
+
+                        $.each(val['noInscriptions'], function (k, v) {
+                            if ($id === v['noUser']['id']) {
+                                $present = "Oui";
+                            }
+                        });
+
+                        if (val['noEtat']['libelle'] === 'En création') {
+                            $action = '<a href="#">Modifier</a> - <a href="#">Publier</a>'
+                        } else if (val['noEtat']['libelle'] === 'En cours' || val['noEtat']['libelle'] === 'Terminer') {
+                            $action = '<a href="' + pathAff +'">Afficher</a>'
+                        } else {
+                            $action = '<a href="' + pathAff +'">Afficher</a>'
+                            if (val['noEtat']['libelle'] === 'Clôturer') {
+                                if ($present === "Oui") {
+                                    $action = $action + ' - ' + '<a href="#">Se désister</a>'
+                                }
+                            } else {
+                                if (val['noInscriptions'].length === 0) {
+                                    $action = $action + ' - ' + '<a href="'+ pathInsc + '">S\'inscrire</a>'
+                                    // if (val['noOrganisateur']['id'] === $id) {
+                                    //     $action = $action + ' - ' + '<a href=#">Annuler</a>'
+                                    // }
+                                } else if ($present === "Oui") {
+                                    $action = $action + ' - ' + '<a href="#">Se désister</a>'
+                                    // if (val['noOrganisateur']['id'] === $id) {
+                                    //     $action = $action + ' - ' + '<a href=#">Annuler</a>'
+                                    // }
+                                } else {
+                                    $action = $action + ' - ' + '<a href="' + pathInsc + '">S\'inscrire</a>'
+                                    // if (val['noOrganisateur']['id'] === $id) {
+                                    //     $action = $action + ' - ' + '<a href=#">Annuler</a>'
+                                    // }
+                                }
+                            }
+                            if (val['noOrganisateur']['id'] === $id) {
+                                $action = $action + ' - ' + '<a href=#">Annuler</a>'
+                            }
+                        }
+
+                        $('#tbody').append(
+                            '<tr><td> ' + val['nom'] + '</td>' +
+                            '<td>' + $outputDebut + '</td>' +
+                            '<td> ' + $outputCloture + '</td>' +
+                            '<td> ' + val['noInscriptions'].length + ' / ' + val['nbInscriptionMax'] + ' </td>' +
+                            '<td>' + val['noEtat']['libelle'] + '</td>' +
+                            '<td>' + $present + ' </td>' +
+                            '<td> <a href = "' + pathOrga + '" >' + val['noOrganisateur']['pseudo'] + '</a></td>' +
+                            '<td>' + $action + '</td>' + '</tr>'
+                        );
+                    }
+                }
+            );
+        };
+    </script>
 {% endblock %}

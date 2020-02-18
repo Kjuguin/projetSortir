@@ -50,10 +50,11 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/afficherProfil/{id}", name="afficherProfil", requirements={"id"="\d+"})
+     * @Route("/afficherProfil/{id}", name="afficherProfil")
      */
-    public function afficherProfil(int $id, EntityManagerInterface $em)
+    public function afficherProfil($id, EntityManagerInterface $em)
     {
+
         $profileRepository = $em->getRepository(User::class);
         $profil = $profileRepository->find($id);
         if ($profil == null) {

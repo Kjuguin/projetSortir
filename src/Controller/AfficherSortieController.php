@@ -15,7 +15,7 @@ use Symfony\Flex\Response;
 class AfficherSortieController extends AbstractController
 {
     /**
-     * @Route("/afficherSortie/{id}", name="afficherSortie", requirements={"id": "\d+"})
+     * @Route("/afficherSortie/{id}", name="afficherSortie")
      */
     public function afficherSortie($id, Request $request, EntityManagerInterface $em)
     {

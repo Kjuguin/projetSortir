@@ -28,6 +28,7 @@ class HomeController extends AbstractController
      */
     public function index(EntityManagerInterface $em, Request $request)
     {
+
 //        $encoder = new JsonEncoder();
 //        $defaultContext = [
 //            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
@@ -84,11 +85,10 @@ class HomeController extends AbstractController
 //
 //        return new JsonResponse($json, Response::HTTP_OK, [], true);
         $data = $serializer->normalize($sorties, null, ['groups' => 'group1']);
-
-        dump($sorties);
-        dump($data);
-        die();
-        return $this->json(['sorties'=>$data]);
+//        dump($sorties);
+//        dump($data);
+//        die();
+        return $this->json(['sorties'=>$data, 'id' => $this->getUser()->getId()]);
 
     }
 
