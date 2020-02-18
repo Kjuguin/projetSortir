@@ -16,7 +16,60 @@ $(document).ready(function () {
 
 });
 
+window.onload = function () {
+    $('#tbody').empty();
+    $.ajax({
+        type: 'POST',
+        url: '/home/recherche',
+        // data: {
+        //     "site": "",
+        //     "nom": "",
+        //     "dateDebut": "",
+        //     "dateFin": "",
+        //     "organisateur": "",
+        //     "inscrit": "",
+        //     "notInscrit": "",
+        //     "passee": ""
+        // }
+
+    }).done(function (data) {
+
+        $recherche(data);
+
+    });
+}
+
+$debutAjax = function () {
+    $('#tbody').empty();
+
+    currentRequest = $.ajax({
+        type: 'POST',
+        url: '/home/recherche',
+        data: {
+            "site": $('#site').val(),
+            "nom": $(this).val(),
+            "dateDebut": $('#date-debut').val(),
+            "dateFin": $('#date-fin').val(),
+            "organisateur": $('#organisateur:checked').val(),
+            "inscrit": $('#inscrit:checked').val(),
+            "notInscrit": $('#non-inscrit:checked').val(),
+            "passee": $('#sorties-passees:checked').val()
+        },
+        beforeSend: function () {
+            if (currentRequest != null) {
+                currentRequest.abort();
+            }
+        }
+
+    }).done(function (data) {
+        $recherche(data);
+
+    });
+}
+
 $('#nom').on('keyup', function (e) {
+
+    // $debutAjax();
 
     $('#tbody').empty();
 
@@ -43,4 +96,5 @@ $('#nom').on('keyup', function (e) {
         $recherche(data);
 
     });
+
 });

@@ -29,20 +29,10 @@ class TestController extends AbstractController
     public function index(EntityManagerInterface $em, Request $request)
     {
 
-//        $encoder = new JsonEncoder();
-//        $defaultContext = [
-//            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
-//                    return $object->getNom();
-//            },
-//        ];
-//        $normalizer = new ObjectNormalizer(null, null, null, null, null, null, $defaultContext);
-//
-//        $serializer = new Serializer([$normalizer], [$encoder]);
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
 
         $normalizer = new ObjectNormalizer($classMetadataFactory);
         $serializer = new Serializer([$normalizer]);
-
 
 
         $sortieRepository = $em->getRepository(TestUn::class);
@@ -56,12 +46,8 @@ class TestController extends AbstractController
         $sorties = $sortieRepository->afficher($param);
 
         $data = $serializer->normalize($sorties, null, ['groups' => 'group1']);
-//        $data = $serializer->normalize($sorties, 'json', ['groups' => 'group1']);
 
-//        var_dump($serializer->serialize($org, 'json'));
-
-//        return new JsonResponse($data, Response::HTTP_OK, [], true);
-return $this->json(['sorties'=>$data]);
+        return $this->json(['sorties' => $data]);
     }
 
     /**
