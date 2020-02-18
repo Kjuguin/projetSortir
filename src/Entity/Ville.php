@@ -36,7 +36,7 @@ class Ville
     private $nomVille;
 
     /**
-     * @Assert\Regex(pattern="^[0-9]{5}$",
+     * @Assert\Regex(pattern="/^[0-9]{5}$/",
      *     message="Le code postal est de 5 chiffres")
      * @ORM\Column(type="string", length=5)
      */
@@ -45,6 +45,11 @@ class Ville
     public function __construct()
     {
         $this->noLieux = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->nomVille;
     }
 
     public function getId(): ?int

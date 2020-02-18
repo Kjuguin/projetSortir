@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
@@ -8,4 +9,5 @@
       <jdbc-url>jdbc:mariadb://10.27.199.255:3306/rdv</jdbc-url>
     </data-source>
   </component>
+
 </project>
