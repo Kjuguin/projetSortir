@@ -49,7 +49,6 @@ class Ville
 
     public function __toString()
     {
-
         return $this->nomVille;
     }
 
