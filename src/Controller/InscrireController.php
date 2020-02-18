@@ -50,11 +50,19 @@ class InscrireController extends AbstractController
     }
 
     /**
-     * @Route("Desistement/{id}", name="Desistement")
+     * @Route("desistement/{id}", name="desistement")
      */
     public function desistement($id, EntityManagerInterface $em, Request $request)
     {
-        {
+
+        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+
+            $this->addFlash('danger', 'Vous devez être connecter');
+
+            return $this->redirectToRoute('app_login');
+        }
+
+
             $sortieRepository = $em->getRepository(Sortie::class);
             $sortie = $sortieRepository->find($id);
 
@@ -75,6 +83,6 @@ class InscrireController extends AbstractController
 
             return $this->redirectToRoute("home");
 
-        }
+
     }
 }

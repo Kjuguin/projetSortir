@@ -16,7 +16,7 @@ use Symfony\Flex\Response;
 class AfficherSortieController extends AbstractController
 {
     /**
-     * @Route("/afficherSortie/{id}", name="afficherSortie", requirements={"id": "\d+"})
+     * @Route("/afficherSortie/{id}", name="afficherSortie")
      */
     public function afficherSortie($id, Request $request, EntityManagerInterface $em)
     {
@@ -35,23 +35,20 @@ class AfficherSortieController extends AbstractController
                 'sortie' => $sortie
             ]
         );
-
-        /**
-         * @Route("/publier/{id}", name="publier", requirements={"id": "\d+"})
-         */
-
-
-        $sortie->setNoEtat($em->getRepository(Etat::class)->findOneBy(array('libelle' =>'Ouvert')));
-        dump($valueInput);
-
-
     }
 
-        /**
-         * @Route("/publier/{id}", name="publier", requirements={"id": "\d+"})
-         */
-        public function publierSortie($id, Request $request, EntityManagerInterface $em)
+    /**
+     * @Route("/publier/{id}", name="publier")
+     */
+    public function publierSortie($id, Request $request, EntityManagerInterface $em)
     {
+
+        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+
+            $this->addFlash('danger', 'Vous devez être connecter');
+
+            return $this->redirectToRoute('app_login');
+        }
 
         $sortieRepository = $em->getRepository(Sortie::class);
         $sortie = $sortieRepository->find($id);
@@ -64,7 +61,6 @@ class AfficherSortieController extends AbstractController
 
         $em->persist($sortie);
         $em->flush();
-
 
         return $this->redirectToRoute("home");
     }

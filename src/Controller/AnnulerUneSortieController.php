@@ -18,7 +18,14 @@ class AnnulerUneSortieController extends AbstractController
      */
     public function annulerSortie($id, EntityManagerInterface $em, Request $request)
     {
-        {
+        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+
+            $this->addFlash('danger', 'Vous devez être connecter');
+
+            return $this->redirectToRoute('app_login');
+        }
+
+
             $SortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
             $sortie = $SortieRepository->find($id);
             $nom = $sortie->getNom();
@@ -28,7 +35,7 @@ class AnnulerUneSortieController extends AbstractController
             $em->flush();
 
             return $this->redirectToRoute("home");
-        }
+
     }
 
     /**
@@ -36,6 +43,13 @@ class AnnulerUneSortieController extends AbstractController
      */
     public function annulerVerification($id, Request $request, EntityManagerInterface $em)
     {
+
+        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+
+            $this->addFlash('danger', 'Vous devez être connecter');
+
+            return $this->redirectToRoute('app_login');
+        }
 
         $sortieRepository = $em->getRepository(Sortie::class);
         $sortie = $sortieRepository->find($id);

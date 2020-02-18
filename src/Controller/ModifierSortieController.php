@@ -32,7 +32,7 @@ class ModifierSortieController extends AbstractController
         $form->handleRequest($request);
         $nom = $sortie->getNom();
 
-        $valueInput = $request->get("buttonModifierUneSortie");
+        $valueInput = $request->get("sortie");
         if ($valueInput == 1) {
             $sortie->setNoEtat($em->getRepository(Etat::class)->findOneBy(array('libelle' => 'En Création')));
             dump($valueInput);
@@ -49,9 +49,10 @@ class ModifierSortieController extends AbstractController
             return $this->redirectToRoute("home");
         }
 
-        return $this->render('sortie/modifierSortie.html.twig', [
+        return $this->render('sortie/creerModifierSortie.html.twig', [
             "form" => $form->createView(),
-            "sortie" => $sortie
+            "sortie" => $sortie,
+            "modification"=>1
         ]);
 
 

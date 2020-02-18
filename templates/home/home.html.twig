@@ -180,7 +180,7 @@
 
                                             <!-- fermé et inscrit -->
                                             {% if inscrit.noUser.id is same as (app.user.id) %}
-                                                - <a href="{{ path('Desistement',{'id':sortie.id}) }}">Se désister</a>
+                                                - <a href="{{ path('desistement',{'id':sortie.id}) }}">Se désister</a>
                                             {% endif %}
 
                                             <!-- fermé et non inscrit (se passe rien) -->
@@ -216,7 +216,7 @@
                                                 {% endif %}
                                             {% else %}
                                                 <!-- ouvert et inscrit -->
-                                                - <a href="#">Se désister</a>
+                                                - <a href="{{ path('desistement',{'id':sortie.id}) }}">Se désister</a>
 
                                                 <!-- ouvert, inscrit et organisateur -->
                                                 {% if sortie.noOrganisateur.id is same as (app.user.id) %}

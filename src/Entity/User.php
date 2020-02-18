@@ -43,7 +43,11 @@ class User implements UserInterface
      */
     private $email;
 
-//TODO :
+    /**
+     * @Assert\Url(message="L'url n'est pas valide")
+     * @ORM\Column(type="string", length=250, nullable=true)
+     */
+    private $urlPhoto;
 
     /**
      * @Assert\NotBlank(message="Il ne doit pas y avoir d'espace dans votre pseudo")
@@ -328,6 +332,18 @@ class User implements UserInterface
                 $noSorty->setNoOrganisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUrlPhoto(): ?string
+    {
+        return $this->urlPhoto;
+    }
+
+    public function setUrlPhoto(?string $urlPhoto): self
+    {
+        $this->urlPhoto = $urlPhoto;
 
         return $this;
     }

@@ -21,8 +21,14 @@ class CreerSortieController extends AbstractController
      */
     public function index(Request $request, EntityManagerInterface $em)
     {
+        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+
+            $this->addFlash('danger', 'Vous devez être connecter');
+
+            return $this->redirectToRoute('app_login');
+        }
+
         $sortie = new Sortie();
-        $etat = new Etat();
 
         $form = $this->createForm(CreationSortieType::class, $sortie);
         $form->handleRequest($request);
@@ -33,7 +39,7 @@ class CreerSortieController extends AbstractController
 
             $sortie= $sortie->setNoOrganisateur($currentUser);
 
-        $valueInput = $request->get("buttonCreerUneSortie") ;
+        $valueInput = $request->get("sortie") ;
 
         if ($valueInput == 1 ){
 
@@ -54,8 +60,9 @@ class CreerSortieController extends AbstractController
 
         }
 
-        return $this->render('creeSortie/index.html.twig',  [
-            "form" => $form->createView()
+        return $this->render('sortie/creerModifierSortie.html.twig',  [
+            "form" => $form->createView(),
+            "modification"=>0
         ]);
     }
 
