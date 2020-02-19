@@ -25,6 +25,8 @@ class SortieRepository extends ServiceEntityRepository
     public function afficher($param)
     {
 
+        $dateLimite = new \DateTime('-1 month');
+
         $sqb = $this->createQueryBuilder('s');
         //ajout param site
         if (!empty($param['site'])) {
@@ -41,7 +43,12 @@ class SortieRepository extends ServiceEntityRepository
         //ajout param date début
         if (!empty($param['dateDebut'])) {
             $sqb->andWhere("s.dateDebut >= :dateDebut");
-            $sqb->setParameter("dateDebut", $param['dateDebut']);
+            if (new \DateTime($param['dateDebut']) < $dateLimite){
+                $dateF = $dateLimite;
+            } else {
+                $dateF = $param['dateDebut'];
+            }
+            $sqb->setParameter("dateDebut", $dateF);
         }
 
         //ajout param date fin

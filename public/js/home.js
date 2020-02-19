@@ -1,6 +1,6 @@
 var currentRequest = null;
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     /**
      * Activation du tri sur toutes les colonnes du tableau
@@ -33,9 +33,9 @@ window.onload = function () {
 $debutAjax = function () {
     $('#tbody').empty();
 
-    console.log("" );
+    console.log("");
     console.log("-----------");
-    console.log(" " );
+    console.log(" ");
     console.log("site : " + $('#site').val());
     console.log("nom : " + $('#nom').val());
     console.log("date debut : " + $('#date-debut').val());
@@ -78,10 +78,31 @@ $('#nom').on('keyup', function (e) {
     $debutAjax();
 });
 
-$('#date-debut').on('change', function (e) {
-    $debutAjax();
-});
+// $('.day').on('onClick', function (e) {
+//     $debutAjax();
+// });
 
 $('#date-fin').on('change', function (e) {
     $debutAjax();
 });
+
+$('.date-pick').datepicker({
+    onSelect: function(dateText, inst) {
+        alert(dateText);
+    }
+});
+
+$("#date-fin").datepicker({
+    onSelect: function(dateText) {
+        display("Selected date: " + dateText + ", Current Selected Value= " + this.value);
+        $(this).change();
+    }
+}).on("change", function() {
+    display("Change event");
+});
+
+
+// $('#date-debut').datepicker()
+//     .on("input change", function (e) {
+//         console.log("Date changed: ", e.target.value);
+//     });
