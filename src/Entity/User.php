@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -16,6 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements UserInterface
 {
     /**
+     * @Groups("group1")
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -43,9 +45,14 @@ class User implements UserInterface
      */
     private $email;
 
-//TODO :
+    /**
+     * @Assert\Url(message="L'url n'est pas valide")
+     * @ORM\Column(type="string", length=250, nullable=true)
+     */
+    private $urlPhoto;
 
     /**
+     * @Groups("group1")
      * @Assert\NotBlank(message="Il ne doit pas y avoir d'espace dans votre pseudo")
      * @Assert\Length(
      *     min="3",
@@ -328,6 +335,18 @@ class User implements UserInterface
                 $noSorty->setNoOrganisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUrlPhoto(): ?string
+    {
+        return $this->urlPhoto;
+    }
+
+    public function setUrlPhoto(?string $urlPhoto): self
+    {
+        $this->urlPhoto = $urlPhoto;
 
         return $this;
     }

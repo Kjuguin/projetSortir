@@ -19,25 +19,62 @@ class GestionProfilType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('pseudo', TextType::class, ['label'=>'Pseudo : '])
-            ->add('email', EmailType::class, ['label'=>'Email : '])
-            ->add('prenom', TextType::class, ['label'=>'Prénom : '])
-            ->add('nom', TextType::class, ['label'=>'Nom : '])
-            ->add('telephone', TextType::class, ['label'=>'Téléphone : ',
-                'required' => false])
+            ->add('pseudo', TextType::class,
+                ['label'=>' ',
+                    'attr'=>[
+                        'class'=>'input-form',
+                        'placeholder'=>'Pseudo'
+                    ]
+                ]
+            )
+            ->add('email', EmailType::class,
+                ['label'=>' ',
+                    'attr'=>[
+                        'class'=>'input-form',
+                        'placeholder'=>'Email'
+                    ]
+                ]
+            )
+            ->add('prenom', TextType::class,
+                ['label'=>' ',
+                    'attr'=>[
+                        'class'=>'input-form',
+                        'placeholder'=>'Prénom'
+                    ]
+                ]
+            )
+            ->add('nom', TextType::class,
+                ['label'=>' ',
+                    'attr'=>[
+                        'class'=>'input-form',
+                        'placeholder'=>'Nom'
+                    ]
+                ]
+            )
+            ->add('telephone', TextType::class,
+                ['label'=>' ',
+                    'attr'=>[
+                        'class'=>'input-form',
+                        'placeholder'=>'Téléphone'
+                    ],
+                    'required' => false
+                ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mot de passe doivent correspondre',
-                'first_options' => ['label' => 'Mot de passe : ',
+                'first_options' => ['label' => ' ',
+                    'attr'=>['class'=>'input-form',
+                        'placeholder'=>'Mot de passe'],
                     'empty_data' => 'Pa$$w0rdPa$$w0rd'],
-                'second_options' => ['label' => 'Vérification mot de passe : ',
+                'second_options' => ['label' => ' ',
+                    'attr'=>['class'=>'input-form', 'placeholder'=>'Confirmation'],
                     'empty_data' => 'Pa$$w0rdPa$$w0rd'],
                 'required' => false
             ])
 
             ->add('noSite', EntityType::class, [
                 'class' => Site::class,
-                'label' => 'Site : '
+                'label' => ' ', 'attr'=>['class'=>'input-form']
             ]);
     }
 

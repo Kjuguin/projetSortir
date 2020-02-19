@@ -1,4 +1,4 @@
-{% extends "layout.html.twig" %}
+{% extends "pages-base.html.twig" %}
 
 {% block body %}
     <h1>Annulation de la Sortie</h1>
@@ -8,6 +8,6 @@
         <div> Lieu
             : {{ sortie.noLieu.nomLieu | capitalize }} {{ sortie.nolieu.rue | capitalize }} {{ sortie.noLieu.noVille.nomVille | capitalize }} {{ sortie.noLieu.noVille.codePostal }}</div>
     </div>
-    <p><a href="{{ path("annulerSortie",{'id':sortie.id}) }}">Comfirmer la suppression</a></p>
+    <p><a href="{{ path("annuler_sortie",{'id':sortie.id}) }}">Comfirmer la suppression</a></p>
     <p><a href="{{ path("home") }}">Annuler</a></p>
 {% endblock %}

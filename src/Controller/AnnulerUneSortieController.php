@@ -8,14 +8,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/annuler", name="annuler_")
+ */
 class AnnulerUneSortieController extends AbstractController
 {
     /**
-     * @Route("annulerSortie/{id}", name="annulerSortie")
+     * @Route("/sortie/{id}", name="sortie")
      */
     public function annulerSortie($id, EntityManagerInterface $em, Request $request)
     {
-        {
+        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+
+            $this->addFlash('danger', 'Vous devez être connecter');
+
+            return $this->redirectToRoute('app_login');
+        }
+
+
             $SortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
             $sortie = $SortieRepository->find($id);
             $nom = $sortie->getNom();
@@ -25,14 +35,21 @@ class AnnulerUneSortieController extends AbstractController
             $em->flush();
 
             return $this->redirectToRoute("home");
-        }
+
     }
 
     /**
-     * @Route("annulerSortieTwig/{id}", name="annulerSortieTwig")
+     * @Route("/verification/{id}", name="verification")
      */
-    public function annulerSortietwig($id, Request $request, EntityManagerInterface $em)
+    public function annulerVerification($id, Request $request, EntityManagerInterface $em)
     {
+
+        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+
+            $this->addFlash('danger', 'Vous devez être connecter');
+
+            return $this->redirectToRoute('app_login');
+        }
 
         $sortieRepository = $em->getRepository(Sortie::class);
         $sortie = $sortieRepository->find($id);
