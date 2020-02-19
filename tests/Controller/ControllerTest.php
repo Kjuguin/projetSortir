@@ -117,7 +117,7 @@ class ControllerTest extends WebTestCase
     public function testAfficherProfilIsUp()
     {
         $this->logIn();
-        $crawler = $this->client->request('GET', '/utilisateur/afficherProfil/157');
+        $this->client->request('GET', '/utilisateur/afficherProfil/157');
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
     }
 
@@ -136,7 +136,7 @@ class ControllerTest extends WebTestCase
     public function testAfficherSortieIsUp()
     {
         $this->logIn();
-        $crawler = $this->client->request('GET', '/sortie/afficherSortie/264');
+        $this->client->request('GET', '/sortie/afficherSortie/264');
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
     }
 
@@ -164,10 +164,11 @@ class ControllerTest extends WebTestCase
     /**
      * Test de validation du formulaire de gestion d'un profil
      */
-   /* public function testFormGestionProfil(){
+    /*public function testFormGestionProfil(){
         $this->logIn();
-        $crawler= $this->client->request('GET', '/utilisateur/gestionProfil/164');
-        $form = $crawler->selectButton('modifierProfil')->form();
+        $crawler = $this->client->request('GET', '/utilisateur/gestionProfil/164');
+        //echo $this->client->getResponse()->getContent();
+        $form = $crawler->selectButton('enregistrerModifsProfil')->form();
         $form['pseudo'] = 'test2';
         $form['email'] = 'test2@test.fr';
         $form['prenom'] = 'Test2';
@@ -175,10 +176,11 @@ class ControllerTest extends WebTestCase
         $form['telephone'] = ' ';
         $form['password'] = 'Pa$$w0rd';
         $form['noSite'] = '54';
-        $crawler = $this->submit($form);
+
+        $crawler = $this->client->submit($form);
         //$this->client->followRedirect();
 
-        //echo $this->client->getResponse()->getContent();
+
     }*/
 
 
