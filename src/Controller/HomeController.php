@@ -71,6 +71,7 @@ class HomeController extends AbstractController
             "inscrit" => $inscrit,
             "notInscrit" => $notInscrit,
             "passee" => $passee,
+            "sens" => 'DESC',
         ];
 
         $sorties = $sortieRepository->afficher($param);
@@ -97,14 +98,31 @@ class HomeController extends AbstractController
         $sites = $siteRepository->findAll();
 
 
-        $sortieRepository = $em->getRepository(Sortie::class);
+        $sortiesRepository = $em->getRepository(Sortie::class);
 
-        $sorties = $sortieRepository->findAll();
+        $date = new \DateTime();
+        $date->format('Y-m-d H:i:s');
+
+        $param = [
+            "site" => null,
+            "nom" => null,
+            "dateDebut" => '2020-02-19',
+            "dateFin" => null,
+            "organisateur" => null,
+            "inscrit" => null,
+            "notInscrit" => null,
+            "passee" => null,
+            "sens" => 'ASC',
+        ];
+
+
+        $sorties = $sortiesRepository->afficher($param);
+        $sortie = $sorties[0];
 
         return $this->render('home/home.html.twig',
             [
                 "sites" => $sites,
-                "sorties" => $sorties,
+                "heure" => $sortie->getDateDebut()
             ]
         );
 

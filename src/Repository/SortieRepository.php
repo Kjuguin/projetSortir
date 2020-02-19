@@ -94,7 +94,12 @@ class SortieRepository extends ServiceEntityRepository
             $sqb->setParameter("limite", $dateLimite);
         }
 
-        $sqb->orderBy("s.dateCloture","DESC");
+        if ( $param['sens']=='ASC'){
+            $sqb->orderBy("s.dateCloture","ASC");
+        } else {
+            $sqb->orderBy("s.dateCloture","DESC");
+
+        }
 
         $query = $sqb->getQuery();
         $result = $query->getResult();
