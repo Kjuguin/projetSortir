@@ -26,10 +26,9 @@ class SortieRepository extends ServiceEntityRepository
     {
 
         $sqb = $this->createQueryBuilder('s');
-        $sqb->leftJoin("s.noInscriptions",'i');
         //ajout param site
         if (!empty($param['site'])) {
-            $sqb->where("s.noSite = :site");
+            $sqb->andWhere("s.noSite = :site");
             $sqb->setParameter("site", $param['site']);
         }
 
@@ -47,11 +46,8 @@ class SortieRepository extends ServiceEntityRepository
 
         //ajout param date fin
         if (!empty($param['dateFin'])) {
-            $sqb->andWhere("s.dateCloture <= :dateFin");
-            $date = DateTime::createFromFormat('Y-m-d', $param['dateFin']);
-            $date->setTime(24, 00, 00);
-            $date->format('Y-m-d H:i:s');
-            $sqb->setParameter("dateFin", $date);
+            $sqb->andWhere("s.dateCloture >= :dateFin");
+            $sqb->setParameter("dateFin", $param['dateFin']);
         }
 
         // ajout choix organisateur
@@ -62,23 +58,28 @@ class SortieRepository extends ServiceEntityRepository
 
         // ajout choix inscrit
         if (!empty($param['inscrit'])) {
+            $sqb->leftJoin("s.noInscriptions", 'i');
             $sqb->andWhere("i.noUser = :inscrit");
             $sqb->setParameter("inscrit", $param['inscrit']);
         }
 
         // ajout choix pas inscrit
         if (!empty($param['notInscrit'])) {
-            $sqb->andWhere("i.noUser != :notInscrit OR i.noUser IS NULL");
+
+            $sqb2 = $this->createQueryBuilder('s2')
+                ->select('s2.id')
+                ->Join("s2.noInscriptions", 'i2')
+                ->andWhere("i2.noUser = :notInscrit");
+
+            $sqb->andWhere($sqb->expr()->notIn('s.id', $sqb2->getDQL()));
+
             $sqb->setParameter("notInscrit", $param['notInscrit']);
         }
 
         //ajout param raccourci date passée
         if (!empty($param['passee'])) {
             $sqb->andWhere("s.dateCloture < :passee");
-            $date = new DateTime();
-            $date->setTime(00, 00, 00);
-            $date->format('Y-m-d H:i:s');
-            $sqb->setParameter("passee", $date);
+            $sqb->setParameter("passee", $param['passee']);
         }
 
         $query = $sqb->getQuery();
