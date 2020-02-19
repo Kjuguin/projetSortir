@@ -20,37 +20,36 @@ class CreationSortieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom', TextType::class,[
-                'label'=>'Nom:'
+            ->add('nom', TextType::class, [
+                'label' => 'Nom:'
             ])
-            ->add('dateDebut', DateTimeType::class,[
-                'label'=>'Date et heure de la sortie:',
+            ->add('dateDebut', DateTimeType::class, [
+                'label' => 'Date et heure de la sortie:',
                 'widget' => 'single_text',
                 "data" => new DateTime(),
             ])
-            ->add('dateCloture', DateTimeType::class,[
-                'label'=>'Date limite inscription:',
+            ->add('dateCloture', DateTimeType::class, [
+                'label' => 'Date limite inscription:',
                 'widget' => 'single_text',
                 "data" => new DateTime(),
             ])
-            ->add('nbInscriptionMax', IntegerType::class,[
-                'label'=>'Nombre de places:',
-                'attr'=>array('min'=>1),
+            ->add('nbInscriptionMax', IntegerType::class, [
+                'label' => 'Nombre de places:',
+                'attr' => array('min' => 1),
             ])
-            ->add('duree', IntegerType::class,[
-                'label'=>'Durée (min):',
-                'attr'=>array('min'=>1),
+            ->add('duree', IntegerType::class, [
+                'label' => 'Durée (min):',
+                'attr' => array('min' => 1),
 
             ])
-            ->add('descriptionInfos', TextareaType::class,[
-                'label'=>'Description et infos:',
-                'attr'=>['rows'=>'10','cols'=>'20']
+            ->add('descriptionInfos', TextareaType::class, [
+                'label' => 'Description et infos:',
+                'attr' => ['rows' => '10', 'cols' => '20']
             ])
-            ->add('noLieu', EntityType::class,[
-                'class'=>Lieu::class,
-                'label'=>'Lieu:'
-            ])
-        ;
+            ->add('noLieu', EntityType::class, [
+                'class' => Lieu::class,
+                'label' => 'Lieu:'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
