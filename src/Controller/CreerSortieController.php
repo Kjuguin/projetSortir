@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Etat;
+use App\Entity\Lieu;
 use App\Entity\Site;
 use App\Entity\User;
+use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Sortie;
@@ -12,6 +14,11 @@ use App\Form\CreationSortieType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
+use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 
 class CreerSortieController extends AbstractController
@@ -65,5 +72,36 @@ class CreerSortieController extends AbstractController
             "modification"=>0
         ]);
     }
+
+
+    /**
+     * @Route("/creerSortie/lieu/{id}", name="lieu")
+     */
+    public function lieu($id,Request $request, EntityManagerInterface $em)
+    {
+        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+
+            $this->addFlash('danger', 'Vous devez être connecté');
+
+            return $this->redirectToRoute('app_login');
+        }
+
+        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
+
+        $normalizer = new ObjectNormalizer($classMetadataFactory);
+        $serializer = new Serializer([new DateTimeNormalizer(), $normalizer]);
+
+        $lieuRepository = $em->getRepository(Lieu::class);
+
+        $lieu = $lieuRepository->find($id);
+dump($id);
+dump($lieu);
+        $data = $serializer->normalize($lieu, null, ['groups' => 'groupe2']);
+dump($data)
+;
+        return $this->json(['lieu' => $data]);
+    }
+
+
 
 }

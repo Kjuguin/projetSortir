@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -26,6 +27,7 @@ class Ville
     private $noLieux;
 
     /**
+     * @Groups("groupe2")
      * @Assert\Length(
      *     min="3",
      *     max="30",
@@ -36,6 +38,7 @@ class Ville
     private $nomVille;
 
     /**
+     * @Groups("groupe2")
      * @Assert\Regex(pattern="/^[0-9]{5}$/",
      *     message="Le code postal est de 5 chiffres")
      * @ORM\Column(type="string", length=5)
