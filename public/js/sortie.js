@@ -15,15 +15,15 @@ $lieuAjax = function () {
         }
     }).done(function (data) {
         // $recherche(data);
-console.log(data);
-console.log(data['lieu']);
-console.log(data['lieu']['noVille']['nomVille']);
+        console.log(data);
+        console.log(data['lieu']);
+        console.log(data['lieu']['noVille']['nomVille']);
 
-$('#ville').html(data['lieu']['noVille']['nomVille']);
-$('#rue').html(data['lieu']['rue']);
-$('#cp').html(data['lieu']['noVille']['codePostal']);
-$('#lat').html(data['lieu']['latitude']);
-$('#long').html(data['lieu']['longitude']);
+        $('#ville').html(data['lieu']['noVille']['nomVille']);
+        $('#rue').html(data['lieu']['rue']);
+        $('#cp').html(data['lieu']['noVille']['codePostal']);
+        $('#lat').html(data['lieu']['latitude']);
+        $('#long').html(data['lieu']['longitude']);
 
 
     });
