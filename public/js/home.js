@@ -19,9 +19,10 @@ window.onload = function () {
 
     $.ajax({
         type: 'POST',
-        url: '/home/recherche',
+        url: '/recherche',
     }).done(function (data) {
         $('#tbody').empty();
+        console.log(data);
         $recherche(data);
 
     });

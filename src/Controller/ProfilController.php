@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class ProfilController extends AbstractController
 {
     /**
-     * @Route("/gestionProfil/{id}", name="gestionProfil", requirements={"id"="\d+"})
+     * @Route("/gestionProfil/{id}", name="gestionProfil")
      */
     public function form(EntityManagerInterface $em, Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -57,7 +57,7 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/afficherProfil/{id}", name="afficherProfil", requirements={"id"="\d+"})
+     * @Route("/afficherProfil/{id}", name="afficherProfil")
      */
     public function afficherProfil(int $id, EntityManagerInterface $em)
     {
