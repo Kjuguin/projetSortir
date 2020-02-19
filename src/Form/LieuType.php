@@ -31,22 +31,21 @@ class LieuType extends AbstractType
             ])
 
             ->add('longitude',IntegerType::class, [
-                'label'=>'longitude:'
+                'label'=>'Longitude:',
             ])
 
             ->add('noVille',EntityType::class,[
                 'class'=>Ville::class,
                 'label'=>'Nom Ville:',
-                'required'=>true,
                 'placeholder'=>' ',
                 'attr'=>[
                     'class'=>'villeSave',
-                    'require'=>true
+                    'required'=>true
                 ],
                 'label_attr'=>['class'=>'labelVilleSave']
             ])
 
-            ->add('noVille', VilleType::class,[
+            ->add('Ville', VilleType::class,[
                 'attr'=>[
                     'class'=>'noVilleLieu',
                     'require'=>'false',
@@ -55,7 +54,7 @@ class LieuType extends AbstractType
 
             ->add('submit', SubmitType::class,[
                 'attr'=>[
-                    'class'=>'buttonSubmitVilleSave'
+                    'class'=>'buttonSubmitVilleSave',
                 ]])
             ;
     }

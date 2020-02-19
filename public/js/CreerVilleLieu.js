@@ -1,10 +1,15 @@
 $(document).ready(function($) {
+
+        //Masque par défaut
+
         $('.nomVilleMasque').hide(0);
         $('.labelNomVilleMasque').hide(0);
         $('.codePostalMasque').hide(0);
         $('.labelCodePostalMasque').hide(0);
         $('.buttonSubmitMasque').hide(0);
         $('#button_ajouterVilleMasque').hide(0);
+
+
 
 
         $('#button_ajouterVille').click(function () {

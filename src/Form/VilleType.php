@@ -19,7 +19,11 @@ class VilleType extends AbstractType
                 'label'=>'Nom ville:',
                 'required'=>false,
                 'attr'=>[
-                    'class'=>'nomVilleMasque'
+                    'class'=>'nomVilleMasque',
+                    'name'=>'nomVilleMasque',
+                ],
+                'constraints'=>[
+
                 ],
                 'label_attr'=>['class'=>'labelNomVilleMasque']
             ])
@@ -27,7 +31,8 @@ class VilleType extends AbstractType
                 'label'=>'Code postal:',
                 'required'=>false,
                 'attr'=>[
-                    'class'=>'codePostalMasque'
+                    'class'=>'codePostalMasque',
+                    'name'=>'nomVilleMasque',
                 ],
                 'label_attr'=>['class'=>'labelCodePostalMasque']
             ])
