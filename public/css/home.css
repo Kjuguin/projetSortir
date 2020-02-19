@@ -471,6 +471,36 @@ p{
     padding-top:2.5em;
 }
 
+/* loader tableau */
+.loader-bloc{
+    width:100%;
+    text-align:center;
+}
+
+.loader{
+    margin: 0 0 2em;
+    height: 100px;
+    width: 20%;
+    text-align: center;
+    padding: 1em;
+    margin: 0 auto 1em;
+    display: inline-block;
+    vertical-align: top;
+}
+
+svg path,
+svg rect{
+    fill: #fff2da;
+}
+
+.loader-bloc p{
+    color:#fff2da;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 1.1em;
+}
+
+/* tableau */
 .table-bordered{
     border:none;
     border-radius: 5px;
@@ -725,12 +755,6 @@ td a:hover{
         width:100%;
     }
 }
-
-
-
-
-
-
 
 
 
