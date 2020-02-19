@@ -3,19 +3,39 @@
 {% block body %}
 
     <div>
-        {{ form_start(formLieu) }}
-        {{ form_widget(formLieu) }}
 
-        {{ form_start(formVille) }}
-        {{ form_widget(formVille) }}
+            {{ form_start(formLieu) }}
+
+            {{ form_label(formLieu.nomLieu) }}
+            {{ form_widget(formLieu.nomLieu) }}
+
+            {{ form_label(formLieu.rue) }}
+            {{ form_widget(formLieu.rue) }}
+
+            {{ form_label(formLieu.longitude) }}
+            {{ form_widget(formLieu.longitude) }}
+
+            {{ form_label(formLieu.latitude) }}
+            {{ form_widget(formLieu.latitude) }}
+
+            {{ form_label(formLieu.noVille) }}
+            {{ form_widget(formLieu.noVille) }}
 
 
-        {{ form_end(formVille) }}
-        <button type="button" id="button_ajouterVille">Ajouter Ville</button>
-        <button type="button" id="button_ajouterVilleMasque">Retour</button>
-        <div id="masque">
+            {{ form_label(formLieu.Ville.nomVille,'Nom Ville:') }}
+            {{ form_widget(formLieu.Ville.nomVille) }}
 
-        </div>
+            {{ form_label(formLieu.Ville.nomVille,'Code Postal:') }}
+            {{ form_widget(formLieu.Ville.codePostal) }}
+
+            <button type="button" id="button_ajouterVille">Ajouter Ville</button>
+            <button type="button" id="button_ajouterVilleMasque">Retour</button>
+
+        {% for message in app.flashes('default') %}
+
+            {{ message }}
+
+        {% endfor %}
 
         {{ form_end(formLieu) }}
 
