@@ -2,12 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\Site;
+
 use App\Entity\Sortie;
+use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
+use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class HomeController extends AbstractController
 {
@@ -24,55 +30,54 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
+        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
 
-        $siteRepository = $em->getRepository(Site::class);
-        $sites = $siteRepository->findAll();
+        $normalizer = new ObjectNormalizer($classMetadataFactory);
+        $serializer = new Serializer([new DateTimeNormalizer(), $normalizer]);
 
-        $sorties = [];
-        $inscrit = null;
-        $notInscrit = null;
+        $sortieRepository = $em->getRepository(Sortie::class);
 
-        if (!is_null($request->get('site'))) {
-
-            if (!empty($request->get('filtre1'))) {
-                $organisateur = $this->getUser()->getId();
-            } else {
-                $organisateur = null;
-            }
-
-            if (!empty($request->get('filtre2'))) {
-                $inscrit = $this->getUser()->getId();
-            }
-
-            if (!empty($request->get('filtre3'))) {
-                $notInscrit = $this->getUser()->getId();
-            }
-            $sortieRepository = $em->getRepository(Sortie::class);
-
-            $param = [
-                "site" => $request->get('site'),
-                "nom" => $request->get('nom'),
-                "dateDebut" => $request->get('date-debut'),
-                "dateFin" => $request->get('date-fin'),
-                "organisateur" => $organisateur,
-                "inscrit" => $inscrit,
-                "notInscrit" => $notInscrit,
-                "passee" => $request->get('filtre4')
-            ];
-
-            dump($param);
-
-            $sorties = $sortieRepository->afficher($param);
+        if (!empty($request->get('organisateur'))) {
+            $organisateur = $this->getUser()->getId();
         } else {
-            $sorties = $em->getRepository(Sortie::class)->findAll();
+            $organisateur = null;
         }
 
-        return $this->render('home/home.html.twig',
-            [
-                "sites" => $sites,
-                "sorties" => $sorties,
-            ]
-        );
+        if (!empty($request->get('inscrit'))) {
+            $inscrit = $this->getUser()->getId();
+        } else {
+            $inscrit = null;
+        }
+
+        if (!empty($request->get('notInscrit'))) {
+            $notInscrit = $this->getUser()->getId();
+        } else {
+            $notInscrit = null;
+        }
+
+        if (!empty($request->get('passee'))) {
+            $passee = new \DateTime();
+        } else {
+            $passee = null;
+        }
+
+        $param = [
+            "site" => $request->get('site'),
+            "nom" => $request->get('nom'),
+            "dateDebut" => $request->get('dateDebut'),
+            "dateFin" => $request->get('dateFin'),
+            "organisateur" => $organisateur,
+            "inscrit" => $inscrit,
+            "notInscrit" => $notInscrit,
+            "passee" => $passee,
+        ];
+
+        $sorties = $sortieRepository->afficher($param);
+
+        $data = $serializer->normalize($sorties, null, ['groups' => 'group1']);
+
+        return $this->json(['sorties' => $data, 'id' => $this->getUser()->getId()]);
+
     }
 
 }
