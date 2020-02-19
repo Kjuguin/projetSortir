@@ -531,6 +531,7 @@ input[type="date"]::-webkit-inner-spin-button {
     font-weight: bold;
     letter-spacing: 1px;
     font-size: 1.1em;
+    padding-bottom:1em;
 }
 
 /* tableau */
@@ -793,6 +794,7 @@ td a:hover{
 /** Animation baby yoda **/
 .container {
     position: relative;
+    padding-bottom:2em;
 }
 .cradle {
     position: relative;
