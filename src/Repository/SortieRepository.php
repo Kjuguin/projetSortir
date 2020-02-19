@@ -6,6 +6,7 @@ use App\Entity\Sortie;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use function Doctrine\ORM\QueryBuilder;
 
 //use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -26,7 +27,6 @@ class SortieRepository extends ServiceEntityRepository
     {
 
         $sqb = $this->createQueryBuilder('s');
-        $sqb->leftJoin("s.noInscriptions",'i');
         //ajout param site
         if (!empty($param['site'])) {
             $sqb->andWhere("s.noSite = :site");
@@ -42,14 +42,12 @@ class SortieRepository extends ServiceEntityRepository
         //ajout param date début
         if (!empty($param['dateDebut'])) {
             $sqb->andWhere("s.dateDebut >= :dateDebut");
-            $param['dateDebut']->setTime(0, 0, 1);
             $sqb->setParameter("dateDebut", $param['dateDebut']);
         }
 
         //ajout param date fin
         if (!empty($param['dateFin'])) {
-            $sqb->andWhere("s.dateCloture <= :dateFin");
-            $param['dateFin']->setTime(23, 59, 59);
+            $sqb->andWhere("s.dateCloture >= :dateFin");
             $sqb->setParameter("dateFin", $param['dateFin']);
         }
 
@@ -61,25 +59,28 @@ class SortieRepository extends ServiceEntityRepository
 
         // ajout choix inscrit
         if (!empty($param['inscrit'])) {
-            $sqb->andWhere(":inscrit MEMBER OF s.noInscriptions");
-            $sqb->andWhere("i MEMBER OF s.noInscriptions");
+            $sqb->leftJoin("s.noInscriptions", 'i');
+            $sqb->andWhere("i.noUser = :inscrit");
             $sqb->setParameter("inscrit", $param['inscrit']);
         }
 
         // ajout choix pas inscrit
         if (!empty($param['notInscrit'])) {
-            $sqb->andWhere(":inscrit NOT MEMBER OF s.noInscriptions");
-            $sqb->andWhere("i MEMBER OF s.noInscriptions");
-//            $sqb->andWhere("i.noUser != :notInscrit OR i.noUser IS NULL");
+
+            $sqb2 = $this->createQueryBuilder('s2')
+                ->select('s2.id')
+                ->Join("s2.noInscriptions", 'i2')
+                ->andWhere("i2.noUser = :notInscrit");
+
+            $sqb->andWhere($sqb->expr()->notIn('s.id', $sqb2->getDQL()));
+
             $sqb->setParameter("notInscrit", $param['notInscrit']);
         }
 
         //ajout param raccourci date passée
         if (!empty($param['passee'])) {
             $sqb->andWhere("s.dateCloture < :passee");
-            $date = new DateTime();
-            $date->setTime(00, 00, 00);
-            $sqb->setParameter("passee", $date);
+            $sqb->setParameter("passee", $param['passee']);
         }
 
         $query = $sqb->getQuery();

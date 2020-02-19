@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Site;
 use App\Entity\Sortie;
 use App\Entity\TestUn;
+use App\Entity\User;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,33 +36,50 @@ class HomeController extends AbstractController
 
         $sortieRepository = $em->getRepository(Sortie::class);
 
-        if (!empty($request->get('filtre1'))) {
+        if (!empty($request->get('organisateur'))) {
             $organisateur = $this->getUser()->getId();
         } else {
             $organisateur = null;
         }
 
-        if (!empty($request->get('filtre2'))) {
+        if (!empty($request->get('inscrit'))) {
             $inscrit = $this->getUser()->getId();
         } else {
             $inscrit = null;
         }
 
-        if (!empty($request->get('filtre3'))) {
+        if (!empty($request->get('notInscrit'))) {
             $notInscrit = $this->getUser()->getId();
         } else {
             $notInscrit = null;
         }
 
+        if (!empty($request->get('passee'))) {
+            $passee = new \DateTime();
+        } else {
+            $passee = null;
+        }
+
+//        $param = [
+//            "site" => $request->get('site'),
+//            "nom" => $request->get('nom'),
+//            "dateDebut" => $request->get('date-debut'),
+//            "dateFin" => $request->get('date-fin'),
+//            "organisateur" => $organisateur,
+//            "inscrit" => $inscrit,
+//            "notInscrit" => $notInscrit,
+//            "passee" => $request->get('filtre4')
+//        ];
+
         $param = [
             "site" => $request->get('site'),
             "nom" => $request->get('nom'),
-            "dateDebut" => $request->get('date-debut'),
-            "dateFin" => $request->get('date-fin'),
+            "dateDebut" => $request->get('dateDebut'),
+            "dateFin" => $request->get('dateFin'),
             "organisateur" => $organisateur,
             "inscrit" => $inscrit,
             "notInscrit" => $notInscrit,
-            "passee" => $request->get('filtre4')
+            "passee" => $passee,
         ];
 
         $sorties = $sortieRepository->afficher($param);
