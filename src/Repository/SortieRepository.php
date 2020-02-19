@@ -24,6 +24,7 @@ class SortieRepository extends ServiceEntityRepository
 
     public function afficher($param)
     {
+        $dateLimite= new \DateTime('-1 month');
 
         $sqb = $this->createQueryBuilder('s');
         //ajout param site
@@ -41,13 +42,23 @@ class SortieRepository extends ServiceEntityRepository
         //ajout param date début
         if (!empty($param['dateDebut'])) {
             $sqb->andWhere("s.dateDebut >= :dateDebut");
-            $sqb->setParameter("dateDebut", $param['dateDebut']);
+            if (new \DateTime($param['dateDebut']) < $dateLimite){
+                $dateD = $dateLimite;
+            } else {
+                $dateD = $param['dateDebut'];
+            }
+            $sqb->setParameter("dateDebut", $dateD);
         }
 
         //ajout param date fin
         if (!empty($param['dateFin'])) {
             $sqb->andWhere("s.dateCloture >= :dateFin");
-            $sqb->setParameter("dateFin", $param['dateFin']);
+            if (new \DateTime($param['dateFin']) < $dateLimite){
+                $dateF = $dateLimite;
+            } else {
+                $dateF = $param['dateFin'];
+            }
+            $sqb->setParameter("dateFin", $dateF);
         }
 
         // ajout choix organisateur
@@ -78,8 +89,9 @@ class SortieRepository extends ServiceEntityRepository
 
         //ajout param raccourci date passée
         if (!empty($param['passee'])) {
-            $sqb->andWhere("s.dateCloture < :passee");
+            $sqb->andWhere("s.dateCloture BETWEEN :limite and :passee");
             $sqb->setParameter("passee", $param['passee']);
+            $sqb->setParameter("limite", $dateLimite);
         }
 
         $sqb->orderBy("s.dateCloture","DESC");
