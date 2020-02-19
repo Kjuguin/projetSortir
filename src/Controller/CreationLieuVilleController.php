@@ -37,19 +37,22 @@ class CreationLieuVilleController extends AbstractController
 
             $em->persist($lieu);
 
-            if ($formVille->isSubmitted() && $formVille->isValid()) {
-                $this->addFlash("success", "Ville ajoutée");
-                $em->persist($ville);
-
-            }
-
             $em->flush();
             return $this->redirectToRoute("ajoutLieuVille");
         }
 
+//        if ($formVille->isSubmitted() && $formVille->isValid()) {
+//            $this->addFlash("success", "Ville ajoutée");
+//            $em->persist($ville);
+//
+//            dump($request->get('idNomLieu'));
+//
+//            $em->flush();
+//            return $this->redirectToRoute("ajoutLieuVille");
+//
+//        }
         return $this->render('creation_lieu_ville/index.html.twig', [
             "formLieu" => $formLieu->createView(),
-            "formVille" =>$formVille->createView()
         ]);
 
     }

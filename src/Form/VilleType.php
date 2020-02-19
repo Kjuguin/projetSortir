@@ -35,6 +35,7 @@ class VilleType extends AbstractType
                 'attr'=>[
                     'class'=>'buttonSubmitMasque'
                 ]])
+
             ;
     }
 

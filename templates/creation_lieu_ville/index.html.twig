@@ -1,22 +1,43 @@
-{% extends "layout.html.twig" %}
+{% extends "pages-base.html.twig" %}
 
 {% block body %}
 
     <div>
-        {{ form_start(formLieu) }}
-        {{ form_widget(formLieu) }}
 
-        <button type="button" id="button_ajouterVille">Ajouter Ville</button>
-        <button type="button" id="button_ajouterVilleMasque">Retour</button>
-        <div id="masque">
-            {{ form_start(formVille) }}
-            {{ form_widget(formVille) }}
+{#        {{ form_start(formVille) }}#}
 
+            {{ form_start(formLieu) }}
 
-            {{ form_end(formVille) }}
-        </div>
+            {{ form_label(formLieu.nomLieu) }}
+            {{ form_widget(formLieu.nomLieu) }}
+
+            {{ form_label(formLieu.rue) }}
+            {{ form_widget(formLieu.rue) }}
+
+            {{ form_label(formLieu.longitude) }}
+            {{ form_widget(formLieu.longitude) }}
+
+            {{ form_label(formLieu.latitude) }}
+            {{ form_widget(formLieu.latitude) }}
+
+{#            {{ form_label(formLieu.noVille) }}#}
+{#            {{ form_widget(formLieu.noVille) }}#}
+
+{#        {{ form_widget(formVille) }}#}
+
+            {{ form_label(formLieu.noVille.nomVille,'Nom Ville:') }}
+            {{ form_widget(formLieu.noVille.nomVille) }}
+
+            {{ form_label(formLieu.noVille.nomVille,'Code Postal:') }}
+            {{ form_widget(formLieu.noVille.codePostal) }}
+
+            <button type="button" id="button_ajouterVille">Ajouter Ville</button>
+            <button type="button" id="button_ajouterVilleMasque">Retour</button>
 
         {{ form_end(formLieu) }}
+
+{#        {{ form_end(formVille) }}#}
+
 
     </div>
 
