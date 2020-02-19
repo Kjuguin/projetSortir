@@ -22,7 +22,7 @@ class SecurityController extends AbstractController
 
         if (!($this->isGranted("ROLE_ADMIN"))) {
 
-            $this->addFlash('danger', 'Vous devez être un administrateur');
+            $this->addFlash('danger', 'Vous devez être administrateur');
 
             return $this->redirectToRoute('home');
         }
@@ -51,9 +51,9 @@ class SecurityController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash("success", "Inscription OK !");
+            $this->addFlash("success", "Inscription réussie !");
 
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('registration');
         }
 
         return $this->render('security/registration.html.twig', [

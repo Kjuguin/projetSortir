@@ -1,5 +1,6 @@
 {% extends 'pages-base.html.twig' %}
 
+{% block title %}Détail sortie{% endblock %}
 
 {% block body %}
 
@@ -64,7 +65,7 @@
                 </div>
 
                 <!-- tableau d'inscrits -->
-                <div class="tbl-inscrits">
+                <div class="tbl-inscrits tbl-iscrt-big">
                     <p>Liste des participants inscrits</p>
 
                     <div class="tbl-header">
@@ -82,8 +83,8 @@
                             <tbody>
                             {% for inscription in sortie.noInscriptions %}
                                 <tr class="dtl-strip">
-                                    <td>{{ inscription.noUser.pseudo }}</td>
-                                    <td>{{ inscription.noUser.prenom | capitalize }} {{ inscription.noUser.prenom | upper }}</td>
+                                    <td><a href="{{ path('utilisateur_afficherProfil',{'id':inscription.noUser.id}) }}">{{ inscription.noUser.pseudo }}</a></td>
+                                    <td>{{ inscription.noUser.nom | capitalize }} {{ inscription.noUser.prenom | upper }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -92,6 +93,35 @@
                 </div>
 
             </div>
+
+            <!-- tableau d'inscrits small -->
+            <div class="tbl-inscrits tbl-iscrt-small">
+                <p>Liste des participants inscrits</p>
+
+                <div class="tbl-header">
+                    <table class="dtl-table">
+                        <thead>
+                        <tr>
+                            <th>Pseudo</th>
+                            <th class="tbl-small-gone">Nom</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="tbl-content">
+                    <table class="dtl-table">
+                        <tbody>
+                        {% for inscription in sortie.noInscriptions %}
+                            <tr class="dtl-strip">
+                                <td><a href="{{ path('utilisateur_afficherProfil',{'id':inscription.noUser.id}) }}">{{ inscription.noUser.pseudo }}</a></td>
+                                <td class="tbl-small-gone">{{ inscription.noUser.nom | capitalize }} {{ inscription.noUser.prenom | upper }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </div>
 {% endblock %}

@@ -20,7 +20,7 @@ class InscrireController extends AbstractController
     {
         if (!($this->isGranted("ROLE_PARTICIPANT"))) {
 
-            $this->addFlash('danger', 'Vous devez être connecter');
+            $this->addFlash('danger', 'Vous devez être connecté');
 
             return $this->redirectToRoute('app_login');
         }
@@ -43,7 +43,7 @@ class InscrireController extends AbstractController
             $entityManager->flush();
 
         } else {
-            $this->addFlash('danger', "il n'y a plus de place pour cette sortie !");
+            $this->addFlash('danger', "Il n'y a plus de place pour cette sortie !");
         }
 
         return $this->redirectToRoute('home');
@@ -57,7 +57,7 @@ class InscrireController extends AbstractController
 
         if (!($this->isGranted("ROLE_PARTICIPANT"))) {
 
-            $this->addFlash('danger', 'Vous devez être connecter');
+            $this->addFlash('danger', 'Vous devez être connecté');
 
             return $this->redirectToRoute('app_login');
         }
@@ -75,7 +75,7 @@ class InscrireController extends AbstractController
 
             $nom = $sortie->getNom();
 
-            $this->addFlash("succes", "Vous etes bien desisté de la sortie " . $nom);
+            $this->addFlash("succes", "Vous vous êtes bien desisté de la sortie " . $nom);
 
             // le findby renvoie un tableau alors il faut récuperer le premier élément
             $em->remove($inscription[0]);
