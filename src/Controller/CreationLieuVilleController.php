@@ -23,34 +23,60 @@ class CreationLieuVilleController extends AbstractController
      */
     public function form(EntityManagerInterface $em, Request $request)
     {
+
         $lieu = new Lieu();
-        $ville = new Ville();
 
         $formLieu = $this->createForm(LieuType::class, $lieu);
-        $formVille = $this->createForm(VilleType::class, $ville);
 
         $formLieu->handleRequest($request);
-        $formVille->handleRequest($request);
 
         if ($formLieu->isSubmitted() && $formLieu->isValid()) {
-            $this->addFlash("success", "Lieu ajouté");
 
-            $em->persist($lieu);
+            $nomVilleRecup= $lieu->getVille()->getNomVille();//ok
+            $codePostalRecup= $lieu->getVille()->getCodePostal();
 
-            if ($formVille->isSubmitted() && $formVille->isValid()) {
-                $this->addFlash("success", "Ville ajoutée");
-                $em->persist($ville);
 
+            $villeRepository = $em->getRepository(Ville::class);
+            $villeNomBDD = $villeRepository->findBy(
+                ['nomVille' => $nomVilleRecup]
+            );
+
+            $villeCPBDD = $villeRepository->findBy([
+                'codePostal' => $codePostalRecup
+            ]);
+
+            if ($villeNomBDD && $villeCPBDD ) {
+
+
+                $this->addFlash("default", 'La ville ou le code postal existe déjà');
+
+                return $this->redirectToRoute("ajoutLieuVille");
+
+            }else {
+
+                if ($lieu->getNoVille()) {
+                    $ville = $em->getRepository(Ville::class)->find($lieu->getNoVille());
+                    $lieu->setVille($ville);
+                }
+                $em->persist($lieu);
+                $em->flush();
+
+                if (!$lieu->getNoVille()) {
+
+                    $ville = $em->getRepository(Ville::class)->find($lieu->getVille());
+                    $lieu->setNoVille($ville);
+                    $em->flush();
+                }
+
+                $this->addFlash("success", "lieu ajouté");
+                return $this->redirectToRoute("ajoutLieuVille");
             }
-
-            $em->flush();
-            return $this->redirectToRoute("ajoutLieuVille");
         }
 
         return $this->render('creation_lieu_ville/index.html.twig', [
             "formLieu" => $formLieu->createView(),
-            "formVille" =>$formVille->createView()
         ]);
 
     }
+
 }

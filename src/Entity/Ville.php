@@ -27,6 +27,11 @@ class Ville
     private $noLieux;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Lieu", mappedBy="ville")
+     */
+    private $Lieux;
+
+    /**
      * @Groups("groupe2")
      * @Assert\Length(
      *     min="3",
@@ -48,11 +53,12 @@ class Ville
     public function __construct()
     {
         $this->noLieux = new ArrayCollection();
+        $this->Lieux = new ArrayCollection();
     }
 
     public function __toString()
     {
-        return $this->nomVille;
+        return (String) $this->nomVille;
     }
 
     public function getId(): ?int
@@ -92,6 +98,15 @@ class Ville
         return $this->noLieux;
     }
 
+    /**
+     * @return Collection|Lieu[]
+     */
+    public function getLieux(): Collection
+    {
+        return $this->Lieux;
+    }
+
+
     public function addNoLieux(Lieu $noLieux): self
     {
         if (!$this->noLieux->contains($noLieux)) {
@@ -109,6 +124,29 @@ class Ville
             // set the owning side to null (unless already changed)
             if ($noLieux->getNoVille() === $this) {
                 $noLieux->setNoVille(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function addLieux(Lieu $Lieux): self
+    {
+        if (!$this->Lieux->contains($Lieux)) {
+            $this->Lieux[] = $Lieux;
+            $Lieux->setVille($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLieux(Lieu $Lieux): self
+    {
+        if ($this->Lieux->contains($Lieux)) {
+            $this->Lieux->removeElement($Lieux);
+            // set the owning side to null (unless already changed)
+            if ($Lieux->getVille() === $this) {
+                $Lieux->setVille(null);
             }
         }
 

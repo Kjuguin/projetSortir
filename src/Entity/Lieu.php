@@ -60,10 +60,17 @@ class Lieu
     private $longitude;
 
     /**
+
      * @Groups("groupe2")
      * @ORM\ManyToOne(targetEntity="App\Entity\Ville", inversedBy="noLieux")
+
      */
     private $noVille;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ville", inversedBy="Lieux", cascade={"persist"})
+     */
+    private $ville;
 
     public function __construct()
     {
@@ -72,7 +79,6 @@ class Lieu
 
     public function __toString(){
         return $this->nomLieu;
-
     }
 
     public function getId(): ?int
@@ -167,6 +173,18 @@ class Lieu
     public function setNoVille(?Ville $noVille): self
     {
         $this->noVille = $noVille;
+
+        return $this;
+    }
+
+    public function getVille(): ?ville
+    {
+        return $this->ville;
+    }
+
+    public function setVille(?ville $ville): self
+    {
+        $this->ville = $ville;
 
         return $this;
     }
