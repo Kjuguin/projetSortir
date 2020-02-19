@@ -14,7 +14,7 @@ class InscrireController extends AbstractController
 {
 
     /**
-     * @Route("/inscription/{id}", name="inscription", requirements={"id": "\d+"}, methods={"GET"})
+     * @Route("/inscription/{id}", name="inscription")
      */
     public function inscription($id, EntityManagerInterface $entityManager)
     {

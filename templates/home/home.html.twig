@@ -15,7 +15,7 @@
             </div>
             <ul class="nav-menu">
                 <li><a href="{{ path('home') }}">Accueil</a></li>
-                <li><a href="{{path('utilisateur_gestionProfil', {"id": app.user.id})}}">Profil</a></li>
+                <li><a href="{{ path('utilisateur_gestionProfil', {"id": app.user.id}) }}">Profil</a></li>
 
                 {% if is_granted('ROLE_ADMIN') %}
                     <li><a href="{{ path('registration') }}">Inscription</a></li>
@@ -23,7 +23,7 @@
                     <li><a href="#">Sites</a></li>
                 {% endif %}
 
-                <li> <a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
             </ul>
         </nav>
 
@@ -40,7 +40,7 @@
             <input class="burger" type="checkbox">
             <nav class="nav-burger">
                 <a class="nav-li-1" href="{{ path('home') }}">Accueil</a>
-                <a href="{{path('utilisateur_gestionProfil', {"id": app.user.id})}}">Profil</a>
+                <a href="{{ path('utilisateur_gestionProfil', {"id": app.user.id}) }}">Profil</a>
 
                 {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('registration') }}">Inscription</a>
@@ -90,7 +90,7 @@
                                 <select class="input-home inpt-site" name="site" id="site">
                                     <option value="" selected>Tous les sites</option>
                                     {% for site in sites %}
-                                        <option value="{{ site.id}}"> {{ site.nomSite }}</option>
+                                        <option value="{{ site.id }}"> {{ site.nomSite }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -113,7 +113,8 @@
                                 <div class="inpt-dt-gp datepicker input-group date" id="datepicker">
                                     <input type="text" class="inpt-dt form-control" placeholder="Choisir une date">
                                     <span class="inpt-calendar input-group-append input-group-addon">
-                                        <span class="inpt-caldr-icon input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        <span class="inpt-caldr-icon input-group-text"><i
+                                                    class="far fa-calendar-alt"></i></span>
                                     </span>
                                 </div>
                             </div>
@@ -126,7 +127,8 @@
                                 <div class="inpt-dt-gp datepicker input-group date" id="datepicker">
                                     <input type="text" class="inpt-dt form-control" placeholder="Choisir une date">
                                     <span class="inpt-calendar input-group-append input-group-addon">
-                                        <span class="inpt-caldr-icon input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        <span class="inpt-caldr-icon input-group-text"><i
+                                                    class="far fa-calendar-alt"></i></span>
                                     </span>
                                 </div>
                             </div>
@@ -138,29 +140,36 @@
                         <div class="bf-checkboxes">
                             <div class="check">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="filtre1" name="filtre1" value="filtre1">
-                                    <label class="custom-control-label" for="filtre1">Sorties dont je suis l'organisateur.rice</label>
+                                    <input type="checkbox" class="custom-control-input" id="organisateur" name="filtre1"
+                                           value="filtre1" onclick="$debutAjax()">
+                                    <label class="custom-control-label" for="organisateur">Sorties dont je suis
+                                        l'organisateur.rice</label>
                                 </div>
                             </div>
 
                             <div class="check">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="filtre2" name="filtre2" value="filtre2">
-                                    <label class="custom-control-label" for="filtre2">Sorties auxquelles je suis inscrit.e</label>
+                                    <input type="checkbox" class="custom-control-input" id="inscrit" name="filtre2"
+                                           value="filtre2" onclick="$debutAjax()">
+                                    <label class="custom-control-label" for="inscrit">Sorties auxquelles je suis
+                                        inscrit.e</label>
                                 </div>
                             </div>
 
                             <div class="check">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="filtre3" name="filtre3" value="filtre3">
-                                    <label class="custom-control-label" for="filtre3">Sorties auxquelles je ne suis pas inscrit.e</label>
+                                    <input type="checkbox" class="custom-control-input" id="non-inscrit" name="filtre3"
+                                           value="filtre3" onclick="$debutAjax()">
+                                    <label class="custom-control-label" for="non-inscrit">Sorties auxquelles je ne suis pas
+                                        inscrit.e</label>
                                 </div>
                             </div>
 
                             <div class="check">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="filtre4" name="filtre4" value="filtre4">
-                                    <label class="custom-control-label" for="filtre4">Sorties passées</label>
+                                    <input type="checkbox" class="custom-control-input" id="sorties-passees" name="filtre4"
+                                           value="filtre4" onclick="$debutAjax()">
+                                    <label class="custom-control-label" for="sorties-passees">Sorties passées</label>
                                 </div>
                             </div>
                         </div>
@@ -218,105 +227,108 @@
                         <th class="table-gone" scope="col" data-field="places" data-sortable="true">Places</th>
                         <th class="table-gone" scope="col" data-field="etat" data-sortable="true">Etat</th>
                         <th class="table-gone" scope="col" data-field="inscrit" data-sortable="true">Inscrit</th>
-                        <th class="table-gone" scope="col" data-field="organisateur" data-sortable="true">Organisateur</th>
+                        <th class="table-gone" scope="col" data-field="organisateur" data-sortable="true">Organisateur
+                        </th>
                         <th scope="col" data-field="action" data-sortable="true">Action</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
+<tr><td> </td></tr>
+{#                    {% for sortie in sorties %}#}
+{#                        <tr>#}
+{#                            <td>{{ sortie.nom }}</td>#}
+{#                            <td>{{ sortie.dateDebut | date('d/m/Y H:i') }}</td>#}
+{#                            <td class="table-gone">{{ sortie.dateCloture | date('d/m/Y') }}</td>#}
+{#                            <td class="table-gone">{{ sortie.noInscriptions.count }}/ {{ sortie.nbInscriptionMax }}</td>#}
+{#                            <td class="table-gone">{{ sortie.noEtat.libelle }}</td>#}
+{#                            <td class="table-gone">#}
+{#                                {% if app.user %}#}
+{#                                    {% for inscrit in sortie.noInscriptions %}#}
+{#                                        {% if inscrit.noUser.id == app.user.id %}#}
+{#                                            <p class="oui-inscrit">Oui</p>#}
+{#                                        {% endif %}#}
+{#                                    {% endfor %}#}
+{#                                {% endif %}#}
+{#                            </td>#}
+{#                            <td class="table-gone">#}
+{#                                <a href="{{ path('utilisateur_afficherProfil',{'id':sortie.noOrganisateur.id}) }}">{{ sortie.noOrganisateur.pseudo }}</a>#}
+{#                            </td>#}
+{#                            #}{#                            <td><a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a> - modifier</td>#}
+{#                            <td>#}
+{#                                {% set test = 0 %}#}
 
-                    {% for sortie in sorties %}
-                        <tr>
-                            <td>{{ sortie.nom }}</td>
-                            <td>{{ sortie.dateDebut | date('d/m/Y H:i') }}</td>
-                            <td class="table-gone">{{ sortie.dateCloture | date('d/m/Y') }}</td>
-                            <td class="table-gone">{{ sortie.noInscriptions.count }} / {{ sortie.nbInscriptionMax }}</td>
-                            <td class="table-gone">{{ sortie.noEtat.libelle }}</td>
-                            <td class="table-gone">
-                                {% if app.user %}
-                                    {% for inscrit in sortie.noInscriptions %}
-                                        {% if inscrit.noUser.id == app.user.id %}
-                                            <p class="oui-inscrit">Oui</p>
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endif %}
-                            </td>
-                            <td class="table-gone">
-                                <a href="{{ path('utilisateur_afficherProfil',{'id':sortie.noOrganisateur.id}) }}">{{ sortie.noOrganisateur.pseudo }}</a>
-                            </td>
-                            {#                            <td><a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a> - modifier</td>#}
-                            <td>
-                                {% set test = 0 %}
+{#                                <!-- En création -->#}
+{#                                {% if sortie.noEtat.libelle is same as ("En création") %}#}
 
-                                <!-- En création -->
-                                {% if sortie.noEtat.libelle is same as ("En création") %}
+{#                                    <a href="{{ path('modifierSortie',{'id':sortie.id}) }}">Modifier</a> - <a#}
+{#                                        href="{{ path('sortie_publier',{'id':sortie.id}) }}">Publier</a>#}
 
-                                    <a href="{{ path('modifierSortie',{'id':sortie.id}) }}">Modifier</a> - <a href="{{ path('sortie_publier',{'id':sortie.id}) }}">Publier</a>
+{#                                    <!-- En cours -->#}
+{#                                {% elseif  sortie.noEtat.libelle is same as ("En cours") %}#}
+{#                                    <a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a>#}
 
-                                    <!-- En cours -->
-                                {% elseif  sortie.noEtat.libelle is same as ("En cours") %}
-                                    <a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a>
-
-                                    <!-- cas ouvert et fermé -->
-                                {% else %}
-                                    <a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a>
+{#                                    <!-- cas ouvert et fermé -->#}
+{#                                {% else %}#}
+{#                                    <a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a>#}
 
 
-                                    <!-- cas fermé -->
-                                    {% if sortie.noEtat.libelle is same as ('Fermé') %}
+{#                                    <!-- cas fermé -->#}
+{#                                    {% if sortie.noEtat.libelle is same as ('Fermé') %}#}
 
-                                        {% for inscrit in sortie.noInscriptions %}
+{#                                        {% for inscrit in sortie.noInscriptions %}#}
 
-                                            <!-- fermé et inscrit -->
-                                            {% if inscrit.noUser.id is same as (app.user.id) %}
-                                                - <a href="{{ path('desistement',{'id':sortie.id}) }}">Se désister</a>
-                                            {% endif %}
+{#                                            <!-- fermé et inscrit -->#}
+{#                                            {% if inscrit.noUser.id is same as (app.user.id) %}#}
+{#                                                - <a href="{{ path('desistement',{'id':sortie.id}) }}">Se désister</a>#}
+{#                                            {% endif %}#}
 
-                                            <!-- fermé et non inscrit (se passe rien) -->
+{#                                            <!-- fermé et non inscrit (se passe rien) -->#}
 
-                                        {% endfor %}
-                                        <!-- cas ouvert -->
-                                    {% elseif sortie.noEtat.libelle is same as ('Ouvert') %}
+{#                                        {% endfor %}#}
+{#                                        <!-- cas ouvert -->#}
+{#                                    {% elseif sortie.noEtat.libelle is same as ('Ouvert') %}#}
 
-                                        {% if sortie.noInscriptions.count is same as (0) %}
-                                            - <a href="{{ path('inscription',{'id':sortie.id}) }}">S'inscrire</a>
-                                            {% if sortie.noOrganisateur.id is same as (app.user.id) %}
-                                                - <a href="{{ path('annuler_verification',{'id':sortie.id}) }}">Annuler</a>
-                                            {% endif %}
-                                        {% else %}
+{#                                        {% if sortie.noInscriptions.count is same as (0) %}#}
+{#                                            - <a href="{{ path('inscription',{'id':sortie.id}) }}">S'inscrire</a>#}
+{#                                            {% if sortie.noOrganisateur.id is same as (app.user.id) %}#}
+{#                                                - <a#}
+{#                                                    href="{{ path('annuler_verification',{'id':sortie.id}) }}">Annuler</a>#}
+{#                                            {% endif %}#}
+{#                                        {% else %}#}
 
-                                            {% for inscrit in sortie.noInscriptions %}
+{#                                            {% for inscrit in sortie.noInscriptions %}#}
 
-                                                {% if inscrit.noUser.id != app.user.id %}
+{#                                                {% if inscrit.noUser.id != app.user.id %}#}
 
-                                                    {% set test = test + 1 %}
+{#                                                    {% set test = test + 1 %}#}
 
-                                                {% endif %}
-                                            {% endfor %}
+{#                                                {% endif %}#}
+{#                                            {% endfor %}#}
 
-                                            {% if test == sortie.noInscriptions.count %}
-                                                <!-- ouvert et non inscrit -->
+{#                                            {% if test == sortie.noInscriptions.count %}#}
+{#                                                <!-- ouvert et non inscrit -->#}
 
-                                                - <a href="{{ path('inscription',{'id':sortie.id}) }}">S'inscrire</a>
+{#                                                - <a href="{{ path('inscription',{'id':sortie.id}) }}">S'inscrire</a>#}
 
-                                                <!-- ouvert, non inscrit et organisateur -->
-                                                {% if sortie.noOrganisateur.id is same as (app.user.id) %}
-                                                    - <a href="{{path('annuler_verification',{'id':sortie.id})}}">Annuler</a>
-                                                {% endif %}
-                                            {% else %}
-                                                <!-- ouvert et inscrit -->
-                                                - <a href="{{ path('desistement',{'id':sortie.id}) }}">Se désister</a>
+{#                                                <!-- ouvert, non inscrit et organisateur -->#}
+{#                                                {% if sortie.noOrganisateur.id is same as (app.user.id) %}#}
+{#                                                    - <a href="{{ path('annuler_verification',{'id':sortie.id}) }}">Annuler</a>#}
+{#                                                {% endif %}#}
+{#                                            {% else %}#}
+{#                                                <!-- ouvert et inscrit -->#}
+{#                                                - <a href="{{ path('desistement',{'id':sortie.id}) }}">Se désister</a>#}
 
-                                                <!-- ouvert, inscrit et organisateur -->
-                                                {% if sortie.noOrganisateur.id is same as (app.user.id) %}
-                                                    - <a href="{{path('annuler_verification',{'id':sortie.id})}}">Annuler</a>
-                                                {% endif %}
-                                            {% endif %}
-                                        {% endif %}
-                                    {% endif %}
-                                {% endif %}
-                            </td>
-                        </tr>
-                    {% endfor %}
+{#                                                <!-- ouvert, inscrit et organisateur -->#}
+{#                                                {% if sortie.noOrganisateur.id is same as (app.user.id) %}#}
+{#                                                    - <a href="{{ path('annuler_verification',{'id':sortie.id}) }}">Annuler</a>#}
+{#                                                {% endif %}#}
+{#                                            {% endif %}#}
+{#                                        {% endif %}#}
+{#                                    {% endif %}#}
+{#                                {% endif %}#}
+{#                            </td>#}
+{#                        </tr>#}
+{#                    {% endfor %}#}
                     </tbody>
                 </table>
             {% endif %}
@@ -324,10 +336,101 @@
 
         <!-- bouton recherche -->
         <div class="bloc-btn-home btn-creer-home">
-            <a href="{{path('creer_sortie')}}" class="btn-home">Créer une sortie</a>
+            <a href="{{ path('creer_sortie') }}" class="btn-home">Créer une sortie</a>
         </div>
 
     </section>
 
 {% endblock %}
 
+{% block javascripts %}
+    <script>
+        $recherche = function (data) {
+            var $id = data['id'];
+            $.each(data['sorties'], function (key, val) {
+                    if (!(val['noEtat']['libelle'] === 'En création' && val['noOrganisateur']['id'] !== $id)) {
+
+                        var $present = '';
+                        var $dateCloture = new Date(val['dateCloture']);
+                        var $outputCloture = $dateCloture.toLocaleString('en-GB', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                        });
+                        var $dateDebut = new Date(val['dateDebut']);
+                        var $outputDebut = $dateDebut.toLocaleString('en-GB', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+                        var $action = '';
+
+                        var pathOrga = "{{ path('utilisateur_afficherProfil',{'id':'%id%'}) }}";
+                        pathOrga = pathOrga.replace("%25id%25", val['noOrganisateur']['id']);
+
+                        var pathAff = "{{ path('sortie_afficherSortie',{'id':'%id2%'}) }}";
+                        pathAff = pathAff.replace("%25id2%25", val['id']);
+
+                        var pathInsc = "{{ path('inscription',{'id':'%id3%'}) }}";
+                        pathInsc = pathInsc.replace("%25id3%25", val['id']);
+
+                        var pathAnn = "{{ path('annuler_verification',{'id':'%id2%'}) }}";
+                        pathAnn = pathAnn.replace("%25id2%25", val['id']);
+
+                        var pathDesi = "{{ path('desistement',{'id':'%id2%'}) }}";
+                        pathDesi = pathDesi.replace("%25id2%25", val['id']);
+
+                        var pathMod = "{{ path('modifierSortie',{'id':'%id2%'}) }}";
+                        pathMod = pathMod.replace("%25id2%25", val['id']);
+
+                        var pathPub = "{{ path('sortie_publier',{'id':'%id2%'}) }}";
+                        pathPub = pathPub.replace("%25id2%25", val['id']);
+
+                        $.each(val['noInscriptions'], function (k, v) {
+                            if ($id === v['noUser']['id']) {
+                                $present = "Oui";
+                            }
+                        });
+
+                        if (val['noEtat']['libelle'] === 'En création') {
+                            $action = '<a href="' + pathMod + '">Modifier</a> - <a href="' + pathPub + '">Publier</a>'
+                        } else if (val['noEtat']['libelle'] === 'En cours' || val['noEtat']['libelle'] === 'Terminer') {
+                            $action = '<a href="' + pathAff + '">Afficher</a>'
+                        } else {
+                            $action = '<a href="' + pathAff + '">Afficher</a>'
+                            if (val['noEtat']['libelle'] === 'Clôturer') {
+                                if ($present === "Oui") {
+                                    $action = $action + ' - ' + '<a href="' + pathDesi + '">Se désister</a>'
+                                }
+                            } else {
+                                if (val['noInscriptions'].length === 0) {
+                                    $action = $action + ' - ' + '<a href="' + pathInsc + '">S\'inscrire</a>'
+                                } else if ($present === "Oui") {
+                                    $action = $action + ' - ' + '<a href="' + pathDesi + '">Se désister</a>'
+                                } else {
+                                    $action = $action + ' - ' + '<a href="' + pathInsc + '">S\'inscrire</a>'
+                                }
+                            }
+                            if (val['noOrganisateur']['id'] === $id) {
+                                $action = $action + ' - ' + '<a href="' + pathAnn + '">Annuler</a>'
+                            }
+                        }
+
+                        $('#tbody').append(
+                            '<tr><td> ' + val['nom'] + '</td>' +
+                            '<td>' + $outputDebut + '</td>' +
+                            '<td> ' + $outputCloture + '</td>' +
+                            '<td> ' + val['noInscriptions'].length + ' / ' + val['nbInscriptionMax'] + ' </td>' +
+                            '<td>' + val['noEtat']['libelle'] + '</td>' +
+                            '<td>' + $present + ' </td>' +
+                            '<td> <a href = "' + pathOrga + '" >' + val['noOrganisateur']['pseudo'] + '</a></td>' +
+                            '<td>' + $action + '</td>' + '</tr>'
+                        );
+                    }
+                }
+            );
+        };
+    </script>
+{% endblock %}

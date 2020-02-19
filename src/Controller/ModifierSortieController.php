@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ModifierSortieController extends AbstractController
 {
     /**
-     * @Route("/modifierSortie/{id}", name="modifierSortie", requirements={"id"="\d+"})
+     * @Route("/modifierSortie/{id}", name="modifierSortie")
      */
     public function form(EntityManagerInterface $em, Request $request, int $id)
     {
