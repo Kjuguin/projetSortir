@@ -44,7 +44,7 @@ $debutAjax = function () {
 
     currentRequest = $.ajax({
         type: 'POST',
-        url: '/home/recherche',
+        url: '/recherche',
         data: {
             "site": $('#site').val(),
             "nom": $('#nom').val(),

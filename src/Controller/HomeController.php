@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Site;
 use App\Entity\Sortie;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,7 +19,7 @@ use Symfony\Component\Serializer\Serializer;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/recherche", name="home_recherche")
      */
     public function index(EntityManagerInterface $em, Request $request)
     {
@@ -77,6 +78,28 @@ class HomeController extends AbstractController
         $data = $serializer->normalize($sorties, null, ['groups' => 'group1']);
 
         return $this->json(['sorties' => $data, 'id' => $this->getUser()->getId()]);
+
+    }
+
+    /**
+     * @Route("/", name="home")
+     */
+    public function home(EntityManagerInterface $em, Request $request)
+    {
+        $siteRepository = $em->getRepository(Site::class);
+        $sites = $siteRepository->findAll();
+
+
+        $sortieRepository = $em->getRepository(Sortie::class);
+
+        $sorties = $sortieRepository->findAll();
+
+        return $this->render('home/home.html.twig',
+            [
+                "sites" => $sites,
+                "sorties" => $sorties,
+            ]
+        );
 
     }
 
