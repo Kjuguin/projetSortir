@@ -82,6 +82,8 @@ class SortieRepository extends ServiceEntityRepository
             $sqb->setParameter("passee", $param['passee']);
         }
 
+        $sqb->orderBy("s.dateCloture","DESC");
+
         $query = $sqb->getQuery();
         $result = $query->getResult();
         return $result;

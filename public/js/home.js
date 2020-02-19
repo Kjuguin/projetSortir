@@ -1,3 +1,5 @@
+var currentRequest = null;
+
 $(document).ready(function() {
 
     /**
