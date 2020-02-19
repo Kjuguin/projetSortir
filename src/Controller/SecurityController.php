@@ -16,13 +16,18 @@ class SecurityController extends AbstractController
 {
     /**
      * @Route("/registration", name="registration")
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param EntityManagerInterface $em
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function registration(UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em, Request $request)
     {
+
+        if (!($this->isGranted("ROLE_ADMIN"))) {
+
+            $this->addFlash('danger', 'Vous devez être administrateur');
+
+            return $this->redirectToRoute('home');
+        }
+
+
         $user = new User();
         $user->setPseudo("test");
 
@@ -37,7 +42,7 @@ class SecurityController extends AbstractController
             $user->setPassword($hash);
             $user->setPseudo($user->getEmail());
 
-            $user->setRoles(['ROLE_USER']);
+            $user->setRoles(['ROLE_PARTICIPANT']);
 
             $user->setNom(ucfirst(strtolower($user->getNom())));
             $user->setPrenom(ucfirst(strtolower($user->getPrenom())));
@@ -46,9 +51,9 @@ class SecurityController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash("success", "Inscription OK !");
+            $this->addFlash("success", "Inscription réussie !");
 
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('registration');
         }
 
         return $this->render('security/registration.html.twig', [

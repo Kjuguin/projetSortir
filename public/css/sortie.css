@@ -1,0 +1,224 @@
+/************************************** PAGE DETAIL SORTIE ****************************************/
+.dtl-sortie-container{
+    display: inline-block;
+    background:#e2f3ff;
+    width: 60em;
+    margin: 0 auto;
+    padding: 3em 3em 3em 3em;
+    border-radius:5px;
+    box-shadow: 2px -2px 28px -4px rgba(40,104,134,0.2);
+}
+
+.dtl-sortie-flex{
+    width:100%;
+    text-align: center;
+}
+
+.dtl-sortie-left, .dtl-sortie-right{
+    display: inline-block;
+    text-align:left;
+    width:47%;
+}
+
+.dtl-sortie-left{
+    float:left;
+}
+
+.dtl-sortie-right{
+    float:right;
+}
+
+.dtl-srt-bloc{
+    margin-top:1.5em;
+}
+
+.dtl-srt-bloc p, .tbl-inscrits p{
+    color:#8c9ca9;
+    margin-bottom: 0.5em !important;
+}
+
+.dtl-srt-bloc div{
+    color:#687786;
+    background:#f4faff;
+    width:100%;
+    padding: 0.7em 1em;
+    font-weight:bold;
+}
+
+.dtl-descp{
+    min-height: 19.8em;
+}
+
+/** tableau d'inscrits **/
+.tbl-iscrt-small{
+    display:none;
+}
+
+.tbl-inscrits{
+    margin-top:1.5em;
+}
+
+.tbl-header{
+    background-color:#fff;
+    border-radius: 3px 3px 0 0;
+}
+
+.dtl-table{
+    width:100%;
+    table-layout:fixed;
+}
+
+.tbl-content{
+    height:11em;
+    overflow-x:auto;
+    margin-top: 0px;
+    border-radius: 0 0 3px 3px;
+    background: #fff2da;
+}
+
+th, td {
+    text-align: left;
+    padding:8px;
+}
+
+th{
+    color:#8fb5db;
+}
+
+.dtl-strip:nth-child(odd){
+    background-color: #fff2da;
+    color:#687786;
+}
+
+.dtl-strip:nth-child(even){
+    background-color: #fff;
+    color:#687786;
+}
+
+.dtl-strip td a, .dtl-strip td a:hover{
+    color:#687786;
+}
+
+/* Scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background:#fff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #718293;
+    border-radius:3px;
+}
+
+
+/*************** MEDIA QUERIES ****************/
+@media screen and (max-width: 1050px){
+    .dtl-sortie-container{
+        width:95%;
+        padding:3em 2em 3em 2em;
+    }
+
+    td{
+        font-size:0.9em;
+    }
+}
+
+@media screen and (max-width: 950px){
+    .dtl-descp{
+        min-height:0;
+    }
+
+    .tbl-iscrt-big{
+        display:none;
+    }
+
+    .tbl-iscrt-small{
+        display: inline-block;
+        text-align:left;
+    }
+
+    th{
+        padding-left: 1.5em;
+    }
+
+    td{
+        font-size:1em;
+        padding-left: 1.5em;
+    }
+}
+
+@media screen and (max-width:800px){
+    .dtl-srt-bloc div{
+        font-weight:500;
+    }
+}
+
+@media screen and (max-width:700px){
+    .dtl-sortie-left, .dtl-sortie-right{
+        float:none;
+        width:100%;
+    }
+}
+
+@media screen and (max-width:520px){
+    .dtl-sortie-container{
+        padding: 3em 1.5em 3em 1.5em;
+    }
+
+    .tbl-small-gone{
+        display: none;
+    }
+
+    td{
+        font-size:0.9em;
+    }
+}
+
+/************************************** PAGE ANNULER SORTIE ****************************************/
+.clear-cncl-btn{
+    display:none;
+}
+
+.cncl-inpt-bloc{
+    text-align: left;
+}
+
+.cncl-sortie-btn{
+    margin-top:3em;
+}
+
+.btn-cncl{
+    width:9em;
+}
+
+.btn-cncl{
+    margin:0 1em 0 1em;
+}
+
+/*************** MEDIA QUERIES ****************/
+@media screen and (max-width: 620px){
+    .clear-cncl-btn{
+        display:block;
+    }
+
+    .btn-cncl{
+        margin:0;
+        margin-top:1.5em;
+    }
+
+    .cncl-sortie-btn {
+        margin-top: 1.5em;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .cncl-cntr{
+        padding:3em 1.5em 3em 1.5em;
+    }
+}

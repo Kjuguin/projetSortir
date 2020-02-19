@@ -1,23 +1,58 @@
-{% extends 'layout.html.twig' %}
+{% extends 'pages-base.html.twig' %}
 
-{% block title %} Modification du Profil{% endblock %}
+{% block title %}Modifier profil{% endblock %}
 
 {% block body %}
-    <div>
-        <h1>Gestion Du Profil</h1>
-    </div>
-    <div>
-        {{ form_start(userForm) }}
-        {{ form_widget(userForm) }}
-        <label>Ma photo </label>
-        <button class="btn btn-success mt15">Télécharger vers le serveur</button>
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="msg-alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
 
+    <div class="edit-profil-bloc">
+        {{ form_start(userForm, {'attr': {'class': 'profil-form'}}) }}
 
-        <div class="row col-auto justify-content-end" style="padding-right: 30px ">
-        <button class="btn btn-success" style="margin-right: 10px" type="reset">Annuler</button>
-        <button class="btn btn-success " type="submit">Modifier</button>
-        {{ form_end(userForm) }}
+        <!-- bloc photo + buttons -->
+        <div class="bloc-profil-left">
+            <div class="left-container">
+                <div class="avtr-prfl-edit">
+                    <img src="{{ asset('img/avatar-big.png') }}">
+                </div>
+
+                <button class="btn-base btn-blue btn-pfl">Upload photo</button>
+
+                <div class="red-action-btn">
+                    <button class="btn-base btn-red btn-pfl" type="reset">Annuler</button>
+                    <div class="clear"></div>
+                    <button class="btn-base btn-red btn-cncl-pfl btn-pfl" type="submit">Enregistrer</button>
+                </div>
+            </div>
         </div>
+
+        <!-- bloc title + fields -->
+        <div class="bloc-profil-right">
+            <h1 class="page-h1">Mon Profil</h1>
+
+            <div class="avtr-edit-mini">
+                <img src="{{ asset('img/avatar-big.png') }}">
+            </div>
+
+            {{ form_widget(userForm) }}
+
+            <div class="gp-btn-pfl-mini">
+                <button class="btn-base btn-blue btn-pfl-mini">Upload photo</button>
+                <div class="clear"></div>
+                <button class="btn-base btn-red btn-pfl-mini mini-cncl" type="reset">Annuler</button>
+                <div class="clear"></div>
+                <button class="btn-base btn-red btn-pfl-mini" id="enregistrerModifsProfil" type="submit">Enregistrer</button>
+
+            </div>
+        </div>
+
+        {{ form_end(userForm) }}
+
     </div>
 
 

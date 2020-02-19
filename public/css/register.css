@@ -1,0 +1,83 @@
+.register-container{
+    background:#e2f3ff;
+    margin: 0 auto;
+    width:45em;
+    padding: 3.5em 5em 3.5em 5em;
+    border-radius:5px;
+    box-shadow: 2px -2px 28px -4px rgba(40,104,134,0.2);
+}
+
+.register-form{
+    text-align: left;
+}
+
+.register-h1{
+    padding-bottom:1em;
+}
+
+#registration label{
+    color:#687786;
+    margin-top: 1.5em;
+    text-align: left;
+}
+
+.input-register{
+    width:100%;
+    border:none;
+    padding: 0.7em 1em 0.7em 1em;
+    background: #f4faff;
+}
+
+#registration div ul li{
+    color:#ff7083;
+}
+
+#registration div:nth-child(6){
+    text-align: center;
+    margin-top:3em;
+}
+
+/*************** MEDIA QUERIES ****************/
+@media screen and (max-width: 820px){
+    .register-container{
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 700px){
+    .register-container{
+        padding: 3.5em 3em 3.5em 3em;
+    }
+}
+
+@media screen and (max-width: 540px){
+    .register-container{
+        padding: 3.5em 2em 3.5em 2em;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

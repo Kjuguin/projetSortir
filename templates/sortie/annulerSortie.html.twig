@@ -1,0 +1,44 @@
+{% extends "pages-base.html.twig" %}
+
+{% block title %}Annuler une sortie{% endblock %}
+
+{% block body %}
+    <div class="register-container cncl-cntr">
+
+        <h1 class="page-h1">Annuler une sortie</h1>
+
+        <div class="cncl-inpt-bloc">
+            <div class="dtl-srt-bloc">
+                <p>Nom</p>
+                <div><span>{{ sortie.nom | capitalize }}</span></div>
+            </div>
+
+            <div class="dtl-srt-bloc">
+                <p>Date et heure de la sortie</p>
+                <div><span>{{ sortie.dateDebut | date("d/m/y H:i:s") }}</span></div>
+            </div>
+
+            <div class="dtl-srt-bloc">
+                <p>Lieu</p>
+                <div><span>
+                    {{ sortie.noLieu.nomLieu | capitalize }}
+                        <div class="clear"></div>
+                    {{ sortie.nolieu.rue | capitalize }}
+                        <div class="clear"></div>
+                    {{ sortie.noLieu.noVille.nomVille | capitalize }}
+                        <div class="clear"></div>
+                    {{ sortie.noLieu.noVille.codePostal }}
+                </span></div>
+            </div>
+        </div>
+
+        <!-- Annuler/confirmer boutons -->
+        <div class="cncl-sortie-btn">
+            <a href="{{ path("annuler_sortie",{'id':sortie.id}) }}"><button class="btn-base btn-red btn-cncl">Confirmer</button></a>
+            <div class="clear clear-cncl-btn"></div>
+            <a href="{{ path("home") }}"><button class="btn-base btn-red btn-cncl">Annuler</button></a>
+        </div>
+
+    </div>
+
+{% endblock %}

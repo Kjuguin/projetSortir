@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}sortir.com{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ asset("css/home.css") }}">
+    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{ asset("img/favicon2.png") }}"/>
+
+    <link rel="stylesheet" type="text/css" href="/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap4-glyphicons/maps/glyphicons-fontawesome.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css"rel="stylesheet">
+</head>
+<body>
+
+    {% block body %}{% endblock %}
+
+    <footer class="home-footer">
+        <div class="hm-footer-wrap">
+            <!-- copyright footer -->
+            <div class="copyright">
+                <p>Sorties entr’Eni © 2020</p>
+            </div>
+
+            <!-- bloc social networks -->
+            <div class="rs-icon">
+                <div class="facebook rs-logo">
+                    <a href="#"><img src="{{ asset('img/facebook.png') }}" alt="facebook logo"></a>
+                </div>
+
+                <div class="instagram rs-logo">
+                    <a href="#"><img src="{{ asset('img/instagram.png') }}" alt="instagram logo"></a>
+                </div>
+
+                <div class="twitter rs-logo">
+                    <a href="#"><img src="{{ asset('img/twitter.png') }}" alt="twitter logo"></a>
+                </div>
+            </div>
+
+            <!-- clear copyright tablette -->
+            <div class="clear clear-footer"></div>
+            <div class="copyright-2">
+                <p>Sorties entr’Eni © 2020</p>
+            </div>
+        </div>
+    </footer>
+
+            <!-- Javascript -->
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+            <script>
+                ;(function($){
+                    $.fn.datepicker.dates['fr'] = {
+                        days: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
+                        daysShort: ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."],
+                        daysMin: ["d", "l", "ma", "me", "j", "v", "s"],
+                        months: ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"],
+                        monthsShort: ["janv.", "févr.", "mars", "avril", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."],
+                        today: "Aujourd'hui",
+                        monthsTitle: "Mois",
+                        clear: "Effacer",
+                        weekStart: 1,
+                        format: "dd/mm/yyyy"
+                    };
+                }(jQuery));
+
+                $('.datepicker').datepicker({
+                    language: 'fr',
+                    autoclose: true,
+                    todayHighlight: true
+                })
+            </script>
+
+            <script type="text/javascript" charset="utf8" src="/js/jquery-3.4.1.min.js"></script>
+            <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+            <script type="text/javascript" charset="utf8" src="/js/datatables.js"></script>
+            <script type="text/javascript" charset="utf8" src="/js/home.js"></script>
+
+    {% block javascripts %}
+    {% endblock %}
+</body>
+</html>
