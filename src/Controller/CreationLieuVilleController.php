@@ -33,7 +33,7 @@ class CreationLieuVilleController extends AbstractController
         $formVille->handleRequest($request);
 
         if ($formLieu->isSubmitted() && $formLieu->isValid()) {
-            $this->addFlash("success", "lieu ajouté");
+            $this->addFlash("success", "Lieu ajouté");
 
             $em->persist($lieu);
 

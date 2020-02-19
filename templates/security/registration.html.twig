@@ -1,12 +1,12 @@
 {% extends 'pages-base.html.twig' %}
 
-{% block title %}Registration !{% endblock %}
+{% block title %}Enregistrer utilisateur{% endblock %}
 
 {% block body %}
 
     {% for label, messages in app.flashes %}
         {% for message in messages %}
-            <div class="msg-alert alert-{{ label }}">
+            <div class="msg-alert">
                 {{ message }}
             </div>
         {% endfor %}

@@ -26,7 +26,7 @@ class HomeController extends AbstractController
 
         if (!($this->isGranted("ROLE_PARTICIPANT"))) {
 
-            $this->addFlash('danger', 'Vous devez vous connecter');
+            $this->addFlash('danger', 'Vous devez être connecté');
 
             return $this->redirectToRoute('app_login');
         }
@@ -88,7 +88,7 @@ class HomeController extends AbstractController
     {
         if (!($this->isGranted("ROLE_PARTICIPANT"))) {
 
-            $this->addFlash('danger', 'Vous devez vous connecter');
+            $this->addFlash('danger', 'Vous devez être connecté');
 
             return $this->redirectToRoute('app_login');
         }

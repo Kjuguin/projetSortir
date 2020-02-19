@@ -20,7 +20,7 @@ class AnnulerUneSortieController extends AbstractController
     {
         if (!($this->isGranted("ROLE_PARTICIPANT"))) {
 
-            $this->addFlash('danger', 'Vous devez être connecter');
+            $this->addFlash('danger', 'Vous devez être connecté');
 
             return $this->redirectToRoute('app_login');
         }
@@ -30,7 +30,7 @@ class AnnulerUneSortieController extends AbstractController
             $sortie = $SortieRepository->find($id);
             $nom = $sortie->getNom();
 
-            $this->addFlash("succes", "Sortie " . $nom . " Annulé");
+            $this->addFlash("succes", "Sortie " . $nom . " Annulée");
             $em->remove($sortie);
             $em->flush();
 
@@ -46,7 +46,7 @@ class AnnulerUneSortieController extends AbstractController
 
         if (!($this->isGranted("ROLE_PARTICIPANT"))) {
 
-            $this->addFlash('danger', 'Vous devez être connecter');
+            $this->addFlash('danger', 'Vous devez être connecté');
 
             return $this->redirectToRoute('app_login');
         }
