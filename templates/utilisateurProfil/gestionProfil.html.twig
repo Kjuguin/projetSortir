@@ -1,8 +1,16 @@
 {% extends 'pages-base.html.twig' %}
 
-{% block title %} Modification du Profil{% endblock %}
+{% block title %}Modifier profil{% endblock %}
 
 {% block body %}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="msg-alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     <div class="edit-profil-bloc">
         {{ form_start(userForm, {'attr': {'class': 'profil-form'}}) }}
 

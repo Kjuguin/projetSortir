@@ -3,17 +3,25 @@
 {% block title %}Modifier une sortie{% endblock %}
 
 {% block body %}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="msg-alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
 
     {{ form_start(form) }}
 
     {{ form_widget(form) }}
 
-    <button style="background: purple"><a href="{{ path('ajoutLieuVille') }}">Ajouter Lieu (à mieux réaliser par la suite</a></button>
+    <button style="background: purple"><a href="{{ path('ajoutLieuVille') }}">Ajouter Lieu (à mieux réaliser par la
+            suite</a></button>
 
     <button type="submit" name="sortie" value="1">Enregistrer</button>
     <button type="submit" name="sortie" value="3">Publier la sortie
     {% if (modification == 1) %}
-    <button><a href="{{ path('annuler_sortie',{'id':sortie.id}) }}">Supprimer</a></button>
+        <button><a href="{{ path('annuler_sortie',{'id':sortie.id}) }}">Supprimer</a></button>
     {% endif %}
     <button type="reset">Annuler</button>
 

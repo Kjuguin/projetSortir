@@ -25,6 +25,20 @@ p{
     clear: both;
 }
 
+/** messages d'alerte **/
+.msg-alert{
+    color: #fff !important;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.3em;
+    margin-bottom:2em;
+    letter-spacing: 1px;
+    background-color:inherit !important;
+    border-color:inherit !important;
+    font-family: 'Nunito', sans-serif !important;
+}
+
 /*************** HEADER ****************/
 .gradient-section{
     text-align: center;
@@ -198,6 +212,7 @@ p{
 .container-home{
     display: flex;
     justify-content: center;
+    padding-bottom: 1.5em;
 }
 
 .mini-user-aside, .mini-clear, .clear-input, .clear-footer{
@@ -270,7 +285,7 @@ p{
 .inpt-dt{
     height:3em !important;
     border:none !important;
-    border-radius:3px 0 0 3px !important;
+    border-radius:3px !important;
 }
 
 .inpt-calendar{
@@ -286,6 +301,39 @@ p{
 .far{
     color:#718293 !important;
     font-size: 1.6em !important;
+}
+
+input[type="date"] {
+    position: relative;
+    padding: 10px;
+    color:#687786;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: transparent;
+    background: none;
+    z-index: 1;
+}
+
+input[type="date"]:before {
+    color: transparent;
+    background: none;
+    display: block;
+    font-family: 'FontAwesome';
+    content: '\f073';
+    /* This is the calendar icon in FontAwesome */
+    width: 15px;
+    height: 20px;
+    font-size:1.4em;
+    position: absolute;
+    top: 8px;
+    right: 0.9em;
+    color: #718293;
+}
+
+input[type="date"]::-webkit-inner-spin-button {
+    visibility: hidden;
+    -webkit-appearance: none;
 }
 
 /** CHECKBOXES **/
@@ -347,6 +395,7 @@ p{
     text-transform: uppercase;
     padding: 0.8em 2em;
     margin:0 !important;
+    cursor:pointer;
     border: none;
     border-radius:5px;
     box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
@@ -471,6 +520,36 @@ p{
     padding-top:2.5em;
 }
 
+/* loader tableau */
+.loader-bloc{
+    width:100%;
+    text-align:center;
+}
+
+.loader{
+    margin: 0 0 2em;
+    height: 100px;
+    width: 20%;
+    text-align: center;
+    padding: 1em;
+    margin: 0 auto 1em;
+    display: inline-block;
+    vertical-align: top;
+}
+
+svg path,
+svg rect{
+    fill: #fff2da;
+}
+
+.loader-bloc p{
+    color:#fff2da;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 1.1em;
+}
+
+/* tableau */
 .table-bordered{
     border:none;
     border-radius: 5px;
@@ -486,7 +565,7 @@ p{
 
 .thead-light tr th{
     background:#fff !important;
-    color:#8fb5db !important;
+    color:#687786 !important;
 }
 
 .table-striped tbody tr:nth-of-type(odd){
@@ -726,12 +805,7 @@ td a:hover{
     }
 }
 
-
-
-
-
-
-
+/************************************************/
 
 
 

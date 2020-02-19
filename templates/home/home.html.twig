@@ -52,6 +52,15 @@
             </nav>
         </div>
 
+        <!-- Message d'alerte -->
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="msg-alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
 
         <!-- SECTION 1 : Recherche et filtres des sorties -->
         <section class="section-filtre">
@@ -110,12 +119,8 @@
                             <div class="bloc-field bf-3">
                                 <label for="date-debut">Début</label>
                                 <!-- 1er champ date-->
-                                <div class="inpt-dt-gp datepicker input-group date" id="datepicker">
-                                    <input type="text" class="inpt-dt form-control" placeholder="Choisir une date">
-                                    <span class="inpt-calendar input-group-append input-group-addon">
-                                        <span class="inpt-caldr-icon input-group-text"><i
-                                                    class="far fa-calendar-alt"></i></span>
-                                    </span>
+                                <div class="inpt-dt-gp input-group date" id="datepicker">
+                                    <input type="date" id="date-debut" class="inpt-dt form-control" placeholder="Choisir une date">
                                 </div>
                             </div>
                             <!-- clear version mobile-->
@@ -124,12 +129,8 @@
                             <div class="bloc-field bf-4">
                                 <label for="date-fin">Fin</label>
                                 <!-- 2eme champ date-->
-                                <div class="inpt-dt-gp datepicker input-group date" id="datepicker">
-                                    <input type="text" class="inpt-dt form-control" placeholder="Choisir une date">
-                                    <span class="inpt-calendar input-group-append input-group-addon">
-                                        <span class="inpt-caldr-icon input-group-text"><i
-                                                    class="far fa-calendar-alt"></i></span>
-                                    </span>
+                                <div class="inpt-dt-gp input-group date" id="datepicker">
+                                    <input type="date" id="date-fin" class="inpt-dt form-control" placeholder="Choisir une date">
                                 </div>
                             </div>
                         </div>
@@ -175,9 +176,9 @@
                         </div>
 
                         <!-- bouton recherche -->
-                        <div class="bloc-btn-home">
-                            <input class="btn-home" type="submit" value="Rechercher">
-                        </div>
+{#                        <div class="bloc-btn-home">#}
+{#                            <input class="btn-home" type="submit" value="Rechercher">#}
+{#                        </div>#}
                     </form>
                 </div>
 
@@ -216,6 +217,28 @@
 
     <!-- SECTION 2 : Affichage du tableau des sorties -->
     <section class="container-fluid">
+
+        <!-- loader chargement tableau -->
+        <div class="loader-bloc">
+            <p>Chargement des sorties</p>
+
+            <div class="loader loader--style3" title="2">
+                <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+                <animateTransform attributeType="xml"
+                            attributeName="transform"
+                            type="rotate"
+                            from="0 25 25"
+                            to="360 25 25"
+                            dur="0.6s"
+                            repeatCount="indefinite"/>
+                </path>
+                </svg>
+            </div>
+        </div>
+
+        <!-- tableau des sorties -->
         <div class="table-responsive-sm">
             {% if(sorties !=null) %}
                 <table id="table-sortie" data-toggle="table" class="table table-bordered table-orderable table-striped">
@@ -233,108 +256,15 @@
                     </tr>
                     </thead>
                     <tbody id="tbody">
-<tr><td> </td></tr>
-{#                    {% for sortie in sorties %}#}
-{#                        <tr>#}
-{#                            <td>{{ sortie.nom }}</td>#}
-{#                            <td>{{ sortie.dateDebut | date('d/m/Y H:i') }}</td>#}
-{#                            <td class="table-gone">{{ sortie.dateCloture | date('d/m/Y') }}</td>#}
-{#                            <td class="table-gone">{{ sortie.noInscriptions.count }}/ {{ sortie.nbInscriptionMax }}</td>#}
-{#                            <td class="table-gone">{{ sortie.noEtat.libelle }}</td>#}
-{#                            <td class="table-gone">#}
-{#                                {% if app.user %}#}
-{#                                    {% for inscrit in sortie.noInscriptions %}#}
-{#                                        {% if inscrit.noUser.id == app.user.id %}#}
-{#                                            <p class="oui-inscrit">Oui</p>#}
-{#                                        {% endif %}#}
-{#                                    {% endfor %}#}
-{#                                {% endif %}#}
-{#                            </td>#}
-{#                            <td class="table-gone">#}
-{#                                <a href="{{ path('utilisateur_afficherProfil',{'id':sortie.noOrganisateur.id}) }}">{{ sortie.noOrganisateur.pseudo }}</a>#}
-{#                            </td>#}
-{#                            #}{#                            <td><a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a> - modifier</td>#}
-{#                            <td>#}
-{#                                {% set test = 0 %}#}
-
-{#                                <!-- En création -->#}
-{#                                {% if sortie.noEtat.libelle is same as ("En création") %}#}
-
-{#                                    <a href="{{ path('modifierSortie',{'id':sortie.id}) }}">Modifier</a> - <a#}
-{#                                        href="{{ path('sortie_publier',{'id':sortie.id}) }}">Publier</a>#}
-
-{#                                    <!-- En cours -->#}
-{#                                {% elseif  sortie.noEtat.libelle is same as ("En cours") %}#}
-{#                                    <a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a>#}
-
-{#                                    <!-- cas ouvert et fermé -->#}
-{#                                {% else %}#}
-{#                                    <a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a>#}
-
-
-{#                                    <!-- cas fermé -->#}
-{#                                    {% if sortie.noEtat.libelle is same as ('Fermé') %}#}
-
-{#                                        {% for inscrit in sortie.noInscriptions %}#}
-
-{#                                            <!-- fermé et inscrit -->#}
-{#                                            {% if inscrit.noUser.id is same as (app.user.id) %}#}
-{#                                                - <a href="{{ path('desistement',{'id':sortie.id}) }}">Se désister</a>#}
-{#                                            {% endif %}#}
-
-{#                                            <!-- fermé et non inscrit (se passe rien) -->#}
-
-{#                                        {% endfor %}#}
-{#                                        <!-- cas ouvert -->#}
-{#                                    {% elseif sortie.noEtat.libelle is same as ('Ouvert') %}#}
-
-{#                                        {% if sortie.noInscriptions.count is same as (0) %}#}
-{#                                            - <a href="{{ path('inscription',{'id':sortie.id}) }}">S'inscrire</a>#}
-{#                                            {% if sortie.noOrganisateur.id is same as (app.user.id) %}#}
-{#                                                - <a#}
-{#                                                    href="{{ path('annuler_verification',{'id':sortie.id}) }}">Annuler</a>#}
-{#                                            {% endif %}#}
-{#                                        {% else %}#}
-
-{#                                            {% for inscrit in sortie.noInscriptions %}#}
-
-{#                                                {% if inscrit.noUser.id != app.user.id %}#}
-
-{#                                                    {% set test = test + 1 %}#}
-
-{#                                                {% endif %}#}
-{#                                            {% endfor %}#}
-
-{#                                            {% if test == sortie.noInscriptions.count %}#}
-{#                                                <!-- ouvert et non inscrit -->#}
-
-{#                                                - <a href="{{ path('inscription',{'id':sortie.id}) }}">S'inscrire</a>#}
-
-{#                                                <!-- ouvert, non inscrit et organisateur -->#}
-{#                                                {% if sortie.noOrganisateur.id is same as (app.user.id) %}#}
-{#                                                    - <a href="{{ path('annuler_verification',{'id':sortie.id}) }}">Annuler</a>#}
-{#                                                {% endif %}#}
-{#                                            {% else %}#}
-{#                                                <!-- ouvert et inscrit -->#}
-{#                                                - <a href="{{ path('desistement',{'id':sortie.id}) }}">Se désister</a>#}
-
-{#                                                <!-- ouvert, inscrit et organisateur -->#}
-{#                                                {% if sortie.noOrganisateur.id is same as (app.user.id) %}#}
-{#                                                    - <a href="{{ path('annuler_verification',{'id':sortie.id}) }}">Annuler</a>#}
-{#                                                {% endif %}#}
-{#                                            {% endif %}#}
-{#                                        {% endif %}#}
-{#                                    {% endif %}#}
-{#                                {% endif %}#}
-{#                            </td>#}
-{#                        </tr>#}
-{#                    {% endfor %}#}
+                        <tr>
+                            <td></td>
+                        </tr>
                     </tbody>
                 </table>
             {% endif %}
         </div>
 
-        <!-- bouton recherche -->
+        <!-- bouton créer sortie -->
         <div class="bloc-btn-home btn-creer-home">
             <a href="{{ path('creer_sortie') }}" class="btn-home">Créer une sortie</a>
         </div>
