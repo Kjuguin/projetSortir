@@ -30,6 +30,7 @@ class User implements UserInterface
     private $noSite;
 
     /**
+     * @var Inscription[]
      * @ORM\OneToMany(targetEntity="App\Entity\Inscription", mappedBy="noUser")
      */
     private $noInscriptions;
@@ -349,5 +350,18 @@ class User implements UserInterface
 
         return $this;
     }
+
+
+    public function isInscrit(Sortie $sortie){
+        foreach ($this->noInscriptions as $inscription){
+           if ( $inscription->getNoSortie() == $sortie) {
+               return true;
+           }
+        }
+
+        return false;
+        //faire l'appel de la methode
+    }
+
 
 }

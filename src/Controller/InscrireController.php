@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class InscrireController extends AbstractController
 {
@@ -32,22 +33,30 @@ class InscrireController extends AbstractController
         $inscription = new Inscription();
 
 
-        if (count($sortie->getNoInscriptions()) < $sortie->getNbInscriptionMax()) {
-
-            $inscription->setDateInscription($date);
-            $inscription->setNoUser($participant);
-            $inscription->setNoSortie($sortie);
-            $entityManager = $this->getDoctrine()->getManager();
-
-            $entityManager->persist($inscription);
-            $entityManager->flush();
+        if ($this->getUser()->isInscrit($sortie)) {
+            $this->addFlash('danger', "Vous êtes déja inscrit petit malin !");
 
         } else {
-            $this->addFlash('danger', "Il n'y a plus de place pour cette sortie !");
-        }
+            if (count($sortie->getNoInscriptions()) < $sortie->getNbInscriptionMax()) {
 
+                $inscription->setDateInscription($date);
+                $inscription->setNoUser($participant);
+                $inscription->setNoSortie($sortie);
+                $entityManager = $this->getDoctrine()->getManager();
+
+                $entityManager->persist($inscription);
+                $entityManager->flush();
+
+            } else {
+                $this->addFlash('danger', "Il n'y a plus de place pour cette sortie !");
+            }
+
+
+        }
         return $this->redirectToRoute('home');
     }
+
+
 
     /**
      * @Route("/desistement/{id}", name="desistement")
