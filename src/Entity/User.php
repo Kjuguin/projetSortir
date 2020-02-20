@@ -46,7 +46,6 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @Assert\Url(message="L'url n'est pas valide")
      * @ORM\Column(type="string", length=250, nullable=true)
      */
     private $urlPhoto;
