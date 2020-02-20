@@ -15,6 +15,8 @@
 
     {{ form_widget(form) }}
 
+    <button type="button" onclick="$test()">Ajout</button>
+
     <button style="background: purple"><a href="{{ path('ajoutLieuVille') }}">Ajouter Lieu (à mieux réaliser par la
             suite</a></button>
 
@@ -67,6 +69,7 @@
     {% if (modification == 1) %}
         <button><a href="{{ path('annuler_sortie',{'id':sortie.id}) }}">Supprimer</a></button>
     {% endif %}
+
     <button type="reset">Annuler</button>
 
     {{ form_end(form) }}
