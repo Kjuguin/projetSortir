@@ -28,11 +28,13 @@ class CreationSortieType extends AbstractType
                 'label' => 'Date et heure de la sortie',
                 'widget' => 'single_text',
                 "data" => new DateTime(),
+                'placeholder'=>' ',
             ])
             ->add('dateCloture', DateTimeType::class, [
                 'label' => 'Date limite d\'inscription',
                 'widget' => 'single_text',
                 "data" => new DateTime(),
+                'placeholder'=>' ',
             ])
             ->add('nbInscriptionMax', IntegerType::class, [
                 'label' => 'Nombre de places',

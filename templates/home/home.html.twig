@@ -72,7 +72,9 @@
                 </div>
 
                 <div class="mini-user-info">
-                    <p class="mini-pseudo">{{ app.user.pseudo }}</p>
+                    <p class="mini-pseudo"><a
+                                href="{{ path('utilisateur_afficherProfil', {"id": app.user.id}) }}">{{ app.user.pseudo }}</a>
+                    </p>
 
                     <div class="mini-date-bloc">
                         <p class="mini-lbl">Date du jour: </p>
@@ -121,7 +123,8 @@
                                 <label for="date-debut">Début</label>
                                 <!-- 1er champ date-->
                                 <div class="inpt-dt-gp input-group date" id="datepicker">
-                                    <input type="date" id="date-debut" class="inpt-dt form-control" placeholder="Choisir une date">
+                                    <input type="date" id="date-debut" class="inpt-dt form-control"
+                                           placeholder="Choisir une date">
                                 </div>
                             </div>
                             <!-- clear version mobile-->
@@ -131,7 +134,8 @@
                                 <label for="date-fin">Fin</label>
                                 <!-- 2eme champ date-->
                                 <div class="inpt-dt-gp input-group date" id="datepicker">
-                                    <input type="date" id="date-fin" class="inpt-dt form-control" placeholder="Choisir une date">
+                                    <input type="date" id="date-fin" class="inpt-dt form-control"
+                                           placeholder="Choisir une date">
                                 </div>
                             </div>
                         </div>
@@ -162,14 +166,16 @@
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="non-inscrit" name="filtre3"
                                            value="filtre3" onclick="$debutAjax()">
-                                    <label class="custom-control-label" for="non-inscrit">Sorties auxquelles je ne suis pas
+                                    <label class="custom-control-label" for="non-inscrit">Sorties auxquelles je ne suis
+                                        pas
                                         inscrit.e</label>
                                 </div>
                             </div>
 
                             <div class="check">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="sorties-passees" name="filtre4"
+                                    <input type="checkbox" class="custom-control-input" id="sorties-passees"
+                                           name="filtre4"
                                            value="filtre4" onclick="$debutAjax()">
                                     <label class="custom-control-label" for="sorties-passees">Sorties passées</label>
                                 </div>
@@ -186,7 +192,9 @@
                         </div>
 
                         <div class="user-info-aside">
-                            <p class="user-pseudo">{{ app.user.pseudo }}</p>
+                            <p class="user-pseudo"><a
+                                        href="{{ path('utilisateur_afficherProfil', {"id": app.user.id}) }}">{{ app.user.pseudo }}</a>
+                            </p>
 
                             <div class="date-bloc-1">
                                 <p class="info-lbl">date du jour</p>
@@ -236,26 +244,26 @@
 
         <!-- tableau des sorties -->
         <div class="table-responsive-sm">
-                <table id="table-sortie" data-toggle="table" class="table table-bordered table-orderable table-striped">
-                    <thead class="thead-light">
-                    <tr class="active">
-                        <th scope="col" data-field="nom" data-sortable="true">Nom</th>
-                        <th scope="col" data-field="date-sortie" data-sortable="true">Date Sortie</th>
-                        <th class="table-gone" scope="col" data-field="cloture" data-sortable="true">Clôture</th>
-                        <th class="table-gone" scope="col" data-field="places" data-sortable="true">Places</th>
-                        <th class="table-gone" scope="col" data-field="etat" data-sortable="true">Etat</th>
-                        <th class="table-gone" scope="col" data-field="inscrit" data-sortable="true">Inscrit</th>
-                        <th class="table-gone" scope="col" data-field="organisateur" data-sortable="true">Organisateur
-                        </th>
-                        <th scope="col" data-field="action" data-sortable="true">Action</th>
-                    </tr>
-                    </thead>
-                    <tbody id="tbody">
-                        <tr>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <table id="table-sortie" data-toggle="table" class="table table-bordered table-orderable table-striped">
+                <thead class="thead-light">
+                <tr class="active">
+                    <th scope="col" data-field="nom" data-sortable="true">Nom</th>
+                    <th scope="col" data-field="date-sortie" data-sortable="true">Date Sortie</th>
+                    <th class="table-gone" scope="col" data-field="cloture" data-sortable="true">Clôture</th>
+                    <th class="table-gone" scope="col" data-field="places" data-sortable="true">Places</th>
+                    <th class="table-gone" scope="col" data-field="etat" data-sortable="true">Etat</th>
+                    <th class="table-gone" scope="col" data-field="inscrit" data-sortable="true">Inscrit</th>
+                    <th class="table-gone" scope="col" data-field="organisateur" data-sortable="true">Organisateur
+                    </th>
+                    <th scope="col" data-field="action" data-sortable="true">Action</th>
+                </tr>
+                </thead>
+                <tbody id="tbody">
+                <tr>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
 
         <!-- bouton créer sortie -->
@@ -276,14 +284,14 @@
 
                         var $present = '';
                         var $dateCloture = new Date(val['dateCloture']);
-                        $dateCloture.setHours($dateCloture.getHours()-2);
+                        $dateCloture.setHours($dateCloture.getHours() - 2);
                         var $outputCloture = $dateCloture.toLocaleString('en-GB', {
                             year: 'numeric',
                             month: '2-digit',
                             day: '2-digit'
                         });
                         var $dateDebut = new Date(val['dateDebut']);
-                        $dateDebut.setHours($dateDebut.getHours()-2);
+                        $dateDebut.setHours($dateDebut.getHours() - 2);
                         var $outputDebut = $dateDebut.toLocaleString('en-GB', {
                             year: 'numeric',
                             month: '2-digit',
@@ -335,11 +343,11 @@
                             $action = '<a href="' + pathAff + '"><img class="icon-table" title="Afficher" src="' + imgAff + '"></a>'
                             if (val['noEtat']['libelle'] === 'Clôturer') {
                                 if ($present === "Oui") {
-                                    $action = $action  + '<a href="' + pathDesi + '"><img class="icon-table" title="Désister" src="' + imgDes + '"></a>'
+                                    $action = $action + '<a href="' + pathDesi + '"><img class="icon-table" title="Désister" src="' + imgDes + '"></a>'
                                 }
                             } else {
                                 if (val['noInscriptions'].length === 0) {
-                                    $action = $action  + '<a href="' + pathInsc + '"><img class="icon-table" title="Inscrire" src="' + imgInsc + '"></a>'
+                                    $action = $action + '<a href="' + pathInsc + '"><img class="icon-table" title="Inscrire" src="' + imgInsc + '"></a>'
                                 } else if ($present === "Oui") {
                                     $action = $action + '<a href="' + pathDesi + '"><img class="icon-table" title="Désister" src="' + imgDes + '"></a>'
                                 } else {
