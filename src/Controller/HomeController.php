@@ -98,6 +98,8 @@ class HomeController extends AbstractController
         $siteRepository = $em->getRepository(Site::class);
         $sites = $siteRepository->findAll();
 
+        $dateDuJour = new \DateTime('now');
+
 
         $verifSorties = $em->getRepository(Sortie::class)->findAll();
 
@@ -131,6 +133,30 @@ class HomeController extends AbstractController
 //
 //                }
 //
+//
+//
+
+
+
+
+
+//                    $dateFin = clone $sortie->getDateDebut();
+//                    $dure = $sortie->getDuree();
+//
+//                    $interval = 'PT' . $dure . 'M';
+//                    $dateFin = $dateFin->add(new \DateInterval($interval));
+//
+//                    if ($sortie->getDateCloture() > $dateDuJour && $sortie->getDateDebut() < $dateDuJour) {
+//                        $sortie->setEtat($etatCloturee);
+//                        $em->flush();
+//                    } elseif ($dateDuJour > $sortie->getDateDebut() && $dateDuJour < $dateFin) {
+//                        $sortie->setEtat($etatEnCours);
+//                        $em->flush();
+//                    } elseif ($dateDuJour > $dateFin) {
+//                        $sortie->setEtat($etatPassee);
+//                        $em->flush();
+//                    }
+//                }
 //
 //
             }
