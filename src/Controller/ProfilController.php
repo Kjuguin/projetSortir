@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\AvatarType;
 use App\Form\GestionProfilType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Service\FileUploader;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -81,4 +84,42 @@ class ProfilController extends AbstractController
             ]
         );
     }
+    /**
+     * @Route("/modifierPhoto", name="modifierPhoto")
+     */
+    public function modifierPhotoDeProfil(EntityManagerInterface $em, Request $request, FileUploader $fileUploader)
+    {
+        $user = $this->getUser();
+        $avatarForm = $this->createForm(AvatarType::class, $user);
+        $avatarForm->handleRequest($request);
+
+        dump($user);
+        if ($avatarForm->isSubmitted() && $avatarForm->isValid()) {
+
+            // on place l'URL du fichier upload dans une variable $file
+            /** @var UploadedFile $file */
+            $file = $avatarForm->get('urlPhoto')->getData();
+            // On renomme le fichier dans un langage utilisable et
+            // on upload le fichier dans public/profile_directory,
+            // grace au App/Service/FileUploader; puis on l'attribut à une variable.
+            // (Sans ça l'URL du fichier sera écrit en BDD dans un répértoire Wamp non accessible)
+            $fileName = $fileUploader->upload($file);
+            // On remplis l'user avec la variable
+            $user->setUrlPhoto($fileName);
+dump($fileName);
+            $em->persist($user);
+            $em->flush();
+            $this->addFlash("success", "Photo modifiée avec succès !");
+
+            return $this->redirectToRoute('utilisateur_gestionProfil', [
+                'id' => $this->getUser()->getId()
+             ]);
+        }
+
+        return $this->render('utilisateurProfil/modifierPhotos.html.twig', [
+            'avatarForm' => $avatarForm->createView()
+        ]);
+    }
+
+
 }

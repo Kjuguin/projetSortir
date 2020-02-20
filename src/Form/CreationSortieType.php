@@ -5,6 +5,8 @@ namespace App\Form;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
 use DateTime;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -13,7 +15,6 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use function Sodium\add;
 
 class CreationSortieType extends AbstractType
 {
@@ -49,7 +50,12 @@ class CreationSortieType extends AbstractType
             ->add('noLieu', EntityType::class, [
                 'class' => Lieu::class,
                 'label' => 'Lieu:'
-            ]);
+            ])
+//            ->add('AjoutLieu', ButtonType::class,
+//                [
+//                'label' => 'Ajout lieu',
+//                ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
