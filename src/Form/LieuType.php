@@ -6,7 +6,7 @@ use App\Entity\Lieu;
 use App\Entity\Ville;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,14 +24,17 @@ class LieuType extends AbstractType
 
             ->add('rue', TextType::class, [
                 'label'=>'Rue:',
+                'attr' => ['id'=> 'idRue', 'name' => 'nameRue'],
             ])
 
-            ->add('latitude',IntegerType::class,[
+            ->add('latitude',NumberType::class,[
                 'label'=>'Latitude:',
+                'attr' => ['id' => 'idLatitude' , 'name' => 'nameLatitude'],
             ])
 
-            ->add('longitude',IntegerType::class, [
+            ->add('longitude',NumberType::class, [
                 'label'=>'Longitude:',
+                'attr' => ['id' => 'idLongitude', 'name' => 'nameLongitude']
             ])
 
             ->add('noVille',EntityType::class,[
@@ -39,6 +42,7 @@ class LieuType extends AbstractType
                 'label'=>'Nom Ville:',
                 'placeholder'=>' ',
                 'attr'=>[
+                    'id' => 'idVilleSave',
                     'class'=>'villeSave',
                     'required'=>true
                 ],
@@ -47,9 +51,12 @@ class LieuType extends AbstractType
 
             ->add('Ville', VilleType::class,[
                 'attr'=>[
+                    'id' => 'idVille',
                     'class'=>'noVilleLieu',
                     'require'=>'false',
-                ]
+                ],
+                'label' => 'Ajout Ville',
+                'label_attr'=>['class'=>'labelVille']
             ])
 
             ->add('submit', SubmitType::class,[
