@@ -1,39 +1,65 @@
 {% extends 'pages-base.html.twig' %}
-{% block title %}Gérer les Lieux{% endblock %}
+{% block title %}Gérer les lieux{% endblock %}
 
 {% block body %}
-    <div class="bloc-field bf-2">
-        <label for="nom">Le nom du lieu contient :</label>
-        <form>
-            <input class="input-home inpt-search" type="search" name="nom" id="nom">
-        </form>
-    </div>
-    <div>
-        <table>
-            <tbody>
-            <tr>
-                <th>nom</th>
-                <th>rue</th>
-                <th>latitude</th>
-                <th>longitude</th>
-            </tr>
-            {% for lieu in lieu %}
-                <tr>
-                    <td>{{ lieu.nomLieu | capitalize }} </td>
-                    <td>{{ lieu.rue | capitalize }} </td>
-                    <td>{{ lieu.latitude | capitalize }} </td>
-                    <td>{{ lieu.longitude | capitalize }} </td>
-                    <td><a href="{{ path ("supprimerLieu",{'id': lieu.id }) }}">supprimer</a></td>
-                </tr>
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="msg-alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
 
-            {% endfor %}
-            </tbody>
-        </table>
+    <div class="register-container lieu-cntnr">
+
+        <h1 class="page-h1 register-h1">Gérer les lieux</h1>
+
+        <div class="lieu-search">
+            <label class="label-lieu" for="nom">Le nom du lieu contient</label>
+            <form>
+                <input class="inpt-search input-lieu" type="search" name="nom" id="nom">
+            </form>
+        </div>
+
+        <!-- tableau des lieux -->
+        <div class="tbl-inscrits">
+            <div class="tbl-header">
+                <table class="dtl-table table-lieu">
+                    <thead>
+                    <tr>
+                        <th class="td-mgn-lieu">Nom</th>
+                        <th class="gone-lieu2">Rue</th>
+                        <th class="gone-lieu">Latitude</th>
+                        <th class="gone-lieu">Longitude</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="tbl-content tbl-content-lieu">
+                <table class="dtl-table">
+                    <tbody>
+                    {% for lieu in lieu %}
+                        <tr class="dtl-strip">
+                            <td class="td-mgn-lieu">{{ lieu.nomLieu | capitalize }} </td>
+                            <td class="gone-lieu2">{{ lieu.rue | capitalize }} </td>
+                            <td class="gone-lieu">{{ lieu.latitude | capitalize }} </td>
+                            <td class="gone-lieu">{{ lieu.longitude | capitalize }} </td>
+                            <td class="cncl-btn-lieu"><a href="{{ path ("supprimerLieu",{'id': lieu.id }) }}"><img src="{{ asset('img/cancel.png') }}"></a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- bouton ajouter -->
+        <button class="btn-base btn-red btn-lieu"><a href="{{ path('ajoutLieuVille') }}">Ajouter</a></button>
+
 
     </div>
-    <div>
-        <button><a href="{{ path('ajoutLieuVille') }}"</a>Ajouter</button>
-    </div>
+
+
 
 
 {% endblock %}

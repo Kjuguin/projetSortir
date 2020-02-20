@@ -1,37 +1,64 @@
 {% extends 'pages-base.html.twig' %}
-{% block title %}Gérer les Sites{% endblock %}
+{% block title %}Gérer les sites{% endblock %}
 
 {% block body %}
-    <div class="bloc-field bf-2">
-        <label for="nom">Le nom du site contient</label>
-        <form>
-            <input class="input-home inpt-search" type="search" name="nom" id="nom">
-        </form>
-    </div>
-    <div >
-        <table >
-            <tbody>
-            <tr>
-                <th>nom</th>
-            </tr>
-            {% for site in sites %}
-                <tr >
-                    <td >{{ site.nomSite | capitalize }} </td>
-                    <td ><a href="{{ path ("supprimerSite",{'id': site.id }) }}">supprimer</a></td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="msg-alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
 
-    </div>
-    <div>
-        <button type="button" id="buttonAjouterSite">Ajouter</button>
-    </div>
-    <div>
-        {{ form_start(ajoutSiteForm) }}
-        {{ form_widget(ajoutSiteForm) }}
-        <button type="submit" >Valider</button>
-        {{ form_end(ajoutSiteForm) }}
+
+    <div class="register-container lieu-cntnr">
+
+        <h1 class="page-h1 register-h1">Gérer les sites</h1>
+
+        <div class="lieu-search">
+            <label class="label-lieu" for="nom">Le nom du site contient</label>
+            <form>
+                <input class="inpt-search input-lieu" type="search" name="nom" id="nom">
+            </form>
+        </div>
+
+        <!-- tableau des lieux -->
+        <div class="tbl-inscrits">
+            <div class="tbl-header">
+                <table class="dtl-table table-lieu">
+                    <thead>
+                    <tr>
+                        <th class="td-mgn-lieu">Nom</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="tbl-content tbl-content-lieu">
+                <table class="dtl-table">
+                    <tbody>
+                    {% for site in sites %}
+                        <tr class="dtl-strip">
+                            <td class="td-mgn-lieu">{{ site.nomSite | capitalize }}</td>
+                            <td><a href="{{ path ("supprimerSite",{'id': site.id }) }}"><img src="{{ asset('img/cancel.png') }}"></a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- buttons -->
+        <div class="site-btn">
+            <button class="btn-red btn-base btn-add-site">Ajouter</button>
+
+            <div class="add-site">
+                {{ form_start(ajoutSiteForm) }}
+                {{ form_widget(ajoutSiteForm) }}
+                <button class="btn-base btn-blue btn-vld-site" type="submit" >Valider</button>
+                {{ form_end(ajoutSiteForm) }}
+            </div>
+        </div>
     </div>
 
 {% endblock %}

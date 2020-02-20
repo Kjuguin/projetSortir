@@ -35,3 +35,152 @@ input[type="number"]::-webkit-inner-spin-button {
 .lieuville-form form div label{
     display:none;
 }
+
+/************************************** PAGE GERER LIEU ****************************************/
+.lieu-cntnr{
+    padding: 3.5em 3em 3.5em 3em;
+}
+
+.lieu-search{
+    margin: 2em 0 5em 0;
+}
+
+.label-lieu{
+    font-weight: bold;
+    color: #687786;
+    margin-bottom:0.5em;
+    font-size: 1.1em;
+}
+
+.inpt-search{
+    background-image:url("../img/loupe.png");
+    background-repeat:no-repeat;
+    background-position:right;
+    background-position-x: 95%;
+    padding: 0 3em 0 0.8em;
+}
+
+.input-lieu{
+    display:block;
+    width: 17em;
+    height: 3em;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 2px -2px 28px -4px rgba(40,104,134,0.2);
+    color:#718293;
+    margin: 0 auto;
+}
+
+/** tableau **/
+.tbl-content-lieu{
+    height:20em;
+}
+
+.table-lieu thead tr th{
+    text-align:left;
+}
+
+.td-mgn-lieu{
+    padding-left:1em;
+}
+
+.cncl-btn-lieu{
+    text-align:center;
+}
+
+.cncl-btn-lieu a{
+    margin-right:2.5em;
+}
+
+/* bouton ajouter */
+.btn-lieu{
+    margin-top:3em;
+}
+
+.btn-lieu a{
+    color:#fff;
+}
+
+.btn-lieu a:hover{
+    color:#fff;
+}
+
+/*************** MEDIA QUERIES ****************/
+@media screen and (max-width: 820px){
+    .lieu-cntnr{
+        width:95%;
+    }
+
+    .cncl-btn-lieu a {
+        margin-right:0;
+        margin-left:1em;
+    }
+
+    .gone-lieu{
+        display: none;
+    }
+
+    .cncl-btn-lieu{
+        text-align:left;
+    }
+}
+
+@media screen and (max-width: 680px){
+    .lieu-cntnr {
+        padding: 3.5em 2em 3.5em 2em;
+    }
+}
+
+@media screen and (max-width: 480px){
+    .gone-lieu2{
+        display:none;
+    }
+}
+
+@media screen and (max-width: 390px){
+    .input-lieu{
+        width:15em;
+    }
+}
+
+
+/************************************** PAGE GERER SITE ****************************************/
+.btn-add-site{
+    margin-top:3em;
+}
+
+.add-site{
+    margin-top: 2em;
+}
+
+.btn-vld-site{
+    margin-top:1em;
+    width: 7em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

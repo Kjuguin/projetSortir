@@ -599,6 +599,11 @@ td a:hover{
     text-decoration:none;
 }
 
+/* icons tableau */
+.icon-table{
+    margin:0 0.4em;
+}
+
 /** Bouton creer une sortie **/
 .btn-creer-home{
     padding-bottom:5em;

@@ -13,15 +13,14 @@ class AjoutSiteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nomSite', TextType::class,[
-                'attr'=>[
-                    'id'=>'idNomSite',
-                    'class'=>'nomSite'
-                    ],
-                'label'=>'Nom Site:',
-                'label_attr'=>['class'=>'labelNomSite'],
-            ])
-        ;
+            ->add('nomSite', TextType::class,
+                [
+                  'label' => 'Nom du site',
+                  'label_attr'=>['class'=>'label-lieu'],
+                   'attr'=>['class'=>'input-lieu nomSite', 'id'=>'idNomSite']
+                ]
+            );
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
