@@ -23,12 +23,6 @@ class CreationLieuVilleController extends AbstractController
      */
     public function form($token = null, EntityManagerInterface $em, Request $request)
     {
-        dump($token);
-        $tok = base64_decode($token);
-//        $tok = $tok.",".$id;
-        dump($token);
-        $token=base64_encode($tok);
-
 
         $lieu = new Lieu();
 
@@ -44,7 +38,9 @@ class CreationLieuVilleController extends AbstractController
 
 
             $lieuRepository = $em->getRepository(Lieu::class);
-            $lieuNomBDD= $lieuRepository->findBy(['nomLieu' => $lieuNomRecup]);
+            $lieuNomBDD= $lieuRepository->findBy(
+                ['nomLieu' => $lieuNomRecup]
+            );
 
             $villeRepository = $em->getRepository(Ville::class);
             $villeNomBDD = $villeRepository->findBy(
@@ -57,16 +53,17 @@ class CreationLieuVilleController extends AbstractController
 
             if ($villeNomBDD && $villeCPBDD) {
 
-                $this->addFlash("default", 'La ville, le code postal et ou le lieu existe déjà');
+                $this->addFlash("default", 'La ville, le code postal existe déjà');
 
                 return $this->redirectToRoute("ajoutLieuVille");
 
-            }elseif ($lieuNomRecup){
+            }elseif ($lieuNomBDD) {
 
-             $this->addFlash("default",'Le nom du lieu existe déjà');
+                $this->addFlash("default", 'Le nom du lieu existe déjà');
 
-             return $this->redirectToRoute("ajoutLieuVille");
+                return $this->redirectToRoute("ajoutLieuVille");
 
+            }else {
 
                 if ($lieu->getNoVille()) {
                     $ville = $em->getRepository(Ville::class)->find($lieu->getNoVille());
@@ -76,7 +73,6 @@ class CreationLieuVilleController extends AbstractController
 
                 }
 
-
                 if (!$lieu->getNoVille()) {
 
                     $ville = $em->getRepository(Ville::class)->find($lieu->getVille());
@@ -84,16 +80,24 @@ class CreationLieuVilleController extends AbstractController
                     $em->flush();
 
                 }
+
+
                 $id = $lieu->getId();
+
+                dump($id);
+
                 $this->addFlash("success", "lieu ajouté");
 
+                dump($token);
 
-                $tok = base64_decode($token);
-                $tok = $tok.",".$id;
+                if ($token){
+                    $tok = base64_decode($token);
+                    $tok = $tok.",".$id;
+                    dump($tok);
+                    $token=base64_encode($tok);
+                }
 
-                $token=base64_encode($tok);
-
-                return $this->redirectToRoute("creer_sortie", [
+                 return $this->redirectToRoute("creer_sortie", [
                     'token' => $token,]);
             }
         }

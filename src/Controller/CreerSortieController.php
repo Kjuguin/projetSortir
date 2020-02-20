@@ -42,6 +42,16 @@ if ($token){
     $lieu=$em->getRepository(Lieu::class)->find($tab[6]);
 dump($tab[6]);
 dump($lieu);
+dump($tab);
+
+if (!$tab[3]){
+    $tab[3] = 0;
+}
+
+    if (!$tab[4]){
+        $tab[4] = 0;
+    }
+
 $sortie->setNom($tab[0])
 ->setDateDebut(new \DateTime($tab[1]))
 ->setDateCloture(new \DateTime($tab[2]))
