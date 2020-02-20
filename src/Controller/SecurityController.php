@@ -46,6 +46,7 @@ class SecurityController extends AbstractController
 
             $user->setNom(ucfirst(strtolower($user->getNom())));
             $user->setPrenom(ucfirst(strtolower($user->getPrenom())));
+            $user->setUrlPhoto('profile_directory/avatar-dft.png');
 
 
             $em->persist($user);
