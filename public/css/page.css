@@ -125,7 +125,7 @@ p{
 
 .burger-menu nav{
     background:inherit;
-    background-color:#fff;
+    background-color:#91cdff;
     font-size:20px;
     font-weight:bold;
     height:0;
@@ -153,11 +153,11 @@ p{
 }
 
 .nav-burger a{
-    color:#687786;
+    color:#fff;
 }
 
 .nav-burger a:hover{
-    color:#ff7083;
+    color:#687786;
 }
 
 .burger-menu .burger{
