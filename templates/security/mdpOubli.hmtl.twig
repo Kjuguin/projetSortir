@@ -1,0 +1,37 @@
+{% extends 'login-base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+{% block stylesheets %}
+
+{% endblock %}
+{% block body %}
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+
+            <!-- Icon -->
+            <div class="fadeIn first login-logo">
+                <img src="{{ asset("img/logo.png") }}" id="icon" alt="User Icon"/>
+                <h1 class="login-title">Sorties entr'ENI</h1>
+            </div>
+
+            <!-- Login Form -->
+            <form method="post">
+                <label for="inputPassword" class="fadeIn second login-input-field lif1">Nouveau mot de passe</label>
+                <input type="password" id="inputPassword" class="fadeIn third login-input-field" name="password"
+                       placeholder="******" required>
+                <input type="hidden" name="_csrf_token" value="{token}">
+                <div class="checkbox mb-3 fadeIn fourth">
+                    <input type="submit" class="fadeIn fourth" value="Enregistrer">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="login-footer">
+        <img src="{{ asset('img/clouds-footer.png') }}">
+    </footer>
+
+
+{% endblock %}

@@ -37,11 +37,46 @@
 
             <!-- Remind Passowrd -->
             <div id="formFooter">
-                <a class="underlineHover" href="#">Mot de passe oublié ?</a>
+                <a class="underlineHover"  href="{{ path('app_forgotten_password') }}">Mot de passe oublié ?</a>
             </div>
-
         </div>
     </div>
+
+    <!-- Modal mot de passe oublié-->
+    <div class="modal fade" id="modalMdpOubli" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="login-title" id="myModalLabel">Récupération de mot de passe</h4>
+                </div>
+                <div class="modal-body login-check-lbl">
+                    Veuillez renseigner votre adresse mail
+                </div>
+                <input autofocus type="text"  id="inputEmail"
+                       class=" login-input-field lif1" name="email" placeholder="Email" required>
+                <input type="submit" data-target="#geneLienMail" class="btn-base btn-red btn-pfl-mini" value="Generer le lien">
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+    <!-- Modal generation de lien-->
+    <div class="modal fade" id="geneLienMail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="login-title" id="myModalLabel">Récupération de mot de passe</h4>
+                </div>
+                <div class="modal-body login-check-lbl">
+                    Ceci est une modale simulant l'envoi d'un lien par mail
+                </div>
+                    <input type="submit" href="{{ path('app_forgotten_password') }}" class="btn-base btn-red btn-pfl-mini" value="Lien">
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
     <footer class="login-footer">
         <img src="{{ asset('img/clouds-footer.png') }}">
     </footer>

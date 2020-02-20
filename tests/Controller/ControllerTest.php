@@ -160,6 +160,15 @@ class ControllerTest extends WebTestCase
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
     }
 
+    /**
+     * Test de redirection de la page home si utilisateur non connecté
+     */
+    public function testRedirectMdpOubliIfNotConnected()
+    {
+        $this->client->request('GET', '/oubli-mot-de-passe');
+        $this->assertSame(302, $this->client->getResponse()->getStatusCode());
+    }
+
 
     /**
      * Test de validation du formulaire de gestion d'un profil
