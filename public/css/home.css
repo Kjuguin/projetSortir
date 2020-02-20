@@ -515,6 +515,13 @@ input[type="date"]::-webkit-inner-spin-button {
     font-weight: bold;
 }
 
+.mini-pseudo a, .user-pseudo a{
+    color:#687786;
+}
+
+.mini-pseudo a:hover, .user-pseudo a:hover{
+    color:#ff7083;
+}
 
 /** Background image section 1 **/
 .background-img{
