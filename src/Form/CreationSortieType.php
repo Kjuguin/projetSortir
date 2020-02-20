@@ -49,7 +49,8 @@ class CreationSortieType extends AbstractType
             ])
             ->add('noLieu', EntityType::class, [
                 'class' => Lieu::class,
-                'label' => 'Lieu'
+                'label' => 'Lieu',
+                'placeholder'=>'Veuillez choisir un lieu',
             ]);
 
     }

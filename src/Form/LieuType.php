@@ -43,7 +43,7 @@ class LieuType extends AbstractType
             ->add('noVille',EntityType::class,[
                 'class'=>Ville::class,
                 'label'=>'Ville',
-                'placeholder'=>' ',
+                'placeholder'=>'Veuillez choisir une ville',
                 'attr'=>[
                     'id' => 'idVilleSave',
                     'class'=>'villeSave input-villieu',
