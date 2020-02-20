@@ -32,8 +32,8 @@
 
                 {% if is_granted('ROLE_ADMIN') %}
                     <li><a href="{{ path('registration') }}">Inscription</a></li>
-                    <li><a href="#">Villes</a></li>
-                    <li><a href="#">Sites</a></li>
+                    <li><a href="{{ path('gererLieu') }}">Villes</a></li>
+                    <li><a href="{{ path('gererSite') }}">Sites</a></li>
                 {% endif %}
 
                 <li> <a href="{{ path('app_logout') }}">Déconnexion</a></li>
@@ -57,8 +57,8 @@
 
                 {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('registration') }}">Inscription</a>
-                    <a href="#">Villes</a>
-                    <a href="#">Sites</a>
+                    <a href="{{ path('gererLieu') }}">Villes</a>
+                    <a href="{{ path('gererSite') }}">Sites</a>
                 {% endif %}
 
                 <a href="{{ path('app_logout') }}">Déconnexion</a>

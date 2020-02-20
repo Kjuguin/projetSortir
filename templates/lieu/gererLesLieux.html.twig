@@ -1,0 +1,39 @@
+{% extends 'pages-base.html.twig' %}
+{% block title %}Gérer les Lieux{% endblock %}
+
+{% block body %}
+    <div class="bloc-field bf-2">
+        <label for="nom">Le nom du lieu contient :</label>
+        <form>
+            <input class="input-home inpt-search" type="search" name="nom" id="nom">
+        </form>
+    </div>
+    <div>
+        <table>
+            <tbody>
+            <tr>
+                <th>nom</th>
+                <th>rue</th>
+                <th>latitude</th>
+                <th>longitude</th>
+            </tr>
+            {% for lieu in lieu %}
+                <tr>
+                    <td>{{ lieu.nomLieu | capitalize }} </td>
+                    <td>{{ lieu.rue | capitalize }} </td>
+                    <td>{{ lieu.latitude | capitalize }} </td>
+                    <td>{{ lieu.longitude | capitalize }} </td>
+                    <td><a href="{{ path ("supprimerLieu",{'id': lieu.id }) }}">supprimer</a></td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    <div>
+        <button><a href="{{ path('ajoutLieuVille') }}"</a>Ajouter</button>
+    </div>
+
+
+{% endblock %}
