@@ -11,41 +11,121 @@
         {% endfor %}
     {% endfor %}
 
-    {{ form_start(form) }}
+    <div class="dtl-sortie-container">
 
-    {{ form_widget(form) }}
+        <h1 class="page-h1">Créer une sortie</h1>
 
-    <button style="background: purple"><a href="{{ path('ajoutLieuVille') }}">Ajouter Lieu (à mieux réaliser par la
-            suite</a></button>
-    <div>
-        <label> Ville : </label>
-        <p id="ville">b</p>
-    </div>
+        <div class="dtl-sortie-flex">
+            {{ form_start(form) }}
+            <!-- left bloc création -->
+            <div class="dtl-sortie-left">
 
-    <div>
-        <label> Rue : </label>
-        <p id="rue">b</p>
-    </div>
-    <div>
-        <label> Code postal : </label>
-        <p id="cp">b</p>
-    </div>
-    <div>
-        <label> Latitude : </label>
-        <p id="lat">b</p>
-    </div>
-    <div>
-        <label> Longitude : </label>
-        <p id="long">b</p>
-    </div>
+                <div class="dtl-srt-bloc">
+                    {{ form_label(form.nom) }}
+                    {{ form_widget(form.nom) }}
+                </div>
+                <div class="dtl-srt-bloc">
+                    {{ form_label(form.dateDebut) }}
+                    {{ form_widget(form.dateDebut) }}
+                </div>
+                <div class="dtl-srt-bloc">
+                    {{ form_label(form.dateCloture) }}
+                    {{ form_widget(form.dateCloture) }}
+                </div>
+                <div class="dtl-srt-bloc">
+                    {{ form_label(form.nbInscriptionMax) }}
+                    {{ form_widget(form.nbInscriptionMax) }}
+                </div>
+                <div class="dtl-srt-bloc">
+                    {{ form_label(form.duree) }}
+                    {{ form_widget(form.duree) }}
+                </div>
+                <div class="dtl-srt-bloc">
+                    {{ form_label(form.descriptionInfos) }}
+                    {{ form_widget(form.descriptionInfos) }}
+                </div>
+            </div>
 
-    <button type="submit" name="sortie" value="1">Enregistrer</button>
-    <button type="submit" name="sortie" value="3">Publier la sortie
-    {% if (modification == 1) %}
-        <button><a href="{{ path('annuler_sortie',{'id':sortie.id}) }}">Supprimer</a></button>
-    {% endif %}
-    <button type="reset">Annuler</button>
+            <!-- Right bloc création -->
+            <div  class="dtl-sortie-right">
 
-    {{ form_end(form) }}
+                <div class="dtl-srt-bloc">
+                    {{ form_label(form.noLieu) }}
+                    <div class="lieu-bloc-btn">
+                        {{ form_widget(form.noLieu) }}
+                        <button class="ajout-btn" type="button" onclick="$test()"><img src="{{ asset('img/ajoutlieu.png') }}"></button>
+                    </div>
+                </div>
+
+                {% if sortie %}
+                    <div class="dtl-srt-bloc">
+                        <label> Ville</label>
+                        <div class="crea-info-field"><p id="ville">{{ sortie.noLieu.noVille.nomVille }}</p></div>
+                    </div>
+                    <div class="dtl-srt-bloc">
+                        <label> Rue</label>
+                        <div class="crea-info-field"><p id="rue">{{ sortie.noLieu.rue }}</p></div>
+                    </div>
+                    <div class="dtl-srt-bloc">
+                        <label> Code postal</label>
+                        <div class="crea-info-field"><p id="cp">{{ sortie.noLieu.noVille.codePostal }}</p></div>
+                    </div>
+                    <div class="dtl-srt-bloc">
+                        <label> Latitude</label>
+                        <div class="crea-info-field"><p id="lat">{{ sortie.noLieu.latitude }}</p></div>
+                    </div>
+                    <div class="dtl-srt-bloc">
+                        <label> Longitude</label>
+                        <div class="crea-info-field"><p id="long">{{ sortie.noLieu.longitude }}</p></div>
+                    </div>
+
+                {% else %}
+                    <div class="dtl-srt-bloc">
+                        <label> Ville</label>
+                        <div class="crea-info-field"><p id="ville"></p></div>
+                    </div>
+                    <div class="dtl-srt-bloc">
+                        <label> Rue</label>
+                        <div class="crea-info-field"><p id="rue"></p></div>
+                    </div>
+                    <div class="dtl-srt-bloc">
+                        <label> Code postal</label>
+                        <div class="crea-info-field"><p id="cp"></p></div>
+                    </div class="dtl-srt-bloc">
+                    <div class="dtl-srt-bloc">
+                        <label>Latitude</label>
+                        <div class="crea-info-field"><p id="lat"></p></div>
+                    </div>
+                    <div class="dtl-srt-bloc">
+                        <label> Longitude</label>
+                        <div class="crea-info-field"><p id="long"></p></div>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="crea-bloc-btn">
+                <button type="submit" name="sortie" value="1" class="btn-red btn-base">Enregistrer</button>
+
+                    <div class="clear clear-crea-btn"></div>
+
+                <button type="submit" name="sortie" value="3" class="btn-red btn-base btn-mid-crea">Publier</button>
+
+                    <div class="clear"></div>
+
+                {% if (modification == 1) %}
+                    <button class="btn-red btn-base btn-dlt-crea btn-crea-top"><a href="{{ path('annuler_sortie',{'id':sortie.id}) }}">Supprimer</a></button>
+                {% endif %}
+
+                    <div class="clear clear-crea-btn"></div>
+
+                <button type="reset" class="btn-red btn-base btn-crea-top">Annuler</button>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+
+    </div>
 
 {% endblock %}

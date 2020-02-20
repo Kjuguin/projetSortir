@@ -8,11 +8,13 @@ $(document).ready(function($) {
         $('.labelCodePostalMasque').hide(0);
         $('.buttonSubmitMasque').hide(0);
         $('#button_ajouterVilleMasque').hide(0);
+        $('.labelVille').hide(0);
 
 
+        $('#button_ajouterVille').click(function () { //Button Ajouter Ville
 
+                $('.villeSave').val("");
 
-        $('#button_ajouterVille').click(function () {
                 $('.nomVilleMasque').show().attr('required',true);
                 $('.labelNomVilleMasque').show();
                 $('.codePostalMasque').show().attr('required',true);
@@ -25,7 +27,12 @@ $(document).ready(function($) {
                 $('.labelVilleSave').hide();
         })
 
-        $('#button_ajouterVilleMasque').click(function(){
+        $('#button_ajouterVilleMasque').click(function(){ //Button Retour
+
+
+                $('.nomVilleMasque').val("");
+                $('.codePostalMasque').val("");
+
                 $('.nomVilleMasque').hide().attr('required',false);
                 $('.labelNomVilleMasque').hide();
                 $('.codePostalMasque').hide().attr('required',false);

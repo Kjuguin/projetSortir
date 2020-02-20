@@ -1,3 +1,124 @@
+/************************************** PAGE CREATION SORTIE ****************************************/
+.dtl-srt-bloc label{
+    color:#8c9ca9;
+    margin-bottom: 0.5em !important;
+}
+
+.dtl-srt-bloc input, .dtl-srt-bloc textarea{
+    color:#687786;
+    background:#f4faff;
+    width:100%;
+    padding: 0.7em 1em;
+    font-weight:bold;
+    border:none;
+}
+
+.dtl-srt-bloc textarea{
+    resize:none;
+}
+
+.dtl-descp2{
+    min-height:12em;
+}
+
+/* bouton lieu */
+.lieu-bloc-btn{
+    display:block;
+    width:100%;
+    padding:0 !important;
+    background:none !important;
+}
+
+#creation_sortie_noLieu{
+    color:#687786;
+    background:#f4faff;
+    width:90%;
+    padding:0.7em 1em;
+    font-weight:bold;
+    border:none;
+}
+
+.ajout-btn{
+    display:inline-block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 0.5em;
+}
+
+/* lieu empty fields */
+.crea-info-field{
+    background: #f4faff;
+    width: 100%;
+    height: 3.03em;
+    padding: 0.7em 1em;
+    font-weight: bold;
+    border: none;
+}
+
+/** bloc bouton page **/
+.clear-crea-btn{
+    display:none;
+}
+
+.crea-bloc-btn{
+    margin-top:3em;
+}
+
+.btn-mid-crea{
+    margin:0 0 0 1em;
+}
+
+.btn-dlt-crea{
+    margin-right:1em !important;
+}
+
+.btn-dlt-crea a{
+    color:#fff;
+}
+
+.btn-dlt-crea a:hover{
+    color:#fff;
+}
+
+.btn-crea-top{
+    margin:1em 0 0 0;
+}
+
+/*************** MEDIA QUERIES ****************/
+@media screen and (max-width: 900px){
+    #creation_sortie_noLieu{
+        width:85%;
+    }
+}
+
+@media screen and (max-width:700px){
+    #creation_sortie_noLieu{
+        width:90%;
+    }
+}
+
+@media screen and (max-width: 560px){
+    .clear-crea-btn{
+        display:block;
+    }
+
+    .btn-mid-crea{
+        margin:1em 0 0 0;
+    }
+
+    .btn-dlt-crea{
+        margin-right:0 !important;
+    }
+}
+
+@media screen and (max-width:442px){
+    #creation_sortie_noLieu{
+        width:85%;
+    }
+}
+
+
 /************************************** PAGE DETAIL SORTIE ****************************************/
 .dtl-sortie-container{
     display: inline-block;
@@ -32,7 +153,7 @@
     margin-top:1.5em;
 }
 
-.dtl-srt-bloc p, .tbl-inscrits p{
+.tbl-inscrits p{
     color:#8c9ca9;
     margin-bottom: 0.5em !important;
 }
