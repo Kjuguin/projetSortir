@@ -81,7 +81,8 @@
 
                     <div class="mini-date-bloc mdb-2">
                         <p class="mini-lbl">Sortie: </p>
-                        <p class="mini-date-user">{{ "now"|date("d/m/Y") }}</p>
+{#                        <p class="mini-date-user">{{ sortie|date("d/m/Y") }}</p>#}
+{#                        <p class="mini-date-user">{{ heure|date("d/m/Y") }}</p>#}
                     </div>
                 </div>
             </div>
@@ -199,8 +200,8 @@
 
                             <div class="date-bloc-2">
                                 <p class="info-lbl">prochaine sortie</p>
-                                <p class="date-user">22/02/2020</p> <!-- contenu à remplacer par une méthode-->
-                                <p class="heure-user">18h30</p> <!-- contenu à remplacer par une méthode-->
+                                <p class="date-user">{{ heure|date("d/m/Y") }}</p> <!-- contenu à remplacer par une méthode-->
+                                <p class="heure-user">{{ heure|date("H:i") }}</p> <!-- contenu à remplacer par une méthode-->
                             </div>
                         </div>
                     </div>
@@ -240,7 +241,6 @@
 
         <!-- tableau des sorties -->
         <div class="table-responsive-sm">
-            {% if(sorties !=null) %}
                 <table id="table-sortie" data-toggle="table" class="table table-bordered table-orderable table-striped">
                     <thead class="thead-light">
                     <tr class="active">
@@ -261,7 +261,6 @@
                         </tr>
                     </tbody>
                 </table>
-            {% endif %}
         </div>
 
         <!-- bouton créer sortie -->
@@ -282,12 +281,14 @@
 
                         var $present = '';
                         var $dateCloture = new Date(val['dateCloture']);
+                        $dateCloture.setHours($dateCloture.getHours()-1);
                         var $outputCloture = $dateCloture.toLocaleString('en-GB', {
                             year: 'numeric',
                             month: '2-digit',
                             day: '2-digit'
                         });
                         var $dateDebut = new Date(val['dateDebut']);
+                        $dateDebut.setHours($dateDebut.getHours()-1);
                         var $outputDebut = $dateDebut.toLocaleString('en-GB', {
                             year: 'numeric',
                             month: '2-digit',
