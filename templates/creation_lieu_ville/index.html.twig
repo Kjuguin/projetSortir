@@ -1,9 +1,24 @@
 {% extends "pages-base.html.twig" %}
 
+{% block title %}Ajout lieu et ville{% endblock %}
+
 {% block body %}
 
-    <div>
+    <!-- Message d'alerte -->
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="msg-alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
 
+    <div class="register-container">
+
+        <h1 class="page-h1">Ajout lieu et ville</h1>
+
+        <!-- formulaire -->
+        <div class="lieuville-form">
             {{ form_start(formLieu) }}
 
             {{ form_label(formLieu.nomLieu) }}
@@ -22,23 +37,26 @@
             {{ form_widget(formLieu.noVille) }}
 
 
-            {{ form_label(formLieu.Ville.nomVille,'Nom Ville:') }}
+            {{ form_label(formLieu.Ville.nomVille,'Ville') }}
             {{ form_widget(formLieu.Ville.nomVille) }}
 
-            {{ form_label(formLieu.Ville.nomVille,'Code Postal:') }}
+            {{ form_label(formLieu.Ville.nomVille,'Code Postal') }}
             {{ form_widget(formLieu.Ville.codePostal) }}
 
-            <button type="button" id="button_ajouterVille">Ajouter Ville</button>
-            <button type="button" id="button_ajouterVilleMasque">Retour</button>
+            <div class="villieu-btn-bloc">
+                <button type="button" id="button_ajouterVille" class="btn-base btn-red">Ajouter Ville</button>
+                <div class="clear"></div>
+                <button type="button" id="button_ajouterVilleMasque" class="btn-base btn-red">Retour</button>
+                <div class="clear"></div>
+                {{ form_widget(formLieu.submit, { 'label':'Envoyer'}) }}
+                <div class="clear"></div>
+                {{ form_widget(formLieu.Ville.submit, { 'label':'Ajouter'}) }}
+            </div>
 
-        {% for message in app.flashes('default') %}
 
-            {{ message }}
 
-        {% endfor %}
-
-        {{ form_end(formLieu) }}
-
+            {{ form_end(formLieu) }}
+        </div>
     </div>
 
 {% endblock %}

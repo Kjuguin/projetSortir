@@ -1,0 +1,37 @@
+/************************************** PAGE AJOUT LIEU VILLE ****************************************/
+.lieuville-form{
+     text-align:left;
+ }
+
+.lieuville-form label{
+    color: #687786;
+    margin-top: 1.5em;
+    text-align: left;
+}
+
+.input-villieu{
+    width: 100%;
+    border: none;
+    padding: 0.7em 1em 0.7em 1em;
+    background: #f4faff;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+    visibility: hidden;
+    -webkit-appearance: none;
+}
+
+.villieu-btn-bloc{
+    text-align: center;
+    margin-top: 3em;
+}
+
+.villieu-btn{
+    margin-top:1.5em;
+}
+
+
+/* label ville moche à dégager */
+.lieuville-form form div label{
+    display:none;
+}

@@ -428,6 +428,14 @@ input[type="date"]::-webkit-inner-spin-button {
 }
 
 .user-avatar{
+    width:88%;
+    height:7.5em;
+    margin:0 auto;
+    overflow:hidden;
+    border-radius:50%;
+}
+
+.user-avatar img{
     width:100%;
 }
 
@@ -477,12 +485,15 @@ input[type="date"]::-webkit-inner-spin-button {
 }
 
 .mini-user-avatar{
-    height: 3em;
-    display: inline-block;
+    display:inline-block;
+    height:3em;
+    width:3em;
+    overflow:hidden;
+    border-radius:50%;
 }
 
 .mini-user-avatar img{
-    height:100%;
+    width:100%;
 }
 
 .mini-user-info, .mini-pseudo, .mini-date-bloc, .mini-lbl, .mini-date-user{
@@ -492,7 +503,8 @@ input[type="date"]::-webkit-inner-spin-button {
 
 .mini-user-info{
     margin-left:0.8em;
-    vertical-align: middle;
+    margin-top: 0.8em;
+    vertical-align: top;
 }
 
 .mini-date-bloc{
@@ -717,11 +729,13 @@ td a:hover{
     }
 }
 
-@media screen and (max-width: 640px){
+@media screen and (max-width: 670px){
     .mdb-2{
         display:none;
     }
+}
 
+@media screen and (max-width: 640px){
     .clear-input{
         display:block;
     }
