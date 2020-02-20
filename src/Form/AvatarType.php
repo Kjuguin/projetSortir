@@ -18,7 +18,8 @@ class AvatarType extends AbstractType
                 FileType::class,
                 [
                     'mapped' => false,
-                    'label' => 'Photo de Profil',
+                    'label' => ' ',
+                    'attr'=>['class'=>'btn-up-photo'],
                     'data_class' => null
                 ]);;
     }

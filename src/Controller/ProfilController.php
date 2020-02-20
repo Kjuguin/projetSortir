@@ -21,7 +21,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/gestionProfil/{id}", name="gestionProfil")
      */
-    public function form(EntityManagerInterface $em, Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function form(EntityManagerInterface $em, Request $request, UserPasswordEncoderInterface $passwordEncoder, FileUploader $fileUploader)
     {
         if (!($this->isGranted("ROLE_PARTICIPANT"))) {
 
@@ -39,7 +39,7 @@ class ProfilController extends AbstractController
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
-            if ($user->getPassword() == 'Pa$$w0rdPa$$w0rd'){
+            if ($user->getPassword() == 'Pa$$w0rdPa$$w0rd') {
                 $user->setPassword($user2->getPassword());
             } else {
                 $password = $passwordEncoder->encodePassword($user, $user->getPassword());
@@ -52,9 +52,43 @@ class ProfilController extends AbstractController
             return $this->redirectToRoute("utilisateur_afficherProfil", ['id' => $user->getId()]);
         }
 
+        $user = $this->getUser();
+        $avatarForm = $this->createForm(AvatarType::class, $user);
+        $avatarForm->handleRequest($request);
+
+        dump($user);
+        if ($avatarForm->isSubmitted() && $avatarForm->isValid()) {
+
+            // on place l'URL du fichier upload dans une variable $file
+            /** @var UploadedFile $file */
+            $file = $avatarForm->get('urlPhoto')->getData();
+            // On renomme le fichier dans un langage utilisable et
+            // on upload le fichier dans public/profile_directory,
+            // grace au App/Service/FileUploader; puis on l'attribut à une variable.
+            // (Sans ça l'URL du fichier sera écrit en BDD dans un répértoire Wamp non accessible)
+            $fileName = $fileUploader->upload($file);
+            // On remplis l'user avec la variable
+            $user->setUrlPhoto($fileName);
+            dump($fileName);
+            $em->persist($user);
+            $em->flush();
+            $this->addFlash("success", "Photo modifiée avec succès !");
+
+            return $this->redirectToRoute('utilisateur_gestionProfil', [
+                'id' => $this->getUser()->getId()
+            ]);
+        }
+
         return $this->render('utilisateurProfil/gestionProfil.html.twig', [
+            'avatarForm' => $avatarForm->createView(),
             "userForm" => $userForm->createView()
         ]);
+
+//        return $this->redirectToRoute('utilisateur_modifierPhoto', [
+//            "userForm" => $userForm->createView()
+//        ]);
+        //        return $this->render('utilisateurProfil/gestionProfil.html.twig', [
+//        ]);
 
 
     }
@@ -84,42 +118,44 @@ class ProfilController extends AbstractController
             ]
         );
     }
-    /**
-     * @Route("/modifierPhoto", name="modifierPhoto")
-     */
-    public function modifierPhotoDeProfil(EntityManagerInterface $em, Request $request, FileUploader $fileUploader)
-    {
-        $user = $this->getUser();
-        $avatarForm = $this->createForm(AvatarType::class, $user);
-        $avatarForm->handleRequest($request);
 
-        dump($user);
-        if ($avatarForm->isSubmitted() && $avatarForm->isValid()) {
-
-            // on place l'URL du fichier upload dans une variable $file
-            /** @var UploadedFile $file */
-            $file = $avatarForm->get('urlPhoto')->getData();
-            // On renomme le fichier dans un langage utilisable et
-            // on upload le fichier dans public/profile_directory,
-            // grace au App/Service/FileUploader; puis on l'attribut à une variable.
-            // (Sans ça l'URL du fichier sera écrit en BDD dans un répértoire Wamp non accessible)
-            $fileName = $fileUploader->upload($file);
-            // On remplis l'user avec la variable
-            $user->setUrlPhoto($fileName);
-dump($fileName);
-            $em->persist($user);
-            $em->flush();
-            $this->addFlash("success", "Photo modifiée avec succès !");
-
-            return $this->redirectToRoute('utilisateur_gestionProfil', [
-                'id' => $this->getUser()->getId()
-             ]);
-        }
-
-        return $this->render('utilisateurProfil/modifierPhotos.html.twig', [
-            'avatarForm' => $avatarForm->createView()
-        ]);
-    }
+//    /**
+//     * @Route("/modifierPhoto/{userForm}", name="modifierPhoto")
+//     */
+//    public function modifierPhotoDeProfil($userForm,EntityManagerInterface $em, Request $request, FileUploader $fileUploader)
+//    {
+//        $user = $this->getUser();
+//        $avatarForm = $this->createForm(AvatarType::class, $user);
+//        $avatarForm->handleRequest($request);
+//
+//        dump($user);
+//        if ($avatarForm->isSubmitted() && $avatarForm->isValid()) {
+//
+//            // on place l'URL du fichier upload dans une variable $file
+//            /** @var UploadedFile $file */
+//            $file = $avatarForm->get('urlPhoto')->getData();
+//            // On renomme le fichier dans un langage utilisable et
+//            // on upload le fichier dans public/profile_directory,
+//            // grace au App/Service/FileUploader; puis on l'attribut à une variable.
+//            // (Sans ça l'URL du fichier sera écrit en BDD dans un répértoire Wamp non accessible)
+//            $fileName = $fileUploader->upload($file);
+//            // On remplis l'user avec la variable
+//            $user->setUrlPhoto($fileName);
+//            dump($fileName);
+//            $em->persist($user);
+//            $em->flush();
+//            $this->addFlash("success", "Photo modifiée avec succès !");
+//
+//            return $this->redirectToRoute('utilisateur_gestionProfil', [
+//                'id' => $this->getUser()->getId()
+//            ]);
+//        }
+//
+//        return $this->render('utilisateurProfil/gestionProfil.html.twig', [
+//            'avatarForm' => $avatarForm->createView(),
+//            "userForm" => $userForm
+//        ]);
+//    }
 
 
 }

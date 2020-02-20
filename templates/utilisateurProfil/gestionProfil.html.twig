@@ -22,7 +22,8 @@
                     <img src="{{ asset(app.user.urlPhoto) }}">
                 </div>
 
-                <a href="{{ path('utilisateur_modifierPhoto') }} "><button class="btn-base btn-blue btn-pfl">Upload photo</button></a>
+{#                <button class="btn-base btn-blue btn-pfl"><a href="{{ path('utilisateur_modifierPhoto') }} ">Upload photo</a></button>#}
+                <button class="btn-base btn-blue btn-pfl" type="button" id="btnPhoto">Upload photo</button>
 
                 <div class="red-action-btn">
                     <button class="btn-base btn-red btn-pfl" type="reset">Annuler</button>
@@ -43,7 +44,7 @@
             {{ form_widget(userForm) }}
 
             <div class="gp-btn-pfl-mini">
-                <a href="{{ path('utilisateur_modifierPhoto') }} "><button class="btn-base btn-blue btn-pfl-mini">Upload photo</button></a>
+                <button class="btn-base btn-blue btn-pfl-mini">Upload photo</button>
                 <div class="clear"></div>
                 <button class="btn-base btn-red btn-pfl-mini mini-cncl" type="reset">Annuler</button>
                 <div class="clear"></div>
@@ -53,6 +54,23 @@
         </div>
 
         {{ form_end(userForm) }}
+    </div>
+
+    <!-- Popup Upload Photo -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="register-container">
+            <span class="close">&times;</span>
+
+            <h1 class="page-h1">Modifier photo de profil</h1>
+
+            {{ form_start(avatarForm) }}
+            {{ form_widget(avatarForm) }}
+
+            <button type="submit" id="submit" name="submit" class="btn-base btn-red btn-photo">Confirmer</button>
+
+            {{ form_end(avatarForm) }}
+        </div>
 
     </div>
 

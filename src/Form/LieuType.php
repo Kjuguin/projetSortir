@@ -24,17 +24,17 @@ class LieuType extends AbstractType
 
             ->add('rue', TextType::class, [
                 'label'=>'Rue',
-                'attr'=>['class'=>'input-villieu']
+                'attr'=>['id'=> 'idRue', 'name' => 'nameRue', 'class'=>'input-villieu']
             ])
 
             ->add('latitude',IntegerType::class,[
                 'label'=>'Latitude',
-                'attr'=>['class'=>'input-villieu']
+                'attr'=>['id' => 'idLatitude' , 'name' => 'nameLatitude', 'class'=>'input-villieu']
             ])
 
             ->add('longitude',IntegerType::class, [
                 'label'=>'Longitude',
-                'attr'=>['class'=>'input-villieu']
+                'attr'=>['id' => 'idLongitude', 'name' => 'nameLongitude', 'class'=>'input-villieu']
             ])
 
             ->add('noVille',EntityType::class,[
@@ -42,6 +42,7 @@ class LieuType extends AbstractType
                 'label'=>'Ville',
                 'placeholder'=>' ',
                 'attr'=>[
+                    'id' => 'idVilleSave',
                     'class'=>'villeSave input-villieu',
                     'required'=>true
                 ],

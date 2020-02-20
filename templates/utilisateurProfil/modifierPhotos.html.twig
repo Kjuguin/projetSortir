@@ -1,15 +1,17 @@
 {% extends 'pages-base.html.twig' %}
 
-{% block title %}Modifier Photo de Profil!{% endblock %}
+{% block title %}Modifier photo de profil{% endblock %}
 
 {% block body %}
 
-    <h2>Modifier ma Photo de Profil</h2>
+    <div class="register-container">
+        <h1 class="page-h1">Modifier photo de profil</h1>
 
-    {{ form_start(avatarForm) }}
-    {{ form_widget(avatarForm) }}
-    <button type="submit" id="submit" name="submit">Confirmer</button>
-    {{ form_end(avatarForm) }}
+        {{ form_start(avatarForm) }}
+        {{ form_widget(avatarForm) }}
+        <button type="submit" id="submit" name="submit">Confirmer</button>
+        {{ form_end(avatarForm) }}
 
+    </div>
 
 {% endblock %}
