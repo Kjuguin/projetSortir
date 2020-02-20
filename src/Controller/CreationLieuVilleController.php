@@ -116,6 +116,5 @@ class CreationLieuVilleController extends AbstractController
 
         }
         return $this->render('creation_lieu_ville/index.html.twig', ["formLieu" => $formLieu->createView(),]);
-
-    }
+   }
 }

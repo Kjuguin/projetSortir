@@ -24,9 +24,12 @@ class SortieRepository extends ServiceEntityRepository
 
     public function afficher($param)
     {
-        $dateLimite= new \DateTime('-1 month');
+        $dateLimite = new \DateTime('-1 month');
 
         $sqb = $this->createQueryBuilder('s');
+        $sqb->andWhere("s.noEtat != 125")
+            ->andWhere("s.noEtat != 127");
+
         //ajout param site
         if (!empty($param['site'])) {
             $sqb->andWhere("s.noSite = :site");
@@ -42,7 +45,7 @@ class SortieRepository extends ServiceEntityRepository
         //ajout param date début
         if (!empty($param['dateDebut'])) {
             $sqb->andWhere("s.dateDebut >= :dateDebut");
-            if (new \DateTime($param['dateDebut']) < $dateLimite){
+            if (new \DateTime($param['dateDebut']) < $dateLimite) {
                 $dateD = $dateLimite;
             } else {
                 $dateD = $param['dateDebut'];
@@ -53,7 +56,7 @@ class SortieRepository extends ServiceEntityRepository
         //ajout param date fin
         if (!empty($param['dateFin'])) {
             $sqb->andWhere("s.dateCloture >= :dateFin");
-            if (new \DateTime($param['dateFin']) < $dateLimite){
+            if (new \DateTime($param['dateFin']) < $dateLimite) {
                 $dateF = $dateLimite;
             } else {
                 $dateF = $param['dateFin'];
@@ -94,10 +97,10 @@ class SortieRepository extends ServiceEntityRepository
             $sqb->setParameter("limite", $dateLimite);
         }
 
-        if ( $param['sens']=='ASC'){
-            $sqb->orderBy("s.dateDebut","ASC");
+        if ($param['sens'] == 'ASC') {
+            $sqb->orderBy("s.dateDebut", "ASC");
         } else {
-            $sqb->orderBy("s.dateCloture","DESC");
+            $sqb->orderBy("s.dateCloture", "DESC");
 
         }
 
