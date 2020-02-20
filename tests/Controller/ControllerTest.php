@@ -160,6 +160,56 @@ class ControllerTest extends WebTestCase
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
     }
 
+    /**
+     * Test de redirection annulation si utilisateur non admin
+     */
+    public function testRedirectAnnulationSortieIfNotAdmin()
+    {
+        $this->client->request('GET', '/annuler');
+        $crawler = $this->client->followRedirect();
+        $this->assertSame(1,$crawler->filter('html:contains("login")')->count());
+    }
+
+    /**
+     * Test affichage de la page annulation sortie si utilisateur admin
+     */
+    public function testAnnulationSortieIfAdminIsUp()
+    {
+        $this->logInAdmin();
+        $this->client->request('GET', '/annuler');
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Test de redirection ajoutLieuVille sortie si utilisateur non admin
+     */
+    public function testRedirectAjoutLieuVilleIfNotAdmin()
+    {
+        $this->client->request('GET', '/ajoutLieuVille');
+        $crawler = $this->client->followRedirect();
+        $this->assertSame(1,$crawler->filter('html:contains("login")')->count());
+    }
+
+    /**
+     * Test affichage de la page ajoutLieuVille sortie si utilisateur admin
+     */
+    public function testAjoutLieuVilleIfAdminIsUp()
+    {
+        $this->logInAdmin();
+        $this->client->request('GET', '/ajoutLieuVille');
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+    }
+
+
+
+
+
+
+
+
+
+
+
     /********************* Tests des formulaires *********************/
 
     /**
@@ -220,6 +270,26 @@ class ControllerTest extends WebTestCase
         $this->assertSame(500, $this->client->getResponse()->getStatusCode());
 
     }
+
+    /**
+     * Test de redirection afficher profil si utilisateur non connecté
+     */
+/*    public function testRedirectAfficherProfilIfNotConnected()
+    {
+        $this->client->request('GET', '/utilisateur/afficherProfil/164');
+        $this->assertSame(302, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Test affichage de la page afficher sortie si utilisateur connecté
+     */
+  /*  public function testAfficherSortieIsUp()
+    {
+        $this->logIn();
+        $this->client->request('GET', '/sortie/afficherSortie/264');
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+    }
+*/
 
 
 

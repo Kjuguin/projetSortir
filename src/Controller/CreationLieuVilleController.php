@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Lieu;
+use App\Entity\Site;
+use App\Entity\Sortie;
 use App\Entity\Ville;
 use App\Form\LieuType;
 use App\Form\VilleType;
@@ -36,9 +38,16 @@ class CreationLieuVilleController extends AbstractController
 
         if ($formLieu->isSubmitted() && $formLieu->isValid()) {
 
-            $nomVilleRecup = $lieu->getVille()->getNomVille();//ok
-            $codePostalRecup = $lieu->getVille()->getCodePostal();
 
+            $nomVilleRecup= $lieu->getVille()->getNomVille();//ok
+            $codePostalRecup= $lieu->getVille()->getCodePostal();
+            $lieuNomRecup = $lieu->getNomLieu();
+
+
+            $lieuRepository = $em->getRepository(Lieu::class);
+            $lieuNomBDD= $lieuRepository->findBy(
+                ['nomLieu' => $lieuNomRecup]
+            );
 
             $villeRepository = $em->getRepository(Ville::class);
             $villeNomBDD = $villeRepository->findBy(
@@ -49,10 +58,16 @@ class CreationLieuVilleController extends AbstractController
                 'codePostal' => $codePostalRecup
             ]);
 
-            if ($villeNomBDD && $villeCPBDD) {
 
 
-                $this->addFlash("default", 'La ville ou le code postal existe déjà');
+                $this->addFlash("default", 'La ville, le code postal existe déjà');
+
+                return $this->redirectToRoute("ajoutLieuVille");
+
+
+            }elseif ($lieuNomBDD) {
+
+                $this->addFlash("default", 'Le nom du lieu existe déjà');
 
                 return $this->redirectToRoute("ajoutLieuVille");
 
@@ -66,24 +81,33 @@ class CreationLieuVilleController extends AbstractController
 
                 }
 
-
                 if (!$lieu->getNoVille()) {
 
                     $ville = $em->getRepository(Ville::class)->find($lieu->getVille());
                     $lieu->setNoVille($ville);
                     $em->flush();
 
+
                 }
+
+
                 $id = $lieu->getId();
+
+                dump($id);
+
                 $this->addFlash("success", "lieu ajouté");
 
+                dump($token);
 
-                $tok = base64_decode($token);
-                $tok = $tok.",".$id;
+                if ($token){
+                    $tok = base64_decode($token);
+                    $tok = $tok.",".$id;
+                    dump($tok);
+                    $token=base64_encode($tok);
+                }
 
-                $token=base64_encode($tok);
+                 return $this->redirectToRoute("creer_sortie", [
 
-                return $this->redirectToRoute("creer_sortie", [
                     'token' => $token,]);
             }
         }
@@ -93,5 +117,7 @@ class CreationLieuVilleController extends AbstractController
         ]);
 
     }
+
+
 
 }

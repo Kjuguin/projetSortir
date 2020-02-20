@@ -19,8 +19,8 @@
 
                 {% if is_granted('ROLE_ADMIN') %}
                     <li><a href="{{ path('registration') }}">Inscription</a></li>
-                    <li><a href="#">Villes</a></li>
-                    <li><a href="#">Sites</a></li>
+                    <li><a href="{{ path('gererLieu') }}">Villes</a></li>
+                    <li><a href="{{ path('gererSite') }}">Sites</a></li>
                 {% endif %}
 
                 <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
@@ -44,8 +44,8 @@
 
                 {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('registration') }}">Inscription</a>
-                    <a href="#">Villes</a>
-                    <a href="#">Sites</a>
+                    <a href="{{ path('gererLieu') }}">Villes</a>
+                    <a href="{{ path('gererSite') }}">Sites</a>
                 {% endif %}
 
                 <a href="{{ path('app_logout') }}">Déconnexion</a>
@@ -314,6 +314,13 @@
                         var pathPub = "{{ path('sortie_publier',{'id':'%id2%'}) }}";
                         pathPub = pathPub.replace("%25id2%25", val['id']);
 
+                        var imgMod = "{{ asset('img/modifier.png') }}";
+                        var imgAff = "{{ asset('img/afficher.png') }}";
+                        var imgAnn = "{{ asset('img/annuler.png') }}";
+                        var imgDes = "{{ asset('img/desister.png') }}";
+                        var imgPub = "{{ asset('img/publier.png') }}";
+                        var imgInsc = "{{ asset('img/sinscrire.png') }}";
+
                         $.each(val['noInscriptions'], function (k, v) {
                             if ($id === v['noUser']['id']) {
                                 $present = "Oui";
@@ -321,26 +328,26 @@
                         });
 
                         if (val['noEtat']['libelle'] === 'En création') {
-                            $action = '<a href="' + pathMod + '">Modifier</a> - <a href="' + pathPub + '">Publier</a>'
+                            $action = '<a href="' + pathMod + '"><img class="icon-table" title="Modifier" src="' + imgMod + '"></a>  <a href="' + pathPub + '"><img class="icon-table" title="Publier" src="' + imgPub + '"></a>'
                         } else if (val['noEtat']['libelle'] === 'En cours' || val['noEtat']['libelle'] === 'Terminer') {
-                            $action = '<a href="' + pathAff + '">Afficher</a>'
+                            $action = '<a href="' + pathAff + '"><img class="icon-table" title="Afficher" src="' + imgAff + '"></a>'
                         } else {
-                            $action = '<a href="' + pathAff + '">Afficher</a>'
+                            $action = '<a href="' + pathAff + '"><img class="icon-table" title="Afficher" src="' + imgAff + '"></a>'
                             if (val['noEtat']['libelle'] === 'Clôturer') {
                                 if ($present === "Oui") {
-                                    $action = $action + ' - ' + '<a href="' + pathDesi + '">Se désister</a>'
+                                    $action = $action  + '<a href="' + pathDesi + '"><img class="icon-table" title="Désister" src="' + imgDes + '"></a>'
                                 }
                             } else {
                                 if (val['noInscriptions'].length === 0) {
-                                    $action = $action + ' - ' + '<a href="' + pathInsc + '">S\'inscrire</a>'
+                                    $action = $action  + '<a href="' + pathInsc + '"><img class="icon-table" title="Inscrire" src="' + imgInsc + '"></a>'
                                 } else if ($present === "Oui") {
-                                    $action = $action + ' - ' + '<a href="' + pathDesi + '">Se désister</a>'
+                                    $action = $action + '<a href="' + pathDesi + '"><img class="icon-table" title="Désister" src="' + imgDes + '"></a>'
                                 } else {
-                                    $action = $action + ' - ' + '<a href="' + pathInsc + '">S\'inscrire</a>'
+                                    $action = $action + '<a href="' + pathInsc + '"><img class="icon-table" title="Inscrire" src="' + imgInsc + '"></a>'
                                 }
                             }
                             if (val['noOrganisateur']['id'] === $id) {
-                                $action = $action + ' - ' + '<a href="' + pathAnn + '">Annuler</a>'
+                                $action = $action + '<a href="' + pathAnn + '"><img class="icon-table" title="Annuler" src="' + imgAnn + '"></a>'
                             }
                         }
 

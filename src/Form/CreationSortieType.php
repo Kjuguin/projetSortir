@@ -51,6 +51,7 @@ class CreationSortieType extends AbstractType
                 'class' => Lieu::class,
                 'label' => 'Lieu'
             ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

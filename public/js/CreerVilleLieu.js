@@ -29,7 +29,6 @@ $(document).ready(function($) {
 
         $('#button_ajouterVilleMasque').click(function(){ //Button Retour
 
-
                 $('.nomVilleMasque').val("");
                 $('.codePostalMasque').val("");
 

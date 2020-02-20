@@ -14,6 +14,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Etat
 {
+    const CLOTURE = "Cloturé";
+    const CREATION = "En création";
+    const COURS = "COURS";
+    const OUVERT = "Ouvert";
+    const ANNULE = "Annulé";
+    const ARCHIVE = "Archivé";
+    const TERMINE = "Terminé";
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

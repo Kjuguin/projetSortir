@@ -62,7 +62,9 @@ $data = btoa($data);
 // console.log(atob($test3));
 //     document.location.href="http://127.0.0.1:8000/ajoutLieuVille?token="+$data;
 //     document.location.href="http://127.0.0.1:8000/ajoutLieuVille/"+$data;
+
     document.location.href="/ajoutLieuVille/"+$data;
+
 
 };
 

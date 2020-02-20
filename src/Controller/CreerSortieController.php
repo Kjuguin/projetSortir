@@ -42,6 +42,17 @@ if ($token){
     $lieu=$em->getRepository(Lieu::class)->find($tab[6]);
 dump($tab[6]);
 dump($lieu);
+
+dump($tab);
+
+if (!$tab[3]){
+    $tab[3] = 0;
+}
+
+    if (!$tab[4]){
+        $tab[4] = 0;
+    }
+
 $sortie->setNom($tab[0])
 ->setDateDebut(new \DateTime($tab[1]))
 ->setDateCloture(new \DateTime($tab[2]))
@@ -52,23 +63,6 @@ $sortie->setNom($tab[0])
 ;
 
 }
-
-//        if ($token == $request->get('token')) {
-//            $valuesString = base64_decode($token);
-//            $values = explode(',', $valuesString);
-//
-//        }
-
-//        if ($lien) {
-//            $sortie->setNom($nom)
-//                ->setDateDebut(new \DateTime($dateD))
-//                ->setDateCloture(new \DateTime($dateF))
-//                ->setNbInscriptionMax($insc)
-//                ->setDuree($duree)
-//                ->setDescriptionInfos($des);
-//        }
-
-
         $form = $this->createForm(CreationSortieType::class, $sortie);
         $form->handleRequest($request);
 
@@ -79,6 +73,7 @@ $sortie->setNom($tab[0])
         $sortie = $sortie->setNoOrganisateur($currentUser);
 
         $valueInput = $request->get("sortie");
+
 
         if ($valueInput == 1) {
             $sortie->setNoEtat($em->getRepository(Etat::class)->findOneBy(array('libelle' => 'En création')));

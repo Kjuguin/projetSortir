@@ -50,7 +50,7 @@ class InscrireController extends AbstractController
     }
 
     /**
-     * @Route("desistement/{id}", name="desistement")
+     * @Route("/desistement/{id}", name="desistement")
      */
     public function desistement($id, EntityManagerInterface $em, Request $request)
     {

@@ -21,6 +21,7 @@ class VilleType extends AbstractType
                 'attr'=>[
                     'id' => 'idNomVille',
                     'class'=>'nomVilleMasque input-villieu',
+
                     'name'=>'nomVilleMasque',
                 ],
                 'constraints'=>[
@@ -35,6 +36,7 @@ class VilleType extends AbstractType
                     'id' => 'idCodePostal',
                     'class'=>'codePostalMasque input-villieu',
                     'name'=>'nomVilleMasque',
+
                 ],
                 'label_attr'=>['class'=>'labelCodePostalMasque']
             ])
