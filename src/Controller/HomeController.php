@@ -100,21 +100,19 @@ class HomeController extends AbstractController
 
         $sortiesRepository = $em->getRepository(Sortie::class);
 
-        $date = new \DateTime();
-        $date->format('Y-m-d H:i:s');
-
+        $dateTime = new \DateTime();
+        $date=$dateTime->format('Y-m-d H:i:s');
         $param = [
             "site" => null,
             "nom" => null,
-            "dateDebut" => '2020-02-19',
+            "dateDebut" => $date,
             "dateFin" => null,
             "organisateur" => null,
-            "inscrit" => null,
+            "inscrit" => $this->getUser()->getId(),
             "notInscrit" => null,
             "passee" => null,
             "sens" => 'ASC',
         ];
-
 
         $sorties = $sortiesRepository->afficher($param);
         $sortie = $sorties[0];

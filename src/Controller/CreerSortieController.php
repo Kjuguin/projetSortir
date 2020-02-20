@@ -94,11 +94,9 @@ class CreerSortieController extends AbstractController
         $lieuRepository = $em->getRepository(Lieu::class);
 
         $lieu = $lieuRepository->find($id);
-dump($id);
-dump($lieu);
+
         $data = $serializer->normalize($lieu, null, ['groups' => 'groupe2']);
-dump($data)
-;
+
         return $this->json(['lieu' => $data]);
     }
 

@@ -281,14 +281,14 @@
 
                         var $present = '';
                         var $dateCloture = new Date(val['dateCloture']);
-                        $dateCloture.setHours($dateCloture.getHours()-1);
+                        $dateCloture.setHours($dateCloture.getHours()-2);
                         var $outputCloture = $dateCloture.toLocaleString('en-GB', {
                             year: 'numeric',
                             month: '2-digit',
                             day: '2-digit'
                         });
                         var $dateDebut = new Date(val['dateDebut']);
-                        $dateDebut.setHours($dateDebut.getHours()-1);
+                        $dateDebut.setHours($dateDebut.getHours()-2);
                         var $outputDebut = $dateDebut.toLocaleString('en-GB', {
                             year: 'numeric',
                             month: '2-digit',
