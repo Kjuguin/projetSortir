@@ -1,44 +1,62 @@
 {% extends "pages-base.html.twig" %}
 
+{% block title %}Ajout lieu et ville{% endblock %}
+
 {% block body %}
 
-    <div>
-
-            {{ form_start(formLieu) }}
-
-            {{ form_label(formLieu.nomLieu) }}
-            {{ form_widget(formLieu.nomLieu) }}
-
-            {{ form_label(formLieu.rue) }}
-            {{ form_widget(formLieu.rue) }}
-
-            {{ form_label(formLieu.longitude) }}
-            {{ form_widget(formLieu.longitude) }}
-
-            {{ form_label(formLieu.latitude) }}
-            {{ form_widget(formLieu.latitude) }}
-
-            {{ form_label(formLieu.noVille) }}
-            {{ form_widget(formLieu.noVille) }}
-
-
-            {{ form_label(formLieu.Ville.nomVille,'Nom Ville:') }}
-            {{ form_widget(formLieu.Ville.nomVille) }}
-
-            {{ form_label(formLieu.Ville.nomVille,'Code Postal:') }}
-            {{ form_widget(formLieu.Ville.codePostal) }}
-
-            <button type="button" id="button_ajouterVille">Ajouter Ville</button>
-            <button type="button" id="button_ajouterVilleMasque">Retour</button>
-
-        {% for message in app.flashes('default') %}
-
-            {{ message }}
-
+    <!-- Message d'alerte -->
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="msg-alert">
+                {{ message }}
+            </div>
         {% endfor %}
+    {% endfor %}
 
-        {{ form_end(formLieu) }}
+    <div class="register-container">
 
+        <h1 class="page-h1">Ajout lieu et ville</h1>
+
+        <!-- formulaire -->
+        <div class="lieuville-form">
+                {{ form_start(formLieu) }}
+
+                {{ form_label(formLieu.nomLieu) }}
+                {{ form_widget(formLieu.nomLieu) }}
+
+                {{ form_label(formLieu.rue) }}
+                {{ form_widget(formLieu.rue) }}
+
+                {{ form_label(formLieu.longitude) }}
+                {{ form_widget(formLieu.longitude) }}
+
+                {{ form_label(formLieu.latitude) }}
+                {{ form_widget(formLieu.latitude) }}
+
+                {{ form_label(formLieu.noVille) }}
+                {{ form_widget(formLieu.noVille) }}
+
+
+                {{ form_label(formLieu.Ville.nomVille,'Ville') }}
+                {{ form_widget(formLieu.Ville.nomVille) }}
+
+                {{ form_label(formLieu.Ville.nomVille,'Code Postal') }}
+                {{ form_widget(formLieu.Ville.codePostal) }}
+
+                <div class="villieu-btn-bloc">
+                    <button type="button" id="button_ajouterVille" class="btn-base btn-red">Ajouter Ville</button>
+                        <div class="clear"></div>
+                    <button type="button" id="button_ajouterVilleMasque" class="btn-base btn-red">Retour</button>
+                        <div class="clear"></div>
+                    {{ form_widget(formLieu.submit, { 'label':'Envoyer'}) }}
+                        <div class="clear"></div>
+                    {{ form_widget(formLieu.Ville.submit, { 'label':'Ajouter'}) }}
+                </div>
+
+
+
+            {{ form_end(formLieu) }}
+        </div>
     </div>
 
 {% endblock %}
