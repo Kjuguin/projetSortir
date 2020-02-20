@@ -19,7 +19,7 @@
 
                 {% if is_granted('ROLE_ADMIN') %}
                     <li><a href="{{ path('registration') }}">Inscription</a></li>
-                    <li><a href="{{ path('gererLieu') }}">Villes</a></li>
+                    <li><a href="{{ path('gererLieu') }}">Lieux</a></li>
                     <li><a href="{{ path('gererSite') }}">Sites</a></li>
                 {% endif %}
 
@@ -44,7 +44,7 @@
 
                 {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('registration') }}">Inscription</a>
-                    <a href="{{ path('gererLieu') }}">Villes</a>
+                    <a href="{{ path('gererLieu') }}">Lieux</a>
                     <a href="{{ path('gererSite') }}">Sites</a>
                 {% endif %}
 
