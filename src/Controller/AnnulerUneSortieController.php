@@ -51,13 +51,20 @@ class AnnulerUneSortieController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
+
+
         $sortieRepository = $em->getRepository(Sortie::class);
         $sortie = $sortieRepository->find($id);
+        if ($sortie->getNoOrganisateur() == $this->getUser()){
+
 
         return $this->render('sortie/annulerSortie.html.twig', [
                 'sortie' => $sortie
             ]
         );
+        }else{
+            return $this->redirectToRoute('home');
+        }
 
     }
 }
