@@ -36,9 +36,13 @@ class CreationLieuVilleController extends AbstractController
 
         if ($formLieu->isSubmitted() && $formLieu->isValid()) {
 
-            $nomVilleRecup = $lieu->getVille()->getNomVille();//ok
-            $codePostalRecup = $lieu->getVille()->getCodePostal();
+            $nomVilleRecup= $lieu->getVille()->getNomVille();//ok
+            $codePostalRecup= $lieu->getVille()->getCodePostal();
+            $lieuNomRecup = $lieu->getNomLieu();
 
+
+            $lieuRepository = $em->getRepository(Lieu::class);
+            $lieuNomBDD= $lieuRepository->findBy(['nomLieu' => $lieuNomRecup]);
 
             $villeRepository = $em->getRepository(Ville::class);
             $villeNomBDD = $villeRepository->findBy(
@@ -51,12 +55,16 @@ class CreationLieuVilleController extends AbstractController
 
             if ($villeNomBDD && $villeCPBDD) {
 
-
-                $this->addFlash("default", 'La ville ou le code postal existe déjà');
+                $this->addFlash("default", 'La ville, le code postal et ou le lieu existe déjà');
 
                 return $this->redirectToRoute("ajoutLieuVille");
 
-            } else {
+            }elseif ($lieuNomRecup){
+
+             $this->addFlash("default",'Le nom du lieu existe déjà');
+
+             return $this->redirectToRoute("ajoutLieuVille");
+
 
                 if ($lieu->getNoVille()) {
                     $ville = $em->getRepository(Ville::class)->find($lieu->getNoVille());

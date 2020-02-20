@@ -52,23 +52,6 @@ $sortie->setNom($tab[0])
 ;
 
 }
-
-//        if ($token == $request->get('token')) {
-//            $valuesString = base64_decode($token);
-//            $values = explode(',', $valuesString);
-//
-//        }
-
-//        if ($lien) {
-//            $sortie->setNom($nom)
-//                ->setDateDebut(new \DateTime($dateD))
-//                ->setDateCloture(new \DateTime($dateF))
-//                ->setNbInscriptionMax($insc)
-//                ->setDuree($duree)
-//                ->setDescriptionInfos($des);
-//        }
-
-
         $form = $this->createForm(CreationSortieType::class, $sortie);
         $form->handleRequest($request);
 
