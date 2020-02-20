@@ -16,11 +16,12 @@ class VilleType extends AbstractType
     {
         $builder
             ->add('nomVille', TextType::class,[
-                'label'=>'Nom ville:',
+                'label'=>'Ville',
                 'required'=>false,
                 'attr'=>[
                     'id' => 'idNomVille',
-                    'class'=>'nomVilleMasque',
+                    'class'=>'nomVilleMasque input-villieu',
+
                     'name'=>'nomVilleMasque',
                 ],
                 'constraints'=>[
@@ -29,21 +30,22 @@ class VilleType extends AbstractType
                 'label_attr'=>['class'=>'labelNomVilleMasque']
             ])
             ->add('codePostal', TextType::class,[
-                'label'=>'Code postal:',
+                'label'=>'Code postal',
                 'required'=>false,
                 'attr'=>[
                     'id' => 'idCodePostal',
-                    'class'=>'codePostalMasque',
-                    'name'=>'codePostalMasque',
+                    'class'=>'codePostalMasque input-villieu',
+                    'name'=>'nomVilleMasque',
+
                 ],
                 'label_attr'=>['class'=>'labelCodePostalMasque']
             ])
-            ->add('Submit', SubmitType::class,[
+            ->add('submit', SubmitType::class,[
+                'label'=>'Envoyer',
                 'attr'=>[
-                    'class'=>'buttonSubmitMasque'
+                    'class'=>'buttonSubmitMasque btn-base btn-red villieu-btn'
                 ]])
-
-            ;
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

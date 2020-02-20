@@ -17,14 +17,13 @@
         <!-- bloc photo + buttons -->
         <div class="bloc-profil-left">
             <div class="left-container">
+
                 <div class="avtr-prfl-edit">
-{#                    <img src="{{ app.user.urlPhoto }}">#}
-{#                    <img src="{{ asset('profile_directory/a712018f9a0bab863353a8c532a11a1a.jpeg') }}">#}
                     <img src="{{ asset(app.user.urlPhoto) }}">
-{#                    <img src="{{ asset('profile_directory'. app.user.urlPhoto) }}">#}
                 </div>
 
-                <button class="btn-base btn-blue btn-pfl"><a href="{{ path('utilisateur_modifierPhoto') }} ">Upload photo</a></button>
+{#                <button class="btn-base btn-blue btn-pfl"><a href="{{ path('utilisateur_modifierPhoto') }} ">Upload photo</a></button>#}
+                <button class="btn-base btn-blue btn-pfl" type="button" id="btnPhoto">Upload photo</button>
 
                 <div class="red-action-btn">
                     <button class="btn-base btn-red btn-pfl" type="reset">Annuler</button>
@@ -39,7 +38,7 @@
             <h1 class="page-h1">Mon Profil</h1>
 
             <div class="avtr-edit-mini">
-                <img src="{{ asset('img/avatar-big.png') }}">
+                <img src="{{ asset(app.user.urlPhoto) }}">
             </div>
 
             {{ form_widget(userForm) }}
@@ -55,6 +54,23 @@
         </div>
 
         {{ form_end(userForm) }}
+    </div>
+
+    <!-- Popup Upload Photo -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="register-container">
+            <span class="close">&times;</span>
+
+            <h1 class="page-h1">Modifier photo de profil</h1>
+
+            {{ form_start(avatarForm) }}
+            {{ form_widget(avatarForm) }}
+
+            <button type="submit" id="submit" name="submit" class="btn-base btn-red btn-photo">Confirmer</button>
+
+            {{ form_end(avatarForm) }}
+        </div>
 
     </div>
 

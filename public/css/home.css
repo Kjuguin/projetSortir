@@ -135,7 +135,7 @@ p{
 
 .burger-menu nav{
     background:inherit;
-    background-color:#fff;
+    background-color:#91cdff;
     font-size:20px;
     font-weight:bold;
     height:0;
@@ -163,11 +163,11 @@ p{
 }
 
 .nav-burger a{
-    color:#687786;
+    color:#fff;
 }
 
 .nav-burger a:hover{
-    color:#ff7083;
+    color:#687786;
 }
 
 .burger-menu .burger{
@@ -428,6 +428,14 @@ input[type="date"]::-webkit-inner-spin-button {
 }
 
 .user-avatar{
+    width:88%;
+    height:7.5em;
+    margin:0 auto;
+    overflow:hidden;
+    border-radius:50%;
+}
+
+.user-avatar img{
     width:100%;
 }
 
@@ -477,12 +485,15 @@ input[type="date"]::-webkit-inner-spin-button {
 }
 
 .mini-user-avatar{
-    height: 3em;
-    display: inline-block;
+    display:inline-block;
+    height:3em;
+    width:3em;
+    overflow:hidden;
+    border-radius:50%;
 }
 
 .mini-user-avatar img{
-    height:100%;
+    width:100%;
 }
 
 .mini-user-info, .mini-pseudo, .mini-date-bloc, .mini-lbl, .mini-date-user{
@@ -492,7 +503,8 @@ input[type="date"]::-webkit-inner-spin-button {
 
 .mini-user-info{
     margin-left:0.8em;
-    vertical-align: middle;
+    margin-top: 0.8em;
+    vertical-align: top;
 }
 
 .mini-date-bloc{
@@ -652,6 +664,11 @@ td a:hover{
     .section-filtre{
         padding-top:5em;
     }
+
+    .msg-alert{
+        margin-bottom:0;
+        margin-top:3em;
+    }
 }
 
 @media screen and (max-width: 930px){
@@ -717,11 +734,13 @@ td a:hover{
     }
 }
 
-@media screen and (max-width: 640px){
+@media screen and (max-width: 670px){
     .mdb-2{
         display:none;
     }
+}
 
+@media screen and (max-width: 640px){
     .clear-input{
         display:block;
     }
@@ -1023,8 +1042,13 @@ td a:hover{
     }
 }
 
+.table-link{
+    color:#000;
+}
 
-
+.table-link:hover{
+    color:#000;
+}
 
 
 

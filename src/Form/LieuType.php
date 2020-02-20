@@ -18,32 +18,35 @@ class LieuType extends AbstractType
     {
         $builder
             ->add('nomLieu',TextType::class,[
-                'attr' => ['id' => 'idNomLieu','name'=>'nameNomLieu'],
-                'label'=>'Nom Lieu:',
+                'attr' => ['id' => 'idNomLieu','name'=>'nameNomLieu', 'class'=> 'input-villieu'],
+                'label'=>'Nom du lieu',
             ])
 
             ->add('rue', TextType::class, [
-                'label'=>'Rue:',
-                'attr' => ['id'=> 'idRue', 'name' => 'nameRue'],
+
+                'label'=>'Rue',
+                'attr'=>['id'=> 'idRue', 'name' => 'nameRue', 'class'=>'input-villieu']
             ])
 
-            ->add('latitude',NumberType::class,[
-                'label'=>'Latitude:',
-                'attr' => ['id' => 'idLatitude' , 'name' => 'nameLatitude'],
+            ->add('latitude',IntegerType::class,[
+                'label'=>'Latitude',
+                'attr'=>['id' => 'idLatitude' , 'name' => 'nameLatitude', 'class'=>'input-villieu']
             ])
 
-            ->add('longitude',NumberType::class, [
-                'label'=>'Longitude:',
-                'attr' => ['id' => 'idLongitude', 'name' => 'nameLongitude']
+            ->add('longitude',IntegerType::class, [
+                'label'=>'Longitude',
+                'attr'=>['id' => 'idLongitude', 'name' => 'nameLongitude', 'class'=>'input-villieu']
+
             ])
 
             ->add('noVille',EntityType::class,[
                 'class'=>Ville::class,
-                'label'=>'Nom Ville:',
+                'label'=>'Ville',
                 'placeholder'=>' ',
                 'attr'=>[
                     'id' => 'idVilleSave',
-                    'class'=>'villeSave',
+                    'class'=>'villeSave input-villieu',
+
                     'required'=>true
                 ],
                 'label_attr'=>['class'=>'labelVilleSave']
@@ -60,10 +63,11 @@ class LieuType extends AbstractType
             ])
 
             ->add('submit', SubmitType::class,[
+
                 'attr'=>[
-                    'class'=>'buttonSubmitVilleSave',
+                    'class'=>'buttonSubmitVilleSave btn-base btn-red villieu-btn',
                 ]])
-            ;
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

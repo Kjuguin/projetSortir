@@ -23,6 +23,12 @@ class CreationLieuVilleController extends AbstractController
      */
     public function form($token = null, EntityManagerInterface $em, Request $request)
     {
+        dump($token);
+        $tok = base64_decode($token);
+//        $tok = $tok.",".$id;
+        dump($token);
+        $token=base64_encode($tok);
+
 
         $lieu = new Lieu();
 
@@ -31,6 +37,7 @@ class CreationLieuVilleController extends AbstractController
         $formLieu->handleRequest($request);
 
         if ($formLieu->isSubmitted() && $formLieu->isValid()) {
+
 
             $nomVilleRecup= $lieu->getVille()->getNomVille();//ok
             $codePostalRecup= $lieu->getVille()->getCodePostal();
@@ -51,11 +58,12 @@ class CreationLieuVilleController extends AbstractController
                 'codePostal' => $codePostalRecup
             ]);
 
-            if ($villeNomBDD && $villeCPBDD) {
+
 
                 $this->addFlash("default", 'La ville, le code postal existe déjà');
 
                 return $this->redirectToRoute("ajoutLieuVille");
+
 
             }elseif ($lieuNomBDD) {
 
@@ -63,7 +71,7 @@ class CreationLieuVilleController extends AbstractController
 
                 return $this->redirectToRoute("ajoutLieuVille");
 
-            }else {
+            } else {
 
                 if ($lieu->getNoVille()) {
                     $ville = $em->getRepository(Ville::class)->find($lieu->getNoVille());
@@ -78,6 +86,7 @@ class CreationLieuVilleController extends AbstractController
                     $ville = $em->getRepository(Ville::class)->find($lieu->getVille());
                     $lieu->setNoVille($ville);
                     $em->flush();
+
 
                 }
 
@@ -98,6 +107,7 @@ class CreationLieuVilleController extends AbstractController
                 }
 
                  return $this->redirectToRoute("creer_sortie", [
+
                     'token' => $token,]);
             }
         }

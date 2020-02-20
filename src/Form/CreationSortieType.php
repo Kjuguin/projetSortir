@@ -22,40 +22,36 @@ class CreationSortieType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-                'label' => 'Nom:'
+                'label' => 'Nom'
             ])
             ->add('dateDebut', DateTimeType::class, [
-                'label' => 'Date et heure de la sortie:',
+                'label' => 'Date et heure de la sortie',
                 'widget' => 'single_text',
                 "data" => new DateTime(),
             ])
             ->add('dateCloture', DateTimeType::class, [
-                'label' => 'Date limite inscription:',
+                'label' => 'Date limite d\'inscription',
                 'widget' => 'single_text',
                 "data" => new DateTime(),
             ])
             ->add('nbInscriptionMax', IntegerType::class, [
-                'label' => 'Nombre de places:',
+                'label' => 'Nombre de places',
                 'attr' => array('min' => 1),
             ])
             ->add('duree', IntegerType::class, [
-                'label' => 'Durée (min):',
+                'label' => 'Durée (minutes)',
                 'attr' => array('min' => 1),
 
             ])
             ->add('descriptionInfos', TextareaType::class, [
-                'label' => 'Description et infos:',
-                'attr' => ['rows' => '10', 'cols' => '20']
+                'label' => 'Description et infos',
+                'attr' => ['class' => 'dtl-descp2']
             ])
             ->add('noLieu', EntityType::class, [
                 'class' => Lieu::class,
-                'label' => 'Lieu:'
-            ])
-//            ->add('AjoutLieu', ButtonType::class,
-//                [
-//                'label' => 'Ajout lieu',
-//                ])
-        ;
+                'label' => 'Lieu'
+            ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

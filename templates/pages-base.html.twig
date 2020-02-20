@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ asset("css/profil.css") }}">
     <link rel="stylesheet" href="{{ asset("css/register.css") }}">
     <link rel="stylesheet" href="{{ asset("css/sortie.css") }}">
+    <link rel="stylesheet" href="{{ asset("css/lieuville.css") }}">
     <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="icon" type="image/png" href="{{ asset("img/favicon2.png") }}"/>
@@ -74,13 +75,43 @@
 
     <!-- FOOTER -->
     <footer class="page-footer">
-        <img src="{{ asset('img/clouds-footer.png') }}">
+        <div class="pg-footer-wrap">
+            <!-- copyright footer -->
+            <div class="copyright">
+                <p>Sorties entr’Eni © 2020</p>
+            </div>
+
+            <!-- bloc social networks -->
+            <div class="rs-icon">
+                <div class="facebook rs-logo">
+                    <a href="#"><img src="{{ asset('img/facebook.png') }}" alt="facebook logo"></a>
+                </div>
+
+                <div class="instagram rs-logo">
+                    <a href="#"><img src="{{ asset('img/instagram.png') }}" alt="instagram logo"></a>
+                </div>
+
+                <div class="twitter rs-logo">
+                    <a href="#"><img src="{{ asset('img/twitter.png') }}" alt="twitter logo"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- clear copyright tablette -->
+        <div class="clear clear-footer"></div>
+        <div class="copyright-2">
+            <p>Sorties entr’Eni © 2020</p>
+        </div>
     </footer>
 
+
+    <!-- JAVASCRIPT -->
     <script type="text/javascript" charset="utf8" src="/js/jquery-3.4.1.min.js"></script>
 
-        <script type="text/javascript" charset="utf8" src="{{ asset('js/CreerVilleLieu.js') }}"></script>
-        <script type="text/javascript" charset="utf8" src="{{ asset('js/sortie.js') }}"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('js/CreerVilleLieu.js') }}"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('js/sortie.js') }}"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('js/popup.js') }}"></script>
+
     {% block javascripts %}{% endblock %}
 
 </body>

@@ -12,27 +12,27 @@
             <!-- left bloc fields -->
             <div class="dtl-sortie-left">
                 <div class="dtl-srt-bloc">
-                    <p>Nom de la sortie</p>
+                    <label>Nom de la sortie</label>
                     <div><span>{{ sortie.nom | capitalize }}</span></div>
                 </div>
                 <div class="dtl-srt-bloc">
-                    <p>Date et heure de la sortie</p>
+                    <label>Date et heure de la sortie</label>
                     <div><span>{{ sortie.dateDebut | date("d/m/y H:i:s") }}</span></div>
                 </div>
                 <div class="dtl-srt-bloc">
-                    <p>Date limite d'inscription</p>
+                    <label>Date limite d'inscription</label>
                     <div><span>{{ sortie.dateCloture | date("d/m/Y") }}</span></div>
                 </div>
                 <div class="dtl-srt-bloc">
-                    <p>Nombre de places</p>
+                    <label>Nombre de places</label>
                     <div><span>{{ sortie.nbInscriptionMax }}</span></div>
                 </div>
                 <div class="dtl-srt-bloc">
-                    <p>Durée (minutes)</p>
+                    <label>Durée (minutes)</label>
                     <div><span>{{ sortie.duree }}</span></div>
                 </div>
                 <div class="dtl-srt-bloc">
-                    <p>Description et infos</p>
+                    <label>Description et infos</label>
                     <div class="dtl-descp"><span>{{ sortie.descriptionInfos }}</span></div>
                 </div>
             </div>
@@ -40,27 +40,27 @@
             <!-- right bloc fields -->
             <div  class="dtl-sortie-right">
                 <div class="dtl-srt-bloc">
-                    <p>Lieu</p>
+                    <label>Lieu</label>
                     <div><span>{{ sortie.noLieu.nomLieu | capitalize }}</span></div>
                 </div>
                 <div class="dtl-srt-bloc">
-                    <p>Ville</p>
+                    <label>Ville</label>
                     <div><span>{{ sortie.noLieu.noVille.nomVille | capitalize }}</span></div>
                 </div>
                 <div class="dtl-srt-bloc">
-                    <p>Rue</p>
+                    <label>Rue</label>
                     <div><span>{{ sortie.nolieu.rue | capitalize }}</span></div>
                 </div>
                 <div class="dtl-srt-bloc">
-                    <p>Code Postal</p>
+                    <label>Code Postal</label>
                     <div><span>{{ sortie.noLieu.noVille.codePostal }}</span></div>
                 </div>
                 <div class="dtl-srt-bloc">
-                    <p>Latitude</p>
+                    <label>Latitude</label>
                     <div><span>{{ sortie.noLieu.latitude }}°</span></div>
                 </div>
                 <div class="dtl-srt-bloc">
-                    <p>Longitude</p>
+                    <label>Longitude</label>
                     <div><span>{{ sortie.noLieu.longitude }}°</span></div>
                 </div>
 

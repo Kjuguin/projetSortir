@@ -42,6 +42,7 @@ if ($token){
     $lieu=$em->getRepository(Lieu::class)->find($tab[6]);
 dump($tab[6]);
 dump($lieu);
+
 dump($tab);
 
 if (!$tab[3]){
@@ -72,6 +73,7 @@ $sortie->setNom($tab[0])
         $sortie = $sortie->setNoOrganisateur($currentUser);
 
         $valueInput = $request->get("sortie");
+
 
         if ($valueInput == 1) {
             $sortie->setNoEtat($em->getRepository(Etat::class)->findOneBy(array('libelle' => 'En création')));

@@ -125,7 +125,7 @@ p{
 
 .burger-menu nav{
     background:inherit;
-    background-color:#fff;
+    background-color:#91cdff;
     font-size:20px;
     font-weight:bold;
     height:0;
@@ -139,7 +139,7 @@ p{
     letter-spacing:1px;
     line-height:2.5;
     padding:0 20px;
-    width:100%;
+    width: 100%;
 }
 
 .nav-li-1{
@@ -153,11 +153,11 @@ p{
 }
 
 .nav-burger a{
-    color:#687786;
+    color:#fff;
 }
 
 .nav-burger a:hover{
-    color:#ff7083;
+    color:#687786;
 }
 
 .burger-menu .burger{
@@ -242,22 +242,53 @@ p{
     background:#ff7083;
 }
 
-
-
-
-
-
-
 /*************** FOOTER ****************/
 .page-footer{
     width:100%;
-    /*position: absolute;*/
+    height:10em;
+    text-align: right;
+    padding:0 4% 0 0;
+
+    background-image: url("../img/clouds-footer.png");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.page-footer img{
-    width:100%;
+.pg-footer-wrap{
+    width:41.5em;
+    margin-top:6.5em;
+    display:inline-block;
+    padding-bottom: 1em;
 }
 
+.copyright{
+    float:left;
+    display: inline-block;
+    margin-top:2em;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #687786;
+}
+
+.copyright-2{
+    display:none;
+}
+
+.rs-icon{
+    float: right;
+    display:inline-block;
+    text-align:right;
+}
+
+.rs-logo{
+    display:inline-block;
+    margin:0 0.5em 0 0.5em;
+}
+
+.rs-logo a img{
+    filter: drop-shadow(1px 0px 5px #83b3ca);
+}
 
 /*************** MEDIA QUERIES ****************/
 @media screen and (max-width: 1200px){
@@ -275,6 +306,41 @@ p{
 
     .page-content{
         padding-top: 5em;
+    }
+}
+
+@media screen and (max-width: 790px){
+    .page-footer{
+        padding:0 4% 0 4%;
+    }
+
+    .pg-footer-wrap{
+        width:100%;
+    }
+}
+
+@media screen and (max-width: 585px){
+    .pg-footer-wrap{
+        text-align:center;
+        padding-bottom:0;
+    }
+
+    .rs-icon{
+        float:none;
+        text-align: center;
+    }
+
+    .copyright{
+        display: none;
+    }
+
+    .copyright-2{
+        display:block;
+        text-align:center;
+        margin: 2em 0 1em 0;
+        font-size: 1em;
+        font-weight: bold;
+        color: #687786;
     }
 }
 
