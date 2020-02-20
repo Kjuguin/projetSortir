@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Etat;
 use App\Entity\Site;
 use App\Entity\Sortie;
 use Doctrine\Common\Annotations\AnnotationReader;
@@ -98,10 +99,48 @@ class HomeController extends AbstractController
         $sites = $siteRepository->findAll();
 
 
+        $verifSorties = $em->getRepository(Sortie::class)->findAll();
+
+        foreach ($verifSorties as $verif) {
+            if ($verif->getNoEtat()->getLibelle() != Etat::ANNULE && $verif->getNoEtat()->getLibelle() != Etat::ARCHIVE) {
+
+                dump($verif->getDateDebut());
+
+
+//                $dateDebut = $verif->getDateDebut();
+//                $dateDebutTime = time($dateDebut);
+//                $newDateDebutTime = $dateDebutTime + ($verif->getDuree() * 60);
+//                $newDateDebut = new \DateTime($newDateDebutTime);
+//
+//
+//                dump($dateDebut);
+//                dump($dateDebutTime);
+//                dump($newDateDebutTime);
+//                dump($newDateDebut);
+
+//                die();
+
+//                if (new \DateTime($verif->getDateDebut()) < new \DateTime())
+//
+//
+//                if (new \DateTime($verif->getDateDebut())>= new \DateTime()){
+//
+//                    $etat=$em->getRepository(Etat::class)->findOneBy(['libelle'=>Etat::COURS]);
+//
+//                    $verif->getNoEtat()->setLibelle($etat);
+//
+//                }
+//
+//
+//
+            }
+        }
+
+
         $sortiesRepository = $em->getRepository(Sortie::class);
 
         $dateTime = new \DateTime();
-        $date=$dateTime->format('Y-m-d H:i:s');
+        $date = $dateTime->format('Y-m-d H:i:s');
         $param = [
             "site" => null,
             "nom" => null,

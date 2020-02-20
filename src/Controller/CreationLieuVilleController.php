@@ -27,7 +27,7 @@ class CreationLieuVilleController extends AbstractController
         $tok = base64_decode($token);
 //        $tok = $tok.",".$id;
         dump($token);
-        $token=base64_encode($tok);
+        $token = base64_encode($tok);
 
 
         $lieu = new Lieu();
@@ -36,88 +36,86 @@ class CreationLieuVilleController extends AbstractController
 
         $formLieu->handleRequest($request);
 
+        $nomVilleRecup = $lieu->getVille()->getNomVille();//ok
+        $codePostalRecup = $lieu->getVille()->getCodePostal();
+        $lieuNomRecup = $lieu->getNomLieu();
+
+
+        $lieuRepository = $em->getRepository(Lieu::class);
+        $lieuNomBDD = $lieuRepository->findBy(
+            ['nomLieu' => $lieuNomRecup]
+        );
+
+        $villeRepository = $em->getRepository(Ville::class);
+        $villeNomBDD = $villeRepository->findBy(
+            ['nomVille' => $nomVilleRecup]
+        );
+
+        $villeCPBDD = $villeRepository->findBy([
+            'codePostal' => $codePostalRecup
+        ]);
+
         if ($formLieu->isSubmitted() && $formLieu->isValid()) {
 
 
-            $nomVilleRecup= $lieu->getVille()->getNomVille();//ok
-            $codePostalRecup= $lieu->getVille()->getCodePostal();
-            $lieuNomRecup = $lieu->getNomLieu();
-
-
-            $lieuRepository = $em->getRepository(Lieu::class);
-            $lieuNomBDD= $lieuRepository->findBy(
-                ['nomLieu' => $lieuNomRecup]
-            );
-
-            $villeRepository = $em->getRepository(Ville::class);
-            $villeNomBDD = $villeRepository->findBy(
-                ['nomVille' => $nomVilleRecup]
-            );
-
-            $villeCPBDD = $villeRepository->findBy([
-                'codePostal' => $codePostalRecup
-            ]);
 
 
 
-                $this->addFlash("default", 'La ville, le code postal existe déjà');
+            $this->addFlash("default", 'La ville, le code postal existe déjà');
 
-                return $this->redirectToRoute("ajoutLieuVille");
-
-
-            }elseif ($lieuNomBDD) {
-
-                $this->addFlash("default", 'Le nom du lieu existe déjà');
-
-                return $this->redirectToRoute("ajoutLieuVille");
-
-            } else {
-
-                if ($lieu->getNoVille()) {
-                    $ville = $em->getRepository(Ville::class)->find($lieu->getNoVille());
-                    $lieu->setVille($ville);
-                    $em->persist($lieu);
-                    $em->flush();
-
-                }
-
-                if (!$lieu->getNoVille()) {
-
-                    $ville = $em->getRepository(Ville::class)->find($lieu->getVille());
-                    $lieu->setNoVille($ville);
-                    $em->flush();
+            return $this->redirectToRoute("ajoutLieuVille");
 
 
-                }
+        } elseif ($lieuNomBDD) {
 
+            $this->addFlash("default", 'Le nom du lieu existe déjà');
 
-                $id = $lieu->getId();
+            return $this->redirectToRoute("ajoutLieuVille");
 
-                dump($id);
+        } else {
 
-                $this->addFlash("success", "lieu ajouté");
+            if ($lieu->getNoVille()) {
+                $ville = $em->getRepository(Ville::class)->find($lieu->getNoVille());
+                $lieu->setVille($ville);
+                $em->persist($lieu);
+                $em->flush();
 
-                dump($token);
-
-                if ($token){
-                    $tok = base64_decode($token);
-                    $tok = $tok.",".$id;
-                    dump($tok);
-                    $token=base64_encode($tok);
-                }
-
-                 return $this->redirectToRoute("creer_sortie", [
-
-                    'token' => $token,]);
             }
+
+            if (!$lieu->getNoVille()) {
+
+                $ville = $em->getRepository(Ville::class)->find($lieu->getVille());
+                $lieu->setNoVille($ville);
+                $em->flush();
+
+
+            }
+
+
+            $id = $lieu->getId();
+
+            dump($id);
+
+            $this->addFlash("success", "lieu ajouté");
+
+            dump($token);
+
+            if ($token) {
+                $tok = base64_decode($token);
+                $tok = $tok . "," . $id;
+                dump($tok);
+                $token = base64_encode($tok);
+            }
+
+            return $this->redirectToRoute("creer_sortie", [
+
+                'token' => $token,]);
         }
 
-        return $this->render('creation_lieu_ville/index.html.twig', [
-            "formLieu" => $formLieu->createView(),
-        ]);
+
+        return $this->render('creation_lieu_ville/index.html.twig', ["formLieu" => $formLieu->createView(),]);
 
     }
-
 
 
 }
