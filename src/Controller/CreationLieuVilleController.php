@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Lieu;
+use App\Entity\Site;
+use App\Entity\Sortie;
 use App\Entity\Ville;
 use App\Form\LieuType;
 use App\Form\VilleType;
@@ -101,5 +103,7 @@ class CreationLieuVilleController extends AbstractController
         ]);
 
     }
+
+
 
 }
