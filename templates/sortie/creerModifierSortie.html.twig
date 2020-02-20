@@ -17,27 +17,50 @@
 
     <button style="background: purple"><a href="{{ path('ajoutLieuVille') }}">Ajouter Lieu (à mieux réaliser par la
             suite</a></button>
-    <div>
-        <label> Ville : </label>
-        <p id="ville">b</p>
-    </div>
 
-    <div>
-        <label> Rue : </label>
-        <p id="rue">b</p>
-    </div>
-    <div>
-        <label> Code postal : </label>
-        <p id="cp">b</p>
-    </div>
-    <div>
-        <label> Latitude : </label>
-        <p id="lat">b</p>
-    </div>
-    <div>
-        <label> Longitude : </label>
-        <p id="long">b</p>
-    </div>
+    {% if sortie %}
+        <div>
+            <label> Ville : </label>
+            <p id="ville">{{ sortie.noLieu.noVille.nomVille }}</p>
+        </div>
+        <div>
+            <label> Rue : </label>
+            <p id="rue">{{ sortie.noLieu.rue }}</p>
+        </div>
+        <div>
+            <label> Code postal : </label>
+            <p id="cp">{{ sortie.noLieu.noVille.codePostal }}</p>
+        </div>
+        <div>
+            <label> Latitude : </label>
+            <p id="lat">{{ sortie.noLieu.latitude }}</p>
+        </div>
+        <div>
+            <label> Longitude : </label>
+            <p id="long">{{ sortie.noLieu.longitude }}</p>
+        </div>
+    {% else %}
+        <div>
+            <label> Ville : </label>
+            <p id="ville"></p>
+        </div>
+        <div>
+            <label> Rue : </label>
+            <p id="rue"></p>
+        </div>
+        <div>
+            <label> Code postal : </label>
+            <p id="cp"></p>
+        </div>
+        <div>
+            <label> Latitude : </label>
+            <p id="lat"></p>
+        </div>
+        <div>
+            <label> Longitude : </label>
+            <p id="long"></p>
+        </div>
+    {% endif %}
 
     <button type="submit" name="sortie" value="1">Enregistrer</button>
     <button type="submit" name="sortie" value="3">Publier la sortie

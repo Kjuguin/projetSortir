@@ -69,7 +69,8 @@ class CreerSortieController extends AbstractController
 
         return $this->render('sortie/creerModifierSortie.html.twig',  [
             "form" => $form->createView(),
-            "modification"=>0
+            "modification"=>0,
+            "sortie"=>null
         ]);
     }
 
