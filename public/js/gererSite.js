@@ -1,17 +1,21 @@
-$(document).ready(function($) {
+$(document).ready(function ($) {
 
 
-    $('.nomSite').hide(0);
-    $('.labelNomSite').hide(0);
+    $('#labelAjoutSite').hide(0);
+    $('#ajout_site_nomSite').hide(0);
 
-    $('#buttonAjouterSite').click(function () {
+    $('#valider').hide(0);
+    $('#ajout_site_nomSite').empty();
+});
 
-        $('.nomSite').show();
-        $('.labelNomSite').show();
+$ajouterSite = function () {
+    $('#valider').toggle();
+    $('#labelAjoutSite').toggle();
+    $('#ajout_site_nomSite').toggle();
 
-    });
+    console.log('test');
+}
 
-
-
-
+$('#nom').on('keyup', function (e) {
+    $rechercheSite();
 });

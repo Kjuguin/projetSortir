@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -14,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Site
 {
     /**
+     * @Groups("groupe3")
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -31,6 +33,7 @@ class Site
     private $noUsers;
 
     /**
+     * @Groups("groupe3")
      * @Assert\Length(
      *     min="3",
      *     max="30",
@@ -39,6 +42,11 @@ class Site
      * @ORM\Column(type="string", length=30)
      */
     private $nomSite;
+
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private $etat;
 
     public function __construct()
     {
@@ -62,6 +70,21 @@ class Site
 
         return $this;
     }
+
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(string $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+
     public function __toString()
     {
         return $this->nomSite;
