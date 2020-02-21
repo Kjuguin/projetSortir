@@ -352,6 +352,79 @@ p{
 }
 
 
+/****************************** TABLEAU DE TROLL ***************************************/
+.table-bordered{
+    border:none;
+    border-radius: 5px;
+}
+
+.table-bordered td, .table-bordered th{
+    border:0 !important;
+}
+
+#table-sortie_length, #table-sortie_info{
+    display:none;
+}
+
+.thead-light tr th{
+    background:#fff !important;
+    color:#687786 !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd){
+    background-color: #fff2da !important;
+    color: #687786;
+}
+
+.table-striped tbody tr:nth-of-type(even){
+    background-color: #fff;
+    color: #687786;
+}
+
+.page-item.active .page-link{
+    background-color: #ff7083 !important;
+    border-color: #ff7083 !important;
+    color:#fff !important;
+}
+
+.page-link{
+    color:#687786 !important;
+}
+
+.page-link:hover{
+    color:#687786 !important;
+}
+
+td a{
+    color:#687786;
+}
+
+td a:hover{
+    color:#687786;
+    font-weight:600;
+    text-decoration:none;
+}
+
+.td-avatar{
+    width:12em;
+}
+
+.troll-img{
+    width:8em;
+    height:8em;
+    overflow:hidden;
+    border-radius:50%;
+}
+
+.troll-img img{
+    width:100%;
+}
+
+.td-text{
+    font-weight:bold;
+    padding-top: 2.5em !important;
+    font-size: 1.3em;
+}
 
 
 
