@@ -150,7 +150,7 @@ class HomeController extends AbstractController
         $verifSorties = $em->getRepository(Sortie::class)->findAll();
 
         if ($verifSorties) {
-            dump($verifSorties);
+            //dump($verifSorties);
 
             foreach ($verifSorties as $verif) {
                 if ($verif->getNoEtat()->getLibelle() != Etat::ANNULE && $verif->getNoEtat()->getLibelle() != Etat::ARCHIVE) {
@@ -210,7 +210,7 @@ class HomeController extends AbstractController
         } else {
             $heure = null;
         }
-        dump($heure);
+        //dump($heure);
         return $this->render('home/home.html.twig',
             ["sites" => $sites,
                 "heure" => $heure]

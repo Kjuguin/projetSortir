@@ -24,7 +24,7 @@ class CreationLieuVilleController extends AbstractController
     public function form($token = null, EntityManagerInterface $em, Request $request)
     {
 
-        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+        if (!($this->isGranted("ROLE_ADMIN"))) {
 
             $this->addFlash('danger', 'Vous devez être connecté');
 
