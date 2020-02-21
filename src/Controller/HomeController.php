@@ -149,44 +149,45 @@ class HomeController extends AbstractController
 
         $verifSorties = $em->getRepository(Sortie::class)->findAll();
 
-        foreach ($verifSorties as $verif) {
-            if ($verif->getNoEtat()->getLibelle() != Etat::ANNULE && $verif->getNoEtat()->getLibelle() != Etat::ARCHIVE) {
+        if ($verifSorties) {
+            dump($verifSorties);
 
-                $etat = null;
-                $dateFin = clone $verif->getDateDebut();
-                $dure = $verif->getDuree();
+            foreach ($verifSorties as $verif) {
+                if ($verif->getNoEtat()->getLibelle() != Etat::ANNULE && $verif->getNoEtat()->getLibelle() != Etat::ARCHIVE) {
 
-                $interval = 'PT' . $dure . 'M';
-                $dateFin = $dateFin->add(new \DateInterval($interval));
-                dump($dateFin);
-                $intervalle = date_diff($dateDuJour, $dateFin);
+                    $etat = null;
+                    $dateFin = clone $verif->getDateDebut();
+                    $dure = $verif->getDuree();
 
-                if ($intervalle->days > 30 && $dateDuJour > $dateFin) {
-                    dump($intervalle->days);
-                    dump($dateDuJour);
-                    $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::ARCHIVE]);
-                    $verif->setNoEtat($etat);
-                } elseif ($dateDuJour > $dateFin) {
-                    $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::TERMINE]);
-                    $verif->setNoEtat($etat);
-                } elseif ($dateDuJour < $dateFin && $dateDuJour > $verif->getDateDebut()) {
-                    $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::COURS]);
-                    $verif->setNoEtat($etat);
-                } elseif ($dateDuJour > $verif->getDateCloture() && $dateDuJour < $verif->getDateDebut()) {
-                    $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::CLOTURE]);
-                    $verif->setNoEtat($etat);
-                } else {
-                    $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::OUVERT]);
-                    $verif->setNoEtat($etat);
+                    $interval = 'PT' . $dure . 'M';
+                    $dateFin = $dateFin->add(new \DateInterval($interval));
+                    $intervalle = date_diff($dateDuJour, $dateFin);
+
+                    if ($intervalle->days > 30 && $dateDuJour > $dateFin) {
+                        dump($intervalle->days);
+                        dump($dateDuJour);
+                        $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::ARCHIVE]);
+                        $verif->setNoEtat($etat);
+                    } elseif ($dateDuJour > $dateFin) {
+                        $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::TERMINE]);
+                        $verif->setNoEtat($etat);
+                    } elseif ($dateDuJour < $dateFin && $dateDuJour > $verif->getDateDebut()) {
+                        $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::COURS]);
+                        $verif->setNoEtat($etat);
+                    } elseif ($dateDuJour > $verif->getDateCloture() && $dateDuJour < $verif->getDateDebut()) {
+                        $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::CLOTURE]);
+                        $verif->setNoEtat($etat);
+                    } else {
+                        $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::OUVERT]);
+                        $verif->setNoEtat($etat);
+                    }
+
+                    $em->persist($verif);
                 }
 
-                $em->persist($verif);
             }
-
         }
-
         $em->flush();
-
 
         $sortiesRepository = $em->getRepository(Sortie::class);
 
@@ -202,12 +203,41 @@ class HomeController extends AbstractController
             "passee" => null,
             "sens" => 'ASC',];
 
-        $sorties = $sortiesRepository->afficher($param);
-        $sortie = $sorties[0];
 
+        $sorties = $sortiesRepository->afficher($param);
+        if ($sorties) {
+            $heure = $sorties[0]->getDateDebut();
+        } else {
+            $heure = null;
+        }
+        dump($heure);
         return $this->render('home/home.html.twig',
             ["sites" => $sites,
-                "heure" => $sortie->getDateDebut()]
+                "heure" => $heure]
+        );
+
+    }
+
+    /**
+     * @Route("/troll", name="troll")
+     */
+    public function troll(EntityManagerInterface $em, Request $request)
+    {
+        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+
+            $this->addFlash('danger', 'Vous devez être connecté');
+
+            return $this->redirectToRoute('app_login');
+        }
+
+        $avatarsRepository = $em->getRepository(User::class);
+
+
+        $avatar = $avatarsRepository->findAll();
+
+
+        return $this->render('troll.html.twig',
+            ["avatars" => $avatar]
         );
 
     }
