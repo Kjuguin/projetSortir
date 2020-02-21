@@ -19,7 +19,7 @@ class ModifierSortieController extends AbstractController
     {
         if (!($this->isGranted("ROLE_PARTICIPANT"))) {
 
-            $this->addFlash('danger', 'Vous devez être connecter');
+            $this->addFlash('danger', 'Vous devez être connecté');
 
             return $this->redirectToRoute('app_login');
         }
@@ -45,7 +45,7 @@ class ModifierSortieController extends AbstractController
 
             $em->persist($sortie);
             $em->flush();
-            $this->addFlash("succes", "Votre Sortie a bien été modifié");
+            $this->addFlash("succes", "Votre sortie a bien été modifiée");
             return $this->redirectToRoute("home");
         }
 

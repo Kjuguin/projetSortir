@@ -19,8 +19,8 @@
 
                 {% if is_granted('ROLE_ADMIN') %}
                     <li><a href="{{ path('registration') }}">Inscription</a></li>
-                    <li><a href="#">Villes</a></li>
-                    <li><a href="#">Sites</a></li>
+                    <li><a href="{{ path('gererLieu') }}">Villes</a></li>
+                    <li><a href="{{ path('gererSite') }}">Sites</a></li>
                 {% endif %}
 
                 <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
@@ -44,13 +44,22 @@
 
                 {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('registration') }}">Inscription</a>
-                    <a href="#">Villes</a>
-                    <a href="#">Sites</a>
+                    <a href="{{ path('gererLieu') }}">Villes</a>
+                    <a href="{{ path('gererSite') }}">Sites</a>
                 {% endif %}
 
                 <a href="{{ path('app_logout') }}">Déconnexion</a>
             </nav>
         </div>
+
+        <!-- Message d'alerte -->
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="msg-alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
 
 
         <!-- SECTION 1 : Recherche et filtres des sorties -->
@@ -59,7 +68,7 @@
             <!-- aside user version tablette/mobile -->
             <div class="mini-user-aside">
                 <div class="mini-user-avatar">
-                    <img src="{{ asset('img/avatar.png') }}" alt="user avatar">
+                    <img src="{{ asset(app.user.urlPhoto) }}" alt="user avatar">
                 </div>
 
                 <div class="mini-user-info">
@@ -72,7 +81,8 @@
 
                     <div class="mini-date-bloc mdb-2">
                         <p class="mini-lbl">Sortie: </p>
-                        <p class="mini-date-user">{{ "now"|date("d/m/Y") }}</p>
+{#                        <p class="mini-date-user">{{ sortie|date("d/m/Y") }}</p>#}
+{#                        <p class="mini-date-user">{{ heure|date("d/m/Y") }}</p>#}
                     </div>
                 </div>
             </div>
@@ -110,12 +120,8 @@
                             <div class="bloc-field bf-3">
                                 <label for="date-debut">Début</label>
                                 <!-- 1er champ date-->
-                                <div class="inpt-dt-gp datepicker input-group date" id="datepicker">
-                                    <input type="text" class="inpt-dt form-control" placeholder="Choisir une date">
-                                    <span class="inpt-calendar input-group-append input-group-addon">
-                                        <span class="inpt-caldr-icon input-group-text"><i
-                                                    class="far fa-calendar-alt"></i></span>
-                                    </span>
+                                <div class="inpt-dt-gp input-group date" id="datepicker">
+                                    <input type="date" id="date-debut" class="inpt-dt form-control" placeholder="Choisir une date">
                                 </div>
                             </div>
                             <!-- clear version mobile-->
@@ -124,12 +130,8 @@
                             <div class="bloc-field bf-4">
                                 <label for="date-fin">Fin</label>
                                 <!-- 2eme champ date-->
-                                <div class="inpt-dt-gp datepicker input-group date" id="datepicker">
-                                    <input type="text" class="inpt-dt form-control" placeholder="Choisir une date">
-                                    <span class="inpt-calendar input-group-append input-group-addon">
-                                        <span class="inpt-caldr-icon input-group-text"><i
-                                                    class="far fa-calendar-alt"></i></span>
-                                    </span>
+                                <div class="inpt-dt-gp input-group date" id="datepicker">
+                                    <input type="date" id="date-fin" class="inpt-dt form-control" placeholder="Choisir une date">
                                 </div>
                             </div>
                         </div>
@@ -175,9 +177,9 @@
                         </div>
 
                         <!-- bouton recherche -->
-                        <div class="bloc-btn-home">
-                            <input class="btn-home" type="submit" value="Rechercher">
-                        </div>
+{#                        <div class="bloc-btn-home">#}
+{#                            <input class="btn-home" type="submit" value="Rechercher">#}
+{#                        </div>#}
                     </form>
                 </div>
 
@@ -185,7 +187,7 @@
                 <div clas="filtre-bloc-right">
                     <div class="user-aside">
                         <div class="user-avatar">
-                            <img src="{{ asset('img/avatar.png') }}" alt="user avatar">
+                            <img src="{{ asset(app.user.urlPhoto) }}" alt="user avatar">
                         </div>
 
                         <div class="user-info-aside">
@@ -198,8 +200,8 @@
 
                             <div class="date-bloc-2">
                                 <p class="info-lbl">prochaine sortie</p>
-                                <p class="date-user">22/02/2020</p> <!-- contenu à remplacer par une méthode-->
-                                <p class="heure-user">18h30</p> <!-- contenu à remplacer par une méthode-->
+                                <p class="date-user">{{ heure|date("d/m/Y") }}</p> <!-- contenu à remplacer par une méthode-->
+                                <p class="heure-user">{{ heure|date("H:i") }}</p> <!-- contenu à remplacer par une méthode-->
                             </div>
                         </div>
                     </div>
@@ -216,8 +218,29 @@
 
     <!-- SECTION 2 : Affichage du tableau des sorties -->
     <section class="container-fluid">
+
+        <!-- loader chargement tableau -->
+        <div class="loader-bloc">
+            <p>Baby Yoda charge les sorties avec la Force</p>
+
+            <!-- Don't poke the baby or he might get mad -->
+            <div class="container">
+                <div class="cradle">
+                    <div class="child">
+                        <div class="head">
+                            <div class="eye eye--left"></div>
+                            <div class="eye eye--right"></div>
+                            <div class="mouth"></div>
+                        </div>
+                        <div class="body"></div>
+                    </div>
+                    <div class="cradle-inner"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- tableau des sorties -->
         <div class="table-responsive-sm">
-            {% if(sorties !=null) %}
                 <table id="table-sortie" data-toggle="table" class="table table-bordered table-orderable table-striped">
                     <thead class="thead-light">
                     <tr class="active">
@@ -233,108 +256,14 @@
                     </tr>
                     </thead>
                     <tbody id="tbody">
-<tr><td> </td></tr>
-{#                    {% for sortie in sorties %}#}
-{#                        <tr>#}
-{#                            <td>{{ sortie.nom }}</td>#}
-{#                            <td>{{ sortie.dateDebut | date('d/m/Y H:i') }}</td>#}
-{#                            <td class="table-gone">{{ sortie.dateCloture | date('d/m/Y') }}</td>#}
-{#                            <td class="table-gone">{{ sortie.noInscriptions.count }}/ {{ sortie.nbInscriptionMax }}</td>#}
-{#                            <td class="table-gone">{{ sortie.noEtat.libelle }}</td>#}
-{#                            <td class="table-gone">#}
-{#                                {% if app.user %}#}
-{#                                    {% for inscrit in sortie.noInscriptions %}#}
-{#                                        {% if inscrit.noUser.id == app.user.id %}#}
-{#                                            <p class="oui-inscrit">Oui</p>#}
-{#                                        {% endif %}#}
-{#                                    {% endfor %}#}
-{#                                {% endif %}#}
-{#                            </td>#}
-{#                            <td class="table-gone">#}
-{#                                <a href="{{ path('utilisateur_afficherProfil',{'id':sortie.noOrganisateur.id}) }}">{{ sortie.noOrganisateur.pseudo }}</a>#}
-{#                            </td>#}
-{#                            #}{#                            <td><a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a> - modifier</td>#}
-{#                            <td>#}
-{#                                {% set test = 0 %}#}
-
-{#                                <!-- En création -->#}
-{#                                {% if sortie.noEtat.libelle is same as ("En création") %}#}
-
-{#                                    <a href="{{ path('modifierSortie',{'id':sortie.id}) }}">Modifier</a> - <a#}
-{#                                        href="{{ path('sortie_publier',{'id':sortie.id}) }}">Publier</a>#}
-
-{#                                    <!-- En cours -->#}
-{#                                {% elseif  sortie.noEtat.libelle is same as ("En cours") %}#}
-{#                                    <a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a>#}
-
-{#                                    <!-- cas ouvert et fermé -->#}
-{#                                {% else %}#}
-{#                                    <a href="{{ path('sortie_afficherSortie',{'id':sortie.id}) }}">Afficher</a>#}
-
-
-{#                                    <!-- cas fermé -->#}
-{#                                    {% if sortie.noEtat.libelle is same as ('Fermé') %}#}
-
-{#                                        {% for inscrit in sortie.noInscriptions %}#}
-
-{#                                            <!-- fermé et inscrit -->#}
-{#                                            {% if inscrit.noUser.id is same as (app.user.id) %}#}
-{#                                                - <a href="{{ path('desistement',{'id':sortie.id}) }}">Se désister</a>#}
-{#                                            {% endif %}#}
-
-{#                                            <!-- fermé et non inscrit (se passe rien) -->#}
-
-{#                                        {% endfor %}#}
-{#                                        <!-- cas ouvert -->#}
-{#                                    {% elseif sortie.noEtat.libelle is same as ('Ouvert') %}#}
-
-{#                                        {% if sortie.noInscriptions.count is same as (0) %}#}
-{#                                            - <a href="{{ path('inscription',{'id':sortie.id}) }}">S'inscrire</a>#}
-{#                                            {% if sortie.noOrganisateur.id is same as (app.user.id) %}#}
-{#                                                - <a#}
-{#                                                    href="{{ path('annuler_verification',{'id':sortie.id}) }}">Annuler</a>#}
-{#                                            {% endif %}#}
-{#                                        {% else %}#}
-
-{#                                            {% for inscrit in sortie.noInscriptions %}#}
-
-{#                                                {% if inscrit.noUser.id != app.user.id %}#}
-
-{#                                                    {% set test = test + 1 %}#}
-
-{#                                                {% endif %}#}
-{#                                            {% endfor %}#}
-
-{#                                            {% if test == sortie.noInscriptions.count %}#}
-{#                                                <!-- ouvert et non inscrit -->#}
-
-{#                                                - <a href="{{ path('inscription',{'id':sortie.id}) }}">S'inscrire</a>#}
-
-{#                                                <!-- ouvert, non inscrit et organisateur -->#}
-{#                                                {% if sortie.noOrganisateur.id is same as (app.user.id) %}#}
-{#                                                    - <a href="{{ path('annuler_verification',{'id':sortie.id}) }}">Annuler</a>#}
-{#                                                {% endif %}#}
-{#                                            {% else %}#}
-{#                                                <!-- ouvert et inscrit -->#}
-{#                                                - <a href="{{ path('desistement',{'id':sortie.id}) }}">Se désister</a>#}
-
-{#                                                <!-- ouvert, inscrit et organisateur -->#}
-{#                                                {% if sortie.noOrganisateur.id is same as (app.user.id) %}#}
-{#                                                    - <a href="{{ path('annuler_verification',{'id':sortie.id}) }}">Annuler</a>#}
-{#                                                {% endif %}#}
-{#                                            {% endif %}#}
-{#                                        {% endif %}#}
-{#                                    {% endif %}#}
-{#                                {% endif %}#}
-{#                            </td>#}
-{#                        </tr>#}
-{#                    {% endfor %}#}
+                        <tr>
+                            <td></td>
+                        </tr>
                     </tbody>
                 </table>
-            {% endif %}
         </div>
 
-        <!-- bouton recherche -->
+        <!-- bouton créer sortie -->
         <div class="bloc-btn-home btn-creer-home">
             <a href="{{ path('creer_sortie') }}" class="btn-home">Créer une sortie</a>
         </div>
@@ -352,12 +281,14 @@
 
                         var $present = '';
                         var $dateCloture = new Date(val['dateCloture']);
+                        $dateCloture.setHours($dateCloture.getHours()-2);
                         var $outputCloture = $dateCloture.toLocaleString('en-GB', {
                             year: 'numeric',
                             month: '2-digit',
                             day: '2-digit'
                         });
                         var $dateDebut = new Date(val['dateDebut']);
+                        $dateDebut.setHours($dateDebut.getHours()-2);
                         var $outputDebut = $dateDebut.toLocaleString('en-GB', {
                             year: 'numeric',
                             month: '2-digit',
@@ -388,6 +319,13 @@
                         var pathPub = "{{ path('sortie_publier',{'id':'%id2%'}) }}";
                         pathPub = pathPub.replace("%25id2%25", val['id']);
 
+                        var imgMod = "{{ asset('img/modifier.png') }}";
+                        var imgAff = "{{ asset('img/afficher.png') }}";
+                        var imgAnn = "{{ asset('img/annuler.png') }}";
+                        var imgDes = "{{ asset('img/desister.png') }}";
+                        var imgPub = "{{ asset('img/publier.png') }}";
+                        var imgInsc = "{{ asset('img/sinscrire.png') }}";
+
                         $.each(val['noInscriptions'], function (k, v) {
                             if ($id === v['noUser']['id']) {
                                 $present = "Oui";
@@ -395,26 +333,26 @@
                         });
 
                         if (val['noEtat']['libelle'] === 'En création') {
-                            $action = '<a href="' + pathMod + '">Modifier</a> - <a href="' + pathPub + '">Publier</a>'
+                            $action = '<a href="' + pathMod + '"><img class="icon-table" title="Modifier" src="' + imgMod + '"></a>  <a href="' + pathPub + '"><img class="icon-table" title="Publier" src="' + imgPub + '"></a>'
                         } else if (val['noEtat']['libelle'] === 'En cours' || val['noEtat']['libelle'] === 'Terminer') {
-                            $action = '<a href="' + pathAff + '">Afficher</a>'
+                            $action = '<a href="' + pathAff + '"><img class="icon-table" title="Afficher" src="' + imgAff + '"></a>'
                         } else {
-                            $action = '<a href="' + pathAff + '">Afficher</a>'
+                            $action = '<a href="' + pathAff + '"><img class="icon-table" title="Afficher" src="' + imgAff + '"></a>'
                             if (val['noEtat']['libelle'] === 'Clôturer') {
                                 if ($present === "Oui") {
-                                    $action = $action + ' - ' + '<a href="' + pathDesi + '">Se désister</a>'
+                                    $action = $action  + '<a href="' + pathDesi + '"><img class="icon-table" title="Désister" src="' + imgDes + '"></a>'
                                 }
                             } else {
                                 if (val['noInscriptions'].length === 0) {
-                                    $action = $action + ' - ' + '<a href="' + pathInsc + '">S\'inscrire</a>'
+                                    $action = $action  + '<a href="' + pathInsc + '"><img class="icon-table" title="Inscrire" src="' + imgInsc + '"></a>'
                                 } else if ($present === "Oui") {
-                                    $action = $action + ' - ' + '<a href="' + pathDesi + '">Se désister</a>'
+                                    $action = $action + '<a href="' + pathDesi + '"><img class="icon-table" title="Désister" src="' + imgDes + '"></a>'
                                 } else {
-                                    $action = $action + ' - ' + '<a href="' + pathInsc + '">S\'inscrire</a>'
+                                    $action = $action + '<a href="' + pathInsc + '"><img class="icon-table" title="Inscrire" src="' + imgInsc + '"></a>'
                                 }
                             }
                             if (val['noOrganisateur']['id'] === $id) {
-                                $action = $action + ' - ' + '<a href="' + pathAnn + '">Annuler</a>'
+                                $action = $action + '<a href="' + pathAnn + '"><img class="icon-table" title="Annuler" src="' + imgAnn + '"></a>'
                             }
                         }
 

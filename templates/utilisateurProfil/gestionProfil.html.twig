@@ -1,8 +1,16 @@
 {% extends 'pages-base.html.twig' %}
 
-{% block title %} Modification du Profil{% endblock %}
+{% block title %}Modifier profil{% endblock %}
 
 {% block body %}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="msg-alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     <div class="edit-profil-bloc">
         {{ form_start(userForm, {'attr': {'class': 'profil-form'}}) }}
 
@@ -10,10 +18,13 @@
         <div class="bloc-profil-left">
             <div class="left-container">
                 <div class="avtr-prfl-edit">
-                    <img src="{{ asset('img/avatar-big.png') }}">
+{#                    <img src="{{ app.user.urlPhoto }}">#}
+{#                    <img src="{{ asset('profile_directory/a712018f9a0bab863353a8c532a11a1a.jpeg') }}">#}
+                    <img src="{{ asset(app.user.urlPhoto) }}">
+{#                    <img src="{{ asset('profile_directory'. app.user.urlPhoto) }}">#}
                 </div>
 
-                <button class="btn-base btn-blue btn-pfl">Upload photo</button>
+                <button class="btn-base btn-blue btn-pfl"><a href="{{ path('utilisateur_modifierPhoto') }} ">Upload photo</a></button>
 
                 <div class="red-action-btn">
                     <button class="btn-base btn-red btn-pfl" type="reset">Annuler</button>

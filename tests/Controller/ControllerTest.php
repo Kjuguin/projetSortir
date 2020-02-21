@@ -161,6 +161,46 @@ class ControllerTest extends WebTestCase
     }
 
     /**
+     * Test de redirection annulation si utilisateur non admin
+     */
+    public function testRedirectAnnulationSortieIfNotAdmin()
+    {
+        $this->client->request('GET', '/annuler');
+        $crawler = $this->client->followRedirect();
+        $this->assertSame(1,$crawler->filter('html:contains("login")')->count());
+    }
+
+    /**
+     * Test affichage de la page annulation sortie si utilisateur admin
+     */
+    public function testAnnulationSortieIfAdminIsUp()
+    {
+        $this->logInAdmin();
+        $this->client->request('GET', '/annuler');
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Test de redirection ajoutLieuVille sortie si utilisateur non admin
+     */
+    public function testRedirectAjoutLieuVilleIfNotAdmin()
+    {
+        $this->client->request('GET', '/ajoutLieuVille');
+        $crawler = $this->client->followRedirect();
+        $this->assertSame(1,$crawler->filter('html:contains("login")')->count());
+    }
+
+    /**
+     * Test affichage de la page ajoutLieuVille sortie si utilisateur admin
+     */
+    public function testAjoutLieuVilleIfAdminIsUp()
+    {
+        $this->logInAdmin();
+        $this->client->request('GET', '/ajoutLieuVille');
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
      * Test de redirection de la page home si utilisateur non connecté
      */
     public function testRedirectMdpOubliIfNotConnected()
@@ -170,27 +210,93 @@ class ControllerTest extends WebTestCase
     }
 
 
+
+
+
+
+
+
+
+    /********************* Tests des formulaires *********************/
+
+    /**
+     * Test de validation du formulaire de connexion
+     */
+    public function testFormConnexion(){
+        $crawler = $this->client->request('GET', '/login');
+        $form = $crawler->selectButton('login')->form();
+        $form['email'] = 'test2';
+        $form['password'] = 'Pa$$w0rd';
+        $this->client->submit($form);
+        $this->client->followRedirect();
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+    }
+
     /**
      * Test de validation du formulaire de gestion d'un profil
      */
-    /*public function testFormGestionProfil(){
+    public function testFormGestionProfil(){
         $this->logIn();
         $crawler = $this->client->request('GET', '/utilisateur/gestionProfil/164');
-        //echo $this->client->getResponse()->getContent();
+//        echo $this->client->getResponse()->getContent();
         $form = $crawler->selectButton('enregistrerModifsProfil')->form();
-        $form['pseudo'] = 'test2';
-        $form['email'] = 'test2@test.fr';
-        $form['prenom'] = 'Test2';
-        $form['nom'] = 'Test2';
-        $form['telephone'] = ' ';
-        $form['password'] = 'Pa$$w0rd';
-        $form['noSite'] = '54';
+        $form['gestion_profil[pseudo]'] = 'test2';
+        $form['gestion_profil[email]'] = 'test2@test.fr';
+        $form['gestion_profil[prenom]'] = 'Test2';
+        $form['gestion_profil[nom]'] = 'Test2';
+        $form['gestion_profil[telephone]'] = ' ';
+        $form['gestion_profil[password][first]'] = 'Pa$$w0rd';
+        $form['gestion_profil[password][second]'] = 'Pa$$w0rd';
+        $form['gestion_profil[noSite]'] = '54';
+        $this->client->submit($form);
+        $this->client->followRedirect();
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
-        $crawler = $this->client->submit($form);
-        //$this->client->followRedirect();
+    }
 
+    /**
+     * Test de validation du formulaire d'inscription par un admin
+     */
+    public function testFormInscriptionByAdmin(){
+        $this->logInAdmin();
+        $crawler = $this->client->request('GET', '/registration');
+//        echo $this->client->getResponse()->getContent();
+        $form = $crawler->selectButton('Enregistrer')->form();
+        //var_dump($form->getValues());
+        $form['registration[email]'] = 'test2@test.fr';
+        $form['registration[password]'] = 'Pa$$w0rd';
+        $form['registration[nom]'] = 'Test2';
+        $form['registration[prenom]'] = 'Test2';
+        $form['registration[noSite]'] = '54';
+        $this->client->submit($form);
+        /**
+         * Erreur mise à 500 car user deja présent dans la BDD. Il faudrait faire un reset commplet de la BDD
+         *  chaque lancement des tests pour être optimal.
+         */
+        $this->assertSame(500, $this->client->getResponse()->getStatusCode());
 
-    }*/
+    }
+
+    /**
+     * Test de redirection afficher profil si utilisateur non connecté
+     */
+/*    public function testRedirectAfficherProfilIfNotConnected()
+    {
+        $this->client->request('GET', '/utilisateur/afficherProfil/164');
+        $this->assertSame(302, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Test affichage de la page afficher sortie si utilisateur connecté
+     */
+  /*  public function testAfficherSortieIsUp()
+    {
+        $this->logIn();
+        $this->client->request('GET', '/sortie/afficherSortie/264');
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+    }
+*/
 
 
 

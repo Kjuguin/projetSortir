@@ -1,0 +1,37 @@
+{% extends 'pages-base.html.twig' %}
+{% block title %}Gérer les Sites{% endblock %}
+
+{% block body %}
+    <div class="bloc-field bf-2">
+        <label for="nom">Le nom du site contient</label>
+        <form>
+            <input class="input-home inpt-search" type="search" name="nom" id="nom">
+        </form>
+    </div>
+    <div >
+        <table >
+            <tbody>
+            <tr>
+                <th>nom</th>
+            </tr>
+            {% for site in sites %}
+                <tr >
+                    <td >{{ site.nomSite | capitalize }} </td>
+                    <td ><a href="{{ path ("supprimerSite",{'id': site.id }) }}">supprimer</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    <div>
+        <button>Ajouter</button>
+    </div>
+    <div>
+        {{ form_start(ajoutSiteForm) }}
+        {{ form_widget(ajoutSiteForm) }}
+        <button type="submit" >Valider</button>
+        {{ form_end(ajoutSiteForm) }}
+    </div>
+
+{% endblock %}

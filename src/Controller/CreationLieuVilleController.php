@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Lieu;
+use App\Entity\Site;
+use App\Entity\Sortie;
 use App\Entity\Ville;
 use App\Form\LieuType;
 use App\Form\VilleType;
@@ -11,46 +13,101 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\UriSigner;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CreationLieuVilleController extends AbstractController
 {
     /**
-     * @Route("/ajoutLieuVille", name="ajoutLieuVille")
-     * @param EntityManagerInterface $em
-     * @param Request $request
-     * @return Response
+     * @Route("/ajoutLieuVille/{token}", name="ajoutLieuVille")
      */
-    public function form(EntityManagerInterface $em, Request $request)
+    public function form($token = null, EntityManagerInterface $em, Request $request)
     {
+
         $lieu = new Lieu();
-        $ville = new Ville();
 
         $formLieu = $this->createForm(LieuType::class, $lieu);
-        $formVille = $this->createForm(VilleType::class, $ville);
 
         $formLieu->handleRequest($request);
-        $formVille->handleRequest($request);
 
         if ($formLieu->isSubmitted() && $formLieu->isValid()) {
-            $this->addFlash("success", "lieu ajouté");
 
-            $em->persist($lieu);
+            $nomVilleRecup= $lieu->getVille()->getNomVille();//ok
+            $codePostalRecup= $lieu->getVille()->getCodePostal();
+            $lieuNomRecup = $lieu->getNomLieu();
 
-            if ($formVille->isSubmitted() && $formVille->isValid()) {
-                $this->addFlash("success", "Ville ajoutée");
-                $em->persist($ville);
 
+            $lieuRepository = $em->getRepository(Lieu::class);
+            $lieuNomBDD= $lieuRepository->findBy(
+                ['nomLieu' => $lieuNomRecup]
+            );
+
+            $villeRepository = $em->getRepository(Ville::class);
+            $villeNomBDD = $villeRepository->findBy(
+                ['nomVille' => $nomVilleRecup]
+            );
+
+            $villeCPBDD = $villeRepository->findBy([
+                'codePostal' => $codePostalRecup
+            ]);
+
+            if ($villeNomBDD && $villeCPBDD) {
+
+                $this->addFlash("default", 'La ville, le code postal existe déjà');
+
+                return $this->redirectToRoute("ajoutLieuVille");
+
+            }elseif ($lieuNomBDD) {
+
+                $this->addFlash("default", 'Le nom du lieu existe déjà');
+
+                return $this->redirectToRoute("ajoutLieuVille");
+
+            }else {
+
+                if ($lieu->getNoVille()) {
+                    $ville = $em->getRepository(Ville::class)->find($lieu->getNoVille());
+                    $lieu->setVille($ville);
+                    $em->persist($lieu);
+                    $em->flush();
+
+                }
+
+                if (!$lieu->getNoVille()) {
+
+                    $ville = $em->getRepository(Ville::class)->find($lieu->getVille());
+                    $lieu->setNoVille($ville);
+                    $em->flush();
+
+                }
+
+
+                $id = $lieu->getId();
+
+                dump($id);
+
+                $this->addFlash("success", "lieu ajouté");
+
+                dump($token);
+
+                if ($token){
+                    $tok = base64_decode($token);
+                    $tok = $tok.",".$id;
+                    dump($tok);
+                    $token=base64_encode($tok);
+                }
+
+                 return $this->redirectToRoute("creer_sortie", [
+                    'token' => $token,]);
             }
-
-            $em->flush();
-            return $this->redirectToRoute("ajoutLieuVille");
         }
 
         return $this->render('creation_lieu_ville/index.html.twig', [
             "formLieu" => $formLieu->createView(),
-            "formVille" =>$formVille->createView()
         ]);
 
     }
+
+
+
 }

@@ -30,7 +30,7 @@ class SecurityController extends AbstractController
 
         if (!($this->isGranted("ROLE_ADMIN"))) {
 
-            $this->addFlash('danger', 'Vous devez être un administrateur');
+            $this->addFlash('danger', 'Vous devez être administrateur');
 
             return $this->redirectToRoute('home');
         }
@@ -54,14 +54,15 @@ class SecurityController extends AbstractController
 
             $user->setNom(ucfirst(strtolower($user->getNom())));
             $user->setPrenom(ucfirst(strtolower($user->getPrenom())));
+            $user->setUrlPhoto('profile_directory/avatar-dft.png');
 
 
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash("success", "Inscription OK !");
+            $this->addFlash("success", "Inscription réussie !");
 
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('registration');
         }
 
         return $this->render('security/registration.html.twig', [
@@ -76,6 +77,15 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+
+        if (($this->isGranted("ROLE_USER"))) {
+
+            $this->addFlash('danger', 'Vous êtes déjà connecté');
+
+            return $this->redirectToRoute('home');
+        }
+
+
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
@@ -126,7 +136,7 @@ class SecurityController extends AbstractController
 
         }
 
-        return $this->render('security/mdpOubli.hmtl.twig');
+        return $this->render('security/oubliPassword.html.twig');
     }
 
     /** Réinitialisation du mot de passe par mail

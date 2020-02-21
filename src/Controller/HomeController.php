@@ -26,7 +26,7 @@ class HomeController extends AbstractController
 
         if (!($this->isGranted("ROLE_PARTICIPANT"))) {
 
-            $this->addFlash('danger', 'Vous devez vous connecter');
+            $this->addFlash('danger', 'Vous devez être connecté');
 
             return $this->redirectToRoute('app_login');
         }
@@ -71,6 +71,7 @@ class HomeController extends AbstractController
             "inscrit" => $inscrit,
             "notInscrit" => $notInscrit,
             "passee" => $passee,
+            "sens" => 'DESC',
         ];
 
         $sorties = $sortieRepository->afficher($param);
@@ -88,7 +89,7 @@ class HomeController extends AbstractController
     {
         if (!($this->isGranted("ROLE_PARTICIPANT"))) {
 
-            $this->addFlash('danger', 'Vous devez vous connecter');
+            $this->addFlash('danger', 'Vous devez être connecté');
 
             return $this->redirectToRoute('app_login');
         }
@@ -97,14 +98,29 @@ class HomeController extends AbstractController
         $sites = $siteRepository->findAll();
 
 
-        $sortieRepository = $em->getRepository(Sortie::class);
+        $sortiesRepository = $em->getRepository(Sortie::class);
 
-        $sorties = $sortieRepository->findAll();
+        $dateTime = new \DateTime();
+        $date=$dateTime->format('Y-m-d H:i:s');
+        $param = [
+            "site" => null,
+            "nom" => null,
+            "dateDebut" => $date,
+            "dateFin" => null,
+            "organisateur" => null,
+            "inscrit" => $this->getUser()->getId(),
+            "notInscrit" => null,
+            "passee" => null,
+            "sens" => 'ASC',
+        ];
+
+        $sorties = $sortiesRepository->afficher($param);
+        $sortie = $sorties[0];
 
         return $this->render('home/home.html.twig',
             [
                 "sites" => $sites,
-                "sorties" => $sorties,
+                "heure" => $sortie->getDateDebut()
             ]
         );
 

@@ -18,13 +18,16 @@ $(document).ready(function() {
 
 window.onload = function () {
 
+    $('.loader-bloc').css("display","block");
+    $('.table-responsive-sm').css("display","none");
 
     $.ajax({
         type: 'POST',
         url: '/recherche',
     }).done(function (data) {
         $('#tbody').empty();
-        console.log(data);
+        $('.loader-bloc').css("display","none");
+        $('.table-responsive-sm').css("display","block");
         $recherche(data);
 
     });
@@ -33,17 +36,8 @@ window.onload = function () {
 $debutAjax = function () {
     $('#tbody').empty();
 
-    console.log("" );
-    console.log("-----------");
-    console.log(" " );
-    console.log("site : " + $('#site').val());
-    console.log("nom : " + $('#nom').val());
-    console.log("date debut : " + $('#date-debut').val());
-    console.log("date fin : " + $('#date-fin').val());
-    console.log("organisateur : " + $('#organisateur:checked').val());
-    console.log("inscrit : " + $('#inscrit:checked').val());
-    console.log("non inscrit : " + $('#non-inscrit:checked').val());
-    console.log("sorties passees : " + $('#sorties-passees:checked').val());
+    $('.loader-bloc').css("display","block");
+    $('.table-responsive-sm').css("display","none");
 
     currentRequest = $.ajax({
         type: 'POST',
@@ -65,6 +59,8 @@ $debutAjax = function () {
         }
 
     }).done(function (data) {
+        $('.loader-bloc').css("display","none");
+        $('.table-responsive-sm').css("display","block");
         $recherche(data);
 
     });

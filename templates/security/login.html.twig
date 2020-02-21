@@ -1,6 +1,6 @@
 {% extends 'login-base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion{% endblock %}
 {% block stylesheets %}
 
 {% endblock %}
@@ -32,13 +32,14 @@
 
                     </label>
                 </div>
-                <input type="submit" class="fadeIn five" value="LOGIN">
+                <input type="submit" class="fadeIn five" id="login" value="LOGIN">
             </form>
 
             <!-- Remind Passowrd -->
             <div id="formFooter">
                 <a class="underlineHover"  href="{{ path('app_forgotten_password') }}">Mot de passe oublié ?</a>
             </div>
+
         </div>
     </div>
 
