@@ -24,7 +24,7 @@ $('#nom').on('keyup', function (e) {
             '<td class="td-mgn-lieu"> ' +  val['rue'] + '</td>' +
             '<td class="td-mgn-lieu"> ' +  val['latitude'] + '</td>' +
             '<td class="td-mgn-lieu"> ' +  val['longitude'] + '</td>' +
-            '<td class="td-mgn-lieu"> ' +  'img' + '</td>' + '<tr'
+            '<td class="td-mgn-lieu"> Annuler</td>' + '<tr'
             );
 
 

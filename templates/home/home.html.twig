@@ -371,11 +371,11 @@
                         $('#tbody').append(
                             '<tr><td> ' + val['nom'] + '</td>' +
                             '<td>' + $outputDebut + '</td>' +
-                            '<td> ' + $outputCloture + '</td>' +
-                            '<td> ' + val['noInscriptions'].length + ' / ' + val['nbInscriptionMax'] + ' </td>' +
-                            '<td>' + val['noEtat']['libelle'] + '</td>' +
-                            '<td>' + $present + ' </td>' +
-                            '<td> <a href = "' + pathOrga + '" >' + val['noOrganisateur']['pseudo'] + '</a></td>' +
+                            '<td class="table-gone"> ' + $outputCloture + '</td>' +
+                            '<td class="table-gone"> ' + val['noInscriptions'].length + ' / ' + val['nbInscriptionMax'] + ' </td>' +
+                            '<td class="table-gone">' + val['noEtat']['libelle'] + '</td>' +
+                            '<td class="table-gone">' + $present + ' </td>' +
+                            '<td class="table-gone"> <a href = "' + pathOrga + '" >' + val['noOrganisateur']['pseudo'] + '</a></td>' +
                             '<td>' + $action + '</td>' + '</tr>'
                         );
                     }

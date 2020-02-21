@@ -70,33 +70,3 @@
 {% block javascripts %}    <script type="text/javascript" charset="utf8" src="{{ asset('js/gererSite.js') }}"></script>
 {% endblock %}
 
-{#{% block javascripts %}#}
-{#<script>#}
-{#    $rechercheSite = function () {#}
-{#        $('#tbody').empty();#}
-{#        // $('.loader-bloc').css("display","block");#}
-{#        // $('.table-responsive-sm').css("display","none");#}
-{#        currentRequest = $.ajax({#}
-{#            type: 'POST',#}
-{#            url: '/gererSite/recherche',#}
-{#            data: {"nom": $('#nom').val()},#}
-{#            beforeSend: function () {#}
-{#                if (currentRequest != null) {#}
-{#                    currentRequest.abort();#}
-{#                }#}
-{#            }#}
-{#        }).done(function (data) {#}
-{#            // $('.loader-bloc').css("display","none");#}
-{#            // $('.table-responsive-sm').css("display","block");#}
-{#            console.log(data);#}
-{#            #}{#var imgCan = "{{ asset('img/cancel.png') }}";#}
-{#            $.each(data['sites'], function (key, val) {#}
-{#                $('#tbody').append(#}
-{#                    '<tr><td> ' + val['nomSite'] + '</td>' +#}
-{#                    '<td>' + 'coucou' + '</td></tr>'#}
-{#                );#}
-{#            })#}
-{#        });#}
-{#    }#}
-{#</script>#}
-{#{% endblock javascripts %}#}

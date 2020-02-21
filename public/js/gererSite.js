@@ -35,11 +35,11 @@ $('#nom').on('keyup', function (e) {
         // $('.table-responsive-sm').css("display","block");
         console.log(data);
         console.log(data['sites']);
-        var imgCan = "{{ asset('img/cancel.png') }}";
+        // var imgCan = "{{ asset('img/cancel.png') }}";
         $.each(data['sites'], function (key, val) {
             $('#tbody').append(
                 '<tr><td> ' + val['nomSite'] + '</td>' +
-                '<td>' + imgCan + '</td></tr>'
+                '<td>Annuler</td></tr>'
             );
         })
     });

@@ -44,41 +44,41 @@ class HomeController extends AbstractController
 
         $verifSorties = $em->getRepository(Sortie::class)->findAll();
 
-        foreach ($verifSorties as $verif) {
-            if ($verif->getNoEtat()->getLibelle() != Etat::ANNULE && $verif->getNoEtat()->getLibelle() != Etat::ARCHIVE) {
-
-                $etat = null;
-                $dateFin = clone $verif->getDateDebut();
-                $dure = $verif->getDuree();
-
-                $interval = 'PT' . $dure . 'M';
-                $dateFin = $dateFin->add(new \DateInterval($interval));
-                dump($dateFin);
-                $intervalle = date_diff($dateDuJour, $dateFin);
-
-                if ($intervalle->days > 30 && $dateDuJour > $dateFin) {
-                    dump($intervalle->days);
-                    dump($dateDuJour);
-                    $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::ARCHIVE]);
-                    $verif->setNoEtat($etat);
-                } elseif ($dateDuJour > $dateFin) {
-                    $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::TERMINE]);
-                    $verif->setNoEtat($etat);
-                } elseif ($dateDuJour < $dateFin && $dateDuJour > $verif->getDateDebut()) {
-                    $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::COURS]);
-                    $verif->setNoEtat($etat);
-                } elseif ($dateDuJour > $verif->getDateCloture() && $dateDuJour < $verif->getDateDebut()) {
-                    $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::CLOTURE]);
-                    $verif->setNoEtat($etat);
-                } else {
-                    $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::OUVERT]);
-                    $verif->setNoEtat($etat);
-                }
-
-                $em->persist($verif);
-            }
-
-        }
+//        foreach ($verifSorties as $verif) {
+//            if ($verif->getNoEtat()->getLibelle() != Etat::ANNULE && $verif->getNoEtat()->getLibelle() != Etat::ARCHIVE) {
+//
+//                $etat = null;
+//                $dateFin = clone $verif->getDateDebut();
+//                $dure = $verif->getDuree();
+//
+//                $interval = 'PT' . $dure . 'M';
+//                $dateFin = $dateFin->add(new \DateInterval($interval));
+//                dump($dateFin);
+//                $intervalle = date_diff($dateDuJour, $dateFin);
+//
+//                if ($intervalle->days > 30 && $dateDuJour > $dateFin) {
+//                    dump($intervalle->days);
+//                    dump($dateDuJour);
+//                    $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::ARCHIVE]);
+//                    $verif->setNoEtat($etat);
+//                } elseif ($dateDuJour > $dateFin) {
+//                    $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::TERMINE]);
+//                    $verif->setNoEtat($etat);
+//                } elseif ($dateDuJour < $dateFin && $dateDuJour > $verif->getDateDebut()) {
+//                    $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::COURS]);
+//                    $verif->setNoEtat($etat);
+//                } elseif ($dateDuJour > $verif->getDateCloture() && $dateDuJour < $verif->getDateDebut()) {
+//                    $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::CLOTURE]);
+//                    $verif->setNoEtat($etat);
+//                } else {
+//                    $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::OUVERT]);
+//                    $verif->setNoEtat($etat);
+//                }
+//
+//                $em->persist($verif);
+//            }
+//
+//        }
 
         $em->flush();
 
@@ -149,44 +149,44 @@ class HomeController extends AbstractController
 
         $verifSorties = $em->getRepository(Sortie::class)->findAll();
 
-        if ($verifSorties) {
-            dump($verifSorties);
-
-            foreach ($verifSorties as $verif) {
-                if ($verif->getNoEtat()->getLibelle() != Etat::ANNULE && $verif->getNoEtat()->getLibelle() != Etat::ARCHIVE) {
-
-                    $etat = null;
-                    $dateFin = clone $verif->getDateDebut();
-                    $dure = $verif->getDuree();
-
-                    $interval = 'PT' . $dure . 'M';
-                    $dateFin = $dateFin->add(new \DateInterval($interval));
-                    $intervalle = date_diff($dateDuJour, $dateFin);
-
-                    if ($intervalle->days > 30 && $dateDuJour > $dateFin) {
-                        dump($intervalle->days);
-                        dump($dateDuJour);
-                        $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::ARCHIVE]);
-                        $verif->setNoEtat($etat);
-                    } elseif ($dateDuJour > $dateFin) {
-                        $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::TERMINE]);
-                        $verif->setNoEtat($etat);
-                    } elseif ($dateDuJour < $dateFin && $dateDuJour > $verif->getDateDebut()) {
-                        $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::COURS]);
-                        $verif->setNoEtat($etat);
-                    } elseif ($dateDuJour > $verif->getDateCloture() && $dateDuJour < $verif->getDateDebut()) {
-                        $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::CLOTURE]);
-                        $verif->setNoEtat($etat);
-                    } else {
-                        $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::OUVERT]);
-                        $verif->setNoEtat($etat);
-                    }
-
-                    $em->persist($verif);
-                }
-
-            }
-        }
+//        if ($verifSorties) {
+//            dump($verifSorties);
+//
+//            foreach ($verifSorties as $verif) {
+//                if ($verif->getNoEtat()->getLibelle() != Etat::ANNULE && $verif->getNoEtat()->getLibelle() != Etat::ARCHIVE) {
+//
+//                    $etat = null;
+//                    $dateFin = clone $verif->getDateDebut();
+//                    $dure = $verif->getDuree();
+//
+//                    $interval = 'PT' . $dure . 'M';
+//                    $dateFin = $dateFin->add(new \DateInterval($interval));
+//                    $intervalle = date_diff($dateDuJour, $dateFin);
+//
+//                    if ($intervalle->days > 30 && $dateDuJour > $dateFin) {
+//                        dump($intervalle->days);
+//                        dump($dateDuJour);
+//                        $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::ARCHIVE]);
+//                        $verif->setNoEtat($etat);
+//                    } elseif ($dateDuJour > $dateFin) {
+//                        $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::TERMINE]);
+//                        $verif->setNoEtat($etat);
+//                    } elseif ($dateDuJour < $dateFin && $dateDuJour > $verif->getDateDebut()) {
+//                        $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::COURS]);
+//                        $verif->setNoEtat($etat);
+//                    } elseif ($dateDuJour > $verif->getDateCloture() && $dateDuJour < $verif->getDateDebut()) {
+//                        $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::CLOTURE]);
+//                        $verif->setNoEtat($etat);
+//                    } else {
+//                        $etat = $em->getRepository(Etat::class)->findOneBy(['libelle' => Etat::OUVERT]);
+//                        $verif->setNoEtat($etat);
+//                    }
+//
+//                    $em->persist($verif);
+//                }
+//
+//            }
+//        }
         $em->flush();
 
         $sortiesRepository = $em->getRepository(Sortie::class);
