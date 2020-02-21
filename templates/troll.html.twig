@@ -1,0 +1,22 @@
+{% extends 'pages-base.html.twig' %}
+{% block title %}Liste d'utilisateurs{% endblock %}
+
+{% block body %}
+
+<div class="table-responsive-sm">
+    <table id="table-sortie" data-toggle="table" class="table table-bordered table-orderable table-striped">
+
+        <tbody id="tbody">
+        {% for avatar in avatars %}
+            <tr>
+                <td class="td-avatar">
+                    <div class="troll-img"><img src="{{ avatar.urlPhoto }}"></div>
+                </td>
+                <td class="td-text">{{ avatar.pseudo }}</td>
+                <td class="td-text">{{ avatar.prenom }}</td>
+                <td class="td-text">{{ avatar.nom }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
