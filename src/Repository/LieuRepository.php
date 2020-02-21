@@ -19,6 +19,21 @@ class LieuRepository extends ServiceEntityRepository
         parent::__construct($registry, Lieu::class);
     }
 
+    public function afficherLieu($param)
+    {
+        $sqb = $this->createQueryBuilder('l');
+//        $sqb->andWhere("s.etat = :etat");
+        $sqb->andWhere("l.nomLieu LIKE :nom");
+
+        $sqb->setParameter("nom", '%' . $param . '%');
+//        $sqb->setParameter("etat", 'OK');
+
+        $query = $sqb->getQuery();
+        $result = $query->getResult();
+
+        return $result;
+    }
+
     // /**
     //  * @return Lieu[] Returns an array of Lieu objects
     //  */

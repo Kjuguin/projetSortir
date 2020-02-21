@@ -36,11 +36,15 @@
             </div>
             <div class="tbl-content tbl-content-lieu">
                 <table class="dtl-table">
-                    <tbody>
+                    <tbody id="tbody">
                     {% for site in sites %}
                         <tr class="dtl-strip">
                             <td class="td-mgn-lieu">{{ site.nomSite | capitalize }}</td>
-                            <td><a href="{{ path ("supprimerSite",{'id': site.id }) }}"><img src="{{ asset('img/cancel.png') }}"></a></td>
+                            <td>
+                                <a href="{{ path ("supprimerSite",{'id': site.id }) }}">
+                                    <img src="{{ asset('img/cancel.png') }}">
+                                </a>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -50,15 +54,46 @@
 
         <!-- buttons -->
         <div class="site-btn">
-            <button class="btn-red btn-base btn-add-site">Ajouter</button>
+            <button class="btn-red btn-base btn-add-site" onclick="$ajouterSite()">Ajouter</button>
 
             <div class="add-site">
                 {{ form_start(ajoutSiteForm) }}
                 {{ form_widget(ajoutSiteForm) }}
-                <button class="btn-base btn-blue btn-vld-site" type="submit" >Valider</button>
+                <button class="btn-base btn-blue btn-vld-site" type="submit" id="valider">Valider</button>
                 {{ form_end(ajoutSiteForm) }}
             </div>
         </div>
     </div>
 
 {% endblock %}
+
+{#{% block javascripts %}#}
+{#<script>#}
+{#    $rechercheSite = function () {#}
+{#        $('#tbody').empty();#}
+{#        // $('.loader-bloc').css("display","block");#}
+{#        // $('.table-responsive-sm').css("display","none");#}
+{#        currentRequest = $.ajax({#}
+{#            type: 'POST',#}
+{#            url: '/gererSite/recherche',#}
+{#            data: {"nom": $('#nom').val()},#}
+{#            beforeSend: function () {#}
+{#                if (currentRequest != null) {#}
+{#                    currentRequest.abort();#}
+{#                }#}
+{#            }#}
+{#        }).done(function (data) {#}
+{#            // $('.loader-bloc').css("display","none");#}
+{#            // $('.table-responsive-sm').css("display","block");#}
+{#            console.log(data);#}
+{#            #}{#var imgCan = "{{ asset('img/cancel.png') }}";#}
+{#            $.each(data['sites'], function (key, val) {#}
+{#                $('#tbody').append(#}
+{#                    '<tr><td> ' + val['nomSite'] + '</td>' +#}
+{#                    '<td>' + 'coucou' + '</td></tr>'#}
+{#                );#}
+{#            })#}
+{#        });#}
+{#    }#}
+{#</script>#}
+{#{% endblock javascripts %}#}

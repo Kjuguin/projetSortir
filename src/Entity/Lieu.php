@@ -27,6 +27,7 @@ class Lieu
     private $noSorties;
 
     /**
+     * @Groups("groupe4")
      * @Assert\Length(
      *     min="3",
      *     max="50",
@@ -37,6 +38,7 @@ class Lieu
     private $nomLieu;
 
     /**
+     * @Groups("groupe4")
      * @Groups("groupe2")
      * @Assert\Length(
      *     min="3",
@@ -48,12 +50,14 @@ class Lieu
     private $rue;
 
     /**
+     * @Groups("groupe4")
      * @Groups("groupe2")
      * @ORM\Column(type="float", nullable=true)
      */
     private $latitude;
 
     /**
+     * @Groups("groupe4")
      * @Groups("groupe2")
      * @ORM\Column(type="float", nullable=true)
      */
@@ -68,6 +72,7 @@ class Lieu
     private $noVille;
 
     /**
+     * @Groups("groupe4")
      * @ORM\ManyToOne(targetEntity="App\Entity\Ville", inversedBy="Lieux", cascade={"persist"})
      */
     private $ville;

@@ -32,6 +32,7 @@ class Ville
     private $Lieux;
 
     /**
+     * @Groups("groupe4")
      * @Groups("groupe2")
      * @Assert\Length(
      *     min="3",

@@ -83,8 +83,13 @@
 
                     <div class="mini-date-bloc mdb-2">
                         <p class="mini-lbl">Sortie: </p>
-                        <p class="mini-date-user">{{ heure|date("d/m/Y") }}</p>
-                        <p class="mini-date-user">{{ heure|date("H:i") }}</p>
+                        {% if heure %}
+                            <p class="mini-date-user">{{ heure|date("d/m/Y") }}</p>
+                            <p class="mini-date-user">{{ heure|date("H:i") }}</p>
+                        {% else %}
+                            Aucune
+                        {% endif %}
+
                     </div>
                 </div>
             </div>
@@ -203,8 +208,12 @@
 
                             <div class="date-bloc-2">
                                 <p class="info-lbl">prochaine sortie</p>
+                                {% if heure %}
                                 <p class="date-user">{{ heure|date("d/m/Y") }}</p>
                                 <p class="heure-user">{{ heure|date("H:i") }}</p>
+                                {% else %}
+                                <p>Aucune sortie de prévue</p>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
