@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Etat;
 use App\Entity\Site;
 use App\Entity\Sortie;
+use App\Entity\User;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
