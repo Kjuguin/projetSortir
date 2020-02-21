@@ -399,6 +399,7 @@ td a{
     color:#687786;
 }
 
+
 td a:hover{
     color:#687786;
     font-weight:600;
@@ -427,6 +428,32 @@ td a:hover{
 }
 
 
+td a:hover{
+    color:#687786;
+    font-weight:600;
+    text-decoration:none;
+}
+
+.td-avatar{
+    width:12em;
+}
+
+.troll-img{
+    width:8em;
+    height:8em;
+    overflow:hidden;
+    border-radius:50%;
+}
+
+.troll-img img{
+    width:100%;
+}
+
+.td-text{
+    font-weight:bold;
+    padding-top: 2.5em !important;
+    font-size: 1.3em;
+}
 
 
 
