@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Etat;
 use App\Entity\Site;
 use App\Entity\Sortie;
+use App\Entity\User;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -207,6 +208,30 @@ class HomeController extends AbstractController
         return $this->render('home/home.html.twig',
             ["sites" => $sites,
                 "heure" => $sortie->getDateDebut()]
+        );
+
+    }
+
+    /**
+     * @Route("/troll", name="troll")
+     */
+    public function troll(EntityManagerInterface $em, Request $request)
+    {
+        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
+
+            $this->addFlash('danger', 'Vous devez être connecté');
+
+            return $this->redirectToRoute('app_login');
+        }
+
+        $avatarsRepository = $em->getRepository(User::class);
+
+
+        $avatar = $avatarsRepository->findAll();
+
+
+        return $this->render('troll.html.twig',
+            ["avatars" => $avatar]
         );
 
     }
