@@ -90,26 +90,24 @@ class CreationLieuVilleController extends AbstractController
 
 
                 }
-
-
                 $id = $lieu->getId();
 
-                dump($id);
 
                 $this->addFlash("success", "lieu ajouté");
 
-                dump($token);
 
                 if ($token) {
                     $tok = base64_decode($token);
                     $tok = $tok . "," . $id;
-                    dump($tok);
                     $token = base64_encode($tok);
+                    return $this->redirectToRoute("creer_sortie", [
+
+                        'token' => $token,]);
+                } else{
+                    return $this->redirectToRoute("gererLieu");
                 }
 
-                return $this->redirectToRoute("creer_sortie", [
 
-                    'token' => $token,]);
             }
 
 

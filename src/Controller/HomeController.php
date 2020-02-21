@@ -186,7 +186,6 @@ class HomeController extends AbstractController
 
         $em->flush();
 
-
         $sortiesRepository = $em->getRepository(Sortie::class);
 
         $dateTime = new \DateTime();
@@ -201,12 +200,18 @@ class HomeController extends AbstractController
             "passee" => null,
             "sens" => 'ASC',];
 
-        $sorties = $sortiesRepository->afficher($param);
-        $sortie = $sorties[0];
 
+
+        $sorties = $sortiesRepository->afficher($param);
+        if ($sorties){
+            $heure = $sorties[0]->getDateDebut();
+        } else{
+               $heure = null;
+        }
+dump($heure);
         return $this->render('home/home.html.twig',
             ["sites" => $sites,
-                "heure" => $sortie->getDateDebut()]
+                "heure" => $heure]
         );
 
     }

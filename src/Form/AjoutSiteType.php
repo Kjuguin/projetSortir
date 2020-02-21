@@ -16,7 +16,7 @@ class AjoutSiteType extends AbstractType
             ->add('nomSite', TextType::class,
                 [
                   'label' => 'Nom du site',
-                  'label_attr'=>['class'=>'label-lieu'],
+                  'label_attr'=>['class'=>'label-lieu', 'id'=>'labelAjoutSite'],
                    'attr'=>['class'=>'input-lieu nomSite', 'id'=>'idNomSite']
                 ]
             );

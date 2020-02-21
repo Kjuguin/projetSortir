@@ -19,6 +19,20 @@ class SiteRepository extends ServiceEntityRepository
         parent::__construct($registry, Site::class);
     }
 
+    public function afficherSite($param)
+    {
+        $sqb = $this->createQueryBuilder('s');
+        $sqb->andWhere("s.etat = :etat");
+        $sqb->andWhere("s.nomSite LIKE :nom");
+
+        $sqb->setParameter("nom", '%' . $param . '%');
+        $sqb->setParameter("etat", 'OK');
+
+        $query = $sqb->getQuery();
+        $result = $query->getResult();
+
+        return $result;
+    }
 
 
     // /**
