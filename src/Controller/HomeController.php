@@ -241,29 +241,4 @@ class HomeController extends AbstractController
         );
 
     }
-
-    /**
-     * @Route("/troll", name="troll")
-     */
-    public function troll(EntityManagerInterface $em, Request $request)
-    {
-        if (!($this->isGranted("ROLE_PARTICIPANT"))) {
-
-            $this->addFlash('danger', 'Vous devez être connecté');
-
-            return $this->redirectToRoute('app_login');
-        }
-
-        $avatarsRepository = $em->getRepository(User::class);
-
-
-        $avatar = $avatarsRepository->findAll();
-
-
-        return $this->render('troll.html.twig',
-            ["avatars" => $avatar]
-        );
-
-    }
-
 }
